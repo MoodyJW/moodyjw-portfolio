@@ -72,9 +72,21 @@ jobs:
           script: |
             const fs = require('fs');
             const path = require('path');
-            
-            const coverageFile = path.join(process.cwd(), 'coverage/coverage-summary.json');
-            
+
+            // Find coverage file (handle subdirectories)
+            let coverageFile = path.join(process.cwd(), 'coverage/coverage-summary.json');
+            if (!fs.existsSync(coverageFile)) {
+              const coverageDir = path.join(process.cwd(), 'coverage');
+              const files = fs.readdirSync(coverageDir);
+              for (const file of files) {
+                const possiblePath = path.join(coverageDir, file, 'coverage-summary.json');
+                if (fs.existsSync(possiblePath)) {
+                  coverageFile = possiblePath;
+                  break;
+                }
+              }
+            }
+
             if (fs.existsSync(coverageFile)) {
               const coverage = JSON.parse(fs.readFileSync(coverageFile, 'utf8'));
               const statements = coverage.total.statements.pct;
