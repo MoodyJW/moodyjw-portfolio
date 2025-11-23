@@ -1,0 +1,194 @@
+name: Lighthouse CI
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+    branches: [main]
+
+env:
+  PRIMARY_NODE_VERSION: '22.x'
+
+jobs:
+  lighthouse:
+    name: Lighthouse Audit
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ env.PRIMARY_NODE_VERSION }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ env.PRIMARY_NODE_VERSION }}
+          cache: 'npm'
+
+      - name: Install dependencies
+        run: npm ci --legacy-peer-deps
+
+      - name: Build application
+        run: npm run build
+        env:
+          NODE_ENV: production
+
+      - name: Install Lighthouse CI
+        run: npm install -g @lhci/cli@0.15.x
+
+      - name: Run Lighthouse CI
+        run: |
+          # Start the server in background
+          npx http-server dist/moodyjw-portfolio/browser -p 8080 &
+          SERVER_PID=$!
+          
+          # Wait for server to be ready
+          npx wait-on http://localhost:8080 -t 60000
+          
+          # Run Lighthouse
+          lhci autorun --config=lighthouserc.json || LIGHTHOUSE_EXIT_CODE=$?
+          
+          # Kill the server
+          kill $SERVER_PID || true
+          
+          # Exit with Lighthouse exit code if it failed
+          exit ${LIGHTHOUSE_EXIT_CODE:-0}
+        env:
+          LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Upload Lighthouse reports
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: lighthouse-reports
+          path: .lighthouseci
+          retention-days: 30
+
+      - name: Comment PR with Lighthouse scores
+        if: github.event_name == 'pull_request' && always()
+        uses: actions/github-script@v7
+        with:
+          script: |
+            const fs = require('fs');
+            const path = require('path');
+            
+            try {
+              // Find the latest manifest file
+              const lhciDir = '.lighthouseci';
+              const manifestPath = path.join(lhciDir, 'manifest.json');
+              
+              if (!fs.existsSync(manifestPath)) {
+                console.log('No Lighthouse manifest found');
+                return;
+              }
+              
+              const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+              
+              if (!manifest || manifest.length === 0) {
+                console.log('Manifest is empty');
+                return;
+              }
+              
+              // Get the first result (we only run one URL)
+              const result = manifest[0];
+              const reportPath = path.join(lhciDir, result.jsonPath);
+              
+              if (!fs.existsSync(reportPath)) {
+                console.log('Report file not found:', reportPath);
+                return;
+              }
+              
+              const report = JSON.parse(fs.readFileSync(reportPath, 'utf8'));
+              
+              // Extract scores
+              const categories = report.categories;
+              const performance = Math.round(categories.performance.score * 100);
+              const accessibility = Math.round(categories.accessibility.score * 100);
+              const bestPractices = Math.round(categories['best-practices'].score * 100);
+              const seo = Math.round(categories.seo.score * 100);
+              
+              // Extract key metrics
+              const audits = report.audits;
+              const fcp = audits['first-contentful-paint'].displayValue;
+              const lcp = audits['largest-contentful-paint'].displayValue;
+              const tbt = audits['total-blocking-time'].displayValue;
+              const cls = audits['cumulative-layout-shift'].displayValue;
+              const si = audits['speed-index'].displayValue;
+              
+              // Determine emoji based on score
+              const getEmoji = (score) => {
+                if (score >= 90) return '🟢';
+                if (score >= 50) return '🟠';
+                return '🔴';
+              };
+              
+              // Create comment body
+              const commentBody = `## 🔦 Lighthouse Audit Results
+              
+| Category | Score |
+|----------|-------|
+| ${getEmoji(performance)} Performance | **${performance}** |
+| ${getEmoji(accessibility)} Accessibility | **${accessibility}** |
+| ${getEmoji(bestPractices)} Best Practices | **${bestPractices}** |
+| ${getEmoji(seo)} SEO | **${seo}** |
+
+### Core Web Vitals
+
+| Metric | Value |
+|--------|-------|
+| First Contentful Paint (FCP) | ${fcp} |
+| Largest Contentful Paint (LCP) | ${lcp} |
+| Total Blocking Time (TBT) | ${tbt} |
+| Cumulative Layout Shift (CLS) | ${cls} |
+| Speed Index (SI) | ${si} |
+
+### Performance Budgets
+
+- ✅ Performance: Target ≥95, Current: ${performance}
+- ✅ Accessibility: Target 100, Current: ${accessibility}
+- ✅ Best Practices: Target 100, Current: ${bestPractices}
+- ✅ SEO: Target ≥95, Current: ${seo}
+
+${performance < 95 ? '⚠️ **Performance score is below target (95)**' : ''}
+${accessibility < 100 ? '⚠️ **Accessibility score is below target (100)**' : ''}
+${bestPractices < 100 ? '⚠️ **Best Practices score is below target (100)**' : ''}
+${seo < 95 ? '⚠️ **SEO score is below target (95)**' : ''}
+
+*Lighthouse CI run for commit ${context.sha.substring(0, 7)}*`;
+
+              // Post comment
+              await github.rest.issues.createComment({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                issue_number: context.issue.number,
+                body: commentBody
+              });
+              
+              console.log('Posted Lighthouse results to PR');
+              
+              // Fail the job if performance budget is not met
+              if (performance < 95 || accessibility < 100 || bestPractices < 100 || seo < 95) {
+                core.setFailed('Performance budget not met');
+              }
+              
+            } catch (error) {
+              console.error('Error processing Lighthouse results:', error);
+              core.setFailed(error.message);
+            }
+
+  lighthouse-status:
+    name: Lighthouse Status Check
+    runs-on: ubuntu-latest
+    needs: [lighthouse]
+    if: always()
+
+    steps:
+      - name: Check Lighthouse job status
+        run: |
+          if [[ "${{ needs.lighthouse.result }}" == "success" ]]; then
+            echo "✅ Lighthouse audit passed"
+            exit 0
+          else
+            echo "❌ Lighthouse audit failed or was cancelled"
+            exit 1
+          fi
