@@ -14,6 +14,8 @@ This is a modern Angular 21 portfolio application built with standalone componen
 - ngx-charts for data visualization
 - Storybook for component documentation
 - Playwright for E2E testing
+- ESLint with Angular ESLint for code quality
+- WCAG 2.1 AAA accessibility compliance
 - npm overrides for package compatibility
 
 ## Architecture Principles
@@ -80,6 +82,13 @@ This is a modern Angular 21 portfolio application built with standalone componen
 - All HTTP requests go through the interceptor chain configured in `app.config.ts`
 
 ## Code Style Guidelines
+
+### Linting (ESLint)
+
+- Run `npm run lint` before committing code
+- Fix auto-fixable issues with `npm run lint:fix`
+- All ESLint errors must be resolved (no warnings in CI)
+- Accessibility rules are enforced at WCAG 2.1 AAA level
 
 ### TypeScript
 
@@ -357,12 +366,76 @@ src/app/
 - Avoid unnecessary subscriptions
 - Use `trackBy` functions in loops
 
-## Accessibility
+## Accessibility (WCAG 2.1 AAA)
 
-- Use semantic HTML elements
-- Include ARIA labels where needed
-- Ensure keyboard navigation works
-- Maintain proper color contrast ratios
+### Required Standards
+
+- **WCAG 2.1 Level AAA compliance** enforced via ESLint
+- All accessibility violations must be fixed before merge
+- Use automated tools:
+  - ESLint accessibility rules (build-time)
+  - Storybook a11y addon (component-level)
+  - axe-core Playwright tests (E2E-level)
+
+### Semantic HTML
+
+- Always use semantic HTML5 elements (`<nav>`, `<main>`, `<article>`, `<section>`, etc.)
+- Use `<button>` for actions, `<a>` for navigation
+- Never use `<div>` or `<span>` for interactive elements
+
+### ARIA
+
+- Add ARIA labels to all interactive elements without visible text
+- Use `aria-label`, `aria-labelledby`, or `aria-describedby` as appropriate
+- Ensure form inputs have associated `<label>` elements
+- Use `role` attribute only when semantic HTML isn't sufficient
+- Never use positive `tabindex` values (only 0 or -1)
+
+### Keyboard Navigation
+
+- All interactive elements must be keyboard accessible
+- Click events MUST have corresponding keyboard events
+- Implement focus management for modals and dynamic content
+- Ensure logical tab order
+- Provide skip links for main content
+
+### Color Contrast (AAA)
+
+- Normal text: 7:1 contrast ratio minimum
+- Large text (18pt+): 4.5:1 contrast ratio minimum
+- UI components and graphics: 3:1 contrast ratio minimum
+- Test with browser DevTools or WebAIM Contrast Checker
+
+### Images & Media
+
+- All images MUST have `alt` attributes
+- Decorative images should have `alt=""`
+- Provide captions and transcripts for video/audio
+- Use `loading="lazy"` for below-fold images
+
+### Forms
+
+- Every input MUST have an associated label
+- Use `<fieldset>` and `<legend>` for grouped inputs
+- Provide clear error messages with `aria-invalid` and `aria-describedby`
+- Never rely on color alone to indicate errors
+
+### Testing
+
+- Run `npm run lint` to catch template accessibility issues
+- Check Storybook a11y addon for component violations
+- Write Playwright tests using `e2e/fixtures/accessibility.ts`
+- Example:
+
+  ```typescript
+  import { test, expect } from './fixtures/accessibility';
+
+  test('page should be accessible', async ({ page, makeAxeBuilder }) => {
+    await page.goto('/');
+    const results = await makeAxeBuilder().analyze();
+    expect(results.violations).toEqual([]);
+  });
+  ```
 
 ## Documentation Standards
 
@@ -425,6 +498,8 @@ src/app/
 
 - Build: `npm run build`
 - Dev server: `npm start`
+- Lint: `npm run lint` (ESLint with accessibility rules)
+- Lint fix: `npm run lint:fix` (auto-fix ESLint issues)
 - Unit tests: `npm test` (Vitest configured)
 - E2E tests: `npm run test:e2e`
 - Update visual baselines: `npm run test:e2e:update-snapshots`
@@ -451,6 +526,8 @@ src/app/
 ✅ Use ng-icons for all icon needs (install specific icon packs as needed)
 ✅ Use Transloco for all user-facing text
 ✅ Use Zod for API response validation
+✅ Ensure WCAG 2.1 AAA accessibility compliance
+✅ Run `npm run lint` before committing
 ✅ Document as you go, not as an afterthought
 
 ### Don'ts
@@ -464,5 +541,10 @@ src/app/
 ❌ Don't create global styles without CSS variables
 ❌ Don't use Angular Material (custom design system)
 ❌ Don't hardcode text strings (use Transloco)
+❌ Don't create interactive elements without keyboard support
+❌ Don't use positive tabindex values
+❌ Don't omit alt text on images (use alt="" for decorative)
+❌ Don't rely on color alone for information
 ❌ Don't defer documentation to the end
 ❌ Don't install packages without checking compatibility
+❌ Don't commit code with ESLint errors
