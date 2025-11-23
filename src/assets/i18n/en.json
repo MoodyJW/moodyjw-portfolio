@@ -1,0 +1,39 @@
+{
+  "common": {
+    "buttons": {
+      "submit": "Submit",
+      "cancel": "Cancel",
+      "save": "Save",
+      "delete": "Delete",
+      "edit": "Edit",
+      "close": "Close",
+      "back": "Back",
+      "next": "Next"
+    },
+    "labels": {
+      "loading": "Loading...",
+      "error": "Error",
+      "success": "Success",
+      "search": "Search",
+      "filter": "Filter"
+    }
+  },
+  "navigation": {
+    "home": "Home",
+    "caseStudies": "Case Studies",
+    "about": "About",
+    "contact": "Contact"
+  },
+  "home": {
+    "hero": {
+      "title": "Lead Frontend Developer",
+      "subtitle": "Building scalable Angular applications with enterprise-grade patterns"
+    }
+  },
+  "caseStudies": {
+    "title": "Case Studies",
+    "viewDetails": "View Details",
+    "noProjects": "No projects found",
+    "loading": "Loading projects..."
+  }
+}

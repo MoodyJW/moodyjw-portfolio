@@ -2,9 +2,33 @@
 
 ## Project Overview
 
-This is a modern Angular portfolio application built with standalone components, signals, and a feature-based architecture. The application demonstrates enterprise-grade patterns and best practices for scalable frontend development.
+This is a modern Angular 21 portfolio application built with standalone components, signals, and a feature-based architecture. The application demonstrates enterprise-grade patterns and best practices for scalable frontend development.
+
+**Key Technologies:**
+
+- Angular 21.0 with standalone components
+- NgRx SignalStore for state management
+- Transloco for internationalization (i18n)
+- ng-icons for icon system
+- Zod for runtime validation
+- ngx-charts for data visualization
+- Storybook for component documentation
+- Playwright for E2E testing
+- ESLint with Angular ESLint for code quality
+- WCAG 2.1 AAA accessibility compliance
+- npm overrides for package compatibility
 
 ## Architecture Principles
+
+### Package Compatibility Strategy
+
+- Using **Angular 21.0** with TypeScript 5.9
+- **npm overrides** configured in package.json for backward-compatible packages:
+  - @ngrx/signals (Angular 20 → 21)
+  - @swimlane/ngx-charts (Angular 18-20 → 21)
+  - @storybook/angular (Angular 18-20 → 21)
+- Zone.js imported in main.ts (required for Angular 21)
+- Always use `--legacy-peer-deps` when adding new packages that may have peer dependency conflicts
 
 ### Folder Structure
 
@@ -58,6 +82,13 @@ This is a modern Angular portfolio application built with standalone components,
 - All HTTP requests go through the interceptor chain configured in `app.config.ts`
 
 ## Code Style Guidelines
+
+### Linting (ESLint)
+
+- Run `npm run lint` before committing code
+- Fix auto-fixable issues with `npm run lint:fix`
+- All ESLint errors must be resolved (no warnings in CI)
+- Accessibility rules are enforced at WCAG 2.1 AAA level
 
 ### TypeScript
 
@@ -191,6 +222,55 @@ src/app/
 5. For data services, use HttpClient to fetch from assets/data/\*.json
 6. Return Observables for async operations
 
+### Using Icons (ng-icons)
+
+1. Import icons from @ng-icons packages in component
+2. Add to component imports array
+3. Use `<ng-icon>` component in templates
+4. Keep icon imports minimal (only import what you need)
+5. **Example**:
+
+   ```typescript
+   import { NgIconComponent, provideIcons } from '@ng-icons/core';
+   // Note: Install specific icon packs as needed, e.g.:
+   // npm install @ng-icons/heroicons --legacy-peer-deps
+   // import { heroHome, heroUser } from '@ng-icons/heroicons/outline';
+
+   @Component({
+     imports: [NgIconComponent],
+     viewProviders: [provideIcons({ /* icons here */ })],
+   })
+   ```
+
+### Internationalization (Transloco)
+
+1. Translations are defined in `src/assets/i18n/{lang}.json`
+2. Use `transloco` pipe or directive in templates
+3. Available languages configured in `app.config.transloco.ts`
+4. Use translation keys with dot notation: `'common.buttons.submit'`
+5. Prefer translation keys over hardcoded text
+6. Custom loader in `transloco-loader.ts` loads translations via HttpClient
+
+### Runtime Validation (Zod)
+
+1. Define schemas for API responses and form inputs
+2. Use `.parse()` for validation with errors
+3. Use `.safeParse()` for validation without throwing
+4. Place schemas near their usage (models or services)
+5. **Example**:
+
+   ```typescript
+   import { z } from 'zod';
+
+   const ProjectSchema = z.object({
+     id: z.string(),
+     title: z.string(),
+     description: z.string(),
+   });
+
+   type Project = z.infer<typeof ProjectSchema>;
+   ```
+
 ### Constants and Configuration
 
 1. **No Magic Strings**: Create constants for all hardcoded values
@@ -227,6 +307,34 @@ src/app/
 4. Create separate configs for dev/staging/prod
 5. Access via `inject()` with InjectionToken
 
+## Component Documentation (Storybook)
+
+- Storybook is configured and ready to use
+- Create stories as you build components
+- Stories live in `.stories.ts` files next to components
+- Document all component inputs, outputs, and variants
+- Include accessibility notes in story descriptions
+- Show different states (loading, error, empty, success)
+- **Example story structure**:
+
+  ```typescript
+  import type { Meta, StoryObj } from '@storybook/angular';
+  import { ButtonComponent } from './button.component';
+
+  const meta: Meta<ButtonComponent> = {
+    title: 'Shared/Button',
+    component: ButtonComponent,
+    tags: ['autodocs'],
+  };
+
+  export default meta;
+  type Story = StoryObj<ButtonComponent>;
+
+  export const Primary: Story = {
+    args: { variant: 'primary', label: 'Click me' },
+  };
+  ```
+
 ## Data Visualization
 
 - Use **ngx-charts** for data visualizations
@@ -258,12 +366,114 @@ src/app/
 - Avoid unnecessary subscriptions
 - Use `trackBy` functions in loops
 
-## Accessibility
+## Accessibility (WCAG 2.1 AAA)
 
-- Use semantic HTML elements
-- Include ARIA labels where needed
-- Ensure keyboard navigation works
-- Maintain proper color contrast ratios
+### Required Standards
+
+- **WCAG 2.1 Level AAA compliance** enforced via ESLint
+- All accessibility violations must be fixed before merge
+- Use automated tools:
+  - ESLint accessibility rules (build-time)
+  - Storybook a11y addon (component-level)
+  - axe-core Playwright tests (E2E-level)
+
+### Semantic HTML
+
+- Always use semantic HTML5 elements (`<nav>`, `<main>`, `<article>`, `<section>`, etc.)
+- Use `<button>` for actions, `<a>` for navigation
+- Never use `<div>` or `<span>` for interactive elements
+
+### ARIA
+
+- Add ARIA labels to all interactive elements without visible text
+- Use `aria-label`, `aria-labelledby`, or `aria-describedby` as appropriate
+- Ensure form inputs have associated `<label>` elements
+- Use `role` attribute only when semantic HTML isn't sufficient
+- Never use positive `tabindex` values (only 0 or -1)
+
+### Keyboard Navigation
+
+- All interactive elements must be keyboard accessible
+- Click events MUST have corresponding keyboard events
+- Implement focus management for modals and dynamic content
+- Ensure logical tab order
+- Provide skip links for main content
+
+### Color Contrast (AAA)
+
+- Normal text: 7:1 contrast ratio minimum
+- Large text (18pt+): 4.5:1 contrast ratio minimum
+- UI components and graphics: 3:1 contrast ratio minimum
+- Test with browser DevTools or WebAIM Contrast Checker
+
+### Images & Media
+
+- All images MUST have `alt` attributes
+- Decorative images should have `alt=""`
+- Provide captions and transcripts for video/audio
+- Use `loading="lazy"` for below-fold images
+
+### Forms
+
+- Every input MUST have an associated label
+- Use `<fieldset>` and `<legend>` for grouped inputs
+- Provide clear error messages with `aria-invalid` and `aria-describedby`
+- Never rely on color alone to indicate errors
+
+### Testing
+
+- Run `npm run lint` to catch template accessibility issues
+- Check Storybook a11y addon for component violations
+- Write Playwright tests using `e2e/fixtures/accessibility.ts`
+- Example:
+
+  ```typescript
+  import { test, expect } from './fixtures/accessibility';
+
+  test('page should be accessible', async ({ page, makeAxeBuilder }) => {
+    await page.goto('/');
+    const results = await makeAxeBuilder().analyze();
+    expect(results.violations).toEqual([]);
+  });
+  ```
+
+## Documentation Standards
+
+### TSDoc Comments
+
+- **ALWAYS** add TSDoc comments to:
+  - All public component methods and properties
+  - All service methods
+  - Store methods and computed properties
+  - Utility functions
+  - Type definitions and interfaces
+- Use `@param`, `@returns`, `@example` tags
+- **Example**:
+
+  ```typescript
+  /**
+   * Loads all projects from the data service.
+   * @returns Observable of Project array
+   * @example
+   * this.projectService.getProjects().subscribe(projects => {...})
+   */
+  getProjects(): Observable<Project[]> {
+    return this.http.get<Project[]>('/assets/data/projects.json');
+  }
+  ```
+
+### Inline Comments
+
+- Add comments for complex business logic
+- Explain **why**, not **what**
+- Keep comments up-to-date with code changes
+
+### Continuous Documentation
+
+- Update README when adding features
+- Create ADRs (Architecture Decision Records) for major decisions
+- Document API changes immediately
+- Keep Storybook stories current
 
 ## Testing
 
@@ -288,10 +498,16 @@ src/app/
 
 - Build: `npm run build`
 - Dev server: `npm start`
-- Unit tests: `npm test`
+- Lint: `npm run lint` (ESLint with accessibility rules)
+- Lint fix: `npm run lint:fix` (auto-fix ESLint issues)
+- Unit tests: `npm test` (Vitest configured)
 - E2E tests: `npm run test:e2e`
 - Update visual baselines: `npm run test:e2e:update-snapshots`
+- Storybook: `npm run storybook`
+- Build Storybook: `npm run build-storybook`
+- API docs: `npm run docs` (Compodoc)
 - Production builds are optimized and tree-shaken
+- **Note**: Use `--legacy-peer-deps` when installing new packages
 
 ## Do's and Don'ts
 
@@ -303,8 +519,16 @@ src/app/
 ✅ Use CSS variables for all styling values
 ✅ Follow BEM naming convention
 ✅ Make all components standalone
-✅ Use modern Angular control flow
+✅ Use modern Angular control flow (@if, @for, @switch)
 ✅ Type everything properly
+✅ Add TSDoc comments to all public APIs
+✅ Create Storybook stories as you build components
+✅ Use ng-icons for all icon needs (install specific icon packs as needed)
+✅ Use Transloco for all user-facing text
+✅ Use Zod for API response validation
+✅ Ensure WCAG 2.1 AAA accessibility compliance
+✅ Run `npm run lint` before committing
+✅ Document as you go, not as an afterthought
 
 ### Don'ts
 
@@ -316,3 +540,11 @@ src/app/
 ❌ Don't use `any` type
 ❌ Don't create global styles without CSS variables
 ❌ Don't use Angular Material (custom design system)
+❌ Don't hardcode text strings (use Transloco)
+❌ Don't create interactive elements without keyboard support
+❌ Don't use positive tabindex values
+❌ Don't omit alt text on images (use alt="" for decorative)
+❌ Don't rely on color alone for information
+❌ Don't defer documentation to the end
+❌ Don't install packages without checking compatibility
+❌ Don't commit code with ESLint errors

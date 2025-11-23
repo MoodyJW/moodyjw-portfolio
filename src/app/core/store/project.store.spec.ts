@@ -3,7 +3,7 @@ import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { ProjectStore } from './project.store';
 import { ProjectService } from '../services/project.service';
-import { Project } from '../models/project.model';
+import type { Project } from '../models/project.model';
 import { of, throwError } from 'rxjs';
 
 describe('ProjectStore', () => {
