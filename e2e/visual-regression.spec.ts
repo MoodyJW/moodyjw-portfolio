@@ -13,7 +13,7 @@ const VIEWPORTS = {
 };
 
 test.describe('Visual Regression Tests - Home Page', () => {
-  for (const [key, viewport] of Object.entries(VIEWPORTS)) {
+  for (const [_key, viewport] of Object.entries(VIEWPORTS)) {
     test(`Home page should match baseline on ${viewport.name}`, async ({ page }) => {
       // Set viewport
       await page.setViewportSize({ width: viewport.width, height: viewport.height });
@@ -34,7 +34,7 @@ test.describe('Visual Regression Tests - Home Page', () => {
 });
 
 test.describe('Visual Regression Tests - Case Studies Page', () => {
-  for (const [key, viewport] of Object.entries(VIEWPORTS)) {
+  for (const [_key, viewport] of Object.entries(VIEWPORTS)) {
     test(`Case Studies page should match baseline on ${viewport.name}`, async ({ page }) => {
       // Set viewport
       await page.setViewportSize({ width: viewport.width, height: viewport.height });

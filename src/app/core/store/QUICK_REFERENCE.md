@@ -3,7 +3,7 @@
 ## Installation
 
 ```bash
-npm install @ngrx/signals --legacy-peer-deps
+npm install @ngrx/signals
 ```
 
 ## Basic Usage

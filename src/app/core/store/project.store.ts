@@ -3,6 +3,8 @@ import { patchState, signalStore, withComputed, withMethods, withState } from '@
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 import { pipe, tap, switchMap, catchError, of } from 'rxjs';
 import { Project } from '../models/project.model';
+import { inject } from '@angular/core';
+import { ProjectService } from '../services/project.service';
 
 /**
  * State interface for the Project Store
@@ -160,7 +162,3 @@ export const ProjectStore = signalStore(
     },
   }))
 );
-
-// Import must be at the bottom to avoid circular dependency
-import { inject } from '@angular/core';
-import { ProjectService } from '../services/project.service';
