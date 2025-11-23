@@ -286,7 +286,6 @@ Each phase builds upon the previous one, ensuring a production-ready, maintainab
 
 **Documentation (Phase 3):**
 
-- [ ] Initialize Storybook configuration (.storybook/)
 - [ ] Create stories for all shared components
   - [ ] Props/inputs documentation
   - [ ] Usage examples and code snippets

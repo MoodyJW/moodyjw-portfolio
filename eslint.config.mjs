@@ -6,6 +6,9 @@ import angularTemplate from '@angular-eslint/eslint-plugin-template';
 import angularTemplateParser from '@angular-eslint/template-parser';
 
 export default [
+  // Base ESLint recommended rules
+  eslint.configs.recommended,
+
   // TypeScript files
   {
     files: ['**/*.ts'],
@@ -22,14 +25,30 @@ export default [
       '@angular-eslint': angular,
     },
     rules: {
-      ...eslint.configs.recommended.rules,
-      ...tseslint.configs.recommended.rules,
-      ...angular.configs.recommended.rules,
-
-      // TypeScript specific rules
+      // TypeScript recommended rules (manually defined for compatibility)
+      '@typescript-eslint/adjacent-overload-signatures': 'error',
+      '@typescript-eslint/ban-ts-comment': 'error',
+      '@typescript-eslint/ban-types': 'error',
+      'no-array-constructor': 'off',
+      '@typescript-eslint/no-array-constructor': 'error',
+      'no-empty-function': 'off',
+      '@typescript-eslint/no-empty-function': 'error',
+      '@typescript-eslint/no-empty-interface': 'error',
       '@typescript-eslint/no-explicit-any': 'error',
-      '@typescript-eslint/explicit-function-return-type': 'off',
+      '@typescript-eslint/no-extra-non-null-assertion': 'error',
+      'no-loss-of-precision': 'off',
+      '@typescript-eslint/no-loss-of-precision': 'error',
+      '@typescript-eslint/no-misused-new': 'error',
+      '@typescript-eslint/no-namespace': 'error',
+      '@typescript-eslint/no-non-null-asserted-optional-chain': 'error',
+      '@typescript-eslint/no-this-alias': 'error',
+      '@typescript-eslint/no-unnecessary-type-constraint': 'error',
+      'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
+      '@typescript-eslint/no-var-requires': 'error',
+      '@typescript-eslint/prefer-as-const': 'error',
+      '@typescript-eslint/triple-slash-reference': 'error',
+      '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/consistent-type-imports': 'error',
 
       // Angular specific rules
@@ -65,10 +84,16 @@ export default [
       '@angular-eslint/template': angularTemplate,
     },
     rules: {
-      ...angularTemplate.configs.recommended.rules,
-      ...angularTemplate.configs.accessibility.rules, // Includes all WCAG 2.1 AAA rules
+      // Angular template recommended and accessibility rules (manually defined)
+      '@angular-eslint/template/banana-in-box': 'error',
+      '@angular-eslint/template/conditional-complexity': 'error',
+      '@angular-eslint/template/cyclomatic-complexity': 'error',
+      '@angular-eslint/template/eqeqeq': 'error',
+      '@angular-eslint/template/no-any': 'error',
+      '@angular-eslint/template/no-duplicate-attributes': 'error',
+      '@angular-eslint/template/no-negated-async': 'error',
 
-      // Enforce specific accessibility rules
+      // WCAG 2.1 AAA accessibility rules
       '@angular-eslint/template/alt-text': 'error',
       '@angular-eslint/template/elements-content': 'error',
       '@angular-eslint/template/label-has-associated-control': 'error',
@@ -82,7 +107,6 @@ export default [
 
       // Template best practices
       '@angular-eslint/template/use-track-by-function': 'error',
-      '@angular-eslint/template/no-negated-async': 'error',
       '@angular-eslint/template/prefer-control-flow': 'error',
       '@angular-eslint/template/prefer-self-closing-tags': 'warn',
     },
