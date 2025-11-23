@@ -8,7 +8,7 @@ import { test, expect } from '@playwright/test';
 test.describe('Navigation', () => {
   test('should navigate to home page', async ({ page }) => {
     await page.goto('/');
-    await expect(page).toHaveURL('/');
+    await expect(page).toHaveURL('/home');
     await expect(page).toHaveTitle(/MoodyJW Portfolio/i);
   });
 
@@ -21,7 +21,7 @@ test.describe('Navigation', () => {
   test('should navigate back to home from case studies', async ({ page }) => {
     await page.goto('/case-studies');
     await page.click('text=Home');
-    await expect(page).toHaveURL('/');
+    await expect(page).toHaveURL('/home');
   });
 });
 

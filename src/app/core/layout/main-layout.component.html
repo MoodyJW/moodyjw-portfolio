@@ -1,6 +1,8 @@
 <div class="main-layout">
+  <a href="#main-content" class="main-layout__skip-link">Skip to main content</a>
+  
   <header class="main-layout__header">
-    <nav class="main-layout__nav">
+    <nav class="main-layout__nav" aria-label="Main navigation">
       <div class="main-layout__brand">
         <a routerLink="/" class="main-layout__brand-link">MoodyJW</a>
       </div>
@@ -15,7 +17,7 @@
     </nav>
   </header>
 
-  <main class="main-layout__content">
+  <main id="main-content" class="main-layout__content">
     <router-outlet />
   </main>
 
