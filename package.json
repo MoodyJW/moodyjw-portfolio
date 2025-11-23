@@ -11,7 +11,10 @@
     "test:e2e:ui": "playwright test --ui",
     "test:e2e:debug": "playwright test --debug",
     "test:e2e:update-snapshots": "playwright test --update-snapshots",
-    "test:e2e:report": "playwright show-report"
+    "test:e2e:report": "playwright show-report",
+    "storybook": "storybook dev -p 6006",
+    "build-storybook": "storybook build",
+    "docs": "compodoc -p tsconfig.json -d docs/compodoc"
   },
   "prettier": {
     "printWidth": 100,
@@ -76,9 +79,12 @@
     "@angular/build": "^21.0.0",
     "@angular/cli": "^21.0.0",
     "@angular/compiler-cli": "^21.0.0",
+    "@compodoc/compodoc": "^1.1.32",
     "@playwright/test": "^1.56.1",
+    "@storybook/angular": "^10.0.8",
     "@types/node": "^24.10.1",
     "jsdom": "^27.1.0",
+    "storybook": "^10.0.8",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8"
   }
