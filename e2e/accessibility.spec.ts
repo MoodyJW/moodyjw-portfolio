@@ -42,19 +42,19 @@ test.describe('Accessibility Compliance', () => {
     await page.waitForLoadState('networkidle');
 
     const skipLink = page.locator('a[href="#main-content"]').first();
-    
+
     // Verify skip link exists
     await expect(skipLink).toBeAttached();
-    
+
     // Programmatically focus the skip link (more reliable than Tab key)
     await page.evaluate(() => {
       const link = document.querySelector<HTMLAnchorElement>('a[href="#main-content"]');
       link?.focus();
     });
-    
+
     // Wait a bit for focus to settle
     await page.waitForTimeout(100);
-    
+
     // Verify it becomes focused and visible
     await expect(skipLink).toBeFocused();
     await expect(skipLink).toBeVisible();

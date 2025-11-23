@@ -106,10 +106,14 @@ Each phase builds upon the previous one, ensuring a production-ready, maintainab
   - [x] Run on main branch and pull requests
   - [x] Separate visual regression test job for all viewports
   - [x] E2E status check job to aggregate results
-- [ ] `.github/workflows/lighthouse.yml` - Performance monitoring
-  - [ ] Run on PRs and main branch
-  - [ ] Performance budget enforcement
-  - [ ] Comment PR with Lighthouse scores
+- [x] `.github/workflows/lighthouse.yml` - Performance monitoring
+  - [x] Run on PRs and main branch
+  - [x] Performance budget enforcement (≥95 performance, 100 accessibility, 100 best practices, ≥95 SEO)
+  - [x] Comment PR with Lighthouse scores and Core Web Vitals
+  - [x] Desktop preset with 3 runs for accuracy
+  - [x] Assert on Core Web Vitals (FCP <1.5s, LCP <2.5s, CLS <0.1, TBT <300ms, SI <3s)
+  - [x] Upload Lighthouse reports as artifacts
+  - [x] Status check job to aggregate results
 - [ ] `.github/workflows/dependency-review.yml` - Security checks
   - [ ] Scan for vulnerabilities in dependencies
   - [ ] Block high-severity issues
