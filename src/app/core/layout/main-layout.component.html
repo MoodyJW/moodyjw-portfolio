@@ -1,0 +1,25 @@
+<div class="main-layout">
+  <header class="main-layout__header">
+    <nav class="main-layout__nav">
+      <div class="main-layout__brand">
+        <a routerLink="/" class="main-layout__brand-link">MoodyJW</a>
+      </div>
+      <ul class="main-layout__menu">
+        <li class="main-layout__menu-item">
+          <a routerLink="/home" routerLinkActive="active" class="main-layout__menu-link">Home</a>
+        </li>
+        <li class="main-layout__menu-item">
+          <a routerLink="/case-studies" routerLinkActive="active" class="main-layout__menu-link">Case Studies</a>
+        </li>
+      </ul>
+    </nav>
+  </header>
+
+  <main class="main-layout__content">
+    <router-outlet></router-outlet>
+  </main>
+
+  <footer class="main-layout__footer">
+    <p class="main-layout__footer-text">&copy; {{ currentYear() }} MoodyJW. All rights reserved.</p>
+  </footer>
+</div>

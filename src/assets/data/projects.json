@@ -1,0 +1,20 @@
+[
+  {
+    "id": "enterprise-dashboard",
+    "title": "Enterprise Analytics Dashboard",
+    "description": "A comprehensive real-time analytics dashboard for enterprise clients featuring custom data visualizations, role-based access control, and responsive design. Built with Angular 18+ using signals and standalone components for optimal performance.",
+    "tags": ["Angular", "TypeScript", "RxJS", "D3.js", "SCSS", "Signals"]
+  },
+  {
+    "id": "healthcare-portal",
+    "title": "Patient Healthcare Portal",
+    "description": "HIPAA-compliant patient portal enabling secure messaging, appointment scheduling, and medical record access. Implemented with Angular's OnPush change detection strategy and lazy-loaded feature modules for enhanced security and performance.",
+    "tags": ["Angular", "TypeScript", "WebSockets", "SCSS", "Accessibility", "Security"]
+  },
+  {
+    "id": "ecommerce-platform",
+    "title": "Modern E-Commerce Platform",
+    "description": "High-performance e-commerce platform with advanced product filtering, real-time inventory management, and seamless checkout experience. Utilized Angular's reactive forms, state management with signals, and progressive web app capabilities.",
+    "tags": ["Angular", "TypeScript", "PWA", "State Management", "Performance", "SEO"]
+  }
+]
