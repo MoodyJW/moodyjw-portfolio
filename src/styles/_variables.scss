@@ -16,7 +16,7 @@
   // Colors - Text (WCAG AAA compliant - 7:1+ on white)
   --color-text: #1a1a1a; // 15.3:1 contrast on white
   --color-text-secondary: #4d4d4d; // 7.5:1 contrast on white
-  --color-text-tertiary: #595959; // 6.7:1 contrast on white (for large text 18pt+)
+  --color-text-tertiary: #595959; // 6.7:1 contrast - exceeds AAA large text (4.5:1), below AAA normal text (7:1)
 
   // Colors - Border (3:1+ contrast for UI components)
   --color-border: #767676; // 4.5:1 contrast on white
@@ -91,6 +91,7 @@
   --z-index-modal: 1050;
   --z-index-popover: 1060;
   --z-index-tooltip: 1070;
+  --z-index-skip-link: 1080; // Skip link should be above all other content for accessibility
 }
 
 // Dark theme support (WCAG AAA compliant)
