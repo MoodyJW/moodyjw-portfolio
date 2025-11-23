@@ -5,7 +5,6 @@ interface CaseStudy {
   title: string;
   description: string;
   technologies: string[];
-  imageUrl: string;
 }
 
 @Component({
@@ -22,22 +21,19 @@ export class CaseStudiesComponent {
       id: 1,
       title: 'Enterprise Dashboard',
       description: 'Built a scalable enterprise dashboard with real-time data visualization using Angular signals and standalone components.',
-      technologies: ['Angular', 'TypeScript', 'RxJS', 'SCSS'],
-      imageUrl: '/assets/placeholder.jpg'
+      technologies: ['Angular', 'TypeScript', 'RxJS', 'SCSS']
     },
     {
       id: 2,
       title: 'E-commerce Platform',
       description: 'Developed a high-performance e-commerce platform with advanced state management and lazy-loaded routes.',
-      technologies: ['Angular', 'NgRx', 'Angular Material', 'Firebase'],
-      imageUrl: '/assets/placeholder.jpg'
+      technologies: ['Angular', 'NgRx', 'Angular Material', 'Firebase']
     },
     {
       id: 3,
       title: 'Design System',
       description: 'Created a comprehensive design system with custom theming using CSS variables and reusable components.',
-      technologies: ['Angular', 'SCSS', 'Storybook', 'Design Tokens'],
-      imageUrl: '/assets/placeholder.jpg'
+      technologies: ['Angular', 'SCSS', 'Storybook', 'Design Tokens']
     }
   ]);
 }
