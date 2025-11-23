@@ -100,10 +100,12 @@ Each phase builds upon the previous one, ensuring a production-ready, maintainab
   - [x] Reusable coverage utility scripts (`scripts/coverage-utils.js`, `scripts/check-coverage.js`)
   - [x] Build artifact uploads (test results, coverage reports, dist/)
   - [x] Environment variables for maintainability (PRIMARY_NODE_VERSION)
-- [ ] `.github/workflows/e2e.yml` - Playwright tests with artifacts (use e2e-tests.yml.example as template)
-  - [ ] Matrix testing across browsers (chromium, firefox, webkit)
-  - [ ] Upload test results and screenshots as artifacts
-  - [ ] Run on main branch and pull requests
+- [x] `.github/workflows/e2e.yml` - Playwright tests with artifacts
+  - [x] Matrix testing across browsers (chromium, firefox, webkit)
+  - [x] Upload test results and screenshots as artifacts
+  - [x] Run on main branch and pull requests
+  - [x] Separate visual regression test job for all viewports
+  - [x] E2E status check job to aggregate results
 - [ ] `.github/workflows/lighthouse.yml` - Performance monitoring
   - [ ] Run on PRs and main branch
   - [ ] Performance budget enforcement
