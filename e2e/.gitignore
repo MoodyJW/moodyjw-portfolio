@@ -1,0 +1,8 @@
+# Playwright test artifacts
+test-results/
+playwright-report/
+playwright/.cache/
+
+# Screenshot diffs and actual screenshots (keep baseline only)
+*.png
+!screenshots-baseline/*.png

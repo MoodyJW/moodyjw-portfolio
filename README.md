@@ -41,7 +41,7 @@ src/app/
 - **Styling**: SCSS with CSS Variables
 - **State Management**: Angular Signals
 - **Routing**: Angular Router (lazy-loaded)
-- **Testing**: Vitest
+- **Testing**: Vitest (Unit) + Playwright (E2E)
 - **Build Tool**: Angular CLI with Vite
 
 ## 🎨 Design System
@@ -100,11 +100,21 @@ npm run build
 ```bash
 # Run unit tests
 npm test
+
+# Run E2E tests
+npm run test:e2e
+
+# Run E2E tests in UI mode (interactive)
+npm run test:e2e:ui
+
+# Update visual regression baselines
+npm run test:e2e:update-snapshots
 ```
 
 ## 📐 Architecture Principles
 
 ### Standalone Components
+
 All components are standalone, eliminating the need for NgModules:
 
 ```typescript
@@ -112,12 +122,13 @@ All components are standalone, eliminating the need for NgModules:
   selector: 'app-feature',
   standalone: true,
   imports: [CommonModule, RouterLink],
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class FeatureComponent {}
 ```
 
 ### Signals
+
 Using Angular Signals for reactive state:
 
 ```typescript
@@ -125,6 +136,7 @@ protected readonly data = signal<Type>(initialValue);
 ```
 
 ### Lazy Loading
+
 All feature routes are lazy-loaded:
 
 ```typescript
@@ -135,10 +147,11 @@ All feature routes are lazy-loaded:
 ```
 
 ### OnPush Change Detection
+
 All components use OnPush strategy for optimal performance:
 
 ```typescript
-changeDetection: ChangeDetectionStrategy.OnPush
+changeDetection: ChangeDetectionStrategy.OnPush;
 ```
 
 ## 🎯 Code Style
@@ -150,7 +163,7 @@ changeDetection: ChangeDetectionStrategy.OnPush
   &__element {
     // element styles
   }
-  
+
   &__element--modifier {
     // modifier styles
   }
@@ -167,10 +180,37 @@ changeDetection: ChangeDetectionStrategy.OnPush
 }
 ```
 
+## 🧪 Testing Strategy
+
+### Unit Testing
+
+- **Framework**: Vitest
+- **Coverage**: Components, services, utilities
+- **Strategy**: Test signal updates, component reactions, and business logic
+
+### E2E Testing
+
+- **Framework**: Playwright
+- **Coverage**: Navigation, user flows, visual regression
+- **Viewports**: Desktop (1920x1080), Laptop (1440x1024), Tablet (768x1024), Mobile (375x667)
+- **Browsers**: Chromium, Firefox, WebKit
+
+#### Visual Regression Tests
+
+Visual regression tests ensure CSS Grid layouts and responsive designs don't break:
+
+- Screenshots captured for Home and Case Studies pages
+- Tested across 4 viewports (Desktop, Laptop, Tablet, Mobile)
+- Baseline images stored in `e2e/screenshots-baseline/`
+- Automatic pixel-by-pixel comparison
+
+See **[E2E Testing Guide](./e2e/README.md)** for detailed information.
+
 ## 📚 Documentation
 
 - **[Implementation Plan](./IMPLEMENTATION_PLAN.md)** - Phased development roadmap
 - **[Copilot Instructions](./.github/copilot-instructions.md)** - AI coding assistant guidelines
+- **[E2E Testing Guide](./e2e/README.md)** - Playwright testing documentation
 
 ## 🤝 Contributing
 
@@ -201,6 +241,7 @@ This project is licensed under the MIT License.
 ## 👤 Author
 
 **MoodyJW**
+
 - GitHub: [@MoodyJW](https://github.com/MoodyJW)
 
 ---

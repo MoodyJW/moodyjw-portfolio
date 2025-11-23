@@ -1,6 +1,7 @@
 # MoodyJW Portfolio - Phased Implementation Plan
 
 ## Overview
+
 This document outlines the phased approach for implementing and extending the Angular portfolio application. Each phase builds upon the previous one, ensuring a solid foundation and maintainable codebase.
 
 ---
@@ -8,6 +9,7 @@ This document outlines the phased approach for implementing and extending the An
 ## Phase 1: Foundation & Core Structure ✅ COMPLETED
 
 ### Objectives
+
 - Set up Angular project with standalone components
 - Establish feature-based folder architecture
 - Implement routing with lazy loading
@@ -15,6 +17,7 @@ This document outlines the phased approach for implementing and extending the An
 - Enforce OnPush change detection strategy
 
 ### Deliverables
+
 - [x] Angular 21+ project scaffolded
 - [x] Feature-based folder structure (Core, Shared, Features)
 - [x] MainLayout shell component
@@ -27,6 +30,7 @@ This document outlines the phased approach for implementing and extending the An
 - [x] GitHub Copilot instructions file
 
 ### Technical Details
+
 - Standalone components with signals
 - BEM naming convention for styles
 - Comprehensive CSS variable system
@@ -37,12 +41,14 @@ This document outlines the phased approach for implementing and extending the An
 ## Phase 2: Enhanced Features & Content
 
 ### Objectives
+
 - Add more portfolio content
 - Implement detail pages
 - Add animations and transitions
 - Enhance user experience
 
 ### Deliverables
+
 - [ ] Case Study detail component with routing
 - [ ] About Me feature component
 - [ ] Skills/Technologies showcase
@@ -53,6 +59,7 @@ This document outlines the phased approach for implementing and extending the An
 - [ ] Loading states and skeletons
 
 ### Technical Details
+
 - Route parameters for case study details
 - Form validation with reactive forms
 - Animation triggers and states
@@ -65,11 +72,13 @@ This document outlines the phased approach for implementing and extending the An
 ## Phase 3: State Management & Services
 
 ### Objectives
+
 - Implement global state management
 - Add data services
 - Create reusable utilities
 
 ### Deliverables
+
 - [ ] Portfolio data service
 - [ ] Theme switcher service (light/dark mode)
 - [ ] Analytics tracking service
@@ -79,6 +88,7 @@ This document outlines the phased approach for implementing and extending the An
 - [ ] Shared utilities (date formatting, string helpers)
 
 ### Technical Details
+
 - Signal-based state management
 - Service injection patterns
 - Error boundaries
@@ -91,11 +101,13 @@ This document outlines the phased approach for implementing and extending the An
 ## Phase 4: Shared Components Library
 
 ### Objectives
+
 - Build reusable component library
 - Create consistent UI patterns
 - Ensure accessibility
 
 ### Deliverables
+
 - [ ] Button component with variants
 - [ ] Card component
 - [ ] Modal/Dialog component
@@ -108,6 +120,7 @@ This document outlines the phased approach for implementing and extending the An
 - [ ] Tabs component
 
 ### Technical Details
+
 - Standalone components with signal inputs
 - ARIA attributes for accessibility
 - Keyboard navigation support
@@ -120,11 +133,13 @@ This document outlines the phased approach for implementing and extending the An
 ## Phase 5: Advanced Features
 
 ### Objectives
+
 - Add interactive features
 - Implement advanced functionality
 - Enhance performance
 
 ### Deliverables
+
 - [ ] Search functionality
 - [ ] Filter/Sort capabilities
 - [ ] Blog/Articles section
@@ -135,6 +150,7 @@ This document outlines the phased approach for implementing and extending the An
 - [ ] Performance monitoring
 
 ### Technical Details
+
 - Custom pipes for filtering
 - Virtual scrolling for large lists
 - Service Worker configuration
@@ -148,23 +164,29 @@ This document outlines the phased approach for implementing and extending the An
 ## Phase 6: Testing & Quality Assurance
 
 ### Objectives
+
 - Comprehensive test coverage
 - Performance optimization
 - Accessibility audit
 
 ### Deliverables
+
 - [ ] Unit tests for all components
 - [ ] Integration tests for features
-- [ ] E2E tests for critical flows
+- [x] E2E tests for critical flows
+- [x] Visual regression tests (Desktop, Laptop, Tablet, Mobile)
 - [ ] Performance benchmarking
 - [ ] Accessibility testing (WCAG 2.1 AA)
-- [ ] Cross-browser testing
-- [ ] Mobile responsiveness testing
+- [x] Cross-browser testing (Chromium, Firefox, WebKit)
+- [x] Mobile responsiveness testing
 - [ ] Lighthouse score optimization (>95)
 
 ### Technical Details
+
 - Vitest for unit testing
-- Cypress or Playwright for E2E
+- Playwright for E2E and visual regression testing
+- Visual regression tests on 4 viewports (Desktop: 1920x1080, Laptop: 1440x1024, Tablet: 768x1024, Mobile: 375x667)
+- Screenshot tests for Home and Case Studies pages
 - axe-core for accessibility
 - Chrome DevTools for performance
 - Bundle size optimization
@@ -176,11 +198,13 @@ This document outlines the phased approach for implementing and extending the An
 ## Phase 7: Deployment & CI/CD
 
 ### Objectives
+
 - Automate deployment pipeline
 - Set up monitoring and analytics
 - Implement feedback loops
 
 ### Deliverables
+
 - [ ] GitHub Actions CI/CD pipeline
 - [ ] Automated testing in CI
 - [ ] Staging environment
@@ -191,6 +215,7 @@ This document outlines the phased approach for implementing and extending the An
 - [ ] Automated dependency updates
 
 ### Technical Details
+
 - GitHub Actions workflows
 - Firebase Hosting or Vercel
 - Environment configuration
@@ -204,11 +229,13 @@ This document outlines the phased approach for implementing and extending the An
 ## Phase 8: Documentation & Maintenance
 
 ### Objectives
+
 - Complete technical documentation
 - Create developer guides
 - Establish maintenance procedures
 
 ### Deliverables
+
 - [ ] Component documentation (Storybook)
 - [ ] API documentation
 - [ ] Architecture decision records (ADRs)
@@ -219,6 +246,7 @@ This document outlines the phased approach for implementing and extending the An
 - [ ] Changelog automation
 
 ### Technical Details
+
 - Storybook for component docs
 - Compodoc for Angular docs
 - Markdown documentation
@@ -231,6 +259,7 @@ This document outlines the phased approach for implementing and extending the An
 ## Continuous Improvements
 
 ### Ongoing Tasks
+
 - Monitor and fix bugs
 - Update dependencies
 - Security patches
@@ -245,18 +274,21 @@ This document outlines the phased approach for implementing and extending the An
 ## Success Metrics
 
 ### Performance
+
 - Lighthouse score > 95
 - First Contentful Paint < 1.5s
 - Time to Interactive < 3s
 - Bundle size < 200KB (initial)
 
 ### Code Quality
+
 - Test coverage > 80%
 - No critical accessibility issues
 - TypeScript strict mode enabled
 - Zero build warnings
 
 ### User Experience
+
 - Mobile-first responsive design
 - Cross-browser compatibility
 - Keyboard navigation support
@@ -267,28 +299,33 @@ This document outlines the phased approach for implementing and extending the An
 ## Technology Stack Summary
 
 ### Core
+
 - Angular 21+ (Standalone Components)
 - TypeScript 5.9+
 - RxJS 7.8+
 - Signals for state management
 
 ### Styling
+
 - SCSS with CSS Variables
 - BEM naming convention
 - Custom design system (no frameworks)
 
 ### Build & Tools
+
 - Angular CLI
 - Vite (via Angular 21+)
 - ESLint for linting
 - Prettier for formatting
 
 ### Testing
+
 - Vitest for unit tests
 - Testing Library for component tests
 - Cypress/Playwright for E2E
 
 ### Deployment
+
 - GitHub Actions
 - Firebase Hosting/Vercel/Netlify
 - Automated previews for PRs
@@ -298,11 +335,13 @@ This document outlines the phased approach for implementing and extending the An
 ## Risk Mitigation
 
 ### Technical Risks
+
 - **Browser compatibility**: Test early and often
 - **Performance**: Monitor bundle size, lazy load aggressively
 - **Breaking changes**: Pin major versions, update incrementally
 
 ### Project Risks
+
 - **Scope creep**: Stick to phase objectives
 - **Time estimation**: Buffer 20% for unknowns
 - **Quality vs speed**: Never skip testing phase
