@@ -8,33 +8,125 @@
 const fs = require('fs');
 const path = require('path');
 
-const COVERAGE_FILE = path.join(__dirname, '../coverage/coverage-summary.json');
 const THRESHOLD = 80;
 
-function getCoverageData() {
-  // Check if coverage file exists
-  if (!fs.existsSync(COVERAGE_FILE)) {
-    // Help debug by checking what files exist in coverage directory
-    const coverageDir = path.join(__dirname, '../coverage');
-    if (fs.existsSync(coverageDir)) {
-      const files = fs.readdirSync(coverageDir);
-      console.error(`Coverage directory exists but coverage-summary.json not found.`);
-      console.error(`Files in coverage/: ${files.join(', ')}`);
-    }
+function findCoverageFile() {
+  const coverageDir = path.join(__dirname, '../coverage');
+  if (!fs.existsSync(coverageDir)) {
     return null;
   }
 
-  try {
-    // Read and parse coverage data
-    const coverage = JSON.parse(fs.readFileSync(COVERAGE_FILE, 'utf8'));
+  // Look for coverage-summary.json (preferred)
+  const files = fs.readdirSync(coverageDir);
+  for (const file of files) {
+    const summaryPath = path.join(coverageDir, file, 'coverage-summary.json');
+    if (fs.existsSync(summaryPath)) {
+      return { path: summaryPath, type: 'summary' };
+    }
+  }
 
-    // Validate the structure
-    if (!coverage.total) {
-      console.error('Coverage file exists but does not have expected "total" property');
-      return null;
+  // Fallback to coverage-final.json
+  for (const file of files) {
+    const finalPath = path.join(coverageDir, file, 'coverage-final.json');
+    if (fs.existsSync(finalPath)) {
+      return { path: finalPath, type: 'final' };
+    }
+  }
+
+  console.error(`Coverage directory exists but no coverage files found.`);
+  console.error(`Files in coverage/: ${files.join(', ')}`);
+  return null;
+}
+
+function calculateTotalsFromFinal(coverageData) {
+  const totals = {
+    statements: { covered: 0, total: 0 },
+    branches: { covered: 0, total: 0 },
+    functions: { covered: 0, total: 0 },
+    lines: { covered: 0, total: 0 },
+  };
+
+  for (const filePath in coverageData) {
+    const file = coverageData[filePath];
+
+    // Statements
+    for (const key in file.s) {
+      totals.statements.total++;
+      if (file.s[key] > 0) totals.statements.covered++;
     }
 
-    const { statements, branches, functions, lines } = coverage.total;
+    // Branches
+    for (const key in file.b) {
+      const branches = file.b[key];
+      for (let i = 0; i < branches.length; i++) {
+        totals.branches.total++;
+        if (branches[i] > 0) totals.branches.covered++;
+      }
+    }
+
+    // Functions
+    for (const key in file.f) {
+      totals.functions.total++;
+      if (file.f[key] > 0) totals.functions.covered++;
+    }
+
+    // Lines (use statementMap as proxy)
+    for (const key in file.s) {
+      totals.lines.total++;
+      if (file.s[key] > 0) totals.lines.covered++;
+    }
+  }
+
+  return {
+    statements: {
+      pct:
+        totals.statements.total > 0
+          ? ((totals.statements.covered / totals.statements.total) * 100).toFixed(2)
+          : 0,
+    },
+    branches: {
+      pct:
+        totals.branches.total > 0
+          ? ((totals.branches.covered / totals.branches.total) * 100).toFixed(2)
+          : 0,
+    },
+    functions: {
+      pct:
+        totals.functions.total > 0
+          ? ((totals.functions.covered / totals.functions.total) * 100).toFixed(2)
+          : 0,
+    },
+    lines: {
+      pct:
+        totals.lines.total > 0 ? ((totals.lines.covered / totals.lines.total) * 100).toFixed(2) : 0,
+    },
+  };
+}
+
+function getCoverageData() {
+  // Find coverage file
+  const coverageFile = findCoverageFile();
+  if (!coverageFile) {
+    return null;
+  }
+  try {
+    // Read and parse coverage data
+    const coverage = JSON.parse(fs.readFileSync(coverageFile.path, 'utf8'));
+
+    let totals;
+    if (coverageFile.type === 'summary') {
+      // coverage-summary.json format
+      if (!coverage.total) {
+        console.error('Coverage file exists but does not have expected "total" property');
+        return null;
+      }
+      totals = coverage.total;
+    } else {
+      // coverage-final.json format - calculate totals
+      totals = calculateTotalsFromFinal(coverage);
+    }
+
+    const { statements, branches, functions, lines } = totals;
 
     return {
       statements: statements.pct,
