@@ -156,6 +156,7 @@ export default [
       'vitest.config.ts',
       'playwright.config.ts',
       'e2e/**',
+      'scripts/**',
     ],
   },
 ];
