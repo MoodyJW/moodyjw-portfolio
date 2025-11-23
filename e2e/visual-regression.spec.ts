@@ -34,9 +34,11 @@ test.describe('Visual Regression Tests - Home Page', () => {
       await page.waitForLoadState('networkidle');
 
       // Take screenshot and compare with baseline
+      // Allow slight differences for cross-platform font rendering
       await expect(page).toHaveScreenshot(`home-${viewport.name}.png`, {
         fullPage: true,
         animations: 'disabled',
+        maxDiffPixelRatio: 0.01, // Allow 1% difference for font rendering
       });
     });
   }
@@ -63,9 +65,11 @@ test.describe('Visual Regression Tests - Case Studies Page', () => {
       await page.waitForLoadState('networkidle');
 
       // Take screenshot and compare with baseline
+      // Allow slight differences for cross-platform font rendering
       await expect(page).toHaveScreenshot(`case-studies-${viewport.name}.png`, {
         fullPage: true,
         animations: 'disabled',
+        maxDiffPixelRatio: 0.01, // Allow 1% difference for font rendering
       });
     });
   }
