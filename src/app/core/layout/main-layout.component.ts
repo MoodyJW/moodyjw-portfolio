@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
+import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
 import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
@@ -9,4 +9,6 @@ import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
   styleUrl: './main-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class MainLayoutComponent {}
+export class MainLayoutComponent {
+  protected readonly currentYear = signal(new Date().getFullYear());
+}
