@@ -35,6 +35,7 @@ This is a modern Angular portfolio application built with standalone components,
 - Inject store with `inject(ProjectStore)` in components
 - Access state via signals: `store.projects()`, `store.isLoading()`
 - **Integration Pattern**:
+
   ```typescript
   export class CaseStudiesComponent implements OnInit {
     readonly store = inject(ProjectStore);
@@ -44,6 +45,7 @@ This is a modern Angular portfolio application built with standalone components,
     }
   }
   ```
+
 - Replace hardcoded data arrays with store-managed state
 - Use store loading/error states in templates with `@if` blocks
 
