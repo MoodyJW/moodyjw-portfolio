@@ -34,6 +34,16 @@ export default defineConfig({
   /* Use custom snapshot path to make snapshots platform-agnostic */
   snapshotPathTemplate: '{testDir}/{testFileDir}/{testFileName}-snapshots/{arg}{ext}',
 
+  /* Configure expect for visual regression with cross-platform tolerance */
+  expect: {
+    toHaveScreenshot: {
+      /* Allow 0.2% pixel difference for font rendering across platforms */
+      maxDiffPixelRatio: 0.002,
+      /* Use same threshold for all projects */
+      threshold: 0.2,
+    },
+  },
+
   /* Configure projects for major browsers */
   projects: [
     {
