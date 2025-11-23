@@ -32,6 +32,9 @@ This document outlines the phased approach for implementing and extending the An
 - [x] HTTP interceptor for latency simulation
 - [x] Project model and TypeScript interfaces
 - [x] Mock JSON data (projects.json)
+- [x] NgRx SignalStore for state management
+- [x] ProjectStore with computed selectors and rxMethod
+- [x] Comprehensive unit tests for store
 
 ### Technical Details
 
@@ -41,6 +44,9 @@ This document outlines the phased approach for implementing and extending the An
 - Responsive layout structure
 - Mockend pattern with HttpClient and functional interceptors
 - Simulated network latency (500-1000ms) for realistic development
+- NgRx SignalStore for reactive state management
+- Computed selectors for derived state
+- Automatic loading and error state handling
 
 ---
 

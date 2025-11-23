@@ -5,7 +5,8 @@
 ## 🚀 Features
 
 - ✅ **Modern Angular 21+** with standalone components
-- ✅ **Signals** for reactive state management
+- ✅ **NgRx SignalStore** for reactive state management
+- ✅ **Signals** for reactive data flow
 - ✅ **Feature-based architecture** (Core, Shared, Features)
 - ✅ **Lazy-loaded routes** for optimal performance
 - ✅ **OnPush change detection** throughout
@@ -23,6 +24,7 @@ src/
 │   ├── core/                    # Core application functionality
 │   │   ├── layout/             # Shell layouts (MainLayout)
 │   │   ├── services/           # Global services (ProjectService)
+│   │   ├── store/              # NgRx SignalStore (ProjectStore)
 │   │   ├── guards/             # Route guards
 │   │   ├── interceptors/       # HTTP interceptors (latency simulation)
 │   │   └── models/             # Data models and interfaces (Project)
@@ -43,7 +45,7 @@ src/
 - **Framework**: Angular 21.0
 - **Language**: TypeScript 5.9
 - **Styling**: SCSS with CSS Variables
-- **State Management**: Angular Signals
+- **State Management**: NgRx SignalStore + Angular Signals
 - **Data Layer**: Mockend pattern with local JSON files
 - **HTTP Client**: Angular HttpClient with functional interceptors
 - **Routing**: Angular Router (lazy-loaded)
@@ -105,23 +107,79 @@ The application uses a **Mockend** approach for data management, providing a rea
 4. **Type Safety**: Full TypeScript support with defined models
 5. **Testable**: Easy to mock and test data flows
 
-### Usage Example
+### Usage Example with NgRx SignalStore
 
 ```typescript
-import { inject } from '@angular/core';
-import { ProjectService } from './core/services/project.service';
+import { Component, inject, OnInit } from '@angular/core';
+import { ProjectStore } from '@core/store';
 
-export class CaseStudiesComponent {
-  private projectService = inject(ProjectService);
-  protected projects = signal<Project[]>([]);
+@Component({
+  selector: 'app-case-studies',
+  standalone: true,
+  template: `
+    @if (store.isLoading()) {
+    <div>Loading projects...</div>
+    } @else if (store.error()) {
+    <div>Error: {{ store.error() }}</div>
+    } @else {
+    <h1>Projects ({{ store.projectCount() }})</h1>
+    @for (project of store.projects(); track project.id) {
+    <article>{{ project.title }}</article>
+    } }
+  `,
+})
+export class CaseStudiesComponent implements OnInit {
+  readonly store = inject(ProjectStore);
 
   ngOnInit() {
-    this.projectService.getProjects().subscribe({
-      next: (projects) => this.projects.set(projects),
-      error: (err) => console.error('Failed to load projects', err)
-    });
+    // Load projects automatically triggers loading state
+    this.store.loadProjects();
   }
 }
+```
+
+## 🎯 State Management with NgRx SignalStore
+
+### Store Features
+
+The `ProjectStore` provides a complete state management solution:
+
+**State Properties:**
+
+- `projects()` - Array of all projects
+- `selectedProject()` - Currently selected project
+- `isLoading()` - Loading state indicator
+- `error()` - Error message if any
+
+**Computed Selectors:**
+
+- `projectCount()` - Total number of projects
+- `projectsByTag(tag)` - Filter projects by tag
+- `hasSelection()` - Check if a project is selected
+- `allTags()` - Get all unique tags sorted
+
+**Methods:**
+
+- `loadProjects()` - Load all projects
+- `loadProjectById(id)` - Load and select specific project
+- `selectProject(project)` - Manually set selected project
+- `clearSelection()` - Clear selected project
+- `clearError()` - Clear error state
+- `reset()` - Reset store to initial state
+
+### Advanced Usage
+
+```typescript
+// Filter projects by technology
+const angularProjects = store.projectsByTag()('Angular');
+
+// Check loading state
+if (store.isLoading()) {
+  // Show spinner
+}
+
+// Access all tags for filtering UI
+const tags = store.allTags(); // ['Angular', 'React', 'TypeScript', ...]
 ```
 
 ## 🚦 Getting Started

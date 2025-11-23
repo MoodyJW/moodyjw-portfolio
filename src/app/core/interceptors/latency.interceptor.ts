@@ -4,10 +4,10 @@ import { delay } from 'rxjs/operators';
 /**
  * Functional HTTP interceptor that simulates network latency
  * Adds a random delay between 500-1000ms to HTTP requests
- * 
+ *
  * This is useful for development to simulate real-world network conditions
  * and test loading states, spinners, and user experience under latency.
- * 
+ *
  * @example
  * ```typescript
  * provideHttpClient(

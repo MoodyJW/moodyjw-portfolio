@@ -8,6 +8,7 @@ The `core` directory contains application-wide functionality that should only be
 core/
 ├── layout/           # Shell layouts and main layout components
 ├── services/         # Global singleton services
+├── store/            # NgRx SignalStore state management
 ├── guards/           # Route guards for navigation control
 ├── interceptors/     # HTTP interceptors
 └── models/           # Shared data models and interfaces
@@ -20,6 +21,16 @@ The `layout` folder contains shell components that wrap feature content:
 - **MainLayoutComponent**: Primary layout with header, navigation, content area, and footer
 - Future layouts: AdminLayout, AuthLayout, etc.
 
+## Store
+
+NgRx SignalStore for reactive state management:
+
+- **ProjectStore**: Manages project/case study state with computed selectors and async methods
+- Reactive signals-based state with automatic change detection
+- Computed selectors for derived state (projectCount, allTags, etc.)
+- Type-safe methods for state updates and async operations
+- Built-in loading and error state management
+
 ## Services
 
 Application-wide services that should be provided in root:
@@ -28,7 +39,6 @@ Application-wide services that should be provided in root:
 - Theme service (light/dark mode)
 - Analytics service
 - SEO service
-- Global state management
 - API services
 
 ## Guards

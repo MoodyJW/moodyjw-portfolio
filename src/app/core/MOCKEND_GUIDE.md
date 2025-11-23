@@ -26,10 +26,10 @@ src/
 
 ```typescript
 interface Project {
-  id: string;           // Unique identifier
-  title: string;        // Display title
-  description: string;  // Detailed description
-  tags: string[];       // Technology tags
+  id: string; // Unique identifier
+  title: string; // Display title
+  description: string; // Detailed description
+  tags: string[]; // Technology tags
 }
 ```
 
@@ -51,7 +51,7 @@ export class MyComponent {
 ```typescript
 this.projectService.getProjects().subscribe({
   next: (projects) => console.log(projects),
-  error: (err) => console.error(err)
+  error: (err) => console.error(err),
 });
 ```
 
@@ -60,7 +60,7 @@ this.projectService.getProjects().subscribe({
 ```typescript
 this.projectService.getProjectById('enterprise-dashboard').subscribe({
   next: (project) => console.log(project),
-  error: (err) => console.error(err)
+  error: (err) => console.error(err),
 });
 ```
 
@@ -69,16 +69,16 @@ this.projectService.getProjectById('enterprise-dashboard').subscribe({
 The `latencyInterceptor` automatically adds a random delay (500-1000ms) to all HTTP requests.
 
 **Benefits:**
+
 - Test loading states and spinners
 - Simulate real network conditions
 - Identify race conditions
 - Improve UX during slow connections
 
 **Configuration** (already set up in `app.config.ts`):
+
 ```typescript
-provideHttpClient(
-  withInterceptors([latencyInterceptor])
-)
+provideHttpClient(withInterceptors([latencyInterceptor]));
 ```
 
 ## Adding New Mock Data
@@ -86,6 +86,7 @@ provideHttpClient(
 ### 1. Create JSON File
 
 Create `src/assets/data/your-data.json`:
+
 ```json
 [
   { "id": "1", "name": "Item 1" },
@@ -96,6 +97,7 @@ Create `src/assets/data/your-data.json`:
 ### 2. Create Model
 
 Create `src/app/core/models/your-model.model.ts`:
+
 ```typescript
 export interface YourModel {
   id: string;
@@ -106,6 +108,7 @@ export interface YourModel {
 ### 3. Create Service
 
 Create `src/app/core/services/your-data.service.ts`:
+
 ```typescript
 import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
@@ -142,24 +145,27 @@ private readonly projectsUrl = 'https://api.example.com/projects';
 ### 2. Optionally Disable Latency Interceptor
 
 In `app.config.ts`:
+
 ```typescript
 // Remove or comment out for production
-provideHttpClient(
-  // withInterceptors([latencyInterceptor])  // Disabled
-)
+provideHttpClient();
+// withInterceptors([latencyInterceptor])  // Disabled
 ```
 
 ### 3. Add Error Handling
 
 ```typescript
-this.projectService.getProjects().pipe(
-  catchError(error => {
-    // Handle API errors
-    return of([]);
-  })
-).subscribe(projects => {
-  // Handle data
-});
+this.projectService
+  .getProjects()
+  .pipe(
+    catchError((error) => {
+      // Handle API errors
+      return of([]);
+    })
+  )
+  .subscribe((projects) => {
+    // Handle data
+  });
 ```
 
 ## Best Practices
@@ -175,6 +181,7 @@ this.projectService.getProjects().pipe(
 ## Testing
 
 The latency interceptor is perfect for testing:
+
 - Loading indicators and spinners
 - Skeleton screens
 - Error states
@@ -191,6 +198,7 @@ The latency interceptor is perfect for testing:
 ---
 
 For more details, see:
+
 - [Core README](./README.md)
 - [Project Documentation](../../../README.md)
 - [Copilot Instructions](../../../.github/copilot-instructions.md)

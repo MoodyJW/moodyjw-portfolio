@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { HttpTestingController, provideHttpClientTesting } from '@angular/common/http/testing';
 import { ProjectService } from './project.service';
 import { Project } from '../models/project.model';
 
@@ -24,8 +25,7 @@ describe('ProjectService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [ProjectService],
+      providers: [ProjectService, provideHttpClient(), provideHttpClientTesting()],
     });
 
     service = TestBed.inject(ProjectService);

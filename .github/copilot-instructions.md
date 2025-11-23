@@ -25,6 +25,16 @@ This is a modern Angular portfolio application built with standalone components,
 - Use the `MainLayoutComponent` as a shell for all feature routes
 - All feature components are lazy-loaded for optimal performance
 
+### State Management (NgRx SignalStore)
+
+- Use **NgRx SignalStore** for reactive state management
+- **ProjectStore**: Central store for project/case study state
+- Store provides computed selectors (projectCount, allTags, projectsByTag)
+- Use `rxMethod` for async operations (loadProjects, loadProjectById)
+- Automatic loading and error state management
+- Inject store with `inject(ProjectStore)` in components
+- Access state via signals: `store.projects()`, `store.isLoading()`
+
 ### Data Layer (Mockend Pattern)
 
 - Mock data stored in `src/assets/data/*.json` files
