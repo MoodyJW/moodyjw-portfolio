@@ -28,6 +28,10 @@ This document outlines the phased approach for implementing and extending the An
 - [x] Case Studies feature component
 - [x] Global styles (reset, variables, utilities)
 - [x] GitHub Copilot instructions file
+- [x] Mockend data layer with ProjectService
+- [x] HTTP interceptor for latency simulation
+- [x] Project model and TypeScript interfaces
+- [x] Mock JSON data (projects.json)
 
 ### Technical Details
 
@@ -35,6 +39,8 @@ This document outlines the phased approach for implementing and extending the An
 - BEM naming convention for styles
 - Comprehensive CSS variable system
 - Responsive layout structure
+- Mockend pattern with HttpClient and functional interceptors
+- Simulated network latency (500-1000ms) for realistic development
 
 ---
 

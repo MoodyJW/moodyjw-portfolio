@@ -25,6 +25,14 @@ This is a modern Angular portfolio application built with standalone components,
 - Use the `MainLayoutComponent` as a shell for all feature routes
 - All feature components are lazy-loaded for optimal performance
 
+### Data Layer (Mockend Pattern)
+
+- Mock data stored in `src/assets/data/*.json` files
+- Services use `HttpClient` to fetch JSON data (allows easy transition to real APIs)
+- **ProjectService**: Manages project/case study data from `projects.json`
+- **latencyInterceptor**: Simulates 500-1000ms network delay for realistic development
+- All HTTP requests go through the interceptor chain configured in `app.config.ts`
+
 ## Code Style Guidelines
 
 ### TypeScript
@@ -155,6 +163,9 @@ src/app/
 1. Place in appropriate folder (core/services or feature/services)
 2. Use `providedIn: 'root'` or provide in component
 3. Use signals or RxJS observables for state
+4. Use `inject()` function for dependency injection (modern Angular pattern)
+5. For data services, use HttpClient to fetch from assets/data/*.json
+6. Return Observables for async operations
 
 ## Performance Considerations
 

@@ -24,6 +24,7 @@ The `layout` folder contains shell components that wrap feature content:
 
 Application-wide services that should be provided in root:
 
+- **ProjectService**: Fetches project/case study data from mock JSON files
 - Theme service (light/dark mode)
 - Analytics service
 - SEO service
@@ -43,6 +44,7 @@ Route guards for access control:
 
 HTTP interceptors for cross-cutting concerns:
 
+- **latencyInterceptor** (functional): Simulates network latency (500-1000ms) for development testing
 - Auth token injection
 - Error handling
 - Loading state management
@@ -52,6 +54,7 @@ HTTP interceptors for cross-cutting concerns:
 
 Shared TypeScript interfaces and types:
 
+- **Project**: Case study/portfolio project model (id, title, description, tags)
 - API response models
 - Business domain models
 - Configuration interfaces

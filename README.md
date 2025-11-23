@@ -13,17 +13,21 @@
 - ✅ **BEM methodology** for maintainable styles
 - ✅ **Responsive layout** with mobile-first approach
 - ✅ **Dark mode support** (auto-detects system preference)
+- ✅ **Mockend data layer** with simulated network latency for realistic development
 
 ## 📁 Project Structure
 
 ```
-src/app/
-├── core/                    # Core application functionality
-│   ├── layout/             # Shell layouts (MainLayout)
-│   ├── services/           # Global services
-│   ├── guards/             # Route guards
-│   ├── interceptors/       # HTTP interceptors
-│   └── models/             # Data models and interfaces
+src/
+├── app/
+│   ├── core/                    # Core application functionality
+│   │   ├── layout/             # Shell layouts (MainLayout)
+│   │   ├── services/           # Global services (ProjectService)
+│   │   ├── guards/             # Route guards
+│   │   ├── interceptors/       # HTTP interceptors (latency simulation)
+│   │   └── models/             # Data models and interfaces (Project)
+├── assets/
+│   └── data/               # Mock JSON data files (projects.json)
 ├── shared/                 # Shared across features
 │   ├── components/         # Reusable components
 │   ├── directives/         # Custom directives
@@ -40,6 +44,8 @@ src/app/
 - **Language**: TypeScript 5.9
 - **Styling**: SCSS with CSS Variables
 - **State Management**: Angular Signals
+- **Data Layer**: Mockend pattern with local JSON files
+- **HTTP Client**: Angular HttpClient with functional interceptors
 - **Routing**: Angular Router (lazy-loaded)
 - **Testing**: Vitest (Unit) + Playwright (E2E)
 - **Build Tool**: Angular CLI with Vite
@@ -56,6 +62,67 @@ The application uses a custom design system built with CSS Variables for consist
 - **Transitions**: Standardized durations and timings
 
 All design tokens are defined in `src/styles/_variables.scss`.
+
+## 💾 Data Architecture (Mockend Pattern)
+
+The application uses a **Mockend** approach for data management, providing a realistic development experience that easily transitions to real APIs:
+
+### Architecture Overview
+
+```
+┌─────────────────┐
+│   Component     │
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│ ProjectService  │  (uses inject(HttpClient))
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│  HttpClient     │  → latencyInterceptor (500-1000ms delay)
+└────────┬────────┘
+         │
+         ▼
+┌─────────────────┐
+│  projects.json  │  (src/assets/data/)
+└─────────────────┘
+```
+
+### Key Components
+
+- **`src/assets/data/projects.json`**: Mock data for case studies/projects
+- **`ProjectService`**: Service layer that fetches data using HttpClient
+- **`latencyInterceptor`**: Functional interceptor that simulates network latency (500-1000ms)
+- **`Project` model**: TypeScript interface defining the data structure
+
+### Why This Approach?
+
+1. **Realistic Development**: Simulated latency helps test loading states and UX
+2. **Easy Transition**: Same service layer works with real APIs—just change the URL
+3. **No Backend Required**: Develop frontend features independently
+4. **Type Safety**: Full TypeScript support with defined models
+5. **Testable**: Easy to mock and test data flows
+
+### Usage Example
+
+```typescript
+import { inject } from '@angular/core';
+import { ProjectService } from './core/services/project.service';
+
+export class CaseStudiesComponent {
+  private projectService = inject(ProjectService);
+  protected projects = signal<Project[]>([]);
+
+  ngOnInit() {
+    this.projectService.getProjects().subscribe({
+      next: (projects) => this.projects.set(projects),
+      error: (err) => console.error('Failed to load projects', err)
+    });
+  }
+}
+```
 
 ## 🚦 Getting Started
 
