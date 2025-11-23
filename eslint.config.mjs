@@ -25,31 +25,12 @@ export default [
       '@angular-eslint': angular,
     },
     rules: {
-      // TypeScript recommended rules (manually defined for compatibility)
-      '@typescript-eslint/adjacent-overload-signatures': 'error',
-      '@typescript-eslint/ban-ts-comment': 'error',
-      '@typescript-eslint/ban-types': 'error',
-      'no-array-constructor': 'off',
-      '@typescript-eslint/no-array-constructor': 'error',
-      'no-empty-function': 'off',
-      '@typescript-eslint/no-empty-function': 'error',
-      '@typescript-eslint/no-empty-interface': 'error',
+      // TypeScript core rules
       '@typescript-eslint/no-explicit-any': 'error',
-      '@typescript-eslint/no-extra-non-null-assertion': 'error',
-      'no-loss-of-precision': 'off',
-      '@typescript-eslint/no-loss-of-precision': 'error',
-      '@typescript-eslint/no-misused-new': 'error',
-      '@typescript-eslint/no-namespace': 'error',
-      '@typescript-eslint/no-non-null-asserted-optional-chain': 'error',
-      '@typescript-eslint/no-this-alias': 'error',
-      '@typescript-eslint/no-unnecessary-type-constraint': 'error',
       'no-unused-vars': 'off',
       '@typescript-eslint/no-unused-vars': ['error', { argsIgnorePattern: '^_' }],
-      '@typescript-eslint/no-var-requires': 'error',
-      '@typescript-eslint/prefer-as-const': 'error',
-      '@typescript-eslint/triple-slash-reference': 'error',
-      '@typescript-eslint/explicit-function-return-type': 'off',
       '@typescript-eslint/consistent-type-imports': 'error',
+      '@typescript-eslint/explicit-function-return-type': 'off',
 
       // Angular specific rules
       '@angular-eslint/directive-selector': [
