@@ -31,6 +31,9 @@ export default defineConfig({
     trace: 'on-first-retry',
   },
 
+  /* Use custom snapshot path to make snapshots platform-agnostic */
+  snapshotPathTemplate: '{testDir}/{testFileDir}/{testFileName}-snapshots/{arg}{ext}',
+
   /* Configure projects for major browsers */
   projects: [
     {
