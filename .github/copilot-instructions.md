@@ -34,6 +34,18 @@ This is a modern Angular portfolio application built with standalone components,
 - Automatic loading and error state management
 - Inject store with `inject(ProjectStore)` in components
 - Access state via signals: `store.projects()`, `store.isLoading()`
+- **Integration Pattern**:
+  ```typescript
+  export class CaseStudiesComponent implements OnInit {
+    readonly store = inject(ProjectStore);
+
+    ngOnInit() {
+      this.store.loadProjects();
+    }
+  }
+  ```
+- Replace hardcoded data arrays with store-managed state
+- Use store loading/error states in templates with `@if` blocks
 
 ### Data Layer (Mockend Pattern)
 
@@ -174,8 +186,67 @@ src/app/
 2. Use `providedIn: 'root'` or provide in component
 3. Use signals or RxJS observables for state
 4. Use `inject()` function for dependency injection (modern Angular pattern)
-5. For data services, use HttpClient to fetch from assets/data/*.json
+5. For data services, use HttpClient to fetch from assets/data/\*.json
 6. Return Observables for async operations
+
+### Constants and Configuration
+
+1. **No Magic Strings**: Create constants for all hardcoded values
+2. **Constants Location**:
+   - Route paths → `shared/constants/routes.constants.ts`
+   - API endpoints → `shared/constants/api.constants.ts`
+   - Configuration values → `shared/constants/config.constants.ts`
+   - App-wide constants → `shared/constants/app.constants.ts`
+3. **Naming Convention**: Use SCREAMING_SNAKE_CASE for constants
+4. **Organization**: Group related constants in objects or enums
+5. **Type Safety**: Export const assertions with `as const` for literal types
+6. **Example**:
+
+   ```typescript
+   // routes.constants.ts
+   export const ROUTES = {
+     HOME: '/',
+     CASE_STUDIES: '/case-studies',
+     CASE_STUDY_DETAIL: '/case-studies/:id',
+   } as const;
+
+   // api.constants.ts
+   export const API_ENDPOINTS = {
+     PROJECTS: '/assets/data/projects.json',
+     GITHUB_API: 'https://api.github.com/graphql',
+   } as const;
+   ```
+
+### Environment Configuration
+
+1. Use Angular environment files for environment-specific config
+2. Never commit secrets or API keys
+3. Use environment variables for sensitive data
+4. Create separate configs for dev/staging/prod
+5. Access via `inject()` with InjectionToken
+
+## Data Visualization
+
+- Use **ngx-charts** for data visualizations
+- Theme charts to match custom design system colors
+- Integrate with GitHub GraphQL API for real-time data
+- Chart types to implement:
+  - Contribution calendar/heatmap
+  - Repository statistics (stars, forks, issues)
+  - Language usage breakdown
+  - Commit activity over time
+- Keep charts responsive and accessible
+- Use loading states while fetching data
+
+## CI/CD & Quality Gates
+
+- GitHub Actions for automated workflows
+- Run tests on every pull request
+- Visual regression tests as part of CI
+- Lighthouse CI for performance budgets
+- Automated dependency updates
+- Branch protection rules for main branch
+- Required status checks before merge
 
 ## Performance Considerations
 
