@@ -27,6 +27,11 @@
   },
   "private": true,
   "packageManager": "npm@10.8.2",
+  "overrides": {
+    "@ngrx/signals": {
+      "@angular/core": "^21.0.0"
+    }
+  },
   "dependencies": {
     "@angular/common": "^21.0.0",
     "@angular/compiler": "^21.0.0",
