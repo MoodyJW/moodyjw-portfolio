@@ -1,3 +1,5 @@
+import type { Environment } from './environment.type';
+
 /**
  * Production environment configuration
  * Used for GitHub Pages deployment
@@ -5,42 +7,6 @@
  * This configuration is applied when building with `--configuration production`
  * GitHub Pages serves from: https://MoodyJW.github.io/moodyjw-portfolio/
  */
-
-/** Type definition for environment configuration */
-export type Environment = {
-  name: string;
-  production: boolean;
-  baseUrl: string;
-  api: {
-    mockDataUrl: string;
-    githubApiUrl: string;
-    githubGraphqlUrl: string;
-  };
-  features: {
-    enableGitHubIntegration: boolean;
-    enableAnalytics: boolean;
-    enableServiceWorker: boolean;
-    enableLogging: boolean;
-    enableLatencySimulation: boolean;
-  };
-  analytics: {
-    trackingId: string;
-    enabled: boolean;
-  };
-  performance: {
-    enabled: boolean;
-    sampleRate: number;
-  };
-  github: {
-    username: string;
-    apiToken: string;
-    cacheDuration: number;
-  };
-  build: {
-    timestamp: string;
-    version: string;
-  };
-};
 
 export const environment: Environment = {
   /** Environment name for logging and debugging */
