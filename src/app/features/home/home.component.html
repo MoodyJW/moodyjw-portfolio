@@ -4,8 +4,16 @@
     <p class="home__subtitle">{{ subtitle() }}</p>
     <p class="home__description">{{ description() }}</p>
     <div class="home__actions">
-      <a [routerLink]="ROUTE_PATHS.CASE_STUDIES" class="home__cta home__cta--primary">{{ LABELS.BUTTONS.VIEW_MORE }} Case Studies</a>
-      <a [href]="EXTERNAL_LINKS.GITHUB_PROFILE" target="_blank" rel="noopener noreferrer" class="home__cta home__cta--secondary">GitHub Profile</a>
+      <a [routerLink]="ROUTE_PATHS.CASE_STUDIES" class="home__cta home__cta--primary"
+        >{{ LABELS.BUTTONS.VIEW_MORE }} Case Studies</a
+      >
+      <a
+        [href]="EXTERNAL_LINKS.GITHUB_PROFILE"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="home__cta home__cta--secondary"
+        >GitHub Profile</a
+      >
     </div>
   </section>
 
@@ -14,15 +22,21 @@
     <div class="home__skills-grid">
       <div class="home__skill-card">
         <h3 class="home__skill-title">Angular</h3>
-        <p class="home__skill-description">Modern Angular with signals, standalone components, and reactive patterns</p>
+        <p class="home__skill-description">
+          Modern Angular with signals, standalone components, and reactive patterns
+        </p>
       </div>
       <div class="home__skill-card">
         <h3 class="home__skill-title">Architecture</h3>
-        <p class="home__skill-description">Scalable, maintainable, and performant application design</p>
+        <p class="home__skill-description">
+          Scalable, maintainable, and performant application design
+        </p>
       </div>
       <div class="home__skill-card">
         <h3 class="home__skill-title">Performance</h3>
-        <p class="home__skill-description">Optimized rendering with OnPush change detection and lazy loading</p>
+        <p class="home__skill-description">
+          Optimized rendering with OnPush change detection and lazy loading
+        </p>
       </div>
       <div class="home__skill-card">
         <h3 class="home__skill-title">Design Systems</h3>
