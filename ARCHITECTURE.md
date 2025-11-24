@@ -11,12 +11,14 @@ This Angular portfolio application is built using modern Angular 21+ features wi
 **Decision**: Use standalone components exclusively, eliminating NgModules.
 
 **Rationale**:
+
 - Simplified dependency management
 - Better tree-shaking and smaller bundles
 - Improved developer experience
 - Forward-compatible with Angular's direction
 
 **Implementation**:
+
 ```typescript
 @Component({
   selector: 'app-feature',
@@ -31,12 +33,14 @@ This Angular portfolio application is built using modern Angular 21+ features wi
 **Decision**: Use Angular Signals as the primary reactive primitive.
 
 **Rationale**:
+
 - Fine-grained reactivity
 - Better performance than zone-based change detection
 - Simpler mental model than RxJS for UI state
 - Native Angular feature with first-class support
 
 **Implementation**:
+
 ```typescript
 protected readonly items = signal<Item[]>([]);
 protected readonly loading = signal(false);
@@ -47,12 +51,14 @@ protected readonly loading = signal(false);
 **Decision**: Enforce `ChangeDetectionStrategy.OnPush` on all components.
 
 **Rationale**:
+
 - Significant performance improvements
 - Forces immutable data patterns
 - Works seamlessly with signals
 - Prevents unnecessary re-renders
 
 **Implementation**:
+
 ```typescript
 @Component({
   // ...
@@ -65,12 +71,14 @@ protected readonly loading = signal(false);
 **Decision**: Organize code by feature domains rather than technical layers.
 
 **Rationale**:
+
 - Better code organization at scale
 - Clear boundaries between features
 - Easier to understand and maintain
 - Supports team-based development
 
 **Structure**:
+
 ```
 src/app/
 ├── core/       # Application-wide singletons
@@ -83,12 +91,14 @@ src/app/
 **Decision**: Lazy load all feature routes using dynamic imports.
 
 **Rationale**:
+
 - Smaller initial bundle size
 - Faster time to interactive
 - Better code splitting
 - Improved performance metrics
 
 **Implementation**:
+
 ```typescript
 {
   path: 'feature',
@@ -101,6 +111,7 @@ src/app/
 **Decision**: Build custom design system with CSS Variables instead of using UI frameworks.
 
 **Rationale**:
+
 - Full control over styling
 - Smaller bundle size
 - No framework-specific conventions
@@ -108,6 +119,7 @@ src/app/
 - Theme flexibility
 
 **Implementation**:
+
 - CSS Variables in `_variables.scss`
 - BEM naming convention
 - Consistent design tokens
@@ -119,6 +131,7 @@ src/app/
 **Purpose**: Application-wide singleton services, guards, interceptors, and layouts.
 
 **Contents**:
+
 - Layout components (MainLayout)
 - Global services
 - Route guards
@@ -126,6 +139,7 @@ src/app/
 - Shared models/interfaces
 
 **Rules**:
+
 - Should only be imported/used by the root app
 - Services should use `providedIn: 'root'`
 - No feature-specific logic
@@ -135,12 +149,14 @@ src/app/
 **Purpose**: Reusable presentational components, directives, and pipes.
 
 **Contents**:
+
 - UI components (buttons, cards, modals)
 - Utility directives
 - Pure pipes
 - Helper functions
 
 **Rules**:
+
 - No business logic
 - Should be dumb/presentational
 - Accept inputs via signals
@@ -152,11 +168,13 @@ src/app/
 **Purpose**: Self-contained feature implementations.
 
 **Contents**:
+
 - Feature components
 - Feature-specific services
 - Feature-specific state
 
 **Rules**:
+
 - Minimize inter-feature dependencies
 - Lazy-loaded by default
 - Feature-specific services provided at component level
@@ -177,6 +195,7 @@ MainLayout (Shell)
 ```
 
 **Benefits**:
+
 - Consistent layout across features
 - Single navigation implementation
 - Shared header/footer
@@ -188,11 +207,11 @@ MainLayout (Shell)
 export const routes: Routes = [
   {
     path: '',
-    loadComponent: () => import('./core/layout').then(m => m.MainLayoutComponent),
+    loadComponent: () => import('./core/layout').then((m) => m.MainLayoutComponent),
     children: [
       // Feature routes here
-    ]
-  }
+    ],
+  },
 ];
 ```
 
@@ -205,10 +224,8 @@ Use signals for component-local state:
 ```typescript
 class MyComponent {
   private readonly items = signal<Item[]>([]);
-  
-  protected readonly filteredItems = computed(() => 
-    this.items().filter(/* logic */)
-  );
+
+  protected readonly filteredItems = computed(() => this.items().filter(/* logic */));
 }
 ```
 
@@ -220,9 +237,9 @@ For global state, create services in `core/services`:
 @Injectable({ providedIn: 'root' })
 export class ThemeService {
   private readonly theme = signal<Theme>('light');
-  
+
   readonly theme$ = this.theme.asReadonly();
-  
+
   setTheme(theme: Theme) {
     this.theme.set(theme);
   }
@@ -356,7 +373,7 @@ Dark mode via CSS `prefers-color-scheme`:
 
 The application is designed to grow incrementally:
 
-1. **Phase 1** (Complete): Foundation
+1. **Phase 1** (95% Complete): Foundation
 2. **Phase 2**: Enhanced features
 3. **Phase 3**: State management
 4. **Phase 4**: Shared components
@@ -422,6 +439,7 @@ ng generate component features/new-feature --standalone
 ### Backend Integration
 
 When adding a backend:
+
 - Create API service in `core/services`
 - Add HTTP interceptors for auth
 - Add error handling
@@ -430,6 +448,7 @@ When adding a backend:
 ### State Management Library
 
 If needed at scale:
+
 - NgRx for complex state
 - Elf for lightweight solution
 - Maintain signal-first approach
