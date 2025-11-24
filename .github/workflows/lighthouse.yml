@@ -164,15 +164,15 @@ jobs:
                 '',
                 '### Performance Budgets',
                 '',
-                `- ${performance >= 80 ? '✅' : '⚠️'} Performance: Target ≥80, Current: ${performance}`,
-                `- ${accessibility >= 95 ? '✅' : '❌'} Accessibility: Target ≥95, Current: ${accessibility}`,
-                `- ${bestPractices >= 90 ? '✅' : '⚠️'} Best Practices: Target ≥90, Current: ${bestPractices}`,
-                `- ${seo >= 85 ? '✅' : '⚠️'} SEO: Target ≥85, Current: ${seo}`,
+                `- ${performance >= 95 ? '✅' : '❌'} Performance: Target ≥95, Current: ${performance}`,
+                `- ${accessibility >= 100 ? '✅' : '❌'} Accessibility: Target 100, Current: ${accessibility}`,
+                `- ${bestPractices >= 100 ? '✅' : '❌'} Best Practices: Target 100, Current: ${bestPractices}`,
+                `- ${seo >= 90 ? '✅' : '⚠️'} SEO: Target ≥90, Current: ${seo}`,
                 '',
-                performance < 80 ? '⚠️ **Performance score is below target (80)**' : '',
-                accessibility < 95 ? '❌ **Accessibility score is below target (95)** - Build will fail!' : '',
-                bestPractices < 90 ? '⚠️ **Best Practices score is below target (90)**' : '',
-                seo < 85 ? '⚠️ **SEO score is below target (85)**' : '',
+                performance < 95 ? '❌ **Performance score is below target (95)** - Build will fail!' : '',
+                accessibility < 100 ? '❌ **Accessibility score is below target (100)** - Build will fail!' : '',
+                bestPractices < 100 ? '❌ **Best Practices score is below target (100)** - Build will fail!' : '',
+                seo < 90 ? '⚠️ **SEO score is below target (90)** - Build will fail!' : '',
                 '',
                 `*Lighthouse CI run for commit ${context.sha.substring(0, 7)}*`
               ].filter(line => line !== '').join('\n');
@@ -191,9 +191,9 @@ jobs:
                 console.log('Lighthouse Results:\n' + commentBody);
               }
               
-              // Fail the job only if accessibility is below threshold (hard requirement)
-              if (accessibility < 95) {
-                core.setFailed('Accessibility score below required threshold (95)');
+              // Fail the job if any budget is not met
+              if (performance < 95 || accessibility < 100 || bestPractices < 100 || seo < 90) {
+                core.setFailed('Lighthouse performance budget not met');
               }
               
             } catch (error) {
