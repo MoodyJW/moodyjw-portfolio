@@ -26,9 +26,6 @@ jobs:
           # Deny licenses that are not OSI-approved or are copyleft
           deny-licenses: GPL-2.0, GPL-3.0, LGPL-2.0, LGPL-2.1, LGPL-3.0, AGPL-3.0
 
-          # Allow specific licenses (permissive open source)
-          allow-licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, 0BSD
-
           # Comment on PR with summary of vulnerabilities
           comment-summary-in-pr: always
 
