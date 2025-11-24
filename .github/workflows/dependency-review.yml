@@ -29,8 +29,8 @@ jobs:
           # Comment on PR with summary of vulnerabilities
           comment-summary-in-pr: always
 
-          # Show dependency changes in PR
-          show-openssf-scorecard: true
+          # Show dependency changes in PR (OpenSSF Scorecard disabled to reduce noise)
+          show-openssf-scorecard: false
 
       - name: Upload dependency review results
         if: always()
