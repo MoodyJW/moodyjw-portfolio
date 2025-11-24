@@ -44,7 +44,10 @@ function isDemoPathListed(file, demoRaw) {
     const line = String(raw).trim();
     if (!line) continue;
     // Normalize common patterns
-    const cleaned = line.replace(/^[-\s>]+/, '').replace(/[()]*/g, '').trim();
+    const cleaned = line
+      .replace(/^[-\s>]+/, '')
+      .replace(/[()]*/g, '')
+      .trim();
 
     // If pattern ends with /* or /*.. then treat as directory prefix
     if (cleaned.endsWith('/*')) {
