@@ -117,14 +117,15 @@ Each phase builds upon the previous one, ensuring a production-ready, maintainab
 - [x] `.github/workflows/dependency-review.yml` - Security checks
   - [x] Scan for vulnerabilities in dependencies on PRs
   - [x] Block high-severity vulnerabilities (critical, high)
-  - [x] Warn on moderate severity issues
-  - [x] License compliance checks (deny GPL/LGPL/AGPL, allow MIT/Apache/BSD/ISC)
-  - [x] OpenSSF Scorecard integration
+  - [x] License compliance checks (deny GPL/LGPL/AGPL)
   - [x] Automated PR comments with vulnerability summary
   - [x] Upload review results as artifacts
-- [ ] `.github/workflows/codeql.yml` - Static code analysis
-  - [ ] Security vulnerability scanning
-  - [ ] TypeScript/JavaScript analysis
+- [x] `.github/workflows/codeql.yml` - Static code analysis
+  - [x] Security vulnerability scanning for TypeScript/JavaScript
+  - [x] Run on push to main, PRs, and weekly schedule
+  - [x] Security-extended query suite for deeper analysis
+  - [x] Upload results to GitHub Security tab
+  - [x] SARIF artifact uploads for audit trail
 - [ ] Branch protection rules configured
   - [ ] Require status checks to pass
   - [ ] Require up-to-date branches
