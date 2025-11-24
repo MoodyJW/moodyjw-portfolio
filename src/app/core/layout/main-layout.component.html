@@ -4,15 +4,21 @@
   <header class="main-layout__header">
     <nav class="main-layout__nav" aria-label="Main navigation">
       <div class="main-layout__brand">
-        <a routerLink="/" class="main-layout__brand-link">MoodyJW</a>
+        <a [routerLink]="ROUTE_PATHS.ROOT" class="main-layout__brand-link">{{ APP_NAME }}</a>
       </div>
       <ul class="main-layout__menu">
-        <li class="main-layout__menu-item">
-          <a routerLink="/home" routerLinkActive="active" class="main-layout__menu-link">Home</a>
-        </li>
-        <li class="main-layout__menu-item">
-          <a routerLink="/case-studies" routerLinkActive="active" class="main-layout__menu-link">Case Studies</a>
-        </li>
+        @for (item of NAV_ITEMS; track item.path) {
+          <li class="main-layout__menu-item">
+            <a 
+              [routerLink]="item.path" 
+              routerLinkActive="active" 
+              class="main-layout__menu-link"
+              [attr.aria-label]="item.ariaLabel"
+            >
+              {{ item.label }}
+            </a>
+          </li>
+        }
       </ul>
     </nav>
   </header>
@@ -22,6 +28,6 @@
   </main>
 
   <footer class="main-layout__footer">
-    <p class="main-layout__footer-text">&copy; {{ currentYear() }} MoodyJW. All rights reserved.</p>
+    <p class="main-layout__footer-text">&copy; {{ COPYRIGHT_YEAR }} {{ APP_NAME }}. All rights reserved.</p>
   </footer>
 </div>
