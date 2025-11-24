@@ -30,3 +30,6 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+
+# Blog articles (for now)
+blog/*.md
