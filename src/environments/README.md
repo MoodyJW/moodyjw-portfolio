@@ -36,233 +36,30 @@ Development configuration used for local development with `ng serve`.
 
 Import the environment configuration:
 
-```typescript
+# Environments (brief)
+
+This folder holds environment configuration used by the Angular CLI for builds.
+
+Purpose
+
+- Provide typed configuration objects for `development` and `production` builds.
+- Configure base URLs, feature flags, and build-time options used across the app.
+
+Quick usage
+
+```ts
 import { environment } from '@environments/environment';
-
-@Injectable({ providedIn: 'root' })
-export class ApiService {
-  private apiUrl = environment.api.mockDataUrl;
-
-  constructor() {
-    if (environment.features.enableLogging) {
-      console.log('API Service initialized with URL:', this.apiUrl);
-    }
-  }
-}
+console.log(environment.name, environment.production);
 ```
 
-### Path Alias
+Build variants
 
-The `@environments` path alias is configured in `tsconfig.json`:
+- Local dev: `ng serve` (uses `environment.development.ts`)
+- Production build: `ng build` (uses `environment.ts`)
 
-```jsonc
-{
-  "compilerOptions": {
-    "paths": {
-      "@environments/*": ["src/environments/*"]
-    }
-  }
-}
-```
+Notes
 
-## Build Configurations
+- Environment files implement the `Environment` type for safety. See `src/environments/environment.type.ts`.
+- Production settings are tuned for GitHub Pages (baseHref and asset paths). Do not commit secrets into these files.
 
-The Angular CLI uses different environment files based on the build configuration:
-
-### Development Build
-
-```bash
-ng serve
-# Uses: environment.development.ts
-```
-
-### Production Build
-
-```bash
-ng build
-# or
-npm run build
-# Uses: environment.ts
-```
-
-## Environment Properties
-
-### Core Properties
-
-- **`name`** - Environment name for identification
-- **`production`** - Boolean indicating production mode
-- **`baseUrl`** - Base URL for the application
-
-### API Configuration (`api`)
-
-- **`mockDataUrl`** - Base path for mock JSON data files
-- **`githubApiUrl`** - GitHub REST API endpoint
-- **`githubGraphqlUrl`** - GitHub GraphQL API endpoint
-
-### Feature Flags (`features`)
-
-Control which features are enabled in each environment:
-
-- **`enableGitHubIntegration`** - Phase 4 GitHub API integration
-- **`enableAnalytics`** - Google Analytics tracking
-- **`enableServiceWorker`** - PWA functionality
-- **`enableLogging`** - Console logging for debugging
-- **`enableLatencySimulation`** - Network latency simulation (dev only)
-
-### Analytics Configuration (`analytics`)
-
-- **`trackingId`** - Google Analytics tracking ID
-- **`enabled`** - Whether analytics is active
-
-### Performance Monitoring (`performance`)
-
-- **`enabled`** - Whether performance monitoring is active
-- **`sampleRate`** - Percentage of sessions to monitor (0.0 to 1.0)
-
-### GitHub Settings (`github`)
-
-- **`username`** - GitHub username for API calls
-- **`apiToken`** - GitHub personal access token (injected at runtime)
-- **`cacheDuration`** - How long to cache GitHub API responses
-
-### Build Information (`build`)
-
-- **`timestamp`** - When the build was created
-- **`version`** - Application version from package.json
-
-## Deployment to GitHub Pages
-
-This application is deployed to **GitHub Pages**, not to other hosting platforms.
-
-### Production Environment Configuration
-
-The production environment (`environment.ts`) is specifically configured for GitHub Pages:
-
-- **Base URL**: `https://MoodyJW.github.io/moodyjw-portfolio`
-- **Mock Data URL**: `/moodyjw-portfolio/assets/data` (includes repo name in path for proper routing)
-- **Features**: Analytics enabled, logging disabled, PWA enabled
-
-### Angular Build Configuration
-
-The `angular.json` file is configured with the correct `baseHref` for GitHub Pages:
-
-```json
-{
-  "configurations": {
-    "production": {
-      "baseHref": "/moodyjw-portfolio/",
-      "fileReplacements": [
-        {
-          "replace": "src/environments/environment.ts",
-          "with": "src/environments/environment.ts"
-        }
-      ]
-    }
-  }
-}
-```
-
-### Deployment Workflow
-
-The `.github/workflows/deploy-pages.yml` workflow handles automated deployment:
-
-1. Builds with production configuration (`ng build`)
-2. Applies `baseHref="/moodyjw-portfolio/"` for proper routing
-3. Creates `404.html` for SPA fallback routing
-4. Deploys to GitHub Pages on every push to `main`
-
-**Status:** First deployment pending merge to `main` branch.
-
-## Security Considerations
-
-### API Tokens
-
-**NEVER commit API tokens to version control!**
-
-For GitHub integration (Phase 4), API tokens should be:
-
-1. **Development**: Loaded from local environment variables
-2. **Production**: Injected at runtime or stored in GitHub Secrets
-
-Example for loading tokens:
-
-```typescript
-// In a service
-const token = environment.github.apiToken || this.getTokenFromRuntime();
-```
-
-### Environment Variables
-
-For sensitive values, use environment variables:
-
-```bash
-# .env.local (not committed)
-GITHUB_TOKEN=ghp_your_token_here
-```
-
-Then access them in Angular using a custom script or build-time replacement.
-
-## Adding New Environments
-
-To add a new environment (e.g., staging):
-
-1. Create `environment.staging.ts`:
-
-```typescript
-import type { Environment } from './environment';
-
-export const environment: Environment = {
-  // ... configuration
-};
-```
-
-2. Update `angular.json`:
-
-```json
-{
-  "configurations": {
-    "staging": {
-      "fileReplacements": [
-        {
-          "replace": "src/environments/environment.ts",
-          "with": "src/environments/environment.staging.ts"
-        }
-      ]
-    }
-  }
-}
-```
-
-3. Build with the configuration:
-
-```bash
-ng build --configuration=staging
-```
-
-## Type Safety
-
-All environment files implement the `Environment` type for consistency:
-
-```typescript
-import type { Environment } from './environment';
-
-export const environment: Environment = {
-  // TypeScript ensures all required properties are present
-};
-```
-
-This prevents configuration mismatches between environments.
-
-## Best Practices
-
-1. **Keep environments in sync** - All environments should have the same structure
-2. **Use feature flags** - Control functionality with boolean flags, not missing properties
-3. **Document changes** - Update this README when adding new configuration
-4. **Don't commit secrets** - Use environment variables or runtime injection
-5. **Test both environments** - Ensure the app works in dev and production modes
-
-## Related Documentation
-
-- **Angular Environments**: https://angular.dev/tools/cli/environments
-- **GitHub Pages**: https://docs.github.com/en/pages
-- **Build Configurations**: See `angular.json` for all available configurations
+If you need more detail, see the root `README.md` and `src/environments/environment.*` files.
