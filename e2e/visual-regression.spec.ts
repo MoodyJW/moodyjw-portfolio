@@ -18,6 +18,9 @@ const VIEWPORTS = {
 test.describe('Visual Regression Tests - Home Page', () => {
   for (const [_key, viewport] of Object.entries(VIEWPORTS)) {
     test(`Home page should match baseline on ${viewport.name}`, async ({ page }, testInfo) => {
+      // Skip visual regression in CI due to platform-specific rendering differences
+      test.skip(!!process.env.CI, 'Visual regression tests skipped in CI');
+      
       // Only run visual regression tests on chromium-desktop
       test.skip(
         testInfo.project.name !== 'chromium-desktop',
@@ -49,6 +52,9 @@ test.describe('Visual Regression Tests - Case Studies Page', () => {
     test(`Case Studies page should match baseline on ${viewport.name}`, async ({
       page,
     }, testInfo) => {
+      // Skip visual regression in CI due to platform-specific rendering differences
+      test.skip(!!process.env.CI, 'Visual regression tests skipped in CI');
+      
       // Only run visual regression tests on chromium-desktop
       test.skip(
         testInfo.project.name !== 'chromium-desktop',
