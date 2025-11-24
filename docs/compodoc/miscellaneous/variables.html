@@ -1,0 +1,2684 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content miscellaneous-variables">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Miscellaneous</li>
+  <li class="breadcrumb-item">Variables</li>
+</ol>
+
+<section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <ul class="index-list">
+                        <li>
+                            <a href="#ALLOWED_DOCUMENT_TYPES" title="src/app/shared/constants/app.constants.ts" ><b>ALLOWED_DOCUMENT_TYPES</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ALLOWED_IMAGE_TYPES" title="src/app/shared/constants/app.constants.ts" ><b>ALLOWED_IMAGE_TYPES</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ANIMATION_DURATIONS" title="src/app/shared/constants/config.constants.ts" ><b>ANIMATION_DURATIONS</b>&nbsp;&nbsp;&nbsp;(src/.../config.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#API_CONFIG" title="src/app/shared/constants/api.constants.ts" ><b>API_CONFIG</b>&nbsp;&nbsp;&nbsp;(src/.../api.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#API_RETRY" title="src/app/shared/constants/api.constants.ts" ><b>API_RETRY</b>&nbsp;&nbsp;&nbsp;(src/.../api.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#API_TIMEOUTS" title="src/app/shared/constants/api.constants.ts" ><b>API_TIMEOUTS</b>&nbsp;&nbsp;&nbsp;(src/.../api.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#APP_NAME" title="src/app/shared/constants/app.constants.ts" ><b>APP_NAME</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#APP_VERSION" title="src/app/shared/constants/app.constants.ts" ><b>APP_VERSION</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#appConfig" title="src/app/app.config.ts" ><b>appConfig</b>&nbsp;&nbsp;&nbsp;(src/.../app.config.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ARIA_LABELS" title="src/app/shared/constants/app.constants.ts" ><b>ARIA_LABELS</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#BREAKPOINTS" title="src/app/shared/constants/config.constants.ts" ><b>BREAKPOINTS</b>&nbsp;&nbsp;&nbsp;(src/.../config.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#CACHE_CONFIG" title="src/app/shared/constants/config.constants.ts" ><b>CACHE_CONFIG</b>&nbsp;&nbsp;&nbsp;(src/.../config.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#COPYRIGHT_YEAR" title="src/app/shared/constants/app.constants.ts" ><b>COPYRIGHT_YEAR</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DATE_FORMATS" title="src/app/shared/constants/app.constants.ts" ><b>DATE_FORMATS</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DEBOUNCE_DELAYS" title="src/app/shared/constants/config.constants.ts" ><b>DEBOUNCE_DELAYS</b>&nbsp;&nbsp;&nbsp;(src/.../config.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DEFAULT_LANGUAGE" title="src/app/shared/constants/app.constants.ts" ><b>DEFAULT_LANGUAGE</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#DEFAULT_THEME" title="src/app/shared/constants/app.constants.ts" ><b>DEFAULT_THEME</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.development.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.development.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#environment" title="src/environments/environment.ts" ><b>environment</b>&nbsp;&nbsp;&nbsp;(src/.../environment.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#EXTERNAL_LINKS" title="src/app/shared/constants/config.constants.ts" ><b>EXTERNAL_LINKS</b>&nbsp;&nbsp;&nbsp;(src/.../config.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#FEATURE_FLAGS" title="src/app/shared/constants/config.constants.ts" ><b>FEATURE_FLAGS</b>&nbsp;&nbsp;&nbsp;(src/.../config.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#GITHUB_ENDPOINTS" title="src/app/shared/constants/api.constants.ts" ><b>GITHUB_ENDPOINTS</b>&nbsp;&nbsp;&nbsp;(src/.../api.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#GITHUB_GRAPHQL_QUERIES" title="src/app/shared/constants/api.constants.ts" ><b>GITHUB_GRAPHQL_QUERIES</b>&nbsp;&nbsp;&nbsp;(src/.../api.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#Handlebars" title="docs/compodoc/template-playground/hbs-render.service.ts" ><b>Handlebars</b>&nbsp;&nbsp;&nbsp;(docs/.../hbs-render.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#HTTP_HEADERS" title="src/app/shared/constants/api.constants.ts" ><b>HTTP_HEADERS</b>&nbsp;&nbsp;&nbsp;(src/.../api.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#HTTP_STATUS" title="src/app/shared/constants/app.constants.ts" ><b>HTTP_STATUS</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#initialState" title="src/app/core/store/project.store.ts" ><b>initialState</b>&nbsp;&nbsp;&nbsp;(src/.../project.store.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#INPUT_LIMITS" title="src/app/shared/constants/app.constants.ts" ><b>INPUT_LIMITS</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#JSZip" title="docs/compodoc/template-playground/zip-export.service.ts" ><b>JSZip</b>&nbsp;&nbsp;&nbsp;(docs/.../zip-export.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#KEYBOARD_KEYS" title="src/app/shared/constants/app.constants.ts" ><b>KEYBOARD_KEYS</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#LABELS" title="src/app/shared/constants/app.constants.ts" ><b>LABELS</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#LANGUAGES" title="src/app/shared/constants/app.constants.ts" ><b>LANGUAGES</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#LATENCY_CONFIG" title="src/app/shared/constants/config.constants.ts" ><b>LATENCY_CONFIG</b>&nbsp;&nbsp;&nbsp;(src/.../config.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#latencyInterceptor" title="src/app/core/interceptors/latency.interceptor.ts" ><b>latencyInterceptor</b>&nbsp;&nbsp;&nbsp;(src/.../latency.interceptor.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#MOCK_ENDPOINTS" title="src/app/shared/constants/api.constants.ts" ><b>MOCK_ENDPOINTS</b>&nbsp;&nbsp;&nbsp;(src/.../api.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#monaco" title="docs/compodoc/template-playground/template-editor.service.ts" ><b>monaco</b>&nbsp;&nbsp;&nbsp;(docs/.../template-editor.service.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#NAV_ITEMS" title="src/app/shared/constants/routes.constants.ts" ><b>NAV_ITEMS</b>&nbsp;&nbsp;&nbsp;(src/.../routes.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#PAGINATION_CONFIG" title="src/app/shared/constants/config.constants.ts" ><b>PAGINATION_CONFIG</b>&nbsp;&nbsp;&nbsp;(src/.../config.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#PERFORMANCE_BUDGETS" title="src/app/shared/constants/config.constants.ts" ><b>PERFORMANCE_BUDGETS</b>&nbsp;&nbsp;&nbsp;(src/.../config.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ProjectStore" title="src/app/core/store/project.store.ts" ><b>ProjectStore</b>&nbsp;&nbsp;&nbsp;(src/.../project.store.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#REGEX_PATTERNS" title="src/app/shared/constants/app.constants.ts" ><b>REGEX_PATTERNS</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ROUTE_PATHS" title="src/app/shared/constants/routes.constants.ts" ><b>ROUTE_PATHS</b>&nbsp;&nbsp;&nbsp;(src/.../routes.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#ROUTES" title="src/app/shared/constants/routes.constants.ts" ><b>ROUTES</b>&nbsp;&nbsp;&nbsp;(src/.../routes.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#SEO_CONFIG" title="src/app/shared/constants/config.constants.ts" ><b>SEO_CONFIG</b>&nbsp;&nbsp;&nbsp;(src/.../config.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#STORAGE_KEYS" title="src/app/shared/constants/config.constants.ts" ><b>STORAGE_KEYS</b>&nbsp;&nbsp;&nbsp;(src/.../config.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#test" title="e2e/fixtures/accessibility.ts" ><b>test</b>&nbsp;&nbsp;&nbsp;(e2e/.../accessibility.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#THEMES" title="src/app/shared/constants/app.constants.ts" ><b>THEMES</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TOAST_DURATIONS" title="src/app/shared/constants/app.constants.ts" ><b>TOAST_DURATIONS</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#TOAST_TYPES" title="src/app/shared/constants/app.constants.ts" ><b>TOAST_TYPES</b>&nbsp;&nbsp;&nbsp;(src/.../app.constants.ts)</a>
+                        </li>
+                        <li>
+                            <a href="#translocoConfig" title="src/app/app.config.transloco.ts" ><b>translocoConfig</b>&nbsp;&nbsp;&nbsp;(src/.../app.config.transloco.ts)</a>
+                        </li>
+                    </ul>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    <h3>src/app/shared/constants/app.constants.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ALLOWED_DOCUMENT_TYPES"></a>
+                    <span class="name">
+                        <span ><b>ALLOWED_DOCUMENT_TYPES</b></span>
+                        <a href="#ALLOWED_DOCUMENT_TYPES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  &#x27;application/pdf&#x27;,
+  &#x27;application/msword&#x27;,
+  &#x27;application/vnd.openxmlformats-officedocument.wordprocessingml.document&#x27;,
+] as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Document file types allowed for upload</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ALLOWED_IMAGE_TYPES"></a>
+                    <span class="name">
+                        <span ><b>ALLOWED_IMAGE_TYPES</b></span>
+                        <a href="#ALLOWED_IMAGE_TYPES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  &#x27;image/jpeg&#x27;,
+  &#x27;image/jpg&#x27;,
+  &#x27;image/png&#x27;,
+  &#x27;image/webp&#x27;,
+  &#x27;image/svg+xml&#x27;,
+] as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Image file types allowed for upload</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="APP_NAME"></a>
+                    <span class="name">
+                        <span ><b>APP_NAME</b></span>
+                        <a href="#APP_NAME"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;MoodyJW Portfolio&#x27;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Application name</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="APP_VERSION"></a>
+                    <span class="name">
+                        <span ><b>APP_VERSION</b></span>
+                        <a href="#APP_VERSION"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;0.0.0&#x27;</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Application version (should match package.json)</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ARIA_LABELS"></a>
+                    <span class="name">
+                        <span ><b>ARIA_LABELS</b></span>
+                        <a href="#ARIA_LABELS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  CLOSE: &#x27;Close&#x27;,
+  OPEN: &#x27;Open&#x27;,
+  MENU: &#x27;Menu&#x27;,
+  SEARCH: &#x27;Search&#x27;,
+  FILTER: &#x27;Filter&#x27;,
+  SORT: &#x27;Sort&#x27;,
+  NEXT: &#x27;Next&#x27;,
+  PREVIOUS: &#x27;Previous&#x27;,
+  LOADING: &#x27;Loading&#x27;,
+  ERROR: &#x27;Error&#x27;,
+  SUCCESS: &#x27;Success&#x27;,
+  WARNING: &#x27;Warning&#x27;,
+  INFO: &#x27;Information&#x27;,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>ARIA labels for common actions (used when visual text is not available)</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="COPYRIGHT_YEAR"></a>
+                    <span class="name">
+                        <span ><b>COPYRIGHT_YEAR</b></span>
+                        <a href="#COPYRIGHT_YEAR"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Date().getFullYear()</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Copyright year (dynamically calculated)</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DATE_FORMATS"></a>
+                    <span class="name">
+                        <span ><b>DATE_FORMATS</b></span>
+                        <a href="#DATE_FORMATS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Short date format (MM/DD/YYYY) */
+  SHORT_DATE: &#x27;MM/dd/yyyy&#x27;,
+  /** Long date format (Month DD, YYYY) */
+  LONG_DATE: &#x27;MMMM dd, yyyy&#x27;,
+  /** ISO date format (YYYY-MM-DD) */
+  ISO_DATE: &#x27;yyyy-MM-dd&#x27;,
+  /** Time format (HH:MM AM/PM) */
+  TIME: &#x27;hh:mm a&#x27;,
+  /** Date and time format */
+  DATE_TIME: &#x27;MM/dd/yyyy hh:mm a&#x27;,
+  /** Relative time threshold (24 hours in ms) */
+  RELATIVE_TIME_THRESHOLD: 24 * 60 * 60 * 1000,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Date and time formats</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DEFAULT_LANGUAGE"></a>
+                    <span class="name">
+                        <span ><b>DEFAULT_LANGUAGE</b></span>
+                        <a href="#DEFAULT_LANGUAGE"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>LANGUAGES.ENGLISH</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Default language</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DEFAULT_THEME"></a>
+                    <span class="name">
+                        <span ><b>DEFAULT_THEME</b></span>
+                        <a href="#DEFAULT_THEME"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>THEMES.AUTO</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Default theme</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="HTTP_STATUS"></a>
+                    <span class="name">
+                        <span ><b>HTTP_STATUS</b></span>
+                        <a href="#HTTP_STATUS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  OK: 200,
+  CREATED: 201,
+  NO_CONTENT: 204,
+  BAD_REQUEST: 400,
+  UNAUTHORIZED: 401,
+  FORBIDDEN: 403,
+  NOT_FOUND: 404,
+  CONFLICT: 409,
+  UNPROCESSABLE_ENTITY: 422,
+  TOO_MANY_REQUESTS: 429,
+  INTERNAL_SERVER_ERROR: 500,
+  SERVICE_UNAVAILABLE: 503,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>HTTP status codes for common scenarios</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="INPUT_LIMITS"></a>
+                    <span class="name">
+                        <span ><b>INPUT_LIMITS</b></span>
+                        <a href="#INPUT_LIMITS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Minimum password length */
+  PASSWORD_MIN: 8,
+  /** Maximum password length */
+  PASSWORD_MAX: 128,
+  /** Maximum username length */
+  USERNAME_MAX: 50,
+  /** Maximum email length */
+  EMAIL_MAX: 254,
+  /** Maximum text input length */
+  TEXT_MAX: 255,
+  /** Maximum textarea length */
+  TEXTAREA_MAX: 5000,
+  /** Maximum search query length */
+  SEARCH_QUERY_MAX: 100,
+  /** Maximum file size in bytes (5MB) */
+  FILE_SIZE_MAX: 5 * 1024 * 1024,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Input length limits</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="KEYBOARD_KEYS"></a>
+                    <span class="name">
+                        <span ><b>KEYBOARD_KEYS</b></span>
+                        <a href="#KEYBOARD_KEYS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  ENTER: &#x27;Enter&#x27;,
+  SPACE: &#x27; &#x27;,
+  ESCAPE: &#x27;Escape&#x27;,
+  TAB: &#x27;Tab&#x27;,
+  ARROW_UP: &#x27;ArrowUp&#x27;,
+  ARROW_DOWN: &#x27;ArrowDown&#x27;,
+  ARROW_LEFT: &#x27;ArrowLeft&#x27;,
+  ARROW_RIGHT: &#x27;ArrowRight&#x27;,
+  HOME: &#x27;Home&#x27;,
+  END: &#x27;End&#x27;,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Keyboard key codes for accessibility</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="LABELS"></a>
+                    <span class="name">
+                        <span ><b>LABELS</b></span>
+                        <a href="#LABELS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Empty state messages */
+  EMPTY_STATES: {
+    NO_RESULTS: &#x27;No results found&#x27;,
+    NO_DATA: &#x27;No data available&#x27;,
+    NO_PROJECTS: &#x27;No case studies available yet.&#x27;,
+    NO_SEARCH_RESULTS: &#x27;No projects match your search.&#x27;,
+  },
+  /** Loading messages */
+  LOADING: {
+    DEFAULT: &#x27;Loading...&#x27;,
+    PROJECTS: &#x27;Loading projects...&#x27;,
+    DATA: &#x27;Loading data...&#x27;,
+  },
+  /** Error messages */
+  ERRORS: {
+    GENERIC: &#x27;Something went wrong. Please try again.&#x27;,
+    NETWORK: &#x27;Network error. Please check your connection.&#x27;,
+    NOT_FOUND: &#x27;The requested resource was not found.&#x27;,
+    UNAUTHORIZED: &#x27;You are not authorized to access this resource.&#x27;,
+    SERVER_ERROR: &#x27;Server error. Please try again later.&#x27;,
+  },
+  /** Success messages */
+  SUCCESS: {
+    SAVED: &#x27;Successfully saved!&#x27;,
+    UPDATED: &#x27;Successfully updated!&#x27;,
+    DELETED: &#x27;Successfully deleted!&#x27;,
+  },
+  /** Common button labels */
+  BUTTONS: {
+    SUBMIT: &#x27;Submit&#x27;,
+    CANCEL: &#x27;Cancel&#x27;,
+    SAVE: &#x27;Save&#x27;,
+    DELETE: &#x27;Delete&#x27;,
+    EDIT: &#x27;Edit&#x27;,
+    CLOSE: &#x27;Close&#x27;,
+    CONFIRM: &#x27;Confirm&#x27;,
+    BACK: &#x27;Back&#x27;,
+    NEXT: &#x27;Next&#x27;,
+    VIEW_MORE: &#x27;View More&#x27;,
+    LEARN_MORE: &#x27;Learn More&#x27;,
+  },
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Content labels for UI elements</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="LANGUAGES"></a>
+                    <span class="name">
+                        <span ><b>LANGUAGES</b></span>
+                        <a href="#LANGUAGES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  ENGLISH: &#x27;en&#x27;,
+  SPANISH: &#x27;es&#x27;,
+  FRENCH: &#x27;fr&#x27;,
+  GERMAN: &#x27;de&#x27;,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Supported languages for i18n</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="REGEX_PATTERNS"></a>
+                    <span class="name">
+                        <span ><b>REGEX_PATTERNS</b></span>
+                        <a href="#REGEX_PATTERNS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Email validation pattern */
+  EMAIL: /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+  /** URL validation pattern */
+  URL: /^(https?:\/\/)?([\da-z.-]+)\.([a-z.]{2,6})([/\w .-]*)*\/?$/,
+  /** Phone number validation (flexible format) */
+  PHONE: /^[+]?[(]?[0-9]{1,4}[)]?[-\s.]?[(]?[0-9]{1,4}[)]?[-\s.]?[0-9]{1,9}$/,
+  /** GitHub username pattern */
+  GITHUB_USERNAME: /^[a-zA-Z0-9](?:[a-zA-Z0-9]|-(?&#x3D;[a-zA-Z0-9])){0,38}$/,
+  /** Hex color code pattern */
+  HEX_COLOR: /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/,
+  /** Alphanumeric with spaces */
+  ALPHANUMERIC_SPACES: /^[a-zA-Z0-9\s]+$/,
+  /** Slug pattern (URL-friendly) */
+  SLUG: /^[a-z0-9]+(?:-[a-z0-9]+)*$/,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>General application constants
+Regex patterns, limits, common values, and other app-wide constants</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="THEMES"></a>
+                    <span class="name">
+                        <span ><b>THEMES</b></span>
+                        <a href="#THEMES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  LIGHT: &#x27;light&#x27;,
+  DARK: &#x27;dark&#x27;,
+  AUTO: &#x27;auto&#x27;,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Supported themes</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TOAST_DURATIONS"></a>
+                    <span class="name">
+                        <span ><b>TOAST_DURATIONS</b></span>
+                        <a href="#TOAST_DURATIONS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Short duration for simple messages */
+  SHORT: 3000,
+  /** Normal duration for standard messages */
+  NORMAL: 5000,
+  /** Long duration for important messages */
+  LONG: 8000,
+  /** Persistent (manual dismiss only) */
+  PERSISTENT: 0,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Toast notification durations (milliseconds)</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="TOAST_TYPES"></a>
+                    <span class="name">
+                        <span ><b>TOAST_TYPES</b></span>
+                        <a href="#TOAST_TYPES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  SUCCESS: &#x27;success&#x27;,
+  ERROR: &#x27;error&#x27;,
+  WARNING: &#x27;warning&#x27;,
+  INFO: &#x27;info&#x27;,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Toast notification types</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/constants/config.constants.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ANIMATION_DURATIONS"></a>
+                    <span class="name">
+                        <span ><b>ANIMATION_DURATIONS</b></span>
+                        <a href="#ANIMATION_DURATIONS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Fast animations (tooltips, dropdowns) */
+  FAST: 150,
+  /** Normal animations (modals, page transitions) */
+  NORMAL: 300,
+  /** Slow animations (complex transitions) */
+  SLOW: 500,
+  /** Extra slow animations (emphasis, attention-grabbing) */
+  EXTRA_SLOW: 800,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Animation and transition durations (milliseconds)</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="BREAKPOINTS"></a>
+                    <span class="name">
+                        <span ><b>BREAKPOINTS</b></span>
+                        <a href="#BREAKPOINTS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Mobile devices (375x667) */
+  MOBILE: 375,
+  /** Tablets (768x1024) */
+  TABLET: 768,
+  /** Laptops (1440x1024) */
+  LAPTOP: 1440,
+  /** Desktops (1920x1080) */
+  DESKTOP: 1920,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Breakpoint values for responsive design (pixels)
+These match the viewport sizes used in E2E visual regression tests</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="CACHE_CONFIG"></a>
+                    <span class="name">
+                        <span ><b>CACHE_CONFIG</b></span>
+                        <a href="#CACHE_CONFIG"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Default cache duration in milliseconds (1 hour) */
+  DEFAULT_TTL: 60 * 60 * 1000,
+  /** Cache duration for GitHub data (30 minutes) */
+  GITHUB_DATA_TTL: 30 * 60 * 1000,
+  /** Cache duration for static content (24 hours) */
+  STATIC_CONTENT_TTL: 24 * 60 * 60 * 1000,
+  /** Maximum cache size (number of entries) */
+  MAX_SIZE: 100,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Cache configuration for API responses</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="DEBOUNCE_DELAYS"></a>
+                    <span class="name">
+                        <span ><b>DEBOUNCE_DELAYS</b></span>
+                        <a href="#DEBOUNCE_DELAYS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Search input debounce */
+  SEARCH: 300,
+  /** Filter selection debounce */
+  FILTER: 200,
+  /** Window resize events */
+  RESIZE: 150,
+  /** Scroll events */
+  SCROLL: 100,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Debounce delays for user input (milliseconds)</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="EXTERNAL_LINKS"></a>
+                    <span class="name">
+                        <span ><b>EXTERNAL_LINKS</b></span>
+                        <a href="#EXTERNAL_LINKS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** GitHub profile URL */
+  GITHUB_PROFILE: &#x27;https://github.com/MoodyJW&#x27;,
+  /** LinkedIn profile URL (placeholder) */
+  LINKEDIN_PROFILE: &#x27;https://linkedin.com/in/placeholder&#x27;,
+  /** Twitter/X profile URL (placeholder) */
+  TWITTER_PROFILE: &#x27;https://twitter.com/placeholder&#x27;,
+  /** Email contact (placeholder) */
+  EMAIL: &#x27;mailto:contact@placeholder.com&#x27;,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>External links</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="FEATURE_FLAGS"></a>
+                    <span class="name">
+                        <span ><b>FEATURE_FLAGS</b></span>
+                        <a href="#FEATURE_FLAGS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Enable GitHub integration (Phase 4) */
+  ENABLE_GITHUB_INTEGRATION: false,
+  /** Enable dark mode toggle */
+  ENABLE_DARK_MODE: true,
+  /** Enable internationalization */
+  ENABLE_I18N: true,
+  /** Enable analytics tracking */
+  ENABLE_ANALYTICS: false,
+  /** Enable blog section */
+  ENABLE_BLOG: false,
+  /** Enable contact form */
+  ENABLE_CONTACT_FORM: false,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Feature flags for enabling/disabling features</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="LATENCY_CONFIG"></a>
+                    <span class="name">
+                        <span ><b>LATENCY_CONFIG</b></span>
+                        <a href="#LATENCY_CONFIG"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Minimum simulated delay in milliseconds */
+  MIN_DELAY: 500,
+  /** Maximum simulated delay in milliseconds */
+  MAX_DELAY: 1000,
+  /** Whether latency simulation is enabled */
+  ENABLED: true,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Application-wide configuration constants
+These values control various application behaviors and settings</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="PAGINATION_CONFIG"></a>
+                    <span class="name">
+                        <span ><b>PAGINATION_CONFIG</b></span>
+                        <a href="#PAGINATION_CONFIG"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Default page size for lists */
+  DEFAULT_PAGE_SIZE: 12,
+  /** Available page size options */
+  PAGE_SIZE_OPTIONS: [6, 12, 24, 48],
+  /** Maximum items to load at once */
+  MAX_PAGE_SIZE: 100,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Pagination configuration</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="PERFORMANCE_BUDGETS"></a>
+                    <span class="name">
+                        <span ><b>PERFORMANCE_BUDGETS</b></span>
+                        <a href="#PERFORMANCE_BUDGETS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Performance score threshold */
+  PERFORMANCE_SCORE: 95,
+  /** Accessibility score threshold */
+  ACCESSIBILITY_SCORE: 100,
+  /** Best practices score threshold */
+  BEST_PRACTICES_SCORE: 100,
+  /** SEO score threshold */
+  SEO_SCORE: 90,
+  /** Core Web Vitals thresholds */
+  CORE_WEB_VITALS: {
+    /** First Contentful Paint (ms) */
+    FCP: 1500,
+    /** Largest Contentful Paint (ms) */
+    LCP: 2500,
+    /** Cumulative Layout Shift (score) */
+    CLS: 0.1,
+    /** Total Blocking Time (ms) */
+    TBT: 300,
+    /** Speed Index (ms) */
+    SI: 3000,
+  },
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Performance budgets (matching Lighthouse CI configuration)</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="SEO_CONFIG"></a>
+                    <span class="name">
+                        <span ><b>SEO_CONFIG</b></span>
+                        <a href="#SEO_CONFIG"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Default page title */
+  DEFAULT_TITLE: &#x27;MoodyJW | Lead Frontend Developer&#x27;,
+  /** Title separator */
+  TITLE_SEPARATOR: &#x27; | &#x27;,
+  /** Site name */
+  SITE_NAME: &#x27;MoodyJW Portfolio&#x27;,
+  /** Default meta description */
+  DEFAULT_DESCRIPTION:
+    &#x27;Lead Frontend Developer portfolio showcasing modern Angular development with enterprise-grade architecture, scalable design systems, and high-performance UI patterns.&#x27;,
+  /** Default keywords */
+  DEFAULT_KEYWORDS: [
+    &#x27;Angular&#x27;,
+    &#x27;Frontend Developer&#x27;,
+    &#x27;TypeScript&#x27;,
+    &#x27;Web Development&#x27;,
+    &#x27;UI/UX&#x27;,
+    &#x27;Design Systems&#x27;,
+    &#x27;NgRx&#x27;,
+    &#x27;Signals&#x27;,
+  ],
+  /** Open Graph image (placeholder) */
+  OG_IMAGE: &#x27;/assets/images/og-image.png&#x27;,
+  /** Twitter card type */
+  TWITTER_CARD: &#x27;summary_large_image&#x27;,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>SEO configuration</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="STORAGE_KEYS"></a>
+                    <span class="name">
+                        <span ><b>STORAGE_KEYS</b></span>
+                        <a href="#STORAGE_KEYS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** User theme preference (light/dark) */
+  THEME: &#x27;moodyjw-theme&#x27;,
+  /** User language preference */
+  LANGUAGE: &#x27;moodyjw-language&#x27;,
+  /** API cache prefix */
+  CACHE_PREFIX: &#x27;moodyjw-cache-&#x27;,
+  /** User preferences */
+  USER_PREFERENCES: &#x27;moodyjw-preferences&#x27;,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Local storage keys</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/constants/api.constants.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="API_CONFIG"></a>
+                    <span class="name">
+                        <span ><b>API_CONFIG</b></span>
+                        <a href="#API_CONFIG"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Base URL for local mock data (Mockend pattern) */
+  MOCK_DATA_BASE: &#x27;/assets/data&#x27;,
+  /** Base URL for i18n translations */
+  I18N_BASE: &#x27;/assets/i18n&#x27;,
+  /** GitHub GraphQL API endpoint (for future GitHub integration) */
+  GITHUB_GRAPHQL: &#x27;https://api.github.com/graphql&#x27;,
+  /** GitHub REST API endpoint (for future GitHub integration) */
+  GITHUB_REST: &#x27;https://api.github.com&#x27;,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>API endpoint constants for data fetching
+All API URLs and GraphQL queries are centralized here</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="API_RETRY"></a>
+                    <span class="name">
+                        <span ><b>API_RETRY</b></span>
+                        <a href="#API_RETRY"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Maximum number of retry attempts */
+  MAX_ATTEMPTS: 3,
+  /** Delay between retries (milliseconds) */
+  RETRY_DELAY: 1000,
+  /** HTTP status codes that should trigger a retry */
+  RETRY_STATUS_CODES: [408, 429, 500, 502, 503, 504],
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>API retry configuration</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="API_TIMEOUTS"></a>
+                    <span class="name">
+                        <span ><b>API_TIMEOUTS</b></span>
+                        <a href="#API_TIMEOUTS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Default timeout for API requests */
+  DEFAULT: 30000, // 30 seconds
+  /** Timeout for file uploads */
+  UPLOAD: 60000, // 60 seconds
+  /** Timeout for large data fetches */
+  LARGE_FETCH: 45000, // 45 seconds
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>API timeout configurations (milliseconds)</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GITHUB_ENDPOINTS"></a>
+                    <span class="name">
+                        <span ><b>GITHUB_ENDPOINTS</b></span>
+                        <a href="#GITHUB_ENDPOINTS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** User profile endpoint */
+  USER_PROFILE: (username: string) &#x3D;&gt; &#x60;${API_CONFIG.GITHUB_REST}/users/${username}&#x60;,
+  /** User repositories endpoint */
+  USER_REPOS: (username: string) &#x3D;&gt; &#x60;${API_CONFIG.GITHUB_REST}/users/${username}/repos&#x60;,
+  /** Repository details endpoint */
+  REPO_DETAILS: (owner: string, repo: string) &#x3D;&gt; &#x60;${API_CONFIG.GITHUB_REST}/repos/${owner}/${repo}&#x60;,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>GitHub API endpoints (placeholders for Phase 4)
+Will be used for fetching real-time GitHub data</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="GITHUB_GRAPHQL_QUERIES"></a>
+                    <span class="name">
+                        <span ><b>GITHUB_GRAPHQL_QUERIES</b></span>
+                        <a href="#GITHUB_GRAPHQL_QUERIES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Query for user contribution calendar */
+  CONTRIBUTION_CALENDAR: &#x60;
+    query($username: String!, $from: DateTime!, $to: DateTime!) {
+      user(login: $username) {
+        contributionsCollection(from: $from, to: $to) {
+          contributionCalendar {
+            totalContributions
+            weeks {
+              contributionDays {
+                contributionCount
+                date
+              }
+            }
+          }
+        }
+      }
+    }
+  &#x60;,
+  /** Query for repository statistics */
+  REPOSITORY_STATS: &#x60;
+    query($owner: String!, $name: String!) {
+      repository(owner: $owner, name: $name) {
+        stargazerCount
+        forkCount
+        issues {
+          totalCount
+        }
+        pullRequests {
+          totalCount
+        }
+        languages(first: 10, orderBy: {field: SIZE, direction: DESC}) {
+          edges {
+            size
+            node {
+              name
+              color
+            }
+          }
+        }
+      }
+    }
+  &#x60;,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>GitHub GraphQL queries (placeholders for Phase 4)
+Used for fetching contribution data and statistics</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="HTTP_HEADERS"></a>
+                    <span class="name">
+                        <span ><b>HTTP_HEADERS</b></span>
+                        <a href="#HTTP_HEADERS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Content type for JSON */
+  CONTENT_TYPE_JSON: { &#x27;Content-Type&#x27;: &#x27;application/json&#x27; },
+  /** GitHub API authorization header (use with token) */
+  GITHUB_AUTH: (token: string) &#x3D;&gt; ({ Authorization: &#x60;Bearer ${token}&#x60; }),
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>HTTP headers configuration</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MOCK_ENDPOINTS"></a>
+                    <span class="name">
+                        <span ><b>MOCK_ENDPOINTS</b></span>
+                        <a href="#MOCK_ENDPOINTS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Projects/case studies data */
+  PROJECTS: &#x60;${API_CONFIG.MOCK_DATA_BASE}/projects.json&#x60;,
+  /** Blog posts data (placeholder for future) */
+  BLOG_POSTS: &#x60;${API_CONFIG.MOCK_DATA_BASE}/blog-posts.json&#x60;,
+  /** Skills/technologies data (placeholder for future) */
+  SKILLS: &#x60;${API_CONFIG.MOCK_DATA_BASE}/skills.json&#x60;,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Mock data endpoints (Mockend pattern)
+Used for fetching local JSON files during development</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/app.config.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="appConfig"></a>
+                    <span class="name">
+                        <span ><b>appConfig</b></span>
+                        <a href="#appConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../components/App.html" target="_self" >ApplicationConfig</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  providers: [
+    provideBrowserGlobalErrorListeners(),
+    provideRouter(routes),
+    provideHttpClient(withInterceptors([latencyInterceptor])),
+    translocoConfig,
+  ],
+}</code>
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/environments/environment.development.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#Environment" target="_self" >Environment</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Environment name for logging and debugging */
+  name: &#x27;development&#x27;,
+
+  /** Whether this is a production build */
+  production: false,
+
+  /** Base URL for the application (localhost) */
+  baseUrl: &#x27;http://localhost:4200&#x27;,
+
+  /** API endpoints configuration */
+  api: {
+    /** Mock data base URL (relative to local server) */
+    mockDataUrl: &#x27;/assets/data&#x27;,
+    /** GitHub API URL (for Phase 4 integration) */
+    githubApiUrl: &#x27;https://api.github.com&#x27;,
+    /** GitHub GraphQL URL (for Phase 4 integration) */
+    githubGraphqlUrl: &#x27;https://api.github.com/graphql&#x27;,
+  },
+
+  /** Feature flags */
+  features: {
+    /** Enable GitHub integration (Phase 4) */
+    enableGitHubIntegration: false,
+    /** Enable analytics tracking (disabled in development) */
+    enableAnalytics: false,
+    /** Enable service worker (PWA) - disabled in dev for hot reload */
+    enableServiceWorker: false,
+    /** Enable debug logging */
+    enableLogging: true,
+    /** Enable network latency simulation for realistic development */
+    enableLatencySimulation: true,
+  },
+
+  /** Analytics configuration */
+  analytics: {
+    /** Google Analytics tracking ID (not used in development) */
+    trackingId: &#x27;&#x27;,
+    /** Disable tracking in development */
+    enabled: false,
+  },
+
+  /** Performance monitoring */
+  performance: {
+    /** Enable performance monitoring in development */
+    enabled: true,
+    /** Sample rate (1.0 &#x3D; 100% in development for full visibility) */
+    sampleRate: 1.0,
+  },
+
+  /** GitHub integration settings (Phase 4) */
+  github: {
+    /** GitHub username */
+    username: &#x27;MoodyJW&#x27;,
+    /** GitHub API token (load from local environment variable) */
+    apiToken: &#x27;&#x27;,
+    /** Cache duration for GitHub data (shorter in development) */
+    cacheDuration: 5 * 60 * 1000, // 5 minutes
+  },
+
+  /** Build information */
+  build: {
+    /** Build timestamp */
+    timestamp: new Date().toISOString(),
+    /** Build version (from package.json) */
+    version: &#x27;0.2.0-dev&#x27;,
+  },
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Development environment configuration
+Used for local development with <code>ng serve</code></p>
+<p>This configuration enables debugging features and uses localhost URLs</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/environments/environment.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="environment"></a>
+                    <span class="name">
+                        <span ><b>environment</b></span>
+                        <a href="#environment"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#Environment" target="_self" >Environment</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Environment name for logging and debugging */
+  name: &#x27;production&#x27;,
+
+  /** Whether this is a production build */
+  production: true,
+
+  /** Base URL for the application (GitHub Pages deployment) */
+  baseUrl: &#x27;https://MoodyJW.github.io/moodyjw-portfolio&#x27;,
+
+  /** API endpoints configuration */
+  api: {
+    /** Mock data base URL (relative to deployment) */
+    mockDataUrl: &#x27;/moodyjw-portfolio/assets/data&#x27;,
+    /** GitHub API URL (for Phase 4 integration) */
+    githubApiUrl: &#x27;https://api.github.com&#x27;,
+    /** GitHub GraphQL URL (for Phase 4 integration) */
+    githubGraphqlUrl: &#x27;https://api.github.com/graphql&#x27;,
+  },
+
+  /** Feature flags */
+  features: {
+    /** Enable GitHub integration (Phase 4) */
+    enableGitHubIntegration: false,
+    /** Enable analytics tracking */
+    enableAnalytics: true,
+    /** Enable service worker (PWA) */
+    enableServiceWorker: true,
+    /** Enable debug logging */
+    enableLogging: false,
+    /** Enable network latency simulation */
+    enableLatencySimulation: false,
+  },
+
+  /** Analytics configuration */
+  analytics: {
+    /** Google Analytics tracking ID (update with your actual ID) */
+    trackingId: &#x27;G-XXXXXXXXXX&#x27;,
+    /** Enable tracking in production */
+    enabled: true,
+  },
+
+  /** Performance monitoring */
+  performance: {
+    /** Enable performance monitoring */
+    enabled: true,
+    /** Sample rate (0.0 to 1.0) */
+    sampleRate: 0.1,
+  },
+
+  /** GitHub integration settings (Phase 4) */
+  github: {
+    /** GitHub username */
+    username: &#x27;MoodyJW&#x27;,
+    /** GitHub API token (should be injected at runtime, not committed) */
+    apiToken: &#x27;&#x27;,
+    /** Cache duration for GitHub data (milliseconds) */
+    cacheDuration: 30 * 60 * 1000, // 30 minutes
+  },
+
+  /** Build information */
+  build: {
+    /** Build timestamp (will be replaced during build) */
+    timestamp: new Date().toISOString(),
+    /** Build version (from package.json) */
+    version: &#x27;0.2.0&#x27;,
+  },
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Production environment configuration
+Used for GitHub Pages deployment</p>
+<p>This configuration is applied when building with <code>--configuration production</code>
+GitHub Pages serves from: <a href="https://MoodyJW.github.io/moodyjw-portfolio/">https://MoodyJW.github.io/moodyjw-portfolio/</a></p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>docs/compodoc/template-playground/hbs-render.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="Handlebars"></a>
+                    <span class="name">
+                        <span ><b>Handlebars</b></span>
+                        <a href="#Handlebars"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/core/store/project.store.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="initialState"></a>
+                    <span class="name">
+                        <span ><b>initialState</b></span>
+                        <a href="#initialState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/ProjectsState.html" target="_self" >ProjectsState</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  projects: [],
+  selectedProject: null,
+  isLoading: false,
+  error: null,
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Initial state for the Project Store</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ProjectStore"></a>
+                    <span class="name">
+                        <span ><b>ProjectStore</b></span>
+                        <a href="#ProjectStore"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signalStore(
+  { providedIn: &#x27;root&#x27; },
+  withState(initialState),
+  withComputed(({ projects, selectedProject }) &#x3D;&gt; ({
+    /**
+     * Number of total projects
+     */
+    projectCount: computed(() &#x3D;&gt; projects().length),
+
+    /**
+     * Projects filtered by specific tags
+     */
+    projectsByTag: computed(() &#x3D;&gt; {
+      return (tag: string) &#x3D;&gt; projects().filter((p) &#x3D;&gt; p.tags.includes(tag));
+    }),
+
+    /**
+     * Checks if a project is currently selected
+     */
+    hasSelection: computed(() &#x3D;&gt; selectedProject() !&#x3D;&#x3D; null),
+
+    /**
+     * Gets unique tags from all projects
+     */
+    allTags: computed(() &#x3D;&gt; {
+      const tags &#x3D; new Set&lt;string&gt;();
+      projects().forEach((project) &#x3D;&gt; {
+        project.tags.forEach((tag) &#x3D;&gt; tags.add(tag));
+      });
+      return Array.from(tags).sort();
+    }),
+  })),
+  withMethods((store, projectService &#x3D; inject(ProjectService)) &#x3D;&gt; ({
+    /**
+     * Loads all projects from the service
+     */
+    loadProjects: rxMethod&lt;void&gt;(
+      pipe(
+        tap(() &#x3D;&gt; patchState(store, { isLoading: true, error: null })),
+        switchMap(() &#x3D;&gt;
+          projectService.getProjects().pipe(
+            tap((projects) &#x3D;&gt;
+              patchState(store, {
+                projects,
+                isLoading: false,
+                error: null,
+              })
+            ),
+            catchError((error) &#x3D;&gt; {
+              patchState(store, {
+                isLoading: false,
+                error: error.message || &#x27;Failed to load projects&#x27;,
+              });
+              return of([]);
+            })
+          )
+        )
+      )
+    ),
+
+    /**
+     * Loads a specific project by ID and sets it as selected
+     */
+    loadProjectById: rxMethod&lt;string&gt;(
+      pipe(
+        tap(() &#x3D;&gt; patchState(store, { isLoading: true, error: null })),
+        switchMap((id) &#x3D;&gt;
+          projectService.getProjectById(id).pipe(
+            tap((project) &#x3D;&gt;
+              patchState(store, {
+                selectedProject: project || null,
+                isLoading: false,
+                error: project ? null : &#x60;Project with ID &quot;${id}&quot; not found&#x60;,
+              })
+            ),
+            catchError((error) &#x3D;&gt; {
+              patchState(store, {
+                isLoading: false,
+                error: error.message || &#x27;Failed to load project&#x27;,
+              });
+              return of(undefined);
+            })
+          )
+        )
+      )
+    ),
+
+    /**
+     * Clears the currently selected project
+     */
+    clearSelection(): void {
+      patchState(store, { selectedProject: null });
+    },
+
+    /**
+     * Manually sets the selected project
+     */
+    selectProject(project: Project): void {
+      patchState(store, { selectedProject: project });
+    },
+
+    /**
+     * Clears any error state
+     */
+    clearError(): void {
+      patchState(store, { error: null });
+    },
+
+    /**
+     * Resets the store to initial state
+     */
+    reset(): void {
+      patchState(store, initialState);
+    },
+  }))
+)</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>NgRx SignalStore for managing project/case study state</p>
+<p>Provides reactive state management with:</p>
+<ul>
+<li>Automatic signal-based reactivity</li>
+<li>Computed selectors for derived state</li>
+<li>Methods for state updates and async operations</li>
+<li>Type-safe API surface</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>docs/compodoc/template-playground/zip-export.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="JSZip"></a>
+                    <span class="name">
+                        <span ><b>JSZip</b></span>
+                        <a href="#JSZip"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/core/interceptors/latency.interceptor.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="latencyInterceptor"></a>
+                    <span class="name">
+                        <span ><b>latencyInterceptor</b></span>
+                        <a href="#latencyInterceptor"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>HttpInterceptorFn</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>(req, next) &#x3D;&gt; {
+  // Skip latency simulation if disabled
+  if (!LATENCY_CONFIG.ENABLED) {
+    return next(req);
+  }
+
+  // Generate random delay between MIN_DELAY and MAX_DELAY
+  const randomDelay &#x3D;
+    Math.floor(Math.random() * (LATENCY_CONFIG.MAX_DELAY - LATENCY_CONFIG.MIN_DELAY)) +
+    LATENCY_CONFIG.MIN_DELAY;
+
+  // Apply delay to the response
+  return next(req).pipe(delay(randomDelay));
+}</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Functional HTTP interceptor that simulates network latency
+Adds a random delay between MIN_DELAY and MAX_DELAY to HTTP requests</p>
+<p>This is useful for development to simulate real-world network conditions
+and test loading states, spinners, and user experience under latency.</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>docs/compodoc/template-playground/template-editor.service.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="monaco"></a>
+                    <span class="name">
+                        <span ><b>monaco</b></span>
+                        <a href="#monaco"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >any</a></code>
+
+                    </td>
+                </tr>
+
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/shared/constants/routes.constants.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="NAV_ITEMS"></a>
+                    <span class="name">
+                        <span ><b>NAV_ITEMS</b></span>
+                        <a href="#NAV_ITEMS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[
+  {
+    label: &#x27;Home&#x27;,
+    path: ROUTE_PATHS.HOME,
+    ariaLabel: &#x27;Navigate to home page&#x27;,
+  },
+  {
+    label: &#x27;Case Studies&#x27;,
+    path: ROUTE_PATHS.CASE_STUDIES,
+    ariaLabel: &#x27;Navigate to case studies page&#x27;,
+  },
+] as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Navigation menu items configuration
+Used for generating navigation menus consistently</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ROUTE_PATHS"></a>
+                    <span class="name">
+                        <span ><b>ROUTE_PATHS</b></span>
+                        <a href="#ROUTE_PATHS"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  ROOT: &#x27;/&#x27;,
+  HOME: &#x27;/home&#x27;,
+  CASE_STUDIES: &#x27;/case-studies&#x27;,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Full route paths including leading slash for routerLink
+Use these for navigation links in templates</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ROUTES"></a>
+                    <span class="name">
+                        <span ><b>ROUTES</b></span>
+                        <a href="#ROUTES"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+  /** Root path (empty string) */
+  ROOT: &#x27;&#x27;,
+  /** Home page route */
+  HOME: &#x27;home&#x27;,
+  /** Case studies list page route */
+  CASE_STUDIES: &#x27;case-studies&#x27;,
+  /** Case study detail page route (use with :id parameter) */
+  CASE_STUDY_DETAIL: &#x27;case-studies/:id&#x27;,
+} as const</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Route path constants for type-safe navigation
+All application routes are defined here to avoid magic strings</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>e2e/fixtures/accessibility.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="test"></a>
+                    <span class="name">
+                        <span ><b>test</b></span>
+                        <a href="#test"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>base.extend&lt;{
+  makeAxeBuilder: () &#x3D;&gt; AxeBuilder;
+}&gt;({
+  makeAxeBuilder: async ({ page }, use) &#x3D;&gt; {
+    const makeAxeBuilder &#x3D; () &#x3D;&gt;
+      new AxeBuilder({ page })
+        .withTags([&#x27;wcag2a&#x27;, &#x27;wcag2aa&#x27;, &#x27;wcag2aaa&#x27;]) // WCAG 2.1 A, AA, AAA
+        .exclude(&#x27;#chromatic-root&#x27;); // Exclude Storybook elements if present
+    await use(makeAxeBuilder);
+  },
+})</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Extended Playwright test with accessibility scanning capabilities
+Uses axe-core to scan pages for WCAG 2.1 AAA compliance</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+    <h3>src/app/app.config.transloco.ts</h3>
+    <section data-compodoc="block-properties">
+    <h3></h3>    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="translocoConfig"></a>
+                    <span class="name">
+                        <span ><b>translocoConfig</b></span>
+                        <a href="#translocoConfig"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>provideTransloco({
+  config: {
+    availableLangs: [&#x27;en&#x27;],
+    defaultLang: &#x27;en&#x27;,
+    reRenderOnLangChange: true,
+    prodMode: !isDevMode(),
+    fallbackLang: &#x27;en&#x27;,
+    missingHandler: {
+      useFallbackTranslation: true,
+    },
+  },
+  loader: TranslocoHttpLoader,
+})</code>
+                    </td>
+                </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Transloco configuration provider
+Provides internationalization (i18n) support for the application
+Note: HttpClient is provided in app.config.ts with interceptors</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'miscellaneous-variables';
+            var COMPODOC_CURRENT_PAGE_URL = 'variables.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

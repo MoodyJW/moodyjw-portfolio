@@ -46,6 +46,15 @@ jobs:
         env:
           NODE_OPTIONS: '--max_old_space_size=4096'
 
+      - name: Generate API docs (Compodoc)
+        run: |
+          echo "Generating Compodoc documentation"
+          npx compodoc -p tsconfig.json -d docs/compodoc || true
+          # Ensure target dir exists inside dist so docs are deployed with the site
+          mkdir -p dist/moodyjw-portfolio/browser/docs/compodoc
+          cp -R docs/compodoc/* dist/moodyjw-portfolio/browser/docs/compodoc/
+          echo "✅ Compodoc output copied to dist/moodyjw-portfolio/browser/docs/compodoc"
+
       - name: Add 404.html for SPA routing
         run: |
           # Copy index.html to 404.html for GitHub Pages SPA support
@@ -72,7 +81,7 @@ jobs:
     name: Deploy to GitHub Pages
     runs-on: ubuntu-latest
     needs: build
-    
+
     permissions:
       pages: write
       id-token: write

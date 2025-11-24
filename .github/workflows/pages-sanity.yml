@@ -1,0 +1,44 @@
+name: Pages Sanity Check
+
+on:
+  workflow_run:
+    workflows: ['Deploy to GitHub Pages']
+    types: [completed]
+
+permissions:
+  contents: read
+
+jobs:
+  sanity-check:
+    name: Sanity-check deep-links on deployed site
+    runs-on: ubuntu-latest
+    if: ${{ github.event.workflow_run.conclusion == 'success' }}
+
+    steps:
+      - name: Run deep-link checks
+        env:
+          BASE: https://MoodyJW.github.io/moodyjw-portfolio
+        run: |
+          set -euo pipefail
+          PATHS=("/" "/case-studies" "/case-studies/some-id" "/this/path/does/not/exist")
+
+          for p in "${PATHS[@]}"; do
+            echo "Checking $BASE$p"
+
+            # Check HTTP status (retry to allow propagation)
+            status=$(curl -s -o /dev/null -w '%{http_code}' --retry 5 --retry-delay 2 "$BASE$p" || true)
+            if [ "$status" != "200" ]; then
+              echo "ERROR: $BASE$p returned status $status"
+              exit 1
+            fi
+
+            # Ensure response contains app markers (nav, main, or app-root)
+            body=$(curl -s --retry 5 --retry-delay 2 "$BASE$p")
+            if ! echo "$body" | grep -q -E '<nav|<main|<app-root'; then
+              echo "ERROR: $BASE$p does not contain expected app markers"
+              echo "--- Response snippet ---"
+              echo "$body" | sed -n '1,40p'
+              exit 1
+            fi
+            echo "OK: $BASE$p -> 200 and app markers present"
+          done
