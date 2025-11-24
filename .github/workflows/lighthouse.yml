@@ -47,10 +47,10 @@ jobs:
         run: |
           echo "Running Lighthouse CI collect..."
           lhci collect --config=lighthouserc.json
-          
+
           echo "Running Lighthouse CI assert..."
           lhci assert --config=lighthouserc.json || echo "⚠️ Assertions had warnings (non-blocking)"
-          
+
           echo "Checking manifest..."
           if [ -f ".lighthouseci/manifest.json" ]; then
             echo "✅ Lighthouse manifest created"
@@ -87,25 +87,26 @@ jobs:
             const path = require('path');
 
             try {
-              // Find the latest manifest file
+              // Find the Lighthouse report files
               const lhciDir = '.lighthouseci';
-              const manifestPath = path.join(lhciDir, 'manifest.json');
               
-              if (!fs.existsSync(manifestPath)) {
-                console.log('No Lighthouse manifest found');
+              if (!fs.existsSync(lhciDir)) {
+                console.log('No .lighthouseci directory found');
                 return;
               }
               
-              const manifest = JSON.parse(fs.readFileSync(manifestPath, 'utf8'));
+              // Find all JSON report files (lhr-*.json)
+              const files = fs.readdirSync(lhciDir);
+              const reportFiles = files.filter(f => f.startsWith('lhr-') && f.endsWith('.json'));
               
-              if (!manifest || manifest.length === 0) {
-                console.log('Manifest is empty');
+              if (reportFiles.length === 0) {
+                console.log('No Lighthouse report files found');
+                console.log('Files in .lighthouseci:', files);
                 return;
               }
               
-              // Get the first result (we only run one URL)
-              const result = manifest[0];
-              const reportPath = path.join(lhciDir, result.jsonPath);
+              // Get the most recent report
+              const reportPath = path.join(lhciDir, reportFiles[reportFiles.length - 1]);
               
               if (!fs.existsSync(reportPath)) {
                 console.log('Report file not found:', reportPath);

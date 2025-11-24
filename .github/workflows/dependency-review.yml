@@ -35,9 +35,6 @@ jobs:
           # Show dependency changes in PR
           show-openssf-scorecard: true
 
-          # Warn on moderate severity vulnerabilities
-          warn-on-severity: moderate
-
       - name: Upload dependency review results
         if: always()
         uses: actions/upload-artifact@v4
