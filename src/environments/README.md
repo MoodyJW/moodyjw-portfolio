@@ -5,9 +5,11 @@ This directory contains environment-specific configuration files for the applica
 ## Files
 
 ### `environment.ts` (Production)
+
 Production configuration used for GitHub Pages deployment. This is the default configuration used when building with `ng build` or `npm run build`.
 
 **Key Features:**
+
 - Production mode enabled
 - Analytics enabled
 - Service Worker (PWA) enabled
@@ -16,9 +18,11 @@ Production configuration used for GitHub Pages deployment. This is the default c
 - GitHub Pages base URL configured
 
 ### `environment.development.ts` (Development)
+
 Development configuration used for local development with `ng serve`.
 
 **Key Features:**
+
 - Production mode disabled
 - Analytics disabled
 - Service Worker disabled (for hot reload)
@@ -66,12 +70,14 @@ The `@environments` path alias is configured in `tsconfig.json`:
 The Angular CLI uses different environment files based on the build configuration:
 
 ### Development Build
+
 ```bash
 ng serve
 # Uses: environment.development.ts
 ```
 
 ### Production Build
+
 ```bash
 ng build
 # or
@@ -177,6 +183,7 @@ Then access them in Angular using a custom script or build-time replacement.
 To add a new environment (e.g., staging):
 
 1. Create `environment.staging.ts`:
+
 ```typescript
 import type { Environment } from './environment';
 
@@ -186,20 +193,24 @@ export const environment: Environment = {
 ```
 
 2. Update `angular.json`:
+
 ```json
 {
   "configurations": {
     "staging": {
-      "fileReplacements": [{
-        "replace": "src/environments/environment.ts",
-        "with": "src/environments/environment.staging.ts"
-      }]
+      "fileReplacements": [
+        {
+          "replace": "src/environments/environment.ts",
+          "with": "src/environments/environment.staging.ts"
+        }
+      ]
     }
   }
 }
 ```
 
 3. Build with the configuration:
+
 ```bash
 ng build --configuration=staging
 ```
