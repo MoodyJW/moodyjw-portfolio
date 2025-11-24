@@ -383,6 +383,7 @@ The `.github/workflows/deploy-pages.yml` workflow:
 #### Access the Site
 
 Once deployed, the site will be available at:
+
 ```
 https://MoodyJW.github.io/moodyjw-portfolio/
 ```
@@ -390,6 +391,7 @@ https://MoodyJW.github.io/moodyjw-portfolio/
 #### Manual Deployment
 
 To trigger a manual deployment:
+
 1. Go to **Actions** tab in GitHub
 2. Select **Deploy to GitHub Pages** workflow
 3. Click **Run workflow** → **Run workflow**
