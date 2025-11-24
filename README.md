@@ -356,6 +356,55 @@ See **[E2E Testing Guide](./e2e/README.md)** for detailed information.
 - **[Implementation Plan](./IMPLEMENTATION_PLAN.md)** - Phased development roadmap
 - **[Copilot Instructions](./.github/copilot-instructions.md)** - AI coding assistant guidelines
 - **[E2E Testing Guide](./e2e/README.md)** - Playwright testing documentation
+- **[Environment Configuration](./src/environments/README.md)** - Environment setup and configuration
+- **[Constants Documentation](./src/app/shared/constants/README.md)** - Application constants usage guide
+
+## 🚀 Deployment
+
+### GitHub Pages
+
+This project is configured for automated deployment to GitHub Pages using GitHub Actions.
+
+#### Setup GitHub Pages
+
+1. Go to repository **Settings** → **Pages**
+2. Under **Source**, select **GitHub Actions**
+3. The site will be deployed automatically on every push to `main`
+
+#### Deployment Workflow
+
+The `.github/workflows/deploy-pages.yml` workflow:
+
+- Builds the application with production configuration
+- Applies the correct `baseHref` for GitHub Pages (`/moodyjw-portfolio/`)
+- Creates a `404.html` for SPA routing support
+- Deploys to GitHub Pages automatically
+
+#### Access the Site
+
+Once deployed, the site will be available at:
+```
+https://MoodyJW.github.io/moodyjw-portfolio/
+```
+
+#### Manual Deployment
+
+To trigger a manual deployment:
+1. Go to **Actions** tab in GitHub
+2. Select **Deploy to GitHub Pages** workflow
+3. Click **Run workflow** → **Run workflow**
+
+### Local Production Build
+
+Test the production build locally:
+
+```bash
+# Build for production
+npm run build
+
+# Serve the production build (requires http-server)
+npx http-server dist/moodyjw-portfolio/browser -p 8080
+```
 
 ## 🤝 Contributing
 
