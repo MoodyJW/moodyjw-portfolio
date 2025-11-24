@@ -1,0 +1,573 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="./images/favicon.ico">
+	   <link rel="stylesheet" href="./styles/style.css">
+        <link rel="stylesheet" href="./styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="./" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content readme">
+                   <div class="content-data">
+
+
+<h1>MoodyJW Portfolio</h1>
+<blockquote>
+<p>Lead Frontend Developer portfolio engineered with modern Angular (signals, standalone). A demonstration of scalable architecture, custom design systems, and high-performance UI patterns.</p>
+</blockquote>
+<h2>🚀 Features</h2>
+<ul>
+<li>✅ <strong>Modern Angular 21+</strong> with standalone components</li>
+<li>✅ <strong>NgRx SignalStore</strong> for reactive state management</li>
+<li>✅ <strong>Signals</strong> for reactive data flow</li>
+<li>✅ <strong>Feature-based architecture</strong> (Core, Shared, Features)</li>
+<li>✅ <strong>Lazy-loaded routes</strong> for optimal performance</li>
+<li>✅ <strong>OnPush change detection</strong> throughout</li>
+<li>✅ <strong>Custom design system</strong> with CSS Variables (no UI frameworks)</li>
+<li>✅ <strong>BEM methodology</strong> for maintainable styles</li>
+<li>✅ <strong>Responsive layout</strong> with mobile-first approach</li>
+<li>✅ <strong>Dark mode support</strong> (auto-detects system preference)</li>
+<li>✅ <strong>Mockend data layer</strong> with simulated network latency for realistic development</li>
+<li>✅ <strong>Complete CI/CD pipeline</strong> with GitHub Actions (build, test, E2E, performance, security)</li>
+</ul>
+<h2>📁 Project Structure</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">## 📚 Documentation (Compodoc)
+
+We use `compodoc` to generate API documentation for the Angular application. Docs are generated into `docs/compodoc`.
+
+Generate docs locally:
+
+```bash
+# Install dependencies
+npm install
+
+# Generate Compodoc documentation
+npx compodoc -p tsconfig.json -d docs/compodoc
+
+# Serve docs locally
+npx compodoc -s -d docs/compodoc</code></pre></div><p>CI: A GitHub Actions workflow (<code>.github/workflows/compodoc.yml</code>) is included to generate docs on <code>main</code> and upload them as an artifact.</p>
+<p>Published docs: The deployment workflow also copies generated Compodoc output into the production <code>dist</code> and deploys it with the site. After a Pages deploy, API docs will be available at:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">https://MoodyJW.github.io/moodyjw-portfolio/docs/compodoc/</code></pre></div><p>src/
+├── app/
+│ ├── core/ # Core application functionality
+│ │ ├── layout/ # Shell layouts (MainLayout)
+│ │ ├── services/ # Global services (ProjectService)
+│ │ ├── store/ # NgRx SignalStore (ProjectStore)
+│ │ ├── guards/ # Route guards
+│ │ ├── interceptors/ # HTTP interceptors (latency simulation)
+│ │ └── models/ # Data models and interfaces (Project)
+├── assets/
+│ └── data/ # Mock JSON data files (projects.json)
+├── shared/ # Shared across features
+│ ├── components/ # Reusable components
+│ ├── directives/ # Custom directives
+│ ├── pipes/ # Custom pipes
+│ └── utils/ # Utility functions
+└── features/ # Feature modules
+├── home/ # Home page feature
+└── case-studies/ # Case studies feature</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">
+## 🛠️ Tech Stack
+
+- **Framework**: Angular 21.0
+- **Language**: TypeScript 5.9 (strict mode)
+- **Styling**: SCSS with CSS Variables
+- **State Management**: NgRx SignalStore + Angular Signals
+- **Data Layer**: Mockend pattern with local JSON files
+- **HTTP Client**: Angular HttpClient with functional interceptors
+- **Routing**: Angular Router (lazy-loaded)
+- **Testing**: Vitest (Unit) + Playwright (E2E + Visual Regression)
+- **Build Tool**: Angular CLI with Vite
+- **CI/CD**: GitHub Actions (4 workflows) + GitHub CodeQL
+- **Code Quality**: ESLint with Angular ESLint + accessibility linting
+- **Performance**: Lighthouse CI with strict budgets (≥95/100/100/90)
+
+## 🎨 Design System
+
+The application uses a custom design system built with CSS Variables for consistency and theme support:
+
+- **Colors**: Primary, surface, text, and status colors
+- **Spacing**: 8-point grid system (xs to 4xl)
+- **Typography**: Font sizes, weights, and families
+- **Border Radius**: Consistent corner radii
+- **Shadows**: Elevation system
+- **Transitions**: Standardized durations and timings
+
+All design tokens are defined in `src/styles/_variables.scss`.
+
+## 💾 Data Architecture (Mockend Pattern)
+
+The application uses a **Mockend** approach for data management, providing a realistic development experience that easily transitions to real APIs:
+
+### Architecture Overview
+</code></pre></div><p>┌─────────────────┐
+│ Component │
+└────────┬────────┘
+│
+▼
+┌─────────────────┐
+│ ProjectService │ (uses inject(HttpClient))
+└────────┬────────┘
+│
+▼
+┌─────────────────┐
+│ HttpClient │ → latencyInterceptor (500-1000ms delay)
+└────────┬────────┘
+│
+▼
+┌─────────────────┐
+│ projects.json │ (src/assets/data/)
+└─────────────────┘</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">
+### Key Components
+
+- **`src/assets/data/projects.json`**: Mock data for case studies/projects
+- **`ProjectService`**: Service layer that fetches data using HttpClient
+- **`latencyInterceptor`**: Functional interceptor that simulates network latency (500-1000ms)
+- **`Project` model**: TypeScript interface defining the data structure
+
+### Why This Approach?
+
+1. **Realistic Development**: Simulated latency helps test loading states and UX
+2. **Easy Transition**: Same service layer works with real APIs—just change the URL
+3. **No Backend Required**: Develop frontend features independently
+4. **Type Safety**: Full TypeScript support with defined models
+5. **Testable**: Easy to mock and test data flows
+
+### Usage Example with NgRx SignalStore
+
+```typescript
+import { Component, inject, OnInit } from &#39;&#64;angular/core&#39;;
+import { ProjectStore } from &#39;&#64;core/store&#39;;
+
+&#64;Component({
+  selector: &#39;app-case-studies&#39;,
+  standalone: true,
+  template: `
+    &#64;if (store.isLoading()) {
+    &lt;div&gt;Loading projects...&lt;/div&gt;
+    } &#64;else if (store.error()) {
+    &lt;div&gt;Error: {{ store.error() }}&lt;/div&gt;
+    } &#64;else {
+    &lt;h1&gt;Projects ({{ store.projectCount() }})&lt;/h1&gt;
+    &#64;for (project of store.projects(); track project.id) {
+    &lt;article&gt;{{ project.title }}&lt;/article&gt;
+    } }
+  `,
+})
+export class CaseStudiesComponent implements OnInit {
+  readonly store = inject(ProjectStore);
+
+  ngOnInit() {
+    // Load projects automatically triggers loading state
+    this.store.loadProjects();
+  }
+}</code></pre></div><h2>🎯 State Management with NgRx SignalStore</h2>
+<h3>Store Features</h3>
+<p>The <code>ProjectStore</code> provides a complete state management solution:</p>
+<p><strong>State Properties:</strong></p>
+<ul>
+<li><code>projects()</code> - Array of all projects</li>
+<li><code>selectedProject()</code> - Currently selected project</li>
+<li><code>isLoading()</code> - Loading state indicator</li>
+<li><code>error()</code> - Error message if any</li>
+</ul>
+<p><strong>Computed Selectors:</strong></p>
+<ul>
+<li><code>projectCount()</code> - Total number of projects</li>
+<li><code>projectsByTag(tag)</code> - Filter projects by tag</li>
+<li><code>hasSelection()</code> - Check if a project is selected</li>
+<li><code>allTags()</code> - Get all unique tags sorted</li>
+</ul>
+<p><strong>Methods:</strong></p>
+<ul>
+<li><code>loadProjects()</code> - Load all projects</li>
+<li><code>loadProjectById(id)</code> - Load and select specific project</li>
+<li><code>selectProject(project)</code> - Manually set selected project</li>
+<li><code>clearSelection()</code> - Clear selected project</li>
+<li><code>clearError()</code> - Clear error state</li>
+<li><code>reset()</code> - Reset store to initial state</li>
+</ul>
+<h3>Advanced Usage</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// Filter projects by technology
+const angularProjects = store.projectsByTag()(&#39;Angular&#39;);
+
+// Check loading state
+if (store.isLoading()) {
+  // Show spinner
+}
+
+// Access all tags for filtering UI
+const tags = store.allTags(); // [&#39;Angular&#39;, &#39;React&#39;, &#39;TypeScript&#39;, ...]</code></pre></div><h2>🚦 Getting Started</h2>
+<h3>Prerequisites</h3>
+<ul>
+<li>Node.js 20.x or higher</li>
+<li>npm 10.x or higher</li>
+</ul>
+<h3>Installation</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash"># Clone the repository
+git clone https://github.com/MoodyJW/moodyjw-portfolio.git
+
+# Navigate to project directory
+cd moodyjw-portfolio
+
+# Install dependencies
+npm install</code></pre></div><h3>Development</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash"># Start development server
+npm start
+
+# Application will be available at http://localhost:4200</code></pre></div><h3>Build</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash"># Build for production
+npm run build
+
+# Output will be in dist/moodyjw-portfolio</code></pre></div><h3>Testing</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash"># Run unit tests with coverage
+npm test
+
+# Run linting (ESLint + accessibility)
+npm run lint
+
+# Run E2E tests
+npm run test:e2e
+
+# Run E2E tests in UI mode (interactive)
+npm run test:e2e:ui
+
+# Update visual regression baselines
+npm run test:e2e:update-snapshots</code></pre></div><h3>CI/CD Pipeline</h3>
+<p>The project includes 4 automated workflows:</p>
+<ol>
+<li><strong>CI</strong> (<code>ci.yml</code>) - Build, lint, test with coverage (80% threshold)</li>
+<li><strong>E2E Tests</strong> (<code>e2e.yml</code>) - Cross-browser testing (Chromium, Firefox, WebKit)</li>
+<li><strong>Lighthouse</strong> (<code>lighthouse.yml</code>) - Performance monitoring with PR comments</li>
+<li><strong>Dependency Review</strong> (<code>dependency-review.yml</code>) - Security vulnerability scanning</li>
+</ol>
+<p>All workflows run on pull requests and must pass before merging.</p>
+<p><strong>Security:</strong> GitHub&#39;s built-in CodeQL scanning is enabled for static code analysis and vulnerability detection.</p>
+<h2>📐 Architecture Principles</h2>
+<h3>Standalone Components</h3>
+<p>All components are standalone, eliminating the need for NgModules:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">&#64;Component({
+  selector: &#39;app-feature&#39;,
+  standalone: true,
+  imports: [CommonModule, RouterLink],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class FeatureComponent {}</code></pre></div><h3>Signals</h3>
+<p>Using Angular Signals for reactive state:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">protected readonly data = signal&lt;Type&gt;(initialValue);</code></pre></div><h3>Lazy Loading</h3>
+<p>All feature routes are lazy-loaded:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">{
+  path: &#39;feature&#39;,
+  loadComponent: () =&gt; import(&#39;./features/feature&#39;).then(m =&gt; m.FeatureComponent)
+}</code></pre></div><h3>OnPush Change Detection</h3>
+<p>All components use OnPush strategy for optimal performance:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">changeDetection: ChangeDetectionStrategy.OnPush;</code></pre></div><h2>🎯 Code Style</h2>
+<h3>BEM Naming Convention</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-scss">.component {
+  &amp;__element {
+    // element styles
+  }
+
+  &amp;__element--modifier {
+    // modifier styles
+  }
+}</code></pre></div><h3>CSS Variables Usage</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-scss">.component {
+  color: var(--color-primary);
+  padding: var(--spacing-lg);
+  font-size: var(--font-size-base);
+}</code></pre></div><h2>🧪 Testing Strategy</h2>
+<h3>Unit Testing</h3>
+<ul>
+<li><strong>Framework</strong>: Vitest</li>
+<li><strong>Coverage</strong>: Components, services, utilities</li>
+<li><strong>Strategy</strong>: Test signal updates, component reactions, and business logic</li>
+</ul>
+<h3>E2E Testing</h3>
+<ul>
+<li><strong>Framework</strong>: Playwright</li>
+<li><strong>Coverage</strong>: Navigation, user flows, visual regression</li>
+<li><strong>Viewports</strong>: Desktop (1920x1080), Laptop (1440x1024), Tablet (768x1024), Mobile (375x667)</li>
+<li><strong>Browsers</strong>: Chromium, Firefox, WebKit</li>
+</ul>
+<h4>Visual Regression Tests</h4>
+<p>Visual regression tests ensure CSS Grid layouts and responsive designs don&#39;t break:</p>
+<ul>
+<li>Screenshots captured for Home and Case Studies pages</li>
+<li>Tested across 4 viewports (Desktop, Laptop, Tablet, Mobile)</li>
+<li>Baseline images stored in <code>e2e/screenshots-baseline/</code></li>
+<li>Automatic pixel-by-pixel comparison</li>
+</ul>
+<p>See <strong><a href="./e2e/README.md">E2E Testing Guide</a></strong> for detailed information.</p>
+<h2>📚 Documentation</h2>
+<ul>
+<li><strong><a href="./IMPLEMENTATION_PLAN.md">Implementation Plan</a></strong> - Phased development roadmap</li>
+<li><strong><a href="./.github/copilot-instructions.md">Copilot Instructions</a></strong> - AI coding assistant guidelines</li>
+<li><strong><a href="./e2e/README.md">E2E Testing Guide</a></strong> - Playwright testing documentation</li>
+<li><strong><a href="./src/environments/README.md">Environment Configuration</a></strong> - Environment setup and configuration</li>
+<li><strong><a href="./src/app/shared/constants/README.md">Constants Documentation</a></strong> - Application constants usage guide</li>
+</ul>
+<h2>🚀 Deployment</h2>
+<p>This project is deployed to <strong>GitHub Pages</strong> with automated CI/CD via GitHub Actions.</p>
+<h3>GitHub Pages Configuration</h3>
+<p><strong>Current Status:</strong> Workflow created and ready. First deployment will occur when configuration is merged to <code>main</code> branch.</p>
+<h4>Initial Setup</h4>
+<ol>
+<li>Go to repository <strong>Settings</strong> → <strong>Pages</strong></li>
+<li>Under <strong>Source</strong>, select <strong>GitHub Actions</strong></li>
+<li>Push changes to <code>main</code> branch to trigger automatic deployment</li>
+</ol>
+<h4>Automated Deployment Workflow</h4>
+<p>The <code>.github/workflows/deploy-pages.yml</code> workflow automatically:</p>
+<ul>
+<li>Triggers on every push to <code>main</code> branch</li>
+<li>Builds the application with production configuration</li>
+<li>Applies the correct <code>baseHref</code> for GitHub Pages (<code>/moodyjw-portfolio/</code>)</li>
+<li>Creates a <code>404.html</code> for SPA routing support</li>
+<li>Uploads and deploys to GitHub Pages</li>
+</ul>
+<h4>Site URL</h4>
+<p>Once deployed, the site will be available at:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-none">https://MoodyJW.github.io/moodyjw-portfolio/</code></pre></div><p><strong>Note:</strong> First deployment is pending merge of configuration to <code>main</code> branch.</p>
+<h4>Manual Deployment</h4>
+<p>To trigger a deployment manually (without pushing to <code>main</code>):</p>
+<ol>
+<li>Go to <strong>Actions</strong> tab in GitHub</li>
+<li>Select <strong>Deploy to GitHub Pages</strong> workflow</li>
+<li>Click <strong>Run workflow</strong> → <strong>Run workflow</strong></li>
+</ol>
+<h4>Local Production Build</h4>
+<p>Test the production build locally before deploying:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash"># Build for production (with GitHub Pages baseHref)
+npm run build
+
+# Serve the production build locally
+npx http-server dist/moodyjw-portfolio/browser -p 8080</code></pre></div><p><strong>Note:</strong> When serving locally, routes may not work exactly as on GitHub Pages due to baseHref differences.</p>
+<h2>🤝 Contributing</h2>
+<ol>
+<li>Follow the established folder structure</li>
+<li>Use standalone components with OnPush</li>
+<li>Implement features with signals</li>
+<li>Style with BEM and CSS variables</li>
+<li>Lazy-load all feature routes</li>
+<li>Write tests for new functionality</li>
+</ol>
+<h2>📊 Performance</h2>
+<ul>
+<li><strong>Initial Bundle</strong>: ~60 KB (gzipped)</li>
+<li><strong>Lazy Chunks</strong>: ~1-1.5 KB each feature</li>
+<li><strong>Lighthouse Scores</strong> (enforced via CI):<ul>
+<li>Performance: ≥95</li>
+<li>Accessibility: 100</li>
+<li>Best Practices: 100</li>
+<li>SEO: ≥90</li>
+</ul>
+</li>
+<li><strong>Core Web Vitals</strong>:<ul>
+<li>First Contentful Paint: &lt;1.5s</li>
+<li>Largest Contentful Paint: &lt;2.5s</li>
+<li>Cumulative Layout Shift: &lt;0.1</li>
+<li>Total Blocking Time: &lt;300ms</li>
+<li>Speed Index: &lt;3s</li>
+</ul>
+</li>
+</ul>
+<h2>🔐 Security</h2>
+<ul>
+<li><strong>Dependency Review</strong>: Automated scanning blocks high-severity vulnerabilities</li>
+<li><strong>CodeQL Analysis</strong>: GitHub&#39;s built-in security scanning for TypeScript/JavaScript</li>
+<li><strong>License Compliance</strong>: Copyleft licenses (GPL, LGPL, AGPL) automatically blocked</li>
+<li><strong>Branch Protection</strong>: Required status checks enforce all quality gates</li>
+<li><strong>No Hardcoded Secrets</strong>: All sensitive data managed via environment variables</li>
+</ul>
+<h2>📝 License</h2>
+<p>This project is licensed under the MIT License.</p>
+<h2>👤 Author</h2>
+<p><strong>MoodyJW</strong></p>
+<ul>
+<li>GitHub: <a href="https://github.com/MoodyJW">@MoodyJW</a></li>
+</ul>
+<hr>
+<p>Built with ❤️ using Angular</p>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 0;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'readme';
+            var COMPODOC_CURRENT_PAGE_URL = 'index.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="./js/libs/custom-elements.min.js"></script>
+       <script src="./js/libs/lit-html.js"></script>
+
+       <script src="./js/menu-wc.js" defer></script>
+       <script nomodule src="./js/menu-wc_es5.js" defer></script>
+
+       <script src="./js/libs/bootstrap-native.js"></script>
+
+       <script src="./js/libs/es6-shim.min.js"></script>
+       <script src="./js/libs/EventDispatcher.js"></script>
+       <script src="./js/libs/promise.min.js"></script>
+
+       <script src="./js/compodoc.js"></script>
+
+       <script src="./js/tabs.js"></script>
+       <script src="./js/menu.js"></script>
+       <script src="./js/libs/clipboard.min.js"></script>
+       <script src="./js/libs/prism.js"></script>
+       <script src="./js/sourceCode.js"></script>
+          <script src="./js/search/search.js"></script>
+          <script src="./js/search/lunr.min.js"></script>
+          <script src="./js/search/search-lunr.js"></script>
+          <script src="./js/search/search_index.js"></script>
+       <script src="./js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

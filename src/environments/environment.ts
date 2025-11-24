@@ -73,6 +73,6 @@ export const environment: Environment = {
     /** Build timestamp (will be replaced during build) */
     timestamp: new Date().toISOString(),
     /** Build version (from package.json) */
-    version: '0.1.0',
+    version: '0.2.0',
   },
 };

@@ -19,26 +19,52 @@
 
 ## 📁 Project Structure
 
+````
+## 📚 Documentation (Compodoc)
+
+We use `compodoc` to generate API documentation for the Angular application. Docs are generated into `docs/compodoc`.
+
+Generate docs locally:
+
+```bash
+# Install dependencies
+npm install
+
+# Generate Compodoc documentation
+npx compodoc -p tsconfig.json -d docs/compodoc
+
+# Serve docs locally
+npx compodoc -s -d docs/compodoc
+````
+
+CI: A GitHub Actions workflow (`.github/workflows/compodoc.yml`) is included to generate docs on `main` and upload them as an artifact.
+
+Published docs: The deployment workflow also copies generated Compodoc output into the production `dist` and deploys it with the site. After a Pages deploy, API docs will be available at:
+
 ```
+https://MoodyJW.github.io/moodyjw-portfolio/docs/compodoc/
+```
+
 src/
 ├── app/
-│   ├── core/                    # Core application functionality
-│   │   ├── layout/             # Shell layouts (MainLayout)
-│   │   ├── services/           # Global services (ProjectService)
-│   │   ├── store/              # NgRx SignalStore (ProjectStore)
-│   │   ├── guards/             # Route guards
-│   │   ├── interceptors/       # HTTP interceptors (latency simulation)
-│   │   └── models/             # Data models and interfaces (Project)
+│ ├── core/ # Core application functionality
+│ │ ├── layout/ # Shell layouts (MainLayout)
+│ │ ├── services/ # Global services (ProjectService)
+│ │ ├── store/ # NgRx SignalStore (ProjectStore)
+│ │ ├── guards/ # Route guards
+│ │ ├── interceptors/ # HTTP interceptors (latency simulation)
+│ │ └── models/ # Data models and interfaces (Project)
 ├── assets/
-│   └── data/               # Mock JSON data files (projects.json)
-├── shared/                 # Shared across features
-│   ├── components/         # Reusable components
-│   ├── directives/         # Custom directives
-│   ├── pipes/              # Custom pipes
-│   └── utils/              # Utility functions
-└── features/               # Feature modules
-    ├── home/               # Home page feature
-    └── case-studies/       # Case studies feature
+│ └── data/ # Mock JSON data files (projects.json)
+├── shared/ # Shared across features
+│ ├── components/ # Reusable components
+│ ├── directives/ # Custom directives
+│ ├── pipes/ # Custom pipes
+│ └── utils/ # Utility functions
+└── features/ # Feature modules
+├── home/ # Home page feature
+└── case-studies/ # Case studies feature
+
 ```
 
 ## 🛠️ Tech Stack
@@ -76,25 +102,27 @@ The application uses a **Mockend** approach for data management, providing a rea
 ### Architecture Overview
 
 ```
+
 ┌─────────────────┐
-│   Component     │
+│ Component │
 └────────┬────────┘
-         │
-         ▼
+│
+▼
 ┌─────────────────┐
-│ ProjectService  │  (uses inject(HttpClient))
+│ ProjectService │ (uses inject(HttpClient))
 └────────┬────────┘
-         │
-         ▼
+│
+▼
 ┌─────────────────┐
-│  HttpClient     │  → latencyInterceptor (500-1000ms delay)
+│ HttpClient │ → latencyInterceptor (500-1000ms delay)
 └────────┬────────┘
-         │
-         ▼
+│
+▼
 ┌─────────────────┐
-│  projects.json  │  (src/assets/data/)
+│ projects.json │ (src/assets/data/)
 └─────────────────┘
-```
+
+````
 
 ### Key Components
 
@@ -140,7 +168,7 @@ export class CaseStudiesComponent implements OnInit {
     this.store.loadProjects();
   }
 }
-```
+````
 
 ## 🎯 State Management with NgRx SignalStore
 

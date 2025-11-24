@@ -71,6 +71,6 @@ export const environment: Environment = {
     /** Build timestamp */
     timestamp: new Date().toISOString(),
     /** Build version (from package.json) */
-    version: '0.1.0-dev',
+    version: '0.2.0-dev',
   },
 };
