@@ -14,28 +14,27 @@ licenses:
   - license: GPL-2.0
     status: deny
     reason: Strong copyleft - requires derivative works to be GPL-licensed
-  
+
   - license: GPL-3.0
     status: deny
     reason: Strong copyleft - requires derivative works to be GPL-licensed
-  
+
   - license: AGPL-3.0
     status: deny
     reason: Network copyleft - requires server-side code to be open-sourced
-  
+
   # Weak copyleft licenses (require modifications to be shared, but not derivative works)
   - license: LGPL-2.0
     status: deny
     reason: Weak copyleft - requires modifications to library to be shared
-  
+
   - license: LGPL-2.1
     status: deny
     reason: Weak copyleft - requires modifications to library to be shared
-  
+
   - license: LGPL-3.0
     status: deny
     reason: Weak copyleft - requires modifications to library to be shared
-
 # Allow permissive licenses
 # - MIT
 # - Apache-2.0
