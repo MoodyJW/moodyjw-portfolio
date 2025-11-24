@@ -15,6 +15,7 @@
 - ✅ **Responsive layout** with mobile-first approach
 - ✅ **Dark mode support** (auto-detects system preference)
 - ✅ **Mockend data layer** with simulated network latency for realistic development
+- ✅ **Complete CI/CD pipeline** with GitHub Actions (build, test, E2E, performance, security)
 
 ## 📁 Project Structure
 
@@ -43,14 +44,17 @@ src/
 ## 🛠️ Tech Stack
 
 - **Framework**: Angular 21.0
-- **Language**: TypeScript 5.9
+- **Language**: TypeScript 5.9 (strict mode)
 - **Styling**: SCSS with CSS Variables
 - **State Management**: NgRx SignalStore + Angular Signals
 - **Data Layer**: Mockend pattern with local JSON files
 - **HTTP Client**: Angular HttpClient with functional interceptors
 - **Routing**: Angular Router (lazy-loaded)
-- **Testing**: Vitest (Unit) + Playwright (E2E)
+- **Testing**: Vitest (Unit) + Playwright (E2E + Visual Regression)
 - **Build Tool**: Angular CLI with Vite
+- **CI/CD**: GitHub Actions (4 workflows) + GitHub CodeQL
+- **Code Quality**: ESLint with Angular ESLint + accessibility linting
+- **Performance**: Lighthouse CI with strict budgets (≥95/100/100/90)
 
 ## 🎨 Design System
 
@@ -223,8 +227,11 @@ npm run build
 ### Testing
 
 ```bash
-# Run unit tests
+# Run unit tests with coverage
 npm test
+
+# Run linting (ESLint + accessibility)
+npm run lint
 
 # Run E2E tests
 npm run test:e2e
@@ -235,6 +242,19 @@ npm run test:e2e:ui
 # Update visual regression baselines
 npm run test:e2e:update-snapshots
 ```
+
+### CI/CD Pipeline
+
+The project includes 4 automated workflows:
+
+1. **CI** (`ci.yml`) - Build, lint, test with coverage (80% threshold)
+2. **E2E Tests** (`e2e.yml`) - Cross-browser testing (Chromium, Firefox, WebKit)
+3. **Lighthouse** (`lighthouse.yml`) - Performance monitoring with PR comments
+4. **Dependency Review** (`dependency-review.yml`) - Security vulnerability scanning
+
+All workflows run on pull requests and must pass before merging.
+
+**Security:** GitHub's built-in CodeQL scanning is enabled for static code analysis and vulnerability detection.
 
 ## 📐 Architecture Principles
 
@@ -350,14 +370,25 @@ See **[E2E Testing Guide](./e2e/README.md)** for detailed information.
 
 - **Initial Bundle**: ~60 KB (gzipped)
 - **Lazy Chunks**: ~1-1.5 KB each feature
-- **Lighthouse Score Target**: 95+
-- **First Contentful Paint**: < 1.5s
+- **Lighthouse Scores** (enforced via CI):
+  - Performance: ≥95
+  - Accessibility: 100
+  - Best Practices: 100
+  - SEO: ≥90
+- **Core Web Vitals**:
+  - First Contentful Paint: <1.5s
+  - Largest Contentful Paint: <2.5s
+  - Cumulative Layout Shift: <0.1
+  - Total Blocking Time: <300ms
+  - Speed Index: <3s
 
 ## 🔐 Security
 
-- No hardcoded secrets
-- Dependencies regularly updated
-- Security best practices enforced
+- **Dependency Review**: Automated scanning blocks high-severity vulnerabilities
+- **CodeQL Analysis**: GitHub's built-in security scanning for TypeScript/JavaScript
+- **License Compliance**: Copyleft licenses (GPL, LGPL, AGPL) automatically blocked
+- **Branch Protection**: Required status checks enforce all quality gates
+- **No Hardcoded Secrets**: All sensitive data managed via environment variables
 
 ## 📝 License
 
