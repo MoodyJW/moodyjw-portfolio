@@ -5,15 +5,18 @@ This directory contains all application-wide constants organized by category. Co
 ## Files Overview
 
 ### `routes.constants.ts`
+
 Route path constants for type-safe navigation.
 
 **Key Exports:**
+
 - `ROUTES` - Route path segments (without leading slash)
 - `ROUTE_PATHS` - Full route paths (with leading slash) for use in templates
 - `NAV_ITEMS` - Navigation menu configuration
 - `getCaseStudyRoute(id)` - Helper function to generate case study detail routes
 
 **Example Usage:**
+
 ```typescript
 // In TypeScript
 import { ROUTES, ROUTE_PATHS, getCaseStudyRoute } from '@shared/constants';
@@ -32,9 +35,11 @@ const route = getCaseStudyRoute('project-1'); // '/case-studies/project-1'
 ```
 
 ### `api.constants.ts`
+
 API endpoints and configuration for data fetching.
 
 **Key Exports:**
+
 - `API_CONFIG` - Base URLs for different API types
 - `MOCK_ENDPOINTS` - Local JSON file paths (Mockend pattern)
 - `GITHUB_ENDPOINTS` - GitHub REST API endpoints (Phase 4)
@@ -44,6 +49,7 @@ API endpoints and configuration for data fetching.
 - `API_RETRY` - Retry configuration for failed requests
 
 **Example Usage:**
+
 ```typescript
 import { MOCK_ENDPOINTS, API_CONFIG } from '@shared/constants';
 
@@ -55,9 +61,11 @@ const url = GITHUB_ENDPOINTS.USER_REPOS('MoodyJW');
 ```
 
 ### `config.constants.ts`
+
 Application-wide configuration values.
 
 **Key Exports:**
+
 - `LATENCY_CONFIG` - Network simulation settings
 - `CACHE_CONFIG` - Cache TTL and size settings
 - `PAGINATION_CONFIG` - Page size defaults
@@ -71,6 +79,7 @@ Application-wide configuration values.
 - `FEATURE_FLAGS` - Toggle features on/off
 
 **Example Usage:**
+
 ```typescript
 import { LATENCY_CONFIG, STORAGE_KEYS, FEATURE_FLAGS } from '@shared/constants';
 
@@ -83,13 +92,17 @@ if (FEATURE_FLAGS.ENABLE_DARK_MODE) {
 localStorage.setItem(STORAGE_KEYS.THEME, 'dark');
 
 // Use animation duration
-setTimeout(() => { /* ... */ }, ANIMATION_DURATIONS.NORMAL);
+setTimeout(() => {
+  /* ... */
+}, ANIMATION_DURATIONS.NORMAL);
 ```
 
 ### `app.constants.ts`
+
 General application constants including validation patterns, labels, and limits.
 
 **Key Exports:**
+
 - `REGEX_PATTERNS` - Validation regex patterns
 - `INPUT_LIMITS` - Min/max length constraints
 - `DATE_FORMATS` - Date formatting patterns
@@ -108,6 +121,7 @@ General application constants including validation patterns, labels, and limits.
 - `APP_NAME` - Application name
 
 **Example Usage:**
+
 ```typescript
 import { LABELS, REGEX_PATTERNS, KEYBOARD_KEYS } from '@shared/constants';
 
@@ -127,6 +141,7 @@ if (event.key === KEYBOARD_KEYS.ESCAPE) {
 ## Import Best Practices
 
 ### Barrel Import (Recommended)
+
 Import all constants from the barrel export:
 
 ```typescript
@@ -134,6 +149,7 @@ import { ROUTES, API_CONFIG, LABELS } from '@shared/constants';
 ```
 
 ### Selective Import
+
 Import specific constants when you need just a few:
 
 ```typescript
@@ -144,6 +160,7 @@ import { LABELS } from '@shared/constants/app.constants';
 ## Usage in Components
 
 ### TypeScript Files
+
 ```typescript
 import { Component } from '@angular/core';
 import { ROUTE_PATHS, LABELS } from '@shared/constants';
@@ -165,18 +182,19 @@ export class ExampleComponent {
 ```
 
 ### Template Files
+
 ```html
 <!-- Use exposed constants -->
 <a [routerLink]="ROUTE_PATHS.HOME">{{ LABELS.BUTTONS.BACK }}</a>
 
 <!-- Empty state -->
 @if (items().length === 0) {
-  <p>{{ LABELS.EMPTY_STATES.NO_RESULTS }}</p>
+<p>{{ LABELS.EMPTY_STATES.NO_RESULTS }}</p>
 }
 
 <!-- Loading state -->
 @if (isLoading()) {
-  <p>{{ LABELS.LOADING.DEFAULT }}</p>
+<p>{{ LABELS.LOADING.DEFAULT }}</p>
 }
 ```
 
@@ -192,6 +210,7 @@ When adding new constants:
 6. **Update this README** with new exports and examples
 
 **Example:**
+
 ```typescript
 /**
  * Social media platform names

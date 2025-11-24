@@ -2,30 +2,31 @@
   <header class="case-studies__header">
     <h1 class="case-studies__title">Case Studies</h1>
     <p class="case-studies__description">
-      A collection of projects showcasing modern Angular development with scalable architecture and best practices.
+      A collection of projects showcasing modern Angular development with scalable architecture and
+      best practices.
     </p>
   </header>
 
   <div class="case-studies__grid">
     @for (study of caseStudies(); track study.id) {
-      <article class="case-studies__card">
-        <div class="case-studies__card-image">
-          <div class="case-studies__card-image-placeholder">
-            {{ study.title.charAt(0) }}
-          </div>
+    <article class="case-studies__card">
+      <div class="case-studies__card-image">
+        <div class="case-studies__card-image-placeholder">
+          {{ study.title.charAt(0) }}
         </div>
-        <div class="case-studies__card-content">
-          <h2 class="case-studies__card-title">{{ study.title }}</h2>
-          <p class="case-studies__card-description">{{ study.description }}</p>
-          <div class="case-studies__card-technologies">
-            @for (tech of study.technologies; track tech) {
-              <span class="case-studies__card-tech-tag">{{ tech }}</span>
-            }
-          </div>
+      </div>
+      <div class="case-studies__card-content">
+        <h2 class="case-studies__card-title">{{ study.title }}</h2>
+        <p class="case-studies__card-description">{{ study.description }}</p>
+        <div class="case-studies__card-technologies">
+          @for (tech of study.technologies; track tech) {
+          <span class="case-studies__card-tech-tag">{{ tech }}</span>
+          }
         </div>
-      </article>
+      </div>
+    </article>
     } @empty {
-      <p class="case-studies__empty">{{ LABELS.EMPTY_STATES.NO_PROJECTS }}</p>
+    <p class="case-studies__empty">{{ LABELS.EMPTY_STATES.NO_PROJECTS }}</p>
     }
   </div>
 </div>
