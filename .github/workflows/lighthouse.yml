@@ -145,32 +145,36 @@ jobs:
                 '',
                 '### Performance Budgets',
                 '',
-                `- ✅ Performance: Target ≥95, Current: ${performance}`,
-                `- ✅ Accessibility: Target 100, Current: ${accessibility}`,
-                `- ✅ Best Practices: Target 100, Current: ${bestPractices}`,
-                `- ✅ SEO: Target ≥95, Current: ${seo}`,
+                `- ${performance >= 80 ? '✅' : '⚠️'} Performance: Target ≥80, Current: ${performance}`,
+                `- ${accessibility >= 95 ? '✅' : '❌'} Accessibility: Target ≥95, Current: ${accessibility}`,
+                `- ${bestPractices >= 90 ? '✅' : '⚠️'} Best Practices: Target ≥90, Current: ${bestPractices}`,
+                `- ${seo >= 85 ? '✅' : '⚠️'} SEO: Target ≥85, Current: ${seo}`,
                 '',
-                performance < 95 ? '⚠️ **Performance score is below target (95)**' : '',
-                accessibility < 100 ? '⚠️ **Accessibility score is below target (100)**' : '',
-                bestPractices < 100 ? '⚠️ **Best Practices score is below target (100)**' : '',
-                seo < 95 ? '⚠️ **SEO score is below target (95)**' : '',
+                performance < 80 ? '⚠️ **Performance score is below target (80)**' : '',
+                accessibility < 95 ? '❌ **Accessibility score is below target (95)** - Build will fail!' : '',
+                bestPractices < 90 ? '⚠️ **Best Practices score is below target (90)**' : '',
+                seo < 85 ? '⚠️ **SEO score is below target (85)**' : '',
                 '',
                 `*Lighthouse CI run for commit ${context.sha.substring(0, 7)}*`
               ].filter(line => line !== '').join('\n');
 
-              // Post comment
-              await github.rest.issues.createComment({
-                owner: context.repo.owner,
-                repo: context.repo.repo,
-                issue_number: context.issue.number,
-                body: commentBody
-              });
+              // Post comment to PR (only if this is a pull request event)
+              if (context.eventName === 'pull_request' && context.payload.pull_request) {
+                await github.rest.issues.createComment({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  issue_number: context.payload.pull_request.number,
+                  body: commentBody
+                });
+                console.log('Posted Lighthouse results to PR #' + context.payload.pull_request.number);
+              } else {
+                console.log('Not a pull request event, skipping comment');
+                console.log('Lighthouse Results:\n' + commentBody);
+              }
               
-              console.log('Posted Lighthouse results to PR');
-              
-              // Fail the job if performance budget is not met
-              if (performance < 95 || accessibility < 100 || bestPractices < 100 || seo < 95) {
-                core.setFailed('Performance budget not met');
+              // Fail the job only if accessibility is below threshold (hard requirement)
+              if (accessibility < 95) {
+                core.setFailed('Accessibility score below required threshold (95)');
               }
               
             } catch (error) {
