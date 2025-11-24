@@ -1,4 +1,5 @@
 import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { LABELS } from '@shared/constants';
 
 interface CaseStudy {
   id: number;
@@ -13,9 +14,11 @@ interface CaseStudy {
   imports: [],
   templateUrl: './case-studies.component.html',
   styleUrl: './case-studies.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush
+  changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class CaseStudiesComponent {
+  /** UI labels */
+  protected readonly LABELS = LABELS;
   protected readonly caseStudies = signal<CaseStudy[]>([
     {
       id: 1,

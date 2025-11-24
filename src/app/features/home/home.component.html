@@ -4,8 +4,8 @@
     <p class="home__subtitle">{{ subtitle() }}</p>
     <p class="home__description">{{ description() }}</p>
     <div class="home__actions">
-      <a routerLink="/case-studies" class="home__cta home__cta--primary">View Case Studies</a>
-      <a href="https://github.com/MoodyJW" target="_blank" rel="noopener noreferrer" class="home__cta home__cta--secondary">GitHub Profile</a>
+      <a [routerLink]="ROUTE_PATHS.CASE_STUDIES" class="home__cta home__cta--primary">{{ LABELS.BUTTONS.VIEW_MORE }} Case Studies</a>
+      <a [href]="EXTERNAL_LINKS.GITHUB_PROFILE" target="_blank" rel="noopener noreferrer" class="home__cta home__cta--secondary">GitHub Profile</a>
     </div>
   </section>
 

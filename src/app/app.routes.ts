@@ -1,27 +1,28 @@
 import type { Routes } from '@angular/router';
+import { ROUTES } from '@shared/constants';
 
 export const routes: Routes = [
   {
-    path: '',
+    path: ROUTES.ROOT,
     loadComponent: () => import('./core/layout').then((m) => m.MainLayoutComponent),
     children: [
       {
-        path: '',
-        redirectTo: 'home',
+        path: ROUTES.ROOT,
+        redirectTo: ROUTES.HOME,
         pathMatch: 'full',
       },
       {
-        path: 'home',
+        path: ROUTES.HOME,
         loadComponent: () => import('./features/home').then((m) => m.HomeComponent),
       },
       {
-        path: 'case-studies',
+        path: ROUTES.CASE_STUDIES,
         loadComponent: () => import('./features/case-studies').then((m) => m.CaseStudiesComponent),
       },
     ],
   },
   {
     path: '**',
-    redirectTo: 'home',
+    redirectTo: ROUTES.HOME,
   },
 ];

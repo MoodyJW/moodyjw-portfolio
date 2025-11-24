@@ -2,6 +2,7 @@ import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
 import type { Project } from '../models/project.model';
+import { MOCK_ENDPOINTS } from '@shared/constants';
 
 /**
  * Service for managing project/case study data
@@ -12,7 +13,7 @@ import type { Project } from '../models/project.model';
 })
 export class ProjectService {
   private readonly http = inject(HttpClient);
-  private readonly projectsUrl = '/assets/data/projects.json';
+  private readonly projectsUrl = MOCK_ENDPOINTS.PROJECTS;
 
   /**
    * Fetches all projects from the mock data source

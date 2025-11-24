@@ -2,6 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import type { Translation, TranslocoLoader } from '@jsverse/transloco';
 import type { Observable } from 'rxjs';
+import { API_CONFIG } from '@shared/constants';
 
 /**
  * Custom Transloco loader for loading translation files
@@ -17,6 +18,6 @@ export class TranslocoHttpLoader implements TranslocoLoader {
    * @returns Observable of translation object
    */
   getTranslation(lang: string): Observable<Translation> {
-    return this.http.get<Translation>(`/assets/i18n/${lang}.json`);
+    return this.http.get<Translation>(`${API_CONFIG.I18N_BASE}/${lang}.json`);
   }
 }
