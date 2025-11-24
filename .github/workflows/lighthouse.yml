@@ -4,7 +4,7 @@ on:
   push:
     branches: [main]
   pull_request:
-    branches: [main]
+    # Run on all PRs during development
 
 env:
   PRIMARY_NODE_VERSION: '22.x'
