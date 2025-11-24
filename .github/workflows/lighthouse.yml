@@ -41,16 +41,16 @@ jobs:
           # Start the server in background
           npx http-server dist/moodyjw-portfolio/browser -p 8080 &
           SERVER_PID=$!
-          
+
           # Wait for server to be ready
           npx wait-on http://localhost:8080 -t 60000
-          
+
           # Run Lighthouse
           lhci autorun --config=lighthouserc.json || LIGHTHOUSE_EXIT_CODE=$?
-          
+
           # Kill the server
           kill $SERVER_PID || true
-          
+
           # Exit with Lighthouse exit code if it failed
           exit ${LIGHTHOUSE_EXIT_CODE:-0}
         env:
@@ -71,7 +71,7 @@ jobs:
           script: |
             const fs = require('fs');
             const path = require('path');
-            
+
             try {
               // Find the latest manifest file
               const lhciDir = '.lighthouseci';
@@ -123,38 +123,40 @@ jobs:
               };
               
               // Create comment body
-              const commentBody = `## 🔦 Lighthouse Audit Results
-              
-| Category | Score |
-|----------|-------|
-| ${getEmoji(performance)} Performance | **${performance}** |
-| ${getEmoji(accessibility)} Accessibility | **${accessibility}** |
-| ${getEmoji(bestPractices)} Best Practices | **${bestPractices}** |
-| ${getEmoji(seo)} SEO | **${seo}** |
-
-### Core Web Vitals
-
-| Metric | Value |
-|--------|-------|
-| First Contentful Paint (FCP) | ${fcp} |
-| Largest Contentful Paint (LCP) | ${lcp} |
-| Total Blocking Time (TBT) | ${tbt} |
-| Cumulative Layout Shift (CLS) | ${cls} |
-| Speed Index (SI) | ${si} |
-
-### Performance Budgets
-
-- ✅ Performance: Target ≥95, Current: ${performance}
-- ✅ Accessibility: Target 100, Current: ${accessibility}
-- ✅ Best Practices: Target 100, Current: ${bestPractices}
-- ✅ SEO: Target ≥95, Current: ${seo}
-
-${performance < 95 ? '⚠️ **Performance score is below target (95)**' : ''}
-${accessibility < 100 ? '⚠️ **Accessibility score is below target (100)**' : ''}
-${bestPractices < 100 ? '⚠️ **Best Practices score is below target (100)**' : ''}
-${seo < 95 ? '⚠️ **SEO score is below target (95)**' : ''}
-
-*Lighthouse CI run for commit ${context.sha.substring(0, 7)}*`;
+              const commentBody = [
+                '## 🔦 Lighthouse Audit Results',
+                '',
+                '| Category | Score |',
+                '|----------|-------|',
+                `| ${getEmoji(performance)} Performance | **${performance}** |`,
+                `| ${getEmoji(accessibility)} Accessibility | **${accessibility}** |`,
+                `| ${getEmoji(bestPractices)} Best Practices | **${bestPractices}** |`,
+                `| ${getEmoji(seo)} SEO | **${seo}** |`,
+                '',
+                '### Core Web Vitals',
+                '',
+                '| Metric | Value |',
+                '|--------|-------|',
+                `| First Contentful Paint (FCP) | ${fcp} |`,
+                `| Largest Contentful Paint (LCP) | ${lcp} |`,
+                `| Total Blocking Time (TBT) | ${tbt} |`,
+                `| Cumulative Layout Shift (CLS) | ${cls} |`,
+                `| Speed Index (SI) | ${si} |`,
+                '',
+                '### Performance Budgets',
+                '',
+                `- ✅ Performance: Target ≥95, Current: ${performance}`,
+                `- ✅ Accessibility: Target 100, Current: ${accessibility}`,
+                `- ✅ Best Practices: Target 100, Current: ${bestPractices}`,
+                `- ✅ SEO: Target ≥95, Current: ${seo}`,
+                '',
+                performance < 95 ? '⚠️ **Performance score is below target (95)**' : '',
+                accessibility < 100 ? '⚠️ **Accessibility score is below target (100)**' : '',
+                bestPractices < 100 ? '⚠️ **Best Practices score is below target (100)**' : '',
+                seo < 95 ? '⚠️ **SEO score is below target (95)**' : '',
+                '',
+                `*Lighthouse CI run for commit ${context.sha.substring(0, 7)}*`
+              ].filter(line => line !== '').join('\n');
 
               // Post comment
               await github.rest.issues.createComment({
