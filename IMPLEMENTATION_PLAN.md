@@ -87,6 +87,12 @@ Each phase builds upon the previous one, ensuring a production-ready, maintainab
 - [x] Playwright accessibility testing (@axe-core/playwright)
 - [x] Storybook accessibility addon (@storybook/addon-a11y)
 
+**Documentation & Storybook Policy (project-wide)**
+
+- All new components and features MUST include: TSDoc for public APIs, at least one Storybook story demonstrating primary states, and unit tests covering component logic.
+- Exceptions: small demo-only components can be added without stories/tests if marked in a short `DEMO_COMPONENTS.md` manifest; these should be migrated to full coverage before Phase 9.
+- Compodoc runs in CI but documentation work is expected to be done alongside feature development (not at project end).
+
 **CI/CD Pipeline:**
 
 - [x] `.github/workflows/ci.yml` - Build, lint, test, coverage
@@ -193,6 +199,15 @@ Each phase builds upon the previous one, ensuring a production-ready, maintainab
 - Playwright for cross-browser testing (Chromium, Firefox, WebKit)
 - Visual regression with 4 viewports (Desktop, Laptop, Tablet, Mobile)
 - Compodoc for API documentation generation
+
+### Per-Phase Documentation Requirements
+
+- Phase 2-5: Every new component or service added as part of these phases must include:
+  - TSDoc on public APIs (functions, classes, methods, inputs/outputs)
+  - A Storybook story (in `.stories.ts`) demonstrating main variants and accessibility notes
+  - Unit tests (Vitest) for logic and reactivity (signals) where applicable
+
+This ensures documentation, examples, and tests are created as features are developed rather than at the end.
 
 ---
 
