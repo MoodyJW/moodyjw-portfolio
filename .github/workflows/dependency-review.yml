@@ -38,9 +38,6 @@ jobs:
           # Warn on moderate severity vulnerabilities
           warn-on-severity: moderate
 
-          # Allow moderate dependencies (don't fail, just warn)
-          allow-dependencies-licenses: moderate
-
       - name: Upload dependency review results
         if: always()
         uses: actions/upload-artifact@v4
