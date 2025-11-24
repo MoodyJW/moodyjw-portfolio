@@ -114,9 +114,14 @@ Each phase builds upon the previous one, ensuring a production-ready, maintainab
   - [x] Assert on Core Web Vitals (FCP <1.5s, LCP <2.5s, CLS <0.1, TBT <300ms, SI <3s)
   - [x] Upload Lighthouse reports as artifacts
   - [x] Status check job to aggregate results
-- [ ] `.github/workflows/dependency-review.yml` - Security checks
-  - [ ] Scan for vulnerabilities in dependencies
-  - [ ] Block high-severity issues
+- [x] `.github/workflows/dependency-review.yml` - Security checks
+  - [x] Scan for vulnerabilities in dependencies on PRs
+  - [x] Block high-severity vulnerabilities (critical, high)
+  - [x] Warn on moderate severity issues
+  - [x] License compliance checks (deny GPL/LGPL/AGPL, allow MIT/Apache/BSD/ISC)
+  - [x] OpenSSF Scorecard integration
+  - [x] Automated PR comments with vulnerability summary
+  - [x] Upload review results as artifacts
 - [ ] `.github/workflows/codeql.yml` - Static code analysis
   - [ ] Security vulnerability scanning
   - [ ] TypeScript/JavaScript analysis
