@@ -25,24 +25,26 @@ jobs:
           for p in "${PATHS[@]}"; do
             echo "Checking $BASE$p"
 
-            # Check HTTP status (retry to allow propagation)
+            # Check HTTP status (retry to allow GitHub Pages propagation)
             # Increase retries/delay to allow GitHub Pages propagation
             status=$(curl -s -o /dev/null -w '%{http_code}' --retry 10 --retry-delay 3 "$BASE$p" || true)
-
-            # Fetch body for further inspection when status is not 200
-            body=$(curl -s --retry 10 --retry-delay 3 "$BASE$p" || true)
 
             # Accept either 200 OK, or a 404 that contains our SPA (index copied to 404.html)
             if [ "$status" = "200" ]; then
               marker_ok=true
             elif [ "$status" = "404" ]; then
-              if echo "$body" | grep -q -E '<nav|<main|<app-root'; then
+              # Only fetch body when we need to inspect a 404 fallback
+              body=$(curl -s --retry 10 --retry-delay 3 "$BASE$p" || true)
+              # Match only full tag names (`<nav`, `<main`, `<app-root`) followed by space or '>'
+              if echo "$body" | grep -q -E '<(nav|main|app-root)([[:space:]>])'; then
                 echo "WARN: $BASE$p returned 404 but body contains SPA fallback (acceptable)"
                 marker_ok=true
               else
                 marker_ok=false
               fi
             else
+              # Fetch body for diagnostics when an unexpected status appears
+              body=$(curl -s --retry 4 --retry-delay 2 "$BASE$p" || true)
               marker_ok=false
             fi
 
