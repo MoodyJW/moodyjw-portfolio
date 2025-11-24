@@ -17,129 +17,61 @@
 - ✅ **Mockend data layer** with simulated network latency for realistic development
 - ✅ **Complete CI/CD pipeline** with GitHub Actions (build, test, E2E, performance, security)
 
-## 📁 Project Structure
+# MoodyJW Portfolio
 
-````
-## 📚 Documentation (Compodoc)
+A concise developer-focused overview and local quick-start for the MoodyJW portfolio.
 
-We use `compodoc` to generate API documentation for the Angular application. Docs are generated into `docs/compodoc`.
+Quick links:
 
-Generate docs locally:
+- Architecture: `ARCHITECTURE.md`
+- Mock data & services: `src/app/core/MOCKEND_GUIDE.md`
+- Store + integration: `src/app/core/STORE_SERVICE_INTEGRATION.md`
+- Generated API docs: `docs/compodoc/` (generated with Compodoc)
+
+Prerequisites
+
+- Node.js (v20 or v22 recommended)
+- npm (use `--legacy-peer-deps` when adding packages if necessary)
+
+Local quick start
 
 ```bash
-# Install dependencies
+# install
 npm install
 
-# Generate Compodoc documentation
+# development server
+npm start
+
+# build production
+npm run build
+
+# generate docs locally
 npx compodoc -p tsconfig.json -d docs/compodoc
-
-# Serve docs locally
+# serve docs
 npx compodoc -s -d docs/compodoc
-````
-
-CI: A GitHub Actions workflow (`.github/workflows/compodoc.yml`) is included to generate docs on `main` and upload them as an artifact.
-
-Published docs: The deployment workflow also copies generated Compodoc output into the production `dist` and deploys it with the site. After a Pages deploy, API docs will be available at:
-
-```
-https://MoodyJW.github.io/moodyjw-portfolio/docs/compodoc/
 ```
 
-src/
-├── app/
-│ ├── core/ # Core application functionality
-│ │ ├── layout/ # Shell layouts (MainLayout)
-│ │ ├── services/ # Global services (ProjectService)
-│ │ ├── store/ # NgRx SignalStore (ProjectStore)
-│ │ ├── guards/ # Route guards
-│ │ ├── interceptors/ # HTTP interceptors (latency simulation)
-│ │ └── models/ # Data models and interfaces (Project)
-├── assets/
-│ └── data/ # Mock JSON data files (projects.json)
-├── shared/ # Shared across features
-│ ├── components/ # Reusable components
-│ ├── directives/ # Custom directives
-│ ├── pipes/ # Custom pipes
-│ └── utils/ # Utility functions
-└── features/ # Feature modules
-├── home/ # Home page feature
-└── case-studies/ # Case studies feature
+Where things live
 
-```
+- App source: `src/app`
+- Mock data: `src/assets/data`
+- Generated docs: `docs/compodoc`
+- GitHub Actions workflows: `.github/workflows`
 
-## 🛠️ Tech Stack
+Docs and CI
 
-- **Framework**: Angular 21.0
-- **Language**: TypeScript 5.9 (strict mode)
-- **Styling**: SCSS with CSS Variables
-- **State Management**: NgRx SignalStore + Angular Signals
-- **Data Layer**: Mockend pattern with local JSON files
-- **HTTP Client**: Angular HttpClient with functional interceptors
-- **Routing**: Angular Router (lazy-loaded)
-- **Testing**: Vitest (Unit) + Playwright (E2E + Visual Regression)
-- **Build Tool**: Angular CLI with Vite
-- **CI/CD**: GitHub Actions (4 workflows) + GitHub CodeQL
-- **Code Quality**: ESLint with Angular ESLint + accessibility linting
-- **Performance**: Lighthouse CI with strict budgets (≥95/100/100/90)
+- Compodoc is run locally via `npx compodoc` and is included in CI (`.github/workflows/compodoc.yml`).
+- The Pages deploy workflow copies generated Compodoc output into the site so docs are available at `/docs/compodoc/` on the deployed site.
 
-## 🎨 Design System
+Contributing
 
-The application uses a custom design system built with CSS Variables for consistency and theme support:
+- Run `npm run lint` and `npm test` before opening PRs.
+- See `IMPLEMENTATION_PLAN.md` for phase-level goals and progress.
 
-- **Colors**: Primary, surface, text, and status colors
-- **Spacing**: 8-point grid system (xs to 4xl)
-- **Typography**: Font sizes, weights, and families
-- **Border Radius**: Consistent corner radii
-- **Shadows**: Elevation system
-- **Transitions**: Standardized durations and timings
+License and security
 
-All design tokens are defined in `src/styles/_variables.scss`.
-
-## 💾 Data Architecture (Mockend Pattern)
-
-The application uses a **Mockend** approach for data management, providing a realistic development experience that easily transitions to real APIs:
-
-### Architecture Overview
-
-```
-
-┌─────────────────┐
-│ Component │
-└────────┬────────┘
-│
-▼
-┌─────────────────┐
-│ ProjectService │ (uses inject(HttpClient))
-└────────┬────────┘
-│
-▼
-┌─────────────────┐
-│ HttpClient │ → latencyInterceptor (500-1000ms delay)
-└────────┬────────┘
-│
-▼
-┌─────────────────┐
-│ projects.json │ (src/assets/data/)
-└─────────────────┘
-
-````
-
-### Key Components
-
-- **`src/assets/data/projects.json`**: Mock data for case studies/projects
-- **`ProjectService`**: Service layer that fetches data using HttpClient
-- **`latencyInterceptor`**: Functional interceptor that simulates network latency (500-1000ms)
-- **`Project` model**: TypeScript interface defining the data structure
-
-### Why This Approach?
-
-1. **Realistic Development**: Simulated latency helps test loading states and UX
-2. **Easy Transition**: Same service layer works with real APIs—just change the URL
-3. **No Backend Required**: Develop frontend features independently
-4. **Type Safety**: Full TypeScript support with defined models
-5. **Testable**: Easy to mock and test data flows
-
-### Usage Example with NgRx SignalStore
+- Do not commit secrets; use GitHub Secrets for tokens.
+- CodeQL and dependency review workflows are configured in CI.
 
 ```typescript
 import { Component, inject, OnInit } from '@angular/core';
@@ -168,7 +100,7 @@ export class CaseStudiesComponent implements OnInit {
     this.store.loadProjects();
   }
 }
-````
+```
 
 ## 🎯 State Management with NgRx SignalStore
 

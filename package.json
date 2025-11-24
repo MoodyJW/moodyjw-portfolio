@@ -32,6 +32,7 @@
     ]
   },
   "private": true,
+  "license": "UNLICENSED",
   "packageManager": "npm@10.8.2",
   "overrides": {
     "@ngrx/signals": {
