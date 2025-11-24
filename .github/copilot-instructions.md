@@ -205,6 +205,14 @@ src/app/
 5. Follow BEM naming for styles
 6. Use CSS variables for theming
 
+Documentation & Tests (required)
+
+- For every new component or feature you add, follow the "docs-as-you-go" rule:
+  - Add TSDoc comments for all public APIs (methods, inputs, outputs).
+  - Create at least one Storybook story (`.stories.ts`) demonstrating the component's primary state(s) and include accessibility notes where relevant.
+  - Add unit tests (Vitest) that cover component behavior, signal updates, and key edge cases.
+- Small demo placeholder components are allowed, but MUST be listed in `DEMO_COMPONENTS.md` and migrated to include stories/tests before Phase 9.
+
 ### Adding a Shared Component
 
 1. Create in `shared/components/`
@@ -315,6 +323,7 @@ src/app/
 - Document all component inputs, outputs, and variants
 - Include accessibility notes in story descriptions
 - Show different states (loading, error, empty, success)
+ - Storybook stories are required at component creation time (see Documentation & Tests section)
 - **Example story structure**:
 
   ```typescript
