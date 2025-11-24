@@ -130,24 +130,48 @@ Control which features are enabled in each environment:
 - **`timestamp`** - When the build was created
 - **`version`** - Application version from package.json
 
-## GitHub Pages Deployment
+## Deployment to GitHub Pages
 
-For GitHub Pages deployment, the production environment includes:
+This application is deployed to **GitHub Pages**, not to other hosting platforms.
+
+### Production Environment Configuration
+
+The production environment (`environment.ts`) is specifically configured for GitHub Pages:
 
 - **Base URL**: `https://MoodyJW.github.io/moodyjw-portfolio`
-- **Mock Data URL**: `/moodyjw-portfolio/assets/data` (includes repo name in path)
+- **Mock Data URL**: `/moodyjw-portfolio/assets/data` (includes repo name in path for proper routing)
+- **Features**: Analytics enabled, logging disabled, PWA enabled
 
-The `angular.json` file must be configured with `baseHref` for GitHub Pages:
+### Angular Build Configuration
+
+The `angular.json` file is configured with the correct `baseHref` for GitHub Pages:
 
 ```json
 {
   "configurations": {
     "production": {
-      "baseHref": "/moodyjw-portfolio/"
+      "baseHref": "/moodyjw-portfolio/",
+      "fileReplacements": [
+        {
+          "replace": "src/environments/environment.ts",
+          "with": "src/environments/environment.ts"
+        }
+      ]
     }
   }
 }
 ```
+
+### Deployment Workflow
+
+The `.github/workflows/deploy-pages.yml` workflow handles automated deployment:
+
+1. Builds with production configuration (`ng build`)
+2. Applies `baseHref="/moodyjw-portfolio/"` for proper routing
+3. Creates `404.html` for SPA fallback routing
+4. Deploys to GitHub Pages on every push to `main`
+
+**Status:** First deployment pending merge to `main` branch.
 
 ## Security Considerations
 

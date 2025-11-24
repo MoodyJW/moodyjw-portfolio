@@ -361,26 +361,29 @@ See **[E2E Testing Guide](./e2e/README.md)** for detailed information.
 
 ## 🚀 Deployment
 
-### GitHub Pages
+This project is deployed to **GitHub Pages** with automated CI/CD via GitHub Actions.
 
-This project is configured for automated deployment to GitHub Pages using GitHub Actions.
+### GitHub Pages Configuration
 
-#### Setup GitHub Pages
+**Current Status:** Workflow created and ready. First deployment will occur when configuration is merged to `main` branch.
+
+#### Initial Setup
 
 1. Go to repository **Settings** → **Pages**
 2. Under **Source**, select **GitHub Actions**
-3. The site will be deployed automatically on every push to `main`
+3. Push changes to `main` branch to trigger automatic deployment
 
-#### Deployment Workflow
+#### Automated Deployment Workflow
 
-The `.github/workflows/deploy-pages.yml` workflow:
+The `.github/workflows/deploy-pages.yml` workflow automatically:
 
+- Triggers on every push to `main` branch
 - Builds the application with production configuration
 - Applies the correct `baseHref` for GitHub Pages (`/moodyjw-portfolio/`)
 - Creates a `404.html` for SPA routing support
-- Deploys to GitHub Pages automatically
+- Uploads and deploys to GitHub Pages
 
-#### Access the Site
+#### Site URL
 
 Once deployed, the site will be available at:
 
@@ -388,25 +391,29 @@ Once deployed, the site will be available at:
 https://MoodyJW.github.io/moodyjw-portfolio/
 ```
 
+**Note:** First deployment is pending merge of configuration to `main` branch.
+
 #### Manual Deployment
 
-To trigger a manual deployment:
+To trigger a deployment manually (without pushing to `main`):
 
 1. Go to **Actions** tab in GitHub
 2. Select **Deploy to GitHub Pages** workflow
 3. Click **Run workflow** → **Run workflow**
 
-### Local Production Build
+#### Local Production Build
 
-Test the production build locally:
+Test the production build locally before deploying:
 
 ```bash
-# Build for production
+# Build for production (with GitHub Pages baseHref)
 npm run build
 
-# Serve the production build (requires http-server)
+# Serve the production build locally
 npx http-server dist/moodyjw-portfolio/browser -p 8080
 ```
+
+**Note:** When serving locally, routes may not work exactly as on GitHub Pages due to baseHref differences.
 
 ## 🤝 Contributing
 
