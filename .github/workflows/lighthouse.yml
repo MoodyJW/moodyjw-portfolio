@@ -36,31 +36,39 @@ jobs:
       - name: Install Lighthouse CI
         run: npm install -g @lhci/cli@0.15.x
 
+      - name: Start HTTP Server
+        run: |
+          npx http-server dist/moodyjw-portfolio/browser -p 8080 &
+          echo $! > server.pid
+          npx wait-on http://localhost:8080 -t 60000
+          echo "✅ Server started on port 8080"
+
       - name: Run Lighthouse CI
         run: |
-          # Start the server in background
-          npx http-server dist/moodyjw-portfolio/browser -p 8080 &
-          SERVER_PID=$!
-
-          # Wait for server to be ready
-          npx wait-on http://localhost:8080 -t 60000
-
-          # Run Lighthouse (continue even if assertions fail)
-          lhci autorun --config=lighthouserc.json || true
-
-          # Kill the server
-          kill $SERVER_PID || true
-
-          # Check if manifest was created
+          echo "Running Lighthouse CI collect..."
+          lhci collect --config=lighthouserc.json
+          
+          echo "Running Lighthouse CI assert..."
+          lhci assert --config=lighthouserc.json || echo "⚠️ Assertions had warnings (non-blocking)"
+          
+          echo "Checking manifest..."
           if [ -f ".lighthouseci/manifest.json" ]; then
-            echo "✅ Lighthouse manifest created successfully"
+            echo "✅ Lighthouse manifest created"
             cat .lighthouseci/manifest.json
           else
-            echo "❌ Lighthouse manifest not found"
+            echo "❌ Manifest not found"
             ls -la .lighthouseci/ || echo "No .lighthouseci directory"
           fi
         env:
           LHCI_GITHUB_APP_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Stop HTTP Server
+        if: always()
+        run: |
+          if [ -f server.pid ]; then
+            kill $(cat server.pid) || true
+            rm server.pid
+          fi
 
       - name: Upload Lighthouse reports
         if: always()
