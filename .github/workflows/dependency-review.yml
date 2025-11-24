@@ -12,7 +12,7 @@ jobs:
   dependency-review:
     name: Dependency Review
     runs-on: ubuntu-latest
-    
+
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
@@ -22,22 +22,22 @@ jobs:
         with:
           # Fail the action if vulnerabilities with severity >= high are detected
           fail-on-severity: high
-          
+
           # Deny licenses that are not OSI-approved or are copyleft
           deny-licenses: GPL-2.0, GPL-3.0, LGPL-2.0, LGPL-2.1, LGPL-3.0, AGPL-3.0
-          
+
           # Allow specific licenses (permissive open source)
           allow-licenses: MIT, Apache-2.0, BSD-2-Clause, BSD-3-Clause, ISC, 0BSD
-          
+
           # Comment on PR with summary of vulnerabilities
           comment-summary-in-pr: always
-          
+
           # Show dependency changes in PR
           show-openssf-scorecard: true
-          
+
           # Warn on moderate severity vulnerabilities
           warn-on-severity: moderate
-          
+
           # Allow moderate dependencies (don't fail, just warn)
           allow-dependencies-licenses: moderate
 
