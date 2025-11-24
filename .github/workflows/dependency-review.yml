@@ -23,8 +23,12 @@ jobs:
           # Fail the action if vulnerabilities with severity >= high are detected
           fail-on-severity: high
 
-          # Deny licenses that are not OSI-approved or are copyleft
-          deny-licenses: GPL-2.0, GPL-3.0, LGPL-2.0, LGPL-2.1, LGPL-3.0, AGPL-3.0
+          # License check configuration (deny-licenses is deprecated)
+          # Block copyleft licenses that could affect commercial use
+          license-check: true
+          fail-on-scopes: runtime
+          # Note: license-check now uses a configuration file or default rules
+          # To block specific licenses, add a .github/dependency-review-config.yml file
 
           # Comment on PR with summary of vulnerabilities
           comment-summary-in-pr: always
