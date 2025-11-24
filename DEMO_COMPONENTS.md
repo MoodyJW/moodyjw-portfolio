@@ -13,14 +13,37 @@ Template (use as a guide when adding entries):
 Current demo placeholders (scan results pre-filled, update if inaccurate):
 
 - `src/app/features/case-studies/case-studies.component.ts`
+
   - name: `CaseStudiesComponent` (placeholder card image element used for visual placeholder)
   - reason: layout placeholder used while content is authored
   - owner: @MoodyJW
   - migrate-by: Phase 3
 
 - `src/app/docs/template-playground/*` (generated sample components used by Compodoc template playground)
+
   - name: `TemplatePlaygroundComponent` and helpers
   - reason: documentation playground artifacts included for demoing Compodoc templates
+  - owner: @MoodyJW
+  - migrate-by: Phase 9
+
+- `docs/compodoc/template-playground/*` (generated Compodoc template playground files)
+
+  - name: `TemplatePlaygroundComponent` (generated)
+  - reason: generated demo artifacts from Compodoc; not part of authored app sources
+  - owner: @MoodyJW
+  - migrate-by: Phase 9
+
+- `docs/compodoc/template-playground/template-playground.component.ts`
+
+  - name: `TemplatePlaygroundComponent (generated source)`
+  - reason: Compodoc emits a generated TypeScript copy for the template playground; skip checks
+  - owner: @MoodyJW
+  - migrate-by: Phase 9
+
+- `dist/moodyjw-portfolio/browser/docs/compodoc/template-playground/*` (packaged Compodoc output copied into `dist` during Pages deploy)
+
+  - name: `TemplatePlaygroundComponent` (packaged)
+  - reason: generated/artifact files created at build time and copied to `dist` for GH Pages
   - owner: @MoodyJW
   - migrate-by: Phase 9
 
