@@ -15,8 +15,8 @@
     "test:e2e:report": "playwright show-report",
     "lint": "eslint . --ext .ts,.html",
     "lint:fix": "eslint . --ext .ts,.html --fix",
-    "storybook": "storybook dev -p 6006",
-    "build-storybook": "storybook build",
+    "storybook": "ng run moodyjw-portfolio:storybook",
+    "build-storybook": "ng run moodyjw-portfolio:build-storybook",
     "docs": "compodoc -p tsconfig.json -d docs/compodoc"
   },
   "prettier": {
@@ -59,7 +59,8 @@
       "@angular/forms": "^21.0.0",
       "@angular/platform-browser": "^21.0.0",
       "@angular/platform-browser-dynamic": "^21.0.0"
-    }
+    },
+    "webpack": "5.102.1"
   },
   "dependencies": {
     "@angular/animations": "^21.0.0",
@@ -103,6 +104,7 @@
     "storybook": "^10.0.8",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8",
-    "wait-on": "^9.0.3"
+    "wait-on": "^9.0.3",
+    "eslint-plugin-storybook": "10.0.8"
   }
 }

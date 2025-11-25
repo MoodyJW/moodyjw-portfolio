@@ -11,6 +11,7 @@
 /test-results/
 /playwright-report/
 /playwright/.cache/
+/documentation.json
 
 # Node modules and dependency files
 /node_modules/

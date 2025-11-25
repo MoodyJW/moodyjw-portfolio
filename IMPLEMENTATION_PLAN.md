@@ -222,6 +222,35 @@ This ensures documentation, examples, and tests are created as features are deve
 
 ### Deliverables
 
+**Theme Picker**
+
+- [ ] `ThemePickerComponent` (standalone, OnPush) surfaced in the MainLayout navbar as an accessible dropdown with keyboard navigation, ARIA labelling, and a11y-friendly focus management.
+  - [ ] Present at least four options at launch: two light (`Lumen`, `Aurora`) and two dark (`Nocturne`, `Cosmos`) with quick swatches showing primary/background contrast.
+  - [ ] Use Transloco keys for labels/descriptions and show current selection plus system-default indicator when applicable.
+  - [ ] Include Storybook stories (default, keyboard navigation demo, reduced-motion) and Playwright smoke test that verifies dropdown interaction.
+- [ ] Theme definitions registry (`THEMES` constant or `ThemeRegistry` service) describing each theme's slug, human label, color tokens, contrast ratios, and whether it is light/dark.
+  - [ ] Validate registry structure with Zod to ensure every theme documents WCAG AAA contrast data (≥7:1 for text, 4.5:1 for large display elements).
+  - [ ] Document contribution checklist for adding future themes (update constants, SCSS variables, story, tests).
+- [ ] `ThemeService` (signal store) responsible for:
+  - [ ] Reading persisted preference from LocalStorage (`THEME_STORAGE_KEY`) with graceful fallback when data is missing/invalid.
+  - [ ] Detecting `prefers-color-scheme` on first load and whenever the OS theme changes, defaulting to a matching light/dark theme when no preference is saved.
+  - [ ] Applying the active theme by toggling a `data-theme` attribute and injecting the corresponding CSS variable map (colors, typography tweaks, shadows) at the root.
+  - [ ] Exposing signals/computed values (`activeTheme`, `availableThemes`, `isSystemDefault`, `isDarkMode`) for consumption by layout and Storybook preview.
+- [ ] Persistence & storage responsibilities:
+  - [ ] Store explicit user selection in LocalStorage with timestamp/version to allow migrations.
+  - [ ] Provide `resetToSystem()` helper that removes the stored value and re-applies system preference.
+  - [ ] Add unit tests covering read/write scenarios and corrupt storage recovery.
+- [ ] Styling implementation:
+  - [ ] Derive each theme from the existing CSS variable system; avoid hardcoded colors in components by only manipulating theme tokens.
+  - [ ] Create SCSS partial defining per-theme maps, ensuring all combinations meet WCAG AAA contrast (verify with automated contrast script and manual WebAIM checks).
+  - [ ] Support smooth but optional transitions (`prefers-reduced-motion` respected) when swapping themes; isolate animation tokens in CSS variables for reuse.
+- [ ] Integration and extensibility:
+  - [ ] Wire ThemePicker into MainLayout nav, case-study pages, and Storybook preview using a shared directive or composable to ensure consistent application.
+  - [ ] Provide README/IMPLEMENTATION_PLAN addendum describing how to register new themes and run the contrast validation script before submission.
+  - [ ] Ensure E2E coverage verifying persistence (reload retains selection) and default fallback behavior on first load across desktop/mobile viewports.
+
+> Acceptance criteria: Theme picker dropdown meets WCAG 2.1 AAA, supports keyboard-only usage, persists preference, defaults to system scheme when unset, and new themes can be added by extending the registry without touching component logic. No duplication — only override what’s different per theme.
+
 **Home Page:**
 
 - [x] HomeComponent with hero section
