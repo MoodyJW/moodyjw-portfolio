@@ -194,7 +194,7 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
   - [x] Implementation recommendations
   - [x] Migration strategy
 - [x] Secrets management and environment files (`.env.example`, GitHub Secrets) in place
-- [ ] Release & versioning policy documented (semantic versioning, changelog strategy)
+- [x] Release & versioning policy documented (semantic versioning, changelog strategy)
 - [x] Local dev reproducibility confirmed (README dev steps, `npm install`, `npm start`, `npm test`)
 
 **Documentation & Standards:**
@@ -910,6 +910,7 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
   - [x] Automated deployment workflow
   - [x] Production builds with baseHref
   - [x] SPA routing support (404.html)
+- [ ] Automated release workflow (version tagging, changelog generation, GitHub Releases)
 - [ ] Verify production deployment
   - [ ] Test deployment workflow end-to-end
   - [ ] Validate all routes work correctly
