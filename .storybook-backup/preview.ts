@@ -1,4 +1,5 @@
 import type { Preview } from '@storybook/angular';
+import '../src/styles.scss';
 
 const preview: Preview = {
   parameters: {
@@ -9,23 +10,17 @@ const preview: Preview = {
       },
     },
     backgrounds: {
-      options: {
-        light: {
+      default: 'light',
+      values: [
+        {
           name: 'light',
           value: '#ffffff',
         },
-
-        dark: {
+        {
           name: 'dark',
           value: '#1a1a1a',
         },
-      },
-    },
-  },
-
-  initialGlobals: {
-    backgrounds: {
-      value: 'light',
+      ],
     },
   },
 };
