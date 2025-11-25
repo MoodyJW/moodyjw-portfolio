@@ -1,0 +1,113 @@
+// Theme System: SCSS Partials for Theme Maps
+// Each theme is defined as a SCSS map. All tokens must match those in themes.constants.ts
+// These are injected as CSS variables by ThemeService at runtime.
+
+// Lumen (Light)
+$theme-lumen: (
+  primary: #0057ff,
+  background: #ffffff,
+  surface: #f7f9fb,
+  text: #111827,
+  text-secondary: #4b5563,
+  border: #e5e7eb,
+  border-hover: #b6c2d1,
+  accent: #ffd600,
+  error: #d32f2f,
+  success: #388e3c,
+  warning: #fbc02d,
+  info: #1976d2,
+);
+
+// Aurora (Light)
+$theme-aurora: (
+  primary: #00897b,
+  background: #f5f7fa,
+  surface: #ffffff,
+  text: #1a202c,
+  text-secondary: #64748b,
+  border: #cbd5e1,
+  border-hover: #94a3b8,
+  accent: #ffb300,
+  error: #c62828,
+  success: #2e7d32,
+  warning: #ffa000,
+  info: #0288d1,
+);
+
+// Nocturne (Dark)
+$theme-nocturne: (
+  primary: #90caf9,
+  background: #181a20,
+  surface: #23272f,
+  text: #f3f4f6,
+  text-secondary: #a1a1aa,
+  border: #2d3748,
+  border-hover: #475569,
+  accent: #ffd600,
+  error: #ef5350,
+  success: #66bb6a,
+  warning: #ffb300,
+  info: #29b6f6,
+);
+
+// Cosmos (Dark)
+$theme-cosmos: (
+  primary: #ff6f91,
+  background: #101014,
+  surface: #181a20,
+  text: #f8fafc,
+  text-secondary: #a3a3a3,
+  border: #23272f,
+  border-hover: #475569,
+  accent: #00e5ff,
+  error: #ff5252,
+  success: #00e676,
+  warning: #ffd740,
+  info: #18ffff,
+);
+
+// Mixin: Inject theme as CSS variables
+@mixin theme-vars($theme) {
+  --color-primary: map-get($theme, primary);
+  --color-background: map-get($theme, background);
+  --color-surface: map-get($theme, surface);
+  --color-text: map-get($theme, text);
+  --color-text-secondary: map-get($theme, text-secondary);
+  --color-border: map-get($theme, border);
+  --color-border-hover: map-get($theme, border-hover);
+  --color-accent: map-get($theme, accent);
+  --color-error: map-get($theme, error);
+  --color-success: map-get($theme, success);
+  --color-warning: map-get($theme, warning);
+  --color-info: map-get($theme, info);
+}
+
+// Theme application (for static fallback or SSR)
+[data-theme='lumen'] {
+  @include theme-vars($theme-lumen);
+}
+[data-theme='aurora'] {
+  @include theme-vars($theme-aurora);
+}
+[data-theme='nocturne'] {
+  @include theme-vars($theme-nocturne);
+}
+[data-theme='cosmos'] {
+  @include theme-vars($theme-cosmos);
+}
+
+// Animation tokens (for prefers-reduced-motion)
+:root {
+  --transition-duration: 0.2s;
+  --transition-timing: cubic-bezier(0.4, 0, 0.2, 1);
+  --border-radius: 6px;
+  --border-radius-sm: 3px;
+  --border-radius-lg: 12px;
+  --border-radius-xl: 20px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  :root {
+    --transition-duration: 0.01s;
+  }
+}
