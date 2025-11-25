@@ -24,8 +24,16 @@ interface ThemePreference {
 /**
  * Utility: Get system theme slug ('lumen' for light, 'nocturne' for dark by default)
  */
-function getSystemThemeSlug(): string {
-  if (typeof window !== 'undefined' && window.matchMedia('(prefers-color-scheme: dark)').matches) {
+
+/**
+ * Exported for testing: Get system theme slug
+ */
+export function getSystemThemeSlug(): string {
+  if (
+    typeof window !== 'undefined' &&
+    window.matchMedia &&
+    window.matchMedia('(prefers-color-scheme: dark)').matches
+  ) {
     return 'nocturne';
   }
   return 'lumen';
@@ -34,8 +42,12 @@ function getSystemThemeSlug(): string {
 /**
  * Utility: Listen for OS theme changes
  */
-function onSystemThemeChange(callback: (slug: string) => void): () => void {
-  if (typeof window === 'undefined') return () => {};
+
+/**
+ * Exported for testing: Listen for OS theme changes
+ */
+export function onSystemThemeChange(callback: (slug: string) => void): () => void {
+  if (typeof window === 'undefined' || !window.matchMedia) return () => {};
   const mq = window.matchMedia('(prefers-color-scheme: dark)');
   const handler = () => callback(getSystemThemeSlug());
   mq.addEventListener('change', handler);
