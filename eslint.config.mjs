@@ -125,6 +125,7 @@ eslint.configs.recommended, // TypeScript files
     'test-results/**',
     'docs/**',
     '.storybook/**',
+    '.storybook-backup/**',
     'storybook-static/**',
     'vitest.config.ts',
     'playwright.config.ts',

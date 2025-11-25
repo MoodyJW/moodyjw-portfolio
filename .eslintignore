@@ -1,9 +1,0 @@
-# Ignore Storybook backup files created during migration
-.storybook-backup/
-
-# Ignore generated documentation output
-docs/compodoc/
-
-# Node modules and build artifacts (redundant with .gitignore but useful for IDEs)
-node_modules/
-dist/
