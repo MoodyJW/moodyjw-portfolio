@@ -187,8 +187,11 @@ npm run build
 ### Testing
 
 ```bash
-# Run unit tests with coverage
+# Run unit tests (interactive, watch mode)
 npm test
+
+# Run unit tests with coverage (used in CI)
+npm run test:coverage
 
 # Run linting (ESLint + accessibility)
 npm run lint
@@ -202,6 +205,8 @@ npm run test:e2e:ui
 # Update visual regression baselines
 npm run test:e2e:update-snapshots
 ```
+
+**Important:** Always use `npm test` or `npm run test:coverage` for running tests. Do not use `npx vitest run` directly as it bypasses Angular's test infrastructure which handles component template and style resolution.
 
 ### CI/CD Pipeline
 
@@ -314,10 +319,19 @@ See **[E2E Testing Guide](./e2e/README.md)** for detailed information.
 ## 📚 Documentation
 
 - **[Implementation Plan](./IMPLEMENTATION_PLAN.md)** - Phased development roadmap
+- **[Architecture](./ARCHITECTURE.md)** - System architecture and design decisions
 - **[Copilot Instructions](./.github/copilot-instructions.md)** - AI coding assistant guidelines
+- **[Claude Code Commands](./.claude/README.md)** - Claude Code slash commands and configuration
 - **[E2E Testing Guide](./e2e/README.md)** - Playwright testing documentation
 - **[Environment Configuration](./src/environments/README.md)** - Environment setup and configuration
 - **[Constants Documentation](./src/app/shared/constants/README.md)** - Application constants usage guide
+
+### AI Coding Assistants
+
+This project is optimized for AI-assisted development:
+
+- **GitHub Copilot**: See [.github/copilot-instructions.md](./.github/copilot-instructions.md) for comprehensive coding guidelines
+- **Claude Code**: See [.claude/README.md](./.claude/README.md) for available slash commands like `/new-component`, `/accessibility-check`, `/review-pr`, and more
 
 ## 🚀 Deployment
 

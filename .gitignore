@@ -36,3 +36,6 @@ yarn-error.log*
 
 # Blog articles (for now)
 blog/*.md
+
+# Claude Code settings (local only)
+.claude/settings.local.json

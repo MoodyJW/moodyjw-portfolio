@@ -109,6 +109,18 @@ describe('ProjectStore', () => {
       expect(store.isLoading()).toBe(false);
       expect(store.error()).toBe(errorMessage);
     });
+
+    it('should handle errors without message property', () => {
+      vi.spyOn(projectService, 'getProjects').mockReturnValue(
+        throwError(() => ({ status: 500 }))
+      );
+
+      store.loadProjects();
+
+      expect(store.projects()).toEqual([]);
+      expect(store.isLoading()).toBe(false);
+      expect(store.error()).toBe('Failed to load projects');
+    });
   });
 
   describe('loadProjectById', () => {
@@ -141,6 +153,17 @@ describe('ProjectStore', () => {
 
       expect(store.selectedProject()).toBeNull();
       expect(store.error()).toBe(errorMessage);
+    });
+
+    it('should handle errors without message property when loading project', () => {
+      vi.spyOn(projectService, 'getProjectById').mockReturnValue(
+        throwError(() => ({ status: 404 }))
+      );
+
+      store.loadProjectById('project-1');
+
+      expect(store.selectedProject()).toBeNull();
+      expect(store.error()).toBe('Failed to load project');
     });
   });
 
