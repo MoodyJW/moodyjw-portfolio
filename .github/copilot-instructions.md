@@ -18,6 +18,13 @@ This is a modern Angular 21 portfolio application built with standalone componen
 - WCAG 2.1 AAA accessibility compliance
 - npm overrides for package compatibility
 
+**Project Decisions (recorded):**
+
+- Analytics: GA4-only for Phase 1 (Looker Studio demos for embedding).
+- Auth: Prioritize Ory (Kratos + Hydra) as the recommended open-source provider; Keycloak remains an alternate.
+- Tests: Enforce tests before merge; coverage goal 85% (80% acceptable).
+- Storybook: Host static Storybook under `/storybook` on GH Pages and attach PR preview artifacts in CI.
+
 ## Architecture Principles
 
 ### Package Compatibility Strategy

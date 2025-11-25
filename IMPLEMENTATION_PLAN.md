@@ -1,18 +1,19 @@
-# MoodyJW Portfolio - Phased Implementation Plan
+# MoodyJW Portfolio - Implementation Plan
 
-## Overview
+An infrastructure-first, enterprise-standard implementation plan following a phased approach from foundation to production deployment.
 
-This document outlines the phased approach for implementing and extending the Angular portfolio application following enterprise development best practices. The strategy follows a standard enterprise approach:
+## Project Decisions (Recorded)
 
-1. **Infrastructure First**: Complete tooling, dependencies, and architecture setup
-2. **Feature Development**: Incremental feature implementation
-3. **Continuous Quality**: Automated testing and monitoring throughout
-
-Each phase builds upon the previous one, ensuring a production-ready, maintainable codebase that demonstrates enterprise-grade Angular development.
+1. **Analytics**: GA4 only for Phase 1. Looker Studio for dashboard embedding demos.
+2. **Auth**: Prioritize **Ory (Kratos + Hydra)** as recommended open-source provider; Keycloak as alternate.
+3. **Tests**: Required before merge. TDD preferred; test-after acceptable. Coverage: 85% goal, 80% acceptable.
+4. **Storybook**: Static build hosted under `/storybook` on GH Pages; PR preview artifacts attached in CI.
 
 ---
 
-## Phase 1: Project Infrastructure & Dependencies ✅ COMPLETE
+## Phase 1: Enterprise Baseline & Project Infrastructure ✅ COMPLETE
+
+**Goal**: Establish a production-quality foundation so development can proceed without major refactors.
 
 ### Objectives
 
@@ -20,9 +21,10 @@ Each phase builds upon the previous one, ensuring a production-ready, maintainab
 - Install and configure all required dependencies
 - Set up development tooling and quality gates
 - Create architectural foundation and design system
-- Implement CI/CD pipeline
+- Implement CI/CD pipeline with all quality gates
 - Configure testing infrastructure (unit, E2E, visual regression)
 - Ensure WCAG 2.1 AAA compliance through automated tooling
+- Set up monitoring, analytics, and error tracking infrastructure
 
 ### Deliverables
 
@@ -52,7 +54,7 @@ Each phase builds upon the previous one, ensuring a production-ready, maintainab
 - [x] Code Quality: eslint, @angular-eslint/eslint-plugin, @angular-eslint/template-parser (configured)
 - [x] Accessibility: @angular-eslint/template/accessibility, @storybook/addon-a11y, @axe-core/playwright
 
-**Architecture:**
+**Architecture Foundation:**
 
 - [x] Standalone components with signals
 - [x] OnPush change detection strategy
@@ -79,19 +81,13 @@ Each phase builds upon the previous one, ensuring a production-ready, maintainab
 - [x] Vitest configuration for unit tests
 - [x] Vitest test setup with zone.js
 - [x] Playwright configuration for E2E tests
-- [x] Visual regression testing on 4 viewports
+- [x] Visual regression testing on 4 viewports (Desktop, Laptop, Tablet, Mobile)
 - [x] Test coverage reporting with thresholds (80%)
 - [x] Path aliases configured (@core, @shared, @features)
 - [x] ESLint configuration with Angular ESLint
 - [x] Accessibility linting (@angular-eslint/template/accessibility)
 - [x] Playwright accessibility testing (@axe-core/playwright)
 - [x] Storybook accessibility addon (@storybook/addon-a11y)
-
-**Documentation & Storybook Policy (project-wide)**
-
-- All new components and features MUST include: TSDoc for public APIs, at least one Storybook story demonstrating primary states, and unit tests covering component logic.
-- Exceptions: small demo-only components can be added without stories/tests if marked in a short `DEMO_COMPONENTS.md` manifest; these should be migrated to full coverage before Phase 9.
-- Compodoc runs in CI but documentation work is expected to be done alongside feature development (not at project end).
 
 **CI/CD Pipeline:**
 
@@ -103,9 +99,9 @@ Each phase builds upon the previous one, ensuring a production-ready, maintainab
   - [x] PR comments with coverage breakdown
   - [x] Fail on coverage below threshold (80%)
   - [x] Fail on accessibility linting errors
-  - [x] Reusable coverage utility scripts (`scripts/coverage-utils.js`, `scripts/check-coverage.js`)
-  - [x] Build artifact uploads (test results, coverage reports, dist/)
-  - [x] Environment variables for maintainability (PRIMARY_NODE_VERSION)
+  - [x] Reusable coverage utility scripts
+  - [x] Build artifact uploads
+  - [x] Environment variables for maintainability
 - [x] `.github/workflows/e2e.yml` - Playwright tests with artifacts
   - [x] Matrix testing across browsers (chromium, firefox, webkit)
   - [x] Upload test results and screenshots as artifacts
@@ -163,16 +159,13 @@ Each phase builds upon the previous one, ensuring a production-ready, maintainab
   - [x] Production: minification, tree-shaking, baseHref for GitHub Pages
   - [x] File replacements for environment switching
   - [x] GitHub Pages configuration with proper base path
-- [x] Create deployment workflow
-  - [x] `.github/workflows/deploy-pages.yml` - Automated GitHub Pages deployment
+
+**Deployment & Documentation:**
+
+- [x] `.github/workflows/deploy-pages.yml` - Automated GitHub Pages deployment
   - [x] Build with production configuration
   - [x] 404.html for SPA routing support
   - [x] Manual deployment trigger
-- [x] Create `.env.example` file (documentation purposes)
-- [x] Document deployment process in README
-
-**Deploy:**
-
 - [x] Test GitHub Pages deployment workflow
   - [x] Merge configuration to main branch
   - [x] Verify workflow triggers correctly
@@ -180,6 +173,38 @@ Each phase builds upon the previous one, ensuring a production-ready, maintainab
   - [x] Test SPA routing with 404.html fallback
   - [x] Verify all assets load with correct baseHref
   - [x] Confirm CI/CD pipeline runs successfully
+- [x] Storybook build pipeline (`npm run build-storybook`) working and static output verified
+- [x] Documentation generation (Compodoc) runs and publishes artifacts (docs/compodoc)
+- [x] Create `.env.example` file (documentation purposes)
+- [x] Document deployment process in README
+
+**Observability & Monitoring Infrastructure:**
+
+- [x] Analytics plan documented (`docs/ANALYTICS.md`)
+  - [x] GA4 property structure defined
+  - [x] Event naming catalog
+  - [x] Consent flow defined
+  - [x] Looker Studio demo report plan
+- [x] Error tracking plan documented (`docs/ERROR_TRACKING.md`)
+  - [x] Sentry configuration guidance
+  - [x] Source map upload strategy
+  - [x] Release tagging approach
+- [x] Auth research documented (`docs/AUTH.md`)
+  - [x] Ory vs Keycloak comparison
+  - [x] Implementation recommendations
+  - [x] Migration strategy
+- [x] Secrets management and environment files (`.env.example`, GitHub Secrets) in place
+- [ ] Release & versioning policy documented (semantic versioning, changelog strategy)
+- [x] Local dev reproducibility confirmed (README dev steps, `npm install`, `npm start`, `npm test`)
+
+**Documentation & Standards:**
+
+- All new components and features MUST include:
+  - TSDoc for public APIs
+  - At least one Storybook story demonstrating primary states
+  - Unit tests covering component logic
+- Exceptions: small demo-only components can be added without stories/tests if marked in `DEMO_COMPONENTS.md` manifest; these should be migrated to full coverage before Phase 7.
+- Compodoc runs in CI but documentation work is expected to be done alongside feature development (not at project end).
 
 ### Technical Details
 
@@ -200,140 +225,58 @@ Each phase builds upon the previous one, ensuring a production-ready, maintainab
 - Visual regression with 4 viewports (Desktop, Laptop, Tablet, Mobile)
 - Compodoc for API documentation generation
 
-### Per-Phase Documentation Requirements
+### Success Metrics
 
-- Phase 2-5: Every new component or service added as part of these phases must include:
-  - TSDoc on public APIs (functions, classes, methods, inputs/outputs)
-  - A Storybook story (in `.stories.ts`) demonstrating main variants and accessibility notes
-  - Unit tests (Vitest) for logic and reactivity (signals) where applicable
+- All CI checks pass on PRs and main
+- Test coverage ≥80% enforced
+- Lighthouse score ≥95 on all metrics
+- WCAG 2.1 AAA compliance verified
+- Storybook preview available for PRs
+- GitHub Pages deployment automated
+- All documentation infrastructure in place
 
-This ensures documentation, examples, and tests are created as features are developed rather than at the end.
+### Estimated Duration
 
----
-
-## Phase 2: Core Feature Implementation ⏳ NEXT UP
-
-### Objectives
-
-- Build foundational feature components
-- Integrate state management with UI
-- Implement routing and navigation
-- Add initial content and portfolio pieces
-
-### Deliverables
-
-**Theme Picker**
-
-- [ ] `ThemePickerComponent` (standalone, OnPush) surfaced in the MainLayout navbar as an accessible dropdown with keyboard navigation, ARIA labelling, and a11y-friendly focus management.
-  - [ ] Present at least four options at launch: two light (`Lumen`, `Aurora`) and two dark (`Nocturne`, `Cosmos`) with quick swatches showing primary/background contrast.
-  - [ ] Use Transloco keys for labels/descriptions and show current selection plus system-default indicator when applicable.
-  - [ ] Include Storybook stories (default, keyboard navigation demo, reduced-motion) and Playwright smoke test that verifies dropdown interaction.
-- [ ] Theme definitions registry (`THEMES` constant or `ThemeRegistry` service) describing each theme's slug, human label, color tokens, contrast ratios, and whether it is light/dark.
-  - [ ] Validate registry structure with Zod to ensure every theme documents WCAG AAA contrast data (≥7:1 for text, 4.5:1 for large display elements).
-  - [ ] Document contribution checklist for adding future themes (update constants, SCSS variables, story, tests).
-- [ ] `ThemeService` (signal store) responsible for:
-  - [ ] Reading persisted preference from LocalStorage (`THEME_STORAGE_KEY`) with graceful fallback when data is missing/invalid.
-  - [ ] Detecting `prefers-color-scheme` on first load and whenever the OS theme changes, defaulting to a matching light/dark theme when no preference is saved.
-  - [ ] Applying the active theme by toggling a `data-theme` attribute and injecting the corresponding CSS variable map (colors, typography tweaks, shadows) at the root.
-  - [ ] Exposing signals/computed values (`activeTheme`, `availableThemes`, `isSystemDefault`, `isDarkMode`) for consumption by layout and Storybook preview.
-- [ ] Persistence & storage responsibilities:
-  - [ ] Store explicit user selection in LocalStorage with timestamp/version to allow migrations.
-  - [ ] Provide `resetToSystem()` helper that removes the stored value and re-applies system preference.
-  - [ ] Add unit tests covering read/write scenarios and corrupt storage recovery.
-- [ ] Styling implementation:
-  - [ ] Derive each theme from the existing CSS variable system; avoid hardcoded colors in components by only manipulating theme tokens.
-  - [ ] Create SCSS partial defining per-theme maps, ensuring all combinations meet WCAG AAA contrast (verify with automated contrast script and manual WebAIM checks).
-  - [ ] Support smooth but optional transitions (`prefers-reduced-motion` respected) when swapping themes; isolate animation tokens in CSS variables for reuse.
-- [ ] Integration and extensibility:
-  - [ ] Wire ThemePicker into MainLayout nav, case-study pages, and Storybook preview using a shared directive or composable to ensure consistent application.
-  - [ ] Provide README/IMPLEMENTATION_PLAN addendum describing how to register new themes and run the contrast validation script before submission.
-  - [ ] Ensure E2E coverage verifying persistence (reload retains selection) and default fallback behavior on first load across desktop/mobile viewports.
-
-> Acceptance criteria: Theme picker dropdown meets WCAG 2.1 AAA, supports keyboard-only usage, persists preference, defaults to system scheme when unset, and new themes can be added by extending the registry without touching component logic. No duplication — only override what’s different per theme.
-
-**Home Page:**
-
-- [x] HomeComponent with hero section
-- [ ] Professional introduction/bio section
-- [ ] Featured projects showcase (3-4 highlights)
-- [ ] Call-to-action buttons (View Projects, Contact)
-- [ ] Smooth scroll navigation
-
-**Case Studies Page:**
-
-- [x] CaseStudiesComponent scaffolded
-- [ ] **Connect ProjectStore to component**
-  - [ ] Inject ProjectStore using inject()
-  - [ ] Replace hardcoded data array with store.projects()
-  - [ ] Call store.loadProjects() in ngOnInit
-  - [ ] Use store.isLoading() for loading state
-  - [ ] Use store.error() for error handling
-- [ ] Project grid/list layout with filtering
-- [ ] Tag-based filtering using store.projectsByTag()
-- [ ] Search functionality across projects
-- [ ] Loading skeletons for better UX
-- [ ] Empty state when no projects match
-
-**Case Study Detail Page:**
-
-- [ ] Create CaseStudyDetailComponent
-- [ ] Route parameter handling (/case-studies/:id)
-- [ ] Use store.selectProject() and store.selectedProject()
-- [ ] Project header with title, description, tags
-- [ ] Challenge & Solution sections
-- [ ] Technologies used section
-- [ ] Results/metrics section
-- [ ] Image gallery or screenshots
-- [ ] "Back to projects" and "Next project" navigation
-- [ ] Breadcrumb navigation
-
-**Navigation & Layout:**
-
-- [ ] Update MainLayout with navigation menu
-- [ ] Active route highlighting
-- [ ] Mobile responsive navigation (hamburger menu)
-- [ ] Footer with social links and copyright
-- [ ] Smooth page transitions with Angular animations
-
-**Content:**
-
-- [ ] Write 3-5 detailed case studies
-- [ ] Professional headshot/avatar
-- [ ] Bio and elevator pitch
-- [ ] Skills and technologies list
-- [ ] GitHub profile link
-- [ ] LinkedIn profile link
-
-**Documentation (Phase 2):**
-
-- [ ] TSDoc comments on all component public APIs
-- [ ] README updates for project structure
-- [ ] Inline code comments for complex logic
-
-### Technical Details
-
-- ProjectStore fully integrated with all components
-- Use @if/@for control flow with store signals
-- Track expressions in loops for performance
-- Route guards for detail page validation
-- Lazy loading for optimal bundle size
-- Angular animations for page transitions
-- Responsive CSS Grid layouts
-
-### Estimated Duration: 2 weeks
+2-3 days
 
 ---
 
-## Phase 3: Shared Component Library
+## Phase 2: Shared Component Library ⏳ NEXT UP
+
+**Goal**: Build an accessible, well-tested library of reusable components and scaffolding to use across the app before building features.
 
 ### Objectives
 
 - Build enterprise-grade reusable component library
 - Ensure consistency across application
-- Implement accessibility standards (WCAG 2.1 AA)
+- Implement accessibility standards (WCAG 2.1 AAA)
 - Create comprehensive component documentation
+- Establish theme system foundation
 
 ### Deliverables
+
+**Theme System Foundation:**
+
+- [ ] Theme definitions registry (`THEMES` constant or `ThemeRegistry` service)
+  - [ ] At least four options at launch: two light (`Lumen`, `Aurora`) and two dark (`Nocturne`, `Cosmos`)
+  - [ ] Describe each theme's slug, human label, color tokens, contrast ratios
+  - [ ] Validate registry structure with Zod
+  - [ ] Ensure every theme documents WCAG AAA contrast data (≥7:1 for text, 4.5:1 for large display)
+  - [ ] Document contribution checklist for adding future themes
+- [ ] `ThemeService` (signal store) responsible for:
+  - [ ] Reading persisted preference from LocalStorage with graceful fallback
+  - [ ] Detecting `prefers-color-scheme` on first load and OS theme changes
+  - [ ] Applying active theme via `data-theme` attribute and CSS variable injection
+  - [ ] Exposing signals/computed values (`activeTheme`, `availableThemes`, `isSystemDefault`, `isDarkMode`)
+  - [ ] Store explicit user selection with timestamp/version for migrations
+  - [ ] Provide `resetToSystem()` helper
+  - [ ] Unit tests covering read/write scenarios and corrupt storage recovery
+- [ ] Styling implementation:
+  - [ ] Derive each theme from existing CSS variable system
+  - [ ] Create SCSS partial defining per-theme maps
+  - [ ] Ensure all combinations meet WCAG AAA contrast
+  - [ ] Support smooth but optional transitions (`prefers-reduced-motion` respected)
+  - [ ] Isolate animation tokens in CSS variables for reuse
 
 **UI Components:**
 
@@ -347,6 +290,13 @@ This ensures documentation, examples, and tests are created as features are deve
 - [ ] IconComponent system (SVG sprite or icon library)
 - [ ] TabsComponent with keyboard navigation
 - [ ] BreadcrumbComponent for navigation
+- [ ] `ThemePickerComponent` (standalone, OnPush)
+  - [ ] Surface in MainLayout navbar as accessible dropdown
+  - [ ] Keyboard navigation, ARIA labelling, a11y-friendly focus management
+  - [ ] Use Transloco keys for labels/descriptions
+  - [ ] Show current selection plus system-default indicator
+  - [ ] Storybook stories (default, keyboard navigation demo, reduced-motion)
+  - [ ] Playwright smoke test verifying dropdown interaction
 
 **Form Components:**
 
@@ -364,7 +314,16 @@ This ensures documentation, examples, and tests are created as features are deve
 - [ ] StackComponent for vertical spacing
 - [ ] DividerComponent
 
-**Documentation (Phase 3):**
+**App Shell:**
+
+- [ ] Update MainLayout with navigation menu
+- [ ] Active route highlighting
+- [ ] Mobile responsive navigation (hamburger menu)
+- [ ] Footer with social links and copyright
+- [ ] Skip-links for accessibility
+- [ ] Wire ThemePicker into navbar
+
+**Documentation (Phase 2):**
 
 - [ ] Create stories for all shared components
   - [ ] Props/inputs documentation
@@ -385,84 +344,28 @@ This ensures documentation, examples, and tests are created as features are deve
 - Theme-aware using CSS variables
 - Comprehensive unit tests (>90% coverage)
 - Storybook stories for interactive documentation
+- Lazy-loaded feature routes with route guards
+- Route-level code splitting
 
-### Estimated Duration: 2-3 weeks
+### Acceptance Criteria
 
----
+- Components are used by sample pages
+- Storybook documents component variants
+- Each component has test coverage and accessibility notes
+- Theme picker meets WCAG 2.1 AAA
+- Theme picker supports keyboard-only usage
+- Theme persists preference, defaults to system scheme when unset
+- New themes can be added by extending registry without touching component logic
 
-## Phase 4: Advanced Features & Professional Content
+### Estimated Duration
 
-### Objectives
-
-- Add professional sections to showcase expertise
-- Integrate live data from GitHub
-- Implement interactive features
-- Add contact functionality
-
-### Deliverables
-
-**About Section:**
-
-- [ ] AboutComponent feature page
-- [ ] Professional bio with personality
-- [ ] Skills matrix with proficiency levels
-- [ ] Professional timeline/experience
-- [ ] Certifications and education
-- [ ] Downloadable resume (PDF)
-
-**GitHub Integration & Data Visualization:**
-
-- [ ] Create GitHubService with GraphQL API integration
-  - [ ] Fetch user profile data
-  - [ ] Fetch contribution data
-  - [ ] Fetch repository statistics
-  - [ ] Fetch language usage breakdown
-  - [ ] Cache responses (1 hour TTL)
-- [ ] Create GitHubStatsComponent
-  - [ ] Contribution heatmap (ngx-charts)
-  - [ ] Repository statistics cards
-  - [ ] Language breakdown chart
-  - [ ] Top repositories showcase
-  - [ ] Loading states and error handling
-- [ ] Theme ngx-charts to match design system
-- [ ] Add feature toggle for GitHub section
-
-**Contact & Interaction:**
-
-- [ ] ContactComponent with reactive form
-- [ ] Form validation with custom validators
-- [ ] Email integration (EmailJS or similar)
-- [ ] Success/error toast notifications
-- [ ] reCAPTCHA integration for spam protection
-- [ ] Social media links component
-
-**Enhanced User Experience:**
-
-- [ ] Theme switcher (light/dark mode)
-  - [ ] ThemeService with LocalStorage persistence
-  - [ ] CSS variable switching
-  - [ ] Smooth transitions between themes
-  - [ ] System preference detection
-- [ ] Search functionality across all content
-- [ ] Filter/sort capabilities for projects
-- [ ] "Back to top" button on long pages
-- [ ] Smooth scroll with scroll spy navigation
-
-### Technical Details
-
-- GitHub GraphQL API with personal access token
-- ngx-charts for data visualization
-- Reactive forms with cross-field validation
-- LocalStorage for theme and cache persistence
-- CSS custom properties for dynamic theming
-- Intersection Observer for scroll effects
-- EmailJS or serverless function for contact form
-
-### Estimated Duration: 2-3 weeks
+2-3 weeks
 
 ---
 
-## Phase 5: Core Services & Utilities
+## Phase 3: Core Services & Utilities
+
+**Goal**: Implement essential application services before building feature pages so they're available throughout development.
 
 ### Objectives
 
@@ -470,14 +373,15 @@ This ensures documentation, examples, and tests are created as features are deve
 - Create reusable utility functions
 - Add error handling and logging
 - Optimize performance and caching
+- Set up SEO and analytics services
 
 ### Deliverables
 
 **Application Services:**
 
-- [x] ProjectService (data fetching)
-- [x] HTTP interceptors (latency)
-- [ ] ThemeService (completed in Phase 4, test coverage here)
+- [x] ProjectService (data fetching) - completed in Phase 1
+- [x] HTTP interceptors (latency) - completed in Phase 1
+- [ ] ThemeService (completed in Phase 2, test coverage here)
 - [ ] SeoService for meta tags and Open Graph
   - [ ] Dynamic title updates
   - [ ] Meta description updates
@@ -487,11 +391,12 @@ This ensures documentation, examples, and tests are created as features are deve
   - [ ] Page view tracking
   - [ ] Event tracking
   - [ ] Custom dimensions
-  - [ ] Privacy-friendly (Plausible or similar)
+  - [ ] Privacy-friendly (GA4)
+  - [ ] Consent-aware initialization
 - [ ] ErrorHandlerService with global error handling
   - [ ] HTTP error interception
   - [ ] Client-side error catching
-  - [ ] Error reporting (Sentry integration optional)
+  - [ ] Error reporting (Sentry integration)
   - [ ] User-friendly error messages
 - [ ] CacheService for API response caching
   - [ ] In-memory caching with TTL
@@ -520,7 +425,7 @@ This ensures documentation, examples, and tests are created as features are deve
 - [ ] FilterPipe (array filtering)
 - [ ] SortPipe (array sorting)
 
-**Documentation (Phase 5):**
+**Documentation (Phase 3):**
 
 - [ ] Run Compodoc to generate API documentation
 - [ ] Document all services with TSDoc
@@ -543,11 +448,251 @@ This ensures documentation, examples, and tests are created as features are deve
 - Comprehensive unit tests for utilities
 - Compodoc for API documentation generation
 
-### Estimated Duration: 1-2 weeks
+### Success Metrics
+
+- All services documented with TSDoc and ADRs
+- Utility functions fully tested
+- Global error handling operational
+- SEO meta tags implemented
+- Analytics tracking configured
+- Compodoc documentation generated and published
+
+### Estimated Duration
+
+1-2 weeks
 
 ---
 
-## Phase 6: Performance & PWA Optimization
+## Phase 4: Pages, Stores, and Feature Implementation
+
+**Goal**: Implement feature pages and state management using the shared components and services.
+
+### Objectives
+
+- Build foundational feature pages
+- Implement dedicated stores for feature domains
+- Integrate state management with UI
+- Implement routing and navigation
+- Add initial content and portfolio pieces
+
+### Deliverables
+
+**Feature Stores:**
+
+- [ ] Implement dedicated stores/services for feature domains:
+  - [ ] `ProjectsStore` & `ProjectsService` — manages personal projects (small apps, demos, code samples)
+  - [ ] `CaseStudiesStore` & `CaseStudiesService` — manages detailed case studies (work engagements, challenges, solutions, metrics)
+  - [ ] Ensure stores follow signals-based patterns with `rxMethod` for async loads
+  - [ ] Expose `isLoading`/`error` signals
+
+**Home Page:**
+
+- [x] HomeComponent with hero section (scaffolded in Phase 1)
+- [ ] Professional introduction/bio section
+- [ ] Featured projects showcase (3-4 highlights)
+- [ ] Call-to-action buttons (View Projects, Contact)
+- [ ] Smooth scroll navigation
+
+**Case Studies Page:**
+
+- [x] CaseStudiesComponent scaffolded (Phase 1)
+- [ ] **Connect ProjectStore/CaseStudiesStore to component**
+  - [ ] Inject store using inject()
+  - [ ] Replace hardcoded data array with store.projects()
+  - [ ] Call store.loadProjects() in ngOnInit
+  - [ ] Use store.isLoading() for loading state
+  - [ ] Use store.error() for error handling
+- [ ] Project grid/list layout with filtering
+- [ ] Tag-based filtering using store.projectsByTag()
+- [ ] Search functionality across projects
+- [ ] Loading skeletons for better UX
+- [ ] Empty state when no projects match
+
+**Case Study Detail Page:**
+
+- [ ] Create CaseStudyDetailComponent
+- [ ] Route parameter handling (/case-studies/:id)
+- [ ] Use store.selectProject() and store.selectedProject()
+- [ ] Project header with title, description, tags
+- [ ] Challenge & Solution sections
+- [ ] Technologies used section
+- [ ] Results/metrics section
+- [ ] Image gallery or screenshots
+- [ ] "Back to projects" and "Next project" navigation
+- [ ] Breadcrumb navigation
+
+**Projects List & Detail:**
+
+- [ ] ProjectsListComponent for personal projects
+- [ ] ProjectDetailComponent with routing
+- [ ] Filter and sort capabilities
+- [ ] Connect to ProjectsStore
+
+**Navigation & Layout:**
+
+- [ ] Smooth page transitions with Angular animations
+
+**Content:**
+
+- [ ] Write 3-5 detailed case studies
+- [ ] Write 3-5 personal project descriptions
+- [ ] Professional headshot/avatar
+- [ ] Bio and elevator pitch
+- [ ] Skills and technologies list
+- [ ] GitHub profile link
+- [ ] LinkedIn profile link
+
+**Documentation (Phase 4):**
+
+- [ ] TSDoc comments on all component public APIs
+- [ ] Storybook stories for feature components (where applicable)
+- [ ] README updates for project structure
+- [ ] Inline code comments for complex logic
+
+### Technical Details
+
+- ProjectStore/CaseStudiesStore fully integrated with all components
+- Use @if/@for control flow with store signals
+- Track expressions in loops for performance
+- Route guards for detail page validation
+- Lazy loading for optimal bundle size
+- Angular animations for page transitions
+- Responsive CSS Grid layouts
+
+### Acceptance Criteria
+
+- All pages built use shared components and their own service/store
+- Unit + E2E checks pass for critical flows
+- Theme picker persists selection and applies across pages
+- Replace hard-coded arrays with appropriate store data
+- Add load/error/loading states and skeletons
+
+### Success Metrics
+
+- All Phase 4 components have TSDoc, Storybook stories, and unit tests
+- Stores fully integrated with UI
+- Navigation and routing working smoothly
+- Initial content published (3-5 case studies, 3-5 projects)
+- Mobile responsive layouts verified
+- Theme system functional across all pages
+
+### Estimated Duration
+
+2-3 weeks
+
+---
+
+## Phase 5: Integrations & Extended Functionality
+
+**Goal**: Add external integrations and optional auth, plus advanced UX features.
+
+### Objectives
+
+- Add professional sections to showcase expertise
+- Integrate live data from GitHub
+- Implement interactive features
+- Add contact functionality
+- Finalize analytics integration
+
+### Deliverables
+
+**About Section:**
+
+- [ ] AboutComponent feature page
+- [ ] Professional bio with personality
+- [ ] Skills matrix with proficiency levels
+- [ ] Professional timeline/experience
+- [ ] Certifications and education
+- [ ] Downloadable resume (PDF)
+
+**GitHub Integration & Data Visualization:**
+
+- [ ] Create GitHubService with GraphQL API integration
+  - [ ] Fetch user profile data
+  - [ ] Fetch contribution data
+  - [ ] Fetch repository statistics
+  - [ ] Fetch language usage breakdown
+  - [ ] Cache responses (1 hour TTL)
+  - [ ] Document secrets usage
+- [ ] Create GitHubStatsComponent
+  - [ ] Contribution heatmap (ngx-charts)
+  - [ ] Repository statistics cards
+  - [ ] Language breakdown chart
+  - [ ] Top repositories showcase
+  - [ ] Loading states and error handling
+- [ ] Theme ngx-charts to match design system
+- [ ] Add feature toggle for GitHub section
+
+**Contact & Interaction:**
+
+- [ ] ContactComponent with reactive form
+- [ ] Form validation with custom validators
+- [ ] Email integration (EmailJS or serverless function)
+- [ ] Success/error toast notifications
+- [ ] reCAPTCHA integration for spam protection
+- [ ] Social media links component
+- [ ] No PII sent to analytics
+
+**Analytics Finalization:**
+
+- [ ] GA4 integration complete
+  - [ ] Environment variable configuration
+  - [ ] Init wrapper service
+  - [ ] Pageview tracking
+  - [ ] Key events tracked (`page_view`, `project_open`, `theme_change`, `contact_submit`)
+  - [ ] Event naming catalog documented
+- [ ] Consent flow implemented
+- [ ] Looker Studio dashboards embedded for demo
+- [ ] Dashboard embeddable and reachable from `/analytics` route
+
+**Enhanced User Experience:**
+
+- [ ] Search functionality across all content
+- [ ] Filter/sort capabilities for projects
+- [ ] "Back to top" button on long pages
+- [ ] Smooth scroll with scroll spy navigation
+
+**Auth (Optional):**
+
+- [ ] Implement chosen auth provider (Ory/Keycloak) in sandboxed/optional manner
+- [ ] Support demo profiles to persist user theme
+- [ ] Document auth flow
+
+### Technical Details
+
+- GitHub GraphQL API with personal access token
+- ngx-charts for data visualization
+- Reactive forms with cross-field validation
+- LocalStorage for theme and cache persistence
+- CSS custom properties for dynamic theming
+- Intersection Observer for scroll effects
+- EmailJS or serverless function for contact form
+
+### Acceptance Criteria
+
+- Integrations documented
+- Dashboards show expected data
+- Optional auth flow demonstrable without blocking features
+
+### Success Metrics
+
+- GitHub integration working with live data
+- Contact form functional with spam protection
+- About section published with professional content
+- Theme switcher working with persistence
+- Search and filter functionality operational
+- All features mobile-responsive
+- Analytics events verified in GA4
+
+### Estimated Duration
+
+2-3 weeks
+
+---
+
+## Phase 6: Performance Verification & PWA
+
+**Goal**: Verify and finalize PWA and performance optimizations; implement ongoing checks as part of CI.
 
 ### Objectives
 
@@ -562,7 +707,7 @@ This ensures documentation, examples, and tests are created as features are deve
 
 - [ ] Lazy load images with loading="lazy"
 - [ ] Implement virtual scrolling for large lists
-- [ ] Code splitting and lazy loading optimization
+- [ ] Code splitting and lazy loading optimization (verify earlier implementation)
 - [ ] Preload critical resources
 - [ ] Minify and compress assets
 - [ ] Bundle size analysis and reduction (<200KB initial)
@@ -601,6 +746,7 @@ This ensures documentation, examples, and tests are created as features are deve
   - [ ] Cumulative Layout Shift < 0.1
 - [ ] Core Web Vitals tracking
 - [ ] Real User Monitoring (RUM) setup
+- [ ] CI Lighthouse reports passing budgets
 
 ### Technical Details
 
@@ -611,16 +757,36 @@ This ensures documentation, examples, and tests are created as features are deve
 - Brotli compression
 - Lighthouse CI integration
 
-### Estimated Duration: 1-2 weeks
+### Acceptance Criteria
+
+- Performance budgets met
+- PWA passes basic offline/installation tests
+- Ensure lazy loading and route-level code splitting implemented
+- Verify bundles per route are small
+
+### Success Metrics
+
+- Lighthouse score >95 on all metrics
+- PWA installable on mobile devices
+- Offline functionality working
+- Bundle size <200KB initial load
+- Core Web Vitals targets met
+- Service worker caching optimized
+
+### Estimated Duration
+
+1-2 weeks
 
 ---
 
-## Phase 7: Testing Excellence & Quality Assurance
+## Phase 7: QA, Accessibility, & Release Readiness
+
+**Goal**: Final verification, audits, and production release readiness.
 
 ### Objectives
 
 - Achieve comprehensive test coverage (>85%)
-- Ensure accessibility compliance (WCAG 2.1 AA)
+- Ensure accessibility compliance (WCAG 2.1 AAA)
 - Validate cross-browser compatibility
 - Meet performance benchmarks
 
@@ -634,10 +800,10 @@ This ensures documentation, examples, and tests are created as features are deve
   - [ ] User interactions (click, input)
   - [ ] Conditional rendering (@if/@for)
 - [ ] Service tests with mocked dependencies
-- [ ] Store tests (already completed)
+- [ ] Store tests (verify Phase 1/4 stores)
 - [ ] Pipe and directive tests
 - [ ] Utility function tests
-- [ ] Test coverage >85% across all modules
+- [ ] Test coverage >85% across all modules (goal), >80% (acceptable)
 - [ ] Mutation testing for critical paths
 
 **Integration Testing:**
@@ -650,8 +816,8 @@ This ensures documentation, examples, and tests are created as features are deve
 
 **E2E Testing (Playwright):**
 
-- [x] Visual regression tests (4 viewports)
-- [x] Basic navigation tests
+- [x] Visual regression tests (4 viewports) - completed in Phase 1
+- [x] Basic navigation tests - completed in Phase 1
 - [ ] User journey tests
   - [ ] Browse projects → view detail → navigate back
   - [ ] Filter projects by tag
@@ -664,14 +830,14 @@ This ensures documentation, examples, and tests are created as features are deve
 
 **Accessibility Testing:**
 
-- [ ] Automated axe-core testing
+- [ ] Automated axe-core testing (verify CI implementation)
 - [ ] Keyboard navigation audit
 - [ ] Screen reader testing (NVDA, JAWS, VoiceOver)
 - [ ] Color contrast validation
 - [ ] Focus management verification
 - [ ] ARIA attribute validation
 - [ ] Semantic HTML audit
-- [ ] WCAG 2.1 AA compliance certification
+- [ ] WCAG 2.1 AAA compliance certification
 
 **Performance Testing:**
 
@@ -685,6 +851,13 @@ This ensures documentation, examples, and tests are created as features are deve
 - [ ] Network waterfall analysis
 - [ ] Memory leak detection
 
+**Security Review:**
+
+- [ ] Security review and final CI green state
+- [ ] Verify CodeQL and dependency-review passing
+- [ ] Verify secret scanning enabled
+- [ ] Review all GitHub Secrets usage
+
 ### Technical Details
 
 - Vitest for unit/integration tests
@@ -696,18 +869,38 @@ This ensures documentation, examples, and tests are created as features are deve
 - Snapshot testing for visual components
 - Code coverage reporting with thresholds
 
-### Estimated Duration: 2 weeks
+### Acceptance Criteria
+
+- Full unit/integration coverage threshold enforced (85% goal, 80% acceptable)
+- Playwright E2E across browsers + visual regression baseline green
+- axe-core checks in CI show no critical accessibility violations
+- All checks green
+
+### Success Metrics
+
+- Test coverage >85% across all modules
+- WCAG 2.1 AAA compliance verified
+- All E2E user journeys passing
+- Cross-browser testing complete (Chromium, Firefox, WebKit)
+- Accessibility audit passed (automated + manual)
+- Performance benchmarks met
+
+### Estimated Duration
+
+2 weeks
 
 ---
 
 ## Phase 8: Deployment, Monitoring & DevOps
 
+**Goal**: Verify production deployment, finalize monitoring and alerting, ensure release readiness.
+
 ### Objectives
 
-- Establish production deployment pipeline
+- Verify production deployment pipeline
 - Set up monitoring and alerting
-- Implement analytics and error tracking
-- Create automated deployment workflows
+- Finalize analytics and error tracking
+- Create release process
 
 ### Deliverables
 
@@ -726,15 +919,15 @@ This ensures documentation, examples, and tests are created as features are deve
   - [ ] Update baseHref in angular.json
   - [ ] Configure SSL/TLS (automatic via GitHub Pages)
 
-**CI/CD Workflows (Created and Active from Phase 1):**
+**CI/CD Workflows (Verification):**
 
-- [x] `.github/workflows/ci.yml` - Active
-- [x] `.github/workflows/e2e.yml` - Active
-- [x] `.github/workflows/lighthouse.yml` - Active
-- [x] `.github/workflows/dependency-review.yml` - Active
-- [x] `.github/workflows/deploy-pages.yml` - Created, pending first deployment
-- [x] Branch protection rules configured
-- [x] Required status checks enforced
+- [x] `.github/workflows/ci.yml` - Active (Phase 1)
+- [x] `.github/workflows/e2e.yml` - Active (Phase 1)
+- [x] `.github/workflows/lighthouse.yml` - Active (Phase 1)
+- [x] `.github/workflows/dependency-review.yml` - Active (Phase 1)
+- [x] `.github/workflows/deploy-pages.yml` - Created in Phase 1
+- [x] Branch protection rules configured (Phase 1)
+- [x] Required status checks enforced (Phase 1)
 - [ ] Verify all workflows pass on main branch after deployment
 - [ ] Monitor deployment workflow for issues
 - [ ] Document any workflow optimizations needed
@@ -746,20 +939,21 @@ This ensures documentation, examples, and tests are created as features are deve
   - [ ] Error grouping and alerting
   - [ ] Performance monitoring
   - [ ] Release tracking
-- [ ] Analytics setup (Plausible or Google Analytics)
-  - [ ] Page view tracking
-  - [ ] Event tracking (clicks, downloads)
-  - [ ] Custom goals and conversions
-  - [ ] Privacy compliance (GDPR, CCPA)
+  - [ ] Test error appears in dashboard
+- [ ] GA4 verification
+  - [ ] Verify events in production
+  - [ ] Confirm consent flow working
+  - [ ] Validate Looker Studio dashboard
 - [ ] Uptime monitoring (UptimeRobot or similar)
 - [ ] Performance monitoring (Lighthouse CI, Web Vitals)
 
 **DevOps Automation:**
 
-- [x] Security vulnerability scanning (GitHub CodeQL + Dependency Review)
+- [x] Security vulnerability scanning (GitHub CodeQL + Dependency Review) - Phase 1
 - [ ] Automated dependency updates (Dependabot)
 - [ ] Automated changelog generation
 - [ ] Semantic versioning and releases
+- [ ] Release PR template
 - [ ] Bundle size tracking in CI
 - [ ] Deploy notifications (GitHub Actions status)
 
@@ -772,9 +966,9 @@ This ensures documentation, examples, and tests are created as features are deve
 
 **Documentation (Phase 8):**
 
-- [x] Deployment guide (GitHub Pages) - in README.md
-- [x] Environment setup documentation - src/environments/README.md
-- [x] CI/CD pipeline documentation - in IMPLEMENTATION_PLAN.md
+- [x] Deployment guide (GitHub Pages) - in README.md (Phase 1)
+- [x] Environment setup documentation - src/environments/README.md (Phase 1)
+- [x] CI/CD pipeline documentation - in IMPLEMENTATION_PLAN.md (Phase 1)
 - [ ] Troubleshooting guide for deployment issues
 - [ ] Performance optimization guide
 
@@ -788,11 +982,29 @@ This ensures documentation, examples, and tests are created as features are deve
 - Matrix builds for parallel testing (Node 20.x, 22.x)
 - Cross-browser E2E testing (Chromium, Firefox, WebKit)
 
-### Estimated Duration: 1 week
+### Acceptance Criteria
+
+- Release PR approved and tagged
+- Production site smoke tests pass
+
+### Success Metrics
+
+- Production deployment successful and stable
+- All monitoring and alerting configured
+- Error tracking operational with source maps
+- Analytics tracking validated
+- Deployment automation working
+- Uptime monitoring active
+
+### Estimated Duration
+
+1 week
 
 ---
 
 ## Phase 9: Final Polish & Project Management
+
+**Goal**: Consolidate and polish all documentation, set up project management infrastructure, create contribution guidelines.
 
 ### Objectives
 
@@ -852,7 +1064,18 @@ This ensures documentation, examples, and tests are created as features are deve
 - GitHub issue and PR templates
 - Shields.io badges for README
 
-### Estimated Duration: 3-5 days
+### Success Metrics
+
+- All documentation complete and up-to-date
+- CONTRIBUTING.md published with clear guidelines
+- README polished with project overview
+- Issue and PR templates active
+- Architecture diagrams created
+- Project ready for public showcase
+
+### Estimated Duration
+
+3-5 days
 
 ---
 
@@ -882,7 +1105,7 @@ This ensures documentation, examples, and tests are created as features are deve
 
 ### Code Quality
 
-- Test coverage > 80%
+- Test coverage > 85% (goal), > 80% (acceptable)
 - No critical accessibility issues
 - TypeScript strict mode enabled
 - Zero build warnings
@@ -929,7 +1152,7 @@ This ensures documentation, examples, and tests are created as features are deve
 ### Deployment
 
 - GitHub Actions
-- Firebase Hosting/Vercel/Netlify
+- GitHub Pages
 - Automated previews for PRs
 
 ---
@@ -952,8 +1175,8 @@ This ensures documentation, examples, and tests are created as features are deve
 
 ## Next Steps
 
-1. ✅ Complete Phase 1 (Foundation)
-2. Begin Phase 2 (Enhanced Features)
+1. ✅ Complete Phase 1 (Infrastructure)
+2. Begin Phase 2 (Shared Component Library)
 3. Set up project board for tracking
 4. Schedule weekly reviews
 5. Document decisions in ADRs
@@ -962,17 +1185,17 @@ This ensures documentation, examples, and tests are created as features are deve
 
 ## Phase Summary
 
-| Phase       | Focus                         | Duration  | Status                  |
-| ----------- | ----------------------------- | --------- | ----------------------- |
-| **Phase 1** | Infrastructure & Dependencies | 2 days    | ⏳ 95% (Deploy pending) |
-| **Phase 2** | Core Features                 | 2 weeks   | ⏳ Ready                |
-| **Phase 3** | Component Library             | 2-3 weeks | ⏳ Pending              |
-| **Phase 4** | Advanced Features             | 2-3 weeks | ⏳ Pending              |
-| **Phase 5** | Services & Utilities          | 1-2 weeks | ⏳ Pending              |
-| **Phase 6** | Performance & PWA             | 1-2 weeks | ⏳ Pending              |
-| **Phase 7** | Testing Excellence            | 2 weeks   | ⏳ Pending              |
-| **Phase 8** | Deployment & DevOps           | 1 week    | ⏳ Pending              |
-| **Phase 9** | Final Polish & Project Mgmt   | 3-5 days  | ⏳ Pending              |
+| Phase       | Focus                                     | Duration  | Status      |
+| ----------- | ----------------------------------------- | --------- | ----------- |
+| **Phase 1** | Enterprise Baseline & Infrastructure      | 2-3 days  | ✅ Complete |
+| **Phase 2** | Shared Component Library                  | 2-3 weeks | ⏳ Next Up  |
+| **Phase 3** | Core Services & Utilities                 | 1-2 weeks | ⏳ Pending  |
+| **Phase 4** | Pages, Stores, and Feature Implementation | 2-3 weeks | ⏳ Pending  |
+| **Phase 5** | Integrations & Extended Functionality     | 2-3 weeks | ⏳ Pending  |
+| **Phase 6** | Performance Verification & PWA            | 1-2 weeks | ⏳ Pending  |
+| **Phase 7** | QA, Accessibility, & Release Readiness    | 2 weeks   | ⏳ Pending  |
+| **Phase 8** | Deployment, Monitoring & DevOps           | 1 week    | ⏳ Pending  |
+| **Phase 9** | Final Polish & Project Management         | 3-5 days  | ⏳ Pending  |
 
 **Total Estimated Duration**: 13-19 weeks (3-5 months)
 
@@ -982,18 +1205,17 @@ This ensures documentation, examples, and tests are created as features are deve
 
 ### Phase 2 Kickoff Tasks:
 
-Pre-Phase-2 checklist:
-
-- [ ] Generate and publish Compodoc documentation (docs/compodoc) before starting feature development
-
-1. Connect ProjectStore to CaseStudiesComponent
-2. Build CaseStudyDetailComponent with routing
-3. Write 3-5 detailed case study content pieces
-4. Implement project filtering and search
+1. Build theme system foundation (ThemeService, registry, SCSS)
+2. Create shared UI components (Button, Card, Modal, Toast, etc.)
+3. Create form components (Input, Select, Checkbox, etc.)
+4. Create layout components (Container, Grid, Stack)
+5. Build ThemePickerComponent and integrate into MainLayout
+6. Update MainLayout with full navigation
+7. Document all components in Storybook with accessibility notes
 
 ---
 
-**Document Version**: 3.2  
-**Last Updated**: November 24, 2025  
-**Status**: Phase 1 ✅ Complete | Phase 2 Ready  
-**Approach**: Enterprise-Standard Development Lifecycle | Deploying to GitHub Pages
+**Document Version**: 3.5 (Merged)  
+**Last Updated**: November 25, 2025  
+**Status**: Phase 1 ✅ Complete | Phase 2 Next Up  
+**Approach**: Infrastructure-First Enterprise Development | GitHub Pages Deployment
