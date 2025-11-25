@@ -2,10 +2,8 @@ name: 'Docs & Storybook Presence Check'
 
 on:
   pull_request:
-    paths:
-      - 'src/**'
-      - 'scripts/**'
-      - 'DEMO_COMPONENTS.md'
+    # Run on all PRs to ensure required check always reports status
+    # Only checks files that changed, so won't fail if no src changes
 
 jobs:
   docs-check:
