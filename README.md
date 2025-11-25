@@ -210,16 +210,20 @@ npm run test:e2e:update-snapshots
 
 ### CI/CD Pipeline
 
-The project includes 4 automated workflows:
+The project includes 8 automated workflows:
 
 1. **CI** (`ci.yml`) - Build, lint, test with coverage (80% threshold)
 2. **E2E Tests** (`e2e.yml`) - Cross-browser testing (Chromium, Firefox, WebKit)
 3. **Lighthouse** (`lighthouse.yml`) - Performance monitoring with PR comments
 4. **Dependency Review** (`dependency-review.yml`) - Security vulnerability scanning
+5. **Deploy Pages** (`deploy-pages.yml`) - Automated GitHub Pages deployment
+6. **Compodoc** (`compodoc.yml`) - API documentation generation
+7. **Docs Check** (`docs-check.yml`) - Documentation validation
+8. **Pages Sanity** (`pages-sanity.yml`) - Deployment verification
 
 All workflows run on pull requests and must pass before merging.
 
-**Security:** GitHub's built-in CodeQL scanning is enabled for static code analysis and vulnerability detection.
+**Security:** GitHub's CodeQL "Default setup" is enabled for automatic security analysis on every push and PR.
 
 ## 📐 Architecture Principles
 
