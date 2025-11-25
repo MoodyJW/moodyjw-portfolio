@@ -257,26 +257,26 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
 
 **Theme System Foundation:**
 
-- [ ] Theme definitions registry (`THEMES` constant or `ThemeRegistry` service)
-  - [ ] At least four options at launch: two light (`Lumen`, `Aurora`) and two dark (`Nocturne`, `Cosmos`)
-  - [ ] Describe each theme's slug, human label, color tokens, contrast ratios
-  - [ ] Validate registry structure with Zod
-  - [ ] Ensure every theme documents WCAG AAA contrast data (≥7:1 for text, 4.5:1 for large display)
-  - [ ] Document contribution checklist for adding future themes
-- [ ] `ThemeService` (signal store) responsible for:
-  - [ ] Reading persisted preference from LocalStorage with graceful fallback
-  - [ ] Detecting `prefers-color-scheme` on first load and OS theme changes
-  - [ ] Applying active theme via `data-theme` attribute and CSS variable injection
-  - [ ] Exposing signals/computed values (`activeTheme`, `availableThemes`, `isSystemDefault`, `isDarkMode`)
-  - [ ] Store explicit user selection with timestamp/version for migrations
-  - [ ] Provide `resetToSystem()` helper
-  - [ ] Unit tests covering read/write scenarios and corrupt storage recovery
-- [ ] Styling implementation:
-  - [ ] Derive each theme from existing CSS variable system
-  - [ ] Create SCSS partial defining per-theme maps
-  - [ ] Ensure all combinations meet WCAG AAA contrast
-  - [ ] Support smooth but optional transitions (`prefers-reduced-motion` respected)
-  - [ ] Isolate animation tokens in CSS variables for reuse
+- [x] Theme definitions registry (`THEMES` constant or `ThemeRegistry` service)
+  - [x] At least four options at launch: two light (`Lumen`, `Aurora`) and two dark (`Nocturne`, `Cosmos`)
+  - [x] Describe each theme's slug, human label, color tokens, contrast ratios
+  - [x] Validate registry structure with Zod
+  - [x] Ensure every theme documents WCAG AAA contrast data (≥7:1 for text, 4.5:1 for large display)
+  - [x] Document contribution checklist for adding future themes
+- [x] `ThemeService` (signal store) responsible for:
+  - [x] Reading persisted preference from LocalStorage with graceful fallback
+  - [x] Detecting `prefers-color-scheme` on first load and OS theme changes
+  - [x] Applying active theme via `data-theme` attribute and CSS variable injection
+  - [x] Exposing signals/computed values (`activeTheme`, `availableThemes`, `isSystemDefault`, `isDarkMode`)
+  - [x] Store explicit user selection with timestamp/version for migrations
+  - [x] Provide `resetToSystem()` helper
+  - [x] Unit tests covering read/write scenarios and corrupt storage recovery
+- [x] Styling implementation:
+  - [x] Derive each theme from existing CSS variable system
+  - [x] Create SCSS partial defining per-theme maps
+  - [x] Ensure all combinations meet WCAG AAA contrast
+  - [x] Support smooth but optional transitions (`prefers-reduced-motion` respected)
+  - [x] Isolate animation tokens in CSS variables for reuse
 
 **UI Components:**
 
