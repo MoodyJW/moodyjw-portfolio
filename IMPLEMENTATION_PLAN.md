@@ -194,7 +194,7 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
   - [x] Implementation recommendations
   - [x] Migration strategy
 - [x] Secrets management and environment files (`.env.example`, GitHub Secrets) in place
-- [x] Release & versioning policy documented (semantic versioning, changelog strategy)
+- [x] Release & versioning policy documented (`docs/RELEASE_VERSIONING.md` - trunk-based development, semantic versioning, conventional commits)
 - [x] Local dev reproducibility confirmed (README dev steps, `npm install`, `npm start`, `npm test`)
 
 **Documentation & Standards:**
