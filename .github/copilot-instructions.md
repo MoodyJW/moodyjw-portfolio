@@ -20,8 +20,10 @@ This is a modern Angular 21 portfolio application built with standalone componen
 
 **Project Decisions (recorded):**
 
-- Analytics: GA4-only for Phase 1 (Looker Studio demos for embedding).
-- Auth: Prioritize Ory (Kratos + Hydra) as the recommended open-source provider; Keycloak remains an alternate.
+- Analytics: GA4-only for Phase 1 (Looker Studio demos for embedding). See `docs/ANALYTICS.md`.
+- Auth: Prioritize Ory (Kratos + Hydra) as the recommended open-source provider; Keycloak remains an alternate. See `docs/AUTH.md`.
+- Error Tracking: Client-side ErrorHandler with localStorage persistence (no external services). See `docs/ERROR_TRACKING.md`.
+- Release & Versioning: Trunk-based development with Semantic Versioning and Conventional Commits. Manual release process. See `docs/RELEASE_VERSIONING.md`.
 - Tests: Enforce tests before merge; coverage goal 85% (80% acceptable).
 - Storybook: Host static Storybook under `/storybook` on GH Pages and attach PR preview artifacts in CI.
 
@@ -304,6 +306,26 @@ Documentation & Tests (required)
    type Project = z.infer<typeof ProjectSchema>;
    ```
 
+### Error Tracking (Client-Side)
+
+1. Use custom `ErrorHandlerService` extending Angular's `ErrorHandler`
+2. Errors persisted to localStorage (no external services like Sentry)
+3. HTTP errors caught via interceptor
+4. Optional "Report Issue" button links to GitHub Issues
+5. Implementation details in `docs/ERROR_TRACKING.md`
+6. **Example**:
+
+   ```typescript
+   import { ErrorHandler } from '@angular/core';
+   import { ErrorHandlerService } from '@core/services/error-handler.service';
+
+   export const appConfig: ApplicationConfig = {
+     providers: [
+       { provide: ErrorHandler, useClass: ErrorHandlerService }
+     ]
+   };
+   ```
+
 ### Constants and Configuration
 
 1. **No Magic Strings**: Create constants for all hardcoded values
@@ -384,13 +406,23 @@ Documentation & Tests (required)
 
 ## CI/CD & Quality Gates
 
-- GitHub Actions for automated workflows
+- GitHub Actions for automated workflows (ci.yml, e2e.yml, lighthouse.yml, deploy-pages.yml)
 - Run tests on every pull request
 - Visual regression tests as part of CI
 - Lighthouse CI for performance budgets
 - Automated dependency updates
 - Branch protection rules for main branch
 - Required status checks before merge
+
+### Deployment Strategy
+
+- **Continuous Deployment**: Push to `main` → automatic deploy to GitHub Pages
+- **Versioning**: Manual releases using Semantic Versioning (see `docs/RELEASE_VERSIONING.md`)
+- **Branching**: Trunk-based development (feature branches → main)
+- **Commits**: Use Conventional Commits format for changelog generation
+- **GitHub Pages**: Static site hosting at moodyjw.github.io/moodyjw-portfolio
+- Includes Compodoc documentation under `/docs/compodoc`
+- Includes Storybook under `/storybook`
 
 ## Performance Considerations
 
@@ -542,6 +574,18 @@ Documentation & Tests (required)
 - API docs: `npm run docs` (Compodoc)
 - Production builds are optimized and tree-shaken
 - **Note**: Use `--legacy-peer-deps` when installing new packages
+
+## Reference Documentation
+
+For detailed implementation guidance, see:
+
+- `docs/ANALYTICS.md` - GA4 integration and event tracking
+- `docs/AUTH.md` - Authentication provider comparison and recommendations
+- `docs/ERROR_TRACKING.md` - Client-side error handling strategy
+- `docs/RELEASE_VERSIONING.md` - Release process and versioning policy
+- `IMPLEMENTATION_PLAN.md` - Complete project roadmap and phase details
+- `ARCHITECTURE.md` - System architecture and design decisions
+- `CONTRIBUTING.md` - Contribution guidelines and workflow
 
 ## Do's and Don'ts
 
