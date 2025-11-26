@@ -1,0 +1,23 @@
+name: "CodeQL Configuration"
+
+# Configuration for GitHub's CodeQL Default Setup
+# Excludes build output directories from security scanning
+
+paths-ignore:
+  # Build outputs
+  - 'dist/**'
+  - 'out-tsc/**'
+  - 'storybook-static/**'
+  - '.angular/**'
+  
+  # Node modules and dependencies
+  - 'node_modules/**'
+  
+  # Test outputs
+  - 'coverage/**'
+  - 'test-results/**'
+  - 'playwright-report/**'
+  - 'e2e/test-output/**'
+  
+  # Documentation outputs
+  - 'docs/compodoc/**'
