@@ -208,6 +208,18 @@ npm run test:e2e:update-snapshots
 
 **Important:** Always use `npm test` or `npm run test:coverage` for running tests. Do not use `npx vitest run` directly as it bypasses Angular's test infrastructure which handles component template and style resolution.
 
+### Storybook
+
+```bash
+# Start Storybook development server
+npm run storybook
+
+# Build Storybook static site
+npm run build-storybook
+```
+
+**Note:** The `storybook-static/` build output is excluded from git (`.gitignore`) and CodeQL scanning. This directory contains bundled dependencies and should not be committed to the repository.
+
 ### CI/CD Pipeline
 
 The project includes 8 automated workflows:

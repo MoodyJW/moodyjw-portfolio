@@ -26,6 +26,9 @@
 /.angular-cli.json
 /.ng/
 
+# Storybook build output
+/storybook-static/
+
 # TypeScript cache
 *.tsbuildinfo
 
