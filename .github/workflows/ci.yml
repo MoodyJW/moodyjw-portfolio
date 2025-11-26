@@ -94,21 +94,50 @@ jobs:
               const functions = coverage.total.functions.pct;
               const lines = coverage.total.lines.pct;
               const threshold = 80;
-              const meetsThreshold = statements >= threshold && branches >= threshold && functions >= threshold && lines >= threshold;
-              
-              const body = [
+              const branchExceptionThreshold = 70;
+              const highCoverageThreshold = 95;
+
+              // Check if Angular Signals branch exception applies
+              const hasHighCoverage = statements >= highCoverageThreshold && lines >= highCoverageThreshold;
+              const branchExceptionApplies = hasHighCoverage && branches >= branchExceptionThreshold;
+
+              // Determine if thresholds are met
+              const meetsThreshold = statements >= threshold &&
+                                     functions >= threshold &&
+                                     lines >= threshold &&
+                                     (branches >= threshold || branchExceptionApplies);
+
+              // Build coverage table
+              const bodyParts = [
                 '## 📊 Test Coverage Report',
                 '',
-                '| Category | Percentage |',
-                '|----------|-----------|',
-                `| Statements | ${statements}% |`,
-                `| Branches | ${branches}% |`,
-                `| Functions | ${functions}% |`,
-                `| Lines | ${lines}% |`,
-                '',
-                meetsThreshold ? '✅ Coverage meets 80% threshold' : '❌ Coverage is below 80% threshold'
-              ].join('\n');
-              
+                '| Category | Percentage | Threshold |',
+                '|----------|-----------|-----------|',
+                `| Statements | ${statements}% | ${threshold}% |`,
+                `| Branches | ${branches}% | ${branchExceptionApplies ? branchExceptionThreshold : threshold}%${branchExceptionApplies ? ' ⚠️' : ''} |`,
+                `| Functions | ${functions}% | ${threshold}% |`,
+                `| Lines | ${lines}% | ${threshold}% |`,
+                ''
+              ];
+
+              // Add status message
+              if (meetsThreshold) {
+                bodyParts.push('✅ Coverage meets threshold requirements');
+              } else {
+                bodyParts.push('❌ Coverage is below threshold requirements');
+              }
+
+              // Add branch exception note if applicable
+              if (branchExceptionApplies) {
+                bodyParts.push('');
+                bodyParts.push('⚠️ **Branch Coverage Exception Applied**');
+                bodyParts.push(`Branch coverage ${branches}% is acceptable due to Angular Signals.`);
+                bodyParts.push(`V8 coverage counts signal initialization (\`input()\`, \`computed()\`) as branches.`);
+                bodyParts.push(`With statements ≥${highCoverageThreshold}% and lines ≥${highCoverageThreshold}%, branch coverage ≥${branchExceptionThreshold}% is sufficient.`);
+              }
+
+              const body = bodyParts.join('\n');
+
               github.rest.issues.createComment({
                 issue_number: context.issue.number,
                 owner: context.repo.owner,
