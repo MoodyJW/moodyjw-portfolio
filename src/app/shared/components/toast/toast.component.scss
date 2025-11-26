@@ -1,0 +1,298 @@
+// Toast component styles using BEM methodology
+// Integrates with existing theme system via CSS variables
+
+.toast {
+  // Base toast styles
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  gap: var(--spacing-md);
+  padding: var(--spacing-lg);
+  min-width: 300px;
+  max-width: 500px;
+  background-color: var(--color-surface);
+  border-radius: var(--border-radius-lg);
+  box-shadow: var(--shadow-lg);
+  border: 1px solid var(--color-border);
+
+  // Animation
+  animation: toast-slide-in 0.3s var(--transition-timing);
+  transition: opacity var(--transition-duration) var(--transition-timing),
+              transform var(--transition-duration) var(--transition-timing);
+
+  // Respect reduced motion preference
+  @media (prefers-reduced-motion: reduce) {
+    animation: toast-fade-in 0.2s ease-in;
+  }
+
+  // Exiting state
+  &--exiting {
+    opacity: 0;
+    transform: translateX(100%);
+
+    @media (prefers-reduced-motion: reduce) {
+      transform: none;
+    }
+  }
+
+  // Responsive sizing
+  @media (max-width: 640px) {
+    min-width: 280px;
+    max-width: calc(100vw - var(--spacing-2xl));
+  }
+
+  // VARIANTS
+
+  // Success variant
+  &--success {
+    border-color: var(--color-success);
+    background-color: var(--color-surface);
+
+    .toast__icon {
+      color: var(--color-success);
+      background-color: var(--color-success);
+      opacity: 0.15;
+    }
+
+    .toast__icon-symbol {
+      color: var(--color-success);
+      opacity: 1;
+    }
+  }
+
+  // Error variant
+  &--error {
+    border-color: var(--color-error);
+    background-color: var(--color-surface);
+
+    .toast__icon {
+      color: var(--color-error);
+      background-color: var(--color-error);
+      opacity: 0.15;
+    }
+
+    .toast__icon-symbol {
+      color: var(--color-error);
+      opacity: 1;
+    }
+  }
+
+  // Warning variant
+  &--warning {
+    border-color: var(--color-warning);
+    background-color: var(--color-surface);
+
+    .toast__icon {
+      color: var(--color-warning);
+      background-color: var(--color-warning);
+      opacity: 0.15;
+    }
+
+    .toast__icon-symbol {
+      color: var(--color-warning);
+      opacity: 1;
+    }
+  }
+
+  // Info variant
+  &--info {
+    border-color: var(--color-info);
+    background-color: var(--color-surface);
+
+    .toast__icon {
+      color: var(--color-info);
+      background-color: var(--color-info);
+      opacity: 0.15;
+    }
+
+    .toast__icon-symbol {
+      color: var(--color-info);
+      opacity: 1;
+    }
+  }
+
+  // ELEMENTS
+
+  // Icon container
+  &__icon {
+    position: relative;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    min-width: 40px;
+    border-radius: var(--border-radius-full);
+    flex-shrink: 0;
+  }
+
+  // Icon symbol
+  &__icon-symbol {
+    position: relative;
+    z-index: 1;
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-bold);
+    line-height: 1;
+  }
+
+  // Content container
+  &__content {
+    flex: 1;
+    min-width: 0; // Allows text truncation
+    padding-top: var(--spacing-xs);
+  }
+
+  // Title
+  &__title {
+    font-size: var(--font-size-base);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    margin-bottom: var(--spacing-xs);
+    line-height: 1.5;
+  }
+
+  // Message
+  &__message {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    line-height: 1.5;
+    word-wrap: break-word;
+  }
+
+  // Dismiss button
+  &__dismiss {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+    min-width: 32px;
+    padding: 0;
+    margin: 0;
+    background: transparent;
+    border: none;
+    border-radius: var(--border-radius);
+    color: var(--color-text-secondary);
+    cursor: pointer;
+    flex-shrink: 0;
+    transition: background-color var(--transition-duration) var(--transition-timing),
+                color var(--transition-duration) var(--transition-timing);
+
+    // Keyboard focus
+    &:focus {
+      outline: none;
+    }
+
+    &:focus-visible {
+      outline: 2px solid var(--color-primary);
+      outline-offset: 2px;
+    }
+
+    // Hover state
+    &:hover {
+      background-color: var(--color-surface-hover);
+      color: var(--color-text);
+    }
+
+    // Active state
+    &:active {
+      background-color: var(--color-surface-active);
+    }
+
+    // Touch target (WCAG 2.1 AAA: minimum 44x44px)
+    @media (pointer: coarse) {
+      width: 44px;
+      height: 44px;
+      min-width: 44px;
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      transition: none;
+    }
+  }
+
+  // Dismiss icon
+  &__dismiss-icon {
+    font-size: var(--font-size-2xl);
+    line-height: 1;
+    font-weight: var(--font-weight-light);
+  }
+}
+
+// ANIMATIONS
+
+// Slide in animation (for regular motion)
+@keyframes toast-slide-in {
+  from {
+    opacity: 0;
+    transform: translateX(100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Fade in animation (for reduced motion)
+@keyframes toast-fade-in {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+// Position-specific slide animations for left positions
+.toast--top-left,
+.toast--bottom-left {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: toast-slide-in-left 0.3s var(--transition-timing);
+  }
+
+  &.toast--exiting {
+    transform: translateX(-100%);
+
+    @media (prefers-reduced-motion: reduce) {
+      transform: none;
+    }
+  }
+}
+
+@keyframes toast-slide-in-left {
+  from {
+    opacity: 0;
+    transform: translateX(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateX(0);
+  }
+}
+
+// Position-specific slide animations for center positions
+.toast--top-center,
+.toast--bottom-center {
+  @media (prefers-reduced-motion: no-preference) {
+    animation: toast-slide-in-center 0.3s var(--transition-timing);
+  }
+
+  &.toast--exiting {
+    transform: translateY(-100%);
+
+    @media (prefers-reduced-motion: reduce) {
+      transform: none;
+    }
+  }
+}
+
+@keyframes toast-slide-in-center {
+  from {
+    opacity: 0;
+    transform: translateY(-100%);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

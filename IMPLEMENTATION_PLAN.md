@@ -314,7 +314,19 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
   - [x] ModalService for programmatic usage
   - [x] Body scroll lock, backdrop click handling, ESC key support
   - [x] Mobile responsive (auto fullscreen on small screens)
-- [ ] ToastNotificationComponent with auto-dismiss
+- [x] ToastNotificationComponent with auto-dismiss
+  - [x] 4 variants (success, error, warning, info) with full theme integration
+  - [x] Auto-dismiss with configurable duration (0 = no auto-dismiss)
+  - [x] Manual dismiss with optional close button
+  - [x] 6 position options (top-left, top-center, top-right, bottom-left, bottom-center, bottom-right)
+  - [x] WCAG 2.1 AAA compliant (ARIA live regions, keyboard navigation, color contrast)
+  - [x] Full TypeScript typing with signal-based inputs
+  - [x] Service-based toast management (ToastService)
+  - [x] Toast container component for rendering toasts
+  - [x] Comprehensive unit tests (93 tests total: 45 component, 29 service, 19 container)
+  - [x] 10 Storybook stories with service integration demo
+  - [x] BEM CSS with CSS variables, respects prefers-reduced-motion
+  - [x] Complete documentation (README.md)
 - [ ] LoadingSpinnerComponent with sizes
 - [ ] SkeletonComponent for loading states
 - [ ] BadgeComponent for tags and status
