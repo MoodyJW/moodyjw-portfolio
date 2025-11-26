@@ -12,3 +12,4 @@ export * from './routes.constants';
 export * from './api.constants';
 export * from './config.constants';
 export * from './app.constants';
+export * from './icons.constants';
