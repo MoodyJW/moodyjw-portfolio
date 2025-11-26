@@ -381,13 +381,6 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
   - [x] Icons organized in categories: Navigation, User, Communication, Work, Feedback, Actions, Theme, Time, Organization, Media, Data, Tech, Engagement, Location
 - [ ] TabsComponent with keyboard navigation
 - [ ] BreadcrumbComponent for navigation
-- [ ] `ThemePickerComponent` (standalone, OnPush)
-  - [ ] Surface in MainLayout navbar as accessible dropdown
-  - [ ] Keyboard navigation, ARIA labelling, a11y-friendly focus management
-  - [ ] Use Transloco keys for labels/descriptions
-  - [ ] Show current selection plus system-default indicator
-  - [ ] Storybook stories (default, keyboard navigation demo, reduced-motion)
-  - [ ] Playwright smoke test verifying dropdown interaction
 
 **Form Components:**
 
@@ -413,6 +406,15 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
 - [ ] Footer with social links and copyright
 - [ ] Skip-links for accessibility
 - [ ] Wire ThemePicker into navbar
+
+**ThemePickerComponent:**
+
+- [ ] Surface in MainLayout navbar as accessible dropdown
+- [ ] Keyboard navigation, ARIA labelling, a11y-friendly focus management
+- [ ] Use Transloco keys for labels/descriptions
+- [ ] Show current selection plus system-default indicator
+- [ ] Storybook stories (default, keyboard navigation demo, reduced-motion)
+- [ ] Playwright smoke test verifying dropdown interaction
 
 **Documentation (Phase 2):**
 
