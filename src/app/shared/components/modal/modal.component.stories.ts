@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { applicationConfig } from '@storybook/angular';
+import { moduleMetadata } from '@storybook/angular';
+import { ButtonComponent } from '../button/button.component';
 import { ModalComponent } from './modal.component';
 import { signal } from '@angular/core';
 
@@ -8,8 +9,8 @@ const meta: Meta<ModalComponent> = {
   component: ModalComponent,
   tags: ['autodocs'],
   decorators: [
-    applicationConfig({
-      providers: [],
+    moduleMetadata({
+      imports: [ModalComponent, ButtonComponent],
     }),
   ],
   argTypes: {
@@ -160,7 +161,7 @@ export const Default: Story = {
           isOpenSignal.set(false);
         },
       },
-    template: `
+      template: `
       <app-button
         variant="primary"
         ariaLabel="Open modal dialog"
@@ -236,7 +237,7 @@ export const SmallSize: Story = {
           isOpenSignal.set(false);
         },
       },
-    template: `
+      template: `
       <app-button
         variant="danger"
         ariaLabel="Delete item"
@@ -302,7 +303,7 @@ export const LargeSize: Story = {
           isOpenSignal.set(false);
         },
       },
-    template: `
+      template: `
       <app-button
         variant="primary"
         ariaLabel="Open settings"
@@ -394,7 +395,7 @@ export const ExtraLargeSize: Story = {
           isOpenSignal.set(false);
         },
       },
-    template: `
+      template: `
       <app-button
         variant="primary"
         ariaLabel="View gallery"
@@ -414,11 +415,14 @@ export const ExtraLargeSize: Story = {
 
         <div modal-body>
           <div style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 1rem;">
-            ${Array.from({ length: 6 }, (_, i) => `
+            ${Array.from(
+              { length: 6 },
+              (_, i) => `
               <div style="aspect-ratio: 16/9; background: var(--color-border); border-radius: 8px; display: flex; align-items: center; justify-content: center;">
                 <span style="color: var(--color-text-secondary);">Image ${i + 1}</span>
               </div>
-            `).join('')}
+            `
+            ).join('')}
           </div>
         </div>
 
@@ -459,7 +463,7 @@ export const Fullscreen: Story = {
           isOpenSignal.set(false);
         },
       },
-    template: `
+      template: `
       <app-button
         variant="primary"
         ariaLabel="Open fullscreen"
@@ -525,7 +529,7 @@ export const Sidebar: Story = {
           isOpenSignal.set(false);
         },
       },
-    template: `
+      template: `
       <app-button
         variant="secondary"
         ariaLabel="Open filters"
@@ -613,7 +617,7 @@ export const Dialog: Story = {
           isOpenSignal.set(false);
         },
       },
-    template: `
+      template: `
       <app-button
         variant="primary"
         ariaLabel="Show success"
@@ -676,7 +680,7 @@ export const NoCloseButton: Story = {
           isOpenSignal.set(false);
         },
       },
-    template: `
+      template: `
       <app-button
         variant="primary"
         ariaLabel="Show notice"
@@ -741,7 +745,7 @@ export const LongContent: Story = {
           isOpenSignal.set(false);
         },
       },
-    template: `
+      template: `
       <app-button
         variant="secondary"
         ariaLabel="View terms"
@@ -759,14 +763,19 @@ export const LongContent: Story = {
         </div>
 
         <div modal-body>
-          ${Array.from({ length: 10 }, (_, i) => `
-            <h3 style="margin: ${i === 0 ? '0' : '1.5rem'} 0 0.5rem 0; font-size: 1.125rem;">Section ${i + 1}</h3>
+          ${Array.from(
+            { length: 10 },
+            (_, i) => `
+            <h3 style="margin: ${
+              i === 0 ? '0' : '1.5rem'
+            } 0 0.5rem 0; font-size: 1.125rem;">Section ${i + 1}</h3>
             <p style="margin: 0 0 1rem 0; line-height: 1.6;">
               Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed do eiusmod
               tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
               quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.
             </p>
-          `).join('')}
+          `
+          ).join('')}
         </div>
 
         <div modal-footer>
@@ -811,7 +820,7 @@ export const KeyboardNavigation: Story = {
           isOpenSignal.set(false);
         },
       },
-    template: `
+      template: `
       <app-button
         variant="primary"
         ariaLabel="Open keyboard demo"

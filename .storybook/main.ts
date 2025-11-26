@@ -2,13 +2,14 @@ import type { StorybookConfig } from '@storybook/angular';
 
 const config: StorybookConfig = {
   stories: ['../src/**/*.stories.@(ts|tsx)'],
-  addons: ['@storybook/addon-a11y'],
+  addons: ['@storybook/addon-a11y', '@storybook/addon-docs'],
   framework: {
     name: '@storybook/angular',
     options: {
-      builder: {
-        buildOptimizer: false,
-        aot: false,
+      // Use Storybook's Angular builder options. `angularBuilderOptions` maps
+      // to the Angular CLI build target defined in `angular.json`.
+      angularBuilderOptions: {
+        browserTarget: 'moodyjw-portfolio:build:development',
       },
     },
   },
