@@ -82,6 +82,7 @@
     "zone.js": "^0.15.1"
   },
   "devDependencies": {
+    "@angular-devkit/build-angular": "^20.3.12",
     "@angular-eslint/builder": "^21.0.0",
     "@angular-eslint/eslint-plugin": "^21.0.0",
     "@angular-eslint/eslint-plugin-template": "^21.0.0",
@@ -93,18 +94,19 @@
     "@compodoc/compodoc": "^1.1.32",
     "@playwright/test": "^1.56.1",
     "@storybook/addon-a11y": "^10.0.8",
+    "@storybook/addon-docs": "^10.0.8",
     "@storybook/angular": "^10.0.8",
     "@types/node": "^24.10.1",
     "@typescript-eslint/eslint-plugin": "^8.47.0",
     "@typescript-eslint/parser": "^8.47.0",
     "@vitest/coverage-v8": "^4.0.13",
     "eslint": "^9.39.1",
+    "eslint-plugin-storybook": "10.0.8",
     "http-server": "^14.1.1",
     "jsdom": "^27.1.0",
     "storybook": "^10.0.8",
     "typescript": "~5.9.2",
     "vitest": "^4.0.8",
-    "wait-on": "^9.0.3",
-    "eslint-plugin-storybook": "10.0.8"
+    "wait-on": "^9.0.3"
   }
 }

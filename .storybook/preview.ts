@@ -21,6 +21,9 @@ const preview: Preview = {
         },
       },
     },
+    docs: {
+      autodocs: 'tag',
+    },
   },
 
   initialGlobals: {
