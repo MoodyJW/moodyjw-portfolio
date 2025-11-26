@@ -9,6 +9,8 @@ const fs = require('fs');
 const path = require('path');
 
 const THRESHOLD = 80;
+const BRANCH_EXCEPTION_THRESHOLD = 70;
+const HIGH_COVERAGE_THRESHOLD = 95;
 
 function findCoverageFile() {
   const coverageDir = path.join(__dirname, '../coverage');
@@ -128,17 +130,28 @@ function getCoverageData() {
 
     const { statements, branches, functions, lines } = totals;
 
+    // Check if Angular Signals branch exception applies
+    // Allow branch coverage >= 70% when statements >= 95% AND lines >= 95%
+    const hasHighCoverage = statements.pct >= HIGH_COVERAGE_THRESHOLD && lines.pct >= HIGH_COVERAGE_THRESHOLD;
+    const branchExceptionApplies = hasHighCoverage && branches.pct >= BRANCH_EXCEPTION_THRESHOLD;
+
+    // Determine if thresholds are met
+    const meetsThreshold =
+      statements.pct >= THRESHOLD &&
+      functions.pct >= THRESHOLD &&
+      lines.pct >= THRESHOLD &&
+      (branches.pct >= THRESHOLD || branchExceptionApplies);
+
     return {
       statements: statements.pct,
       branches: branches.pct,
       functions: functions.pct,
       lines: lines.pct,
       threshold: THRESHOLD,
-      meetsThreshold:
-        statements.pct >= THRESHOLD &&
-        branches.pct >= THRESHOLD &&
-        functions.pct >= THRESHOLD &&
-        lines.pct >= THRESHOLD,
+      branchExceptionThreshold: BRANCH_EXCEPTION_THRESHOLD,
+      highCoverageThreshold: HIGH_COVERAGE_THRESHOLD,
+      branchExceptionApplies,
+      meetsThreshold,
     };
   } catch (error) {
     console.error('Error reading or parsing coverage file:', error.message);
@@ -148,7 +161,12 @@ function getCoverageData() {
 
 // Export for use in other scripts
 if (typeof module !== 'undefined' && module.exports) {
-  module.exports = { getCoverageData, THRESHOLD };
+  module.exports = {
+    getCoverageData,
+    THRESHOLD,
+    BRANCH_EXCEPTION_THRESHOLD,
+    HIGH_COVERAGE_THRESHOLD
+  };
 }
 
 // CLI usage: output JSON
