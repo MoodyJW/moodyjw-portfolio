@@ -5,9 +5,20 @@ const config: StorybookConfig = {
   addons: ['@storybook/addon-a11y'],
   framework: {
     name: '@storybook/angular',
-    options: {},
+    options: {
+      builder: {
+        buildOptimizer: false,
+        aot: false,
+      },
+    },
   },
   docs: {},
+  typescript: {
+    check: false,
+  },
+  core: {
+    builder: '@storybook/builder-webpack5',
+  },
 };
 
 export default config;
