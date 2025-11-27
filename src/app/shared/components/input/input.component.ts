@@ -59,6 +59,13 @@ export type InputValidationState = 'default' | 'success' | 'warning' | 'error';
   styleUrl: './input.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
+/**
+ * Accessible Input component with full feature set for forms.
+ *
+ * Provides helper text, validation states, character counting, and
+ * prefix/suffix slots. All public inputs use `input()` signals and events
+ * are exposed via `output()` for integration with parent forms and stores.
+ */
 export class InputComponent {
   /**
    * Visual variant of the input
