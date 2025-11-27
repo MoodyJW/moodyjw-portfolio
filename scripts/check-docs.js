@@ -2,6 +2,7 @@
 const { execSync } = require('child_process');
 const fs = require('fs');
 const path = require('path');
+const STORYBOOK_EXCEPTIONS = 'STORYBOOK_EXCEPTIONS.md';
 
 function gitChangedFiles(base = 'origin/main') {
   try {
@@ -30,7 +31,7 @@ function specExistsFor(file) {
 }
 
 function isDemoPathListed(file, demoRaw) {
-  // Extract explicitly backticked paths from DEMO_COMPONENTS.md (preferred)
+  // Extract explicitly backticked paths from STORYBOOK_EXCEPTIONS.md (preferred)
   const pathMatches = [];
   const backtickRe = /`([^`]+)`/g;
   let m;
@@ -84,9 +85,9 @@ function run() {
     const storyFile = path.join(dir, `${baseName}.stories.ts`);
     const content = fs.readFileSync(file, 'utf8');
 
-    // skip demo components listed in DEMO_COMPONENTS.md (supports simple wildcards/dirs)
-    const demoList = fs.existsSync('DEMO_COMPONENTS.md')
-      ? fs.readFileSync('DEMO_COMPONENTS.md', 'utf8')
+    // skip demo components listed in STORYBOOK_EXCEPTIONS.md (supports simple wildcards/dirs)
+    const demoList = fs.existsSync(STORYBOOK_EXCEPTIONS)
+      ? fs.readFileSync(STORYBOOK_EXCEPTIONS, 'utf8')
       : '';
     if (isDemoPathListed(file, demoList)) {
       console.log(`Skipping demo component ${file}`);
@@ -109,7 +110,7 @@ function run() {
       console.error(` - ${f.file}: missing ${f.missing.join(', ')}`);
     }
     console.error(
-      '\nAdd a Storybook story and TSDoc, or add the component to DEMO_COMPONENTS.md if it is a temporary demo.'
+      `\nAdd a Storybook story and TSDoc, or add the component to ${STORYBOOK_EXCEPTIONS} if it is a temporary demo.`
     );
     process.exit(2);
   }

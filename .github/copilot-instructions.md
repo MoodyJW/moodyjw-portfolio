@@ -238,7 +238,7 @@ Documentation & Tests (required)
   - Add TSDoc comments for all public APIs (methods, inputs, outputs).
   - Create at least one Storybook story (`.stories.ts`) demonstrating the component's primary state(s) and include accessibility notes where relevant.
   - Add unit tests (Vitest) that cover component behavior, signal updates, and key edge cases.
-- Small demo placeholder components are allowed, but MUST be listed in `DEMO_COMPONENTS.md` and migrated to include stories/tests before Phase 9.
+- Small demo placeholder components are allowed, but MUST be listed in `STORYBOOK_EXCEPTIONS.md` and migrated to include stories/tests before Phase 9.
 
 ### Adding a Shared Component
 
@@ -320,9 +320,7 @@ Documentation & Tests (required)
    import { ErrorHandlerService } from '@core/services/error-handler.service';
 
    export const appConfig: ApplicationConfig = {
-     providers: [
-       { provide: ErrorHandler, useClass: ErrorHandlerService }
-     ]
+     providers: [{ provide: ErrorHandler, useClass: ErrorHandlerService }],
    };
    ```
 

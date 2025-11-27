@@ -204,7 +204,7 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
   - TSDoc for public APIs
   - At least one Storybook story demonstrating primary states
   - Unit tests covering component logic
-- Exceptions: small demo-only components can be added without stories/tests if marked in `DEMO_COMPONENTS.md` manifest; these should be migrated to full coverage before Phase 7.
+- Exceptions: small demo-only components can be added without stories/tests if marked in `STORYBOOK_EXCEPTIONS.md` manifest; these should be migrated to full coverage before Phase 7.
 - Compodoc runs in CI but documentation work is expected to be done alongside feature development (not at project end).
 
 ### Technical Details
@@ -396,7 +396,19 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
   - [x] BEM CSS with CSS variables, respects prefers-reduced-motion
   - [x] Content projection pattern for tab content via contentChildren()
   - [x] Automatic focus management and tab state synchronization
-- [ ] BreadcrumbComponent for navigation
+- [x] BreadcrumbComponent for navigation
+  - [x] 4 visual variants (default, slash, chevron, arrow) with full theme integration
+  - [x] 3 size variants (sm, md, lg) with proper touch target sizes
+  - [x] Full Angular Router integration with query params and fragments
+  - [x] Optional icon support per breadcrumb item via IconComponent
+  - [x] Automatic ellipsis collapsing for deep hierarchies (maxItems option)
+  - [x] WAI-ARIA breadcrumb pattern (role="navigation", aria-label, aria-current)
+  - [x] WCAG 2.1 AAA compliant (ARIA labels, keyboard navigation, focus management)
+  - [x] Full TypeScript typing with signal-based inputs
+  - [x] Comprehensive unit tests (54 tests covering all functionality)
+  - [x] 15 Storybook stories with real-world examples and accessibility documentation
+  - [x] BEM CSS with CSS variables, respects prefers-reduced-motion
+  - [x] Complete documentation with TSDoc comments
 
 **Form Components:**
 
