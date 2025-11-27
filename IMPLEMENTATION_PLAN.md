@@ -426,7 +426,20 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
   - [x] Storybook stories: documented primary state with helper text and character-count demonstrated
   - [x] Accessibility: required `aria-label` enforced in tests; helper linked with `aria-describedby`; color contrast validated
   - [x] Notes: Footer markup extracted into a small `InputFooterComponent` to reduce template cyclomatic complexity and improve testability
-- [ ] TextareaComponent
+- [x] TextareaComponent
+  - [x] Standalone `TextareaComponent` with signal-based `input()` properties and `output()` events
+  - [x] Supports 3 visual variants (`default`, `filled`, `outlined`) and 3 size options (`sm`, `md`, `lg`)
+  - [x] Validation states: `default`, `success`, `warning`, `error` with visual styling and ARIA (`aria-invalid`)
+  - [x] Configurable rows, minRows, maxRows with auto-resize functionality
+  - [x] Resize options: `none`, `vertical`, `horizontal`, `both` for manual resizing
+  - [x] Character count support with `showCharCount` + `maxLength` and live `charCountText()` computed signal
+  - [x] Helper text with computed ID linking via `aria-describedby` and helper CSS classes
+  - [x] Full keyboard and focus handling (focus, blur events) and public focus/blur/select methods
+  - [x] OnPush change detection, BEM CSS with CSS variables, respects `prefers-reduced-motion`
+  - [x] Reuses `InputFooterComponent` for consistent footer styling
+  - [x] Unit tests: 79 comprehensive tests covering all functionality (100% pass rate)
+  - [x] Storybook stories: 22 stories covering all variants, sizes, states, and use cases
+  - [x] Accessibility: required `aria-label` enforced; helper linked with `aria-describedby`; WCAG 2.1 AAA compliant
 - [ ] SelectComponent/DropdownComponent
 - [ ] CheckboxComponent
 - [ ] RadioComponent
