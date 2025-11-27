@@ -54,10 +54,10 @@ describe('ThemeService', () => {
     const s = TestBed.inject(ThemeService);
     // @ts-ignore
     vi.spyOn(s, '_getStoredPreference').mockReturnValue({
-      slug: 'not-a-theme',
+      slug: 'not-a-theme' as string,
       timestamp: Date.now(),
       version: 1,
-    });
+    } as { slug: string; timestamp: number; version: number });
     // @ts-ignore
     expect(s._getInitialThemeSlug()).toBe(getSystemThemeSlug());
   });

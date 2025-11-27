@@ -1,7 +1,14 @@
 /* eslint-disable no-undef */
- 
-import type { ApplicationRef, ComponentRef, EnvironmentInjector,Type } from '@angular/core';
-import { createComponent,Injectable, signal } from '@angular/core';
+
+import type { ComponentRef, Type } from '@angular/core';
+import {
+  ApplicationRef,
+  createComponent,
+  EnvironmentInjector,
+  inject,
+  Injectable,
+  signal,
+} from '@angular/core';
 
 import { ModalComponent } from '../components/modal/modal.component';
 
@@ -125,12 +132,12 @@ export class ModalService {
   private _appRef = signal<ApplicationRef | null>(null);
   private _injector = signal<EnvironmentInjector | null>(null);
 
-  constructor(
-    private applicationRef: ApplicationRef,
-    private injector: EnvironmentInjector
-  ) {
-    this._appRef.set(applicationRef);
-    this._injector.set(injector);
+  private applicationRef: ApplicationRef = inject(ApplicationRef);
+  private injector: EnvironmentInjector = inject(EnvironmentInjector);
+
+  constructor() {
+    this._appRef.set(this.applicationRef);
+    this._injector.set(this.injector);
   }
 
   /**
@@ -156,10 +163,7 @@ export class ModalService {
     modalRef.setInput('variant', config.variant ?? 'default');
     modalRef.setInput('size', config.size ?? 'md');
     modalRef.setInput('open', true);
-    modalRef.setInput(
-      'closeOnBackdropClick',
-      config.closeOnBackdropClick ?? true
-    );
+    modalRef.setInput('closeOnBackdropClick', config.closeOnBackdropClick ?? true);
     modalRef.setInput('closeOnEscape', config.closeOnEscape ?? true);
     modalRef.setInput('showCloseButton', config.showCloseButton ?? true);
     modalRef.setInput('preventBodyScroll', config.preventBodyScroll ?? true);
@@ -193,9 +197,7 @@ export class ModalService {
       // Wait for close animation
       setTimeout(() => {
         // Remove from active modals
-        this._activeModals.update((modals) =>
-          modals.filter((m) => m !== modalRef)
-        );
+        this._activeModals.update((modals) => modals.filter((m) => m !== modalRef));
 
         // Cleanup
         appRef.detachView(modalRef.hostView);
