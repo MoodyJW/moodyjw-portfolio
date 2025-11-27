@@ -55,10 +55,24 @@ Current demo placeholders (scan results pre-filled, update if inaccurate):
   - migrate-by: Phase 4
 
 - `src/app/shared/components/tabs/tab` (single tab used by tabs component)
+
   - name: `TabComponent`
   - reason: internal helper component used by Tabs; not intended for standalone use
   - owner: @MoodyJW
   - migrate-by: Never?
+
+- `src/app/core/layout/main-layout/*` (layout components with minimal logic)
+
+  - name: `MainLayoutComponent` and children
+  - reason: layout components with minimal logic; primarily structural
+  - owner: @MoodyJW
+  - migrate-by: Phase 5
+
+- `src/app/features/home/*` (home page components with minimal logic)
+  - name: `HomePageComponent` and children
+  - reason: primarily structural components for home page layout
+  - owner: @MoodyJW
+  - migrate-by: Phase 5
 
 Notes
 
