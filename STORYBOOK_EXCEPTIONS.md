@@ -1,4 +1,4 @@
-# Demo Components Manifest
+# Storbook Exceptions Components Manifest
 
 This file lists intentionally allowed demo or placeholder components that are exempt from the "docs-as-you-go" requirement (Storybook story + TSDoc + unit tests) temporarily. Each entry should include a short reason and a migration target/owner and must be migrated to full coverage before Phase 9.
 
@@ -48,10 +48,17 @@ Current demo placeholders (scan results pre-filled, update if inaccurate):
   - migrate-by: Phase 9
 
 - `src/app/shared/constants/*` (placeholder constants listed in README)
+
   - name: `Constants placeholders`
   - reason: placeholder values for external links and future content
   - owner: @MoodyJW
   - migrate-by: Phase 4
+
+- `src/app/shared/components/tabs/tab` (single tab used by tabs component)
+  - name: `TabComponent`
+  - reason: internal helper component used by Tabs; not intended for standalone use
+  - owner: @MoodyJW
+  - migrate-by: Never?
 
 Notes
 
