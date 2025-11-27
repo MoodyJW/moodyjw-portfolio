@@ -5,6 +5,26 @@
   <ol class="breadcrumb__list">
     @for (item of displayItems(); track trackByIndex($index); let i = $index; let isLast = $last) {
       <li class="breadcrumb__item">
+        <ng-template #breadcrumbIcon let-it>
+          <app-icon
+            [name]="it?.icon ?? 'heroHome'"
+            size="sm"
+            class="breadcrumb__icon"
+            [decorative]="true"
+            [hidden]="!(showIcons() && it?.icon)"
+          />
+        </ng-template>
+        <ng-template #separatorContent>
+          @if (separatorIcon()) {
+            <app-icon
+              [name]="separatorIcon()!"
+              size="xs"
+              [decorative]="true"
+            />
+          } @else {
+            <span>{{ separatorText() }}</span>
+          }
+        </ng-template>
         @if (isEllipsis(item)) {
           <!-- Ellipsis for collapsed items -->
           <span
@@ -13,7 +33,7 @@
           >
             ...
           </span>
-        } @else if (isBreadcrumbItem(item)) {
+        } @else {
           @if (item.route && !item.current) {
             <!-- Clickable breadcrumb link -->
             <a
@@ -23,14 +43,7 @@
               class="breadcrumb__link"
               (click)="onItemClick(item)"
             >
-              @if (showIcons() && item.icon) {
-                <app-icon
-                  [name]="item.icon"
-                  size="sm"
-                  class="breadcrumb__icon"
-                  [decorative]="true"
-                />
-              }
+              <ng-container *ngTemplateOutlet="breadcrumbIcon; context:{ $implicit: item }" />
               <span class="breadcrumb__label">{{ item.label }}</span>
             </a>
           } @else {
@@ -39,14 +52,7 @@
               class="breadcrumb__current"
               aria-current="page"
             >
-              @if (showIcons() && item.icon) {
-                <app-icon
-                  [name]="item.icon"
-                  size="sm"
-                  class="breadcrumb__icon"
-                  [decorative]="true"
-                />
-              }
+              <ng-container *ngTemplateOutlet="breadcrumbIcon; context:{ $implicit: item }" />
               <span class="breadcrumb__label">{{ item.label }}</span>
             </span>
           }
@@ -57,15 +63,13 @@
               class="breadcrumb__separator"
               aria-hidden="true"
             >
-              @if (separatorIcon()) {
-                <app-icon
-                  [name]="separatorIcon()!"
-                  size="xs"
-                  [decorative]="true"
-                />
-              } @else {
-                {{ separatorText() }}
-              }
+              <app-icon
+                [name]="separatorIcon() ?? 'heroChevronRight'"
+                size="xs"
+                [decorative]="true"
+                [hidden]="!separatorIcon()"
+              />
+              <span [hidden]="separatorIcon()">{{ separatorText() }}</span>
             </span>
           }
         }

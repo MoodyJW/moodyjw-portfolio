@@ -522,6 +522,8 @@ describe('BreadcrumbComponent', () => {
 
       const icon = fixture.nativeElement.querySelector('app-icon');
       expect(icon).toBeTruthy();
+      // should be visible (no hidden attribute)
+      expect(icon.getAttribute('hidden')).toBeNull();
     });
 
     it('should not render icons when showIcons is false', () => {
@@ -532,7 +534,9 @@ describe('BreadcrumbComponent', () => {
       fixture.detectChanges();
 
       const icon = fixture.nativeElement.querySelector('app-icon');
-      expect(icon).toBeNull();
+      // element is present but hidden via [hidden]
+      expect(icon).toBeTruthy();
+      expect(icon.getAttribute('hidden')).not.toBeNull();
     });
   });
 
