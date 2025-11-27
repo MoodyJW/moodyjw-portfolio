@@ -1,0 +1,75 @@
+<nav
+  [class]="breadcrumbClasses()"
+  aria-label="{{ ariaLabel() }}"
+>
+  <ol class="breadcrumb__list">
+    @for (item of displayItems(); track trackByIndex($index); let i = $index; let isLast = $last) {
+      <li class="breadcrumb__item">
+        @if (isEllipsis(item)) {
+          <!-- Ellipsis for collapsed items -->
+          <span
+            class="breadcrumb__ellipsis"
+            aria-hidden="true"
+          >
+            ...
+          </span>
+        } @else if (isBreadcrumbItem(item)) {
+          @if (item.route && !item.current) {
+            <!-- Clickable breadcrumb link -->
+            <a
+              [routerLink]="item.route"
+              [queryParams]="item.queryParams"
+              [fragment]="item.fragment"
+              class="breadcrumb__link"
+              (click)="onItemClick(item)"
+            >
+              @if (showIcons() && item.icon) {
+                <app-icon
+                  [name]="item.icon"
+                  size="sm"
+                  class="breadcrumb__icon"
+                  [decorative]="true"
+                />
+              }
+              <span class="breadcrumb__label">{{ item.label }}</span>
+            </a>
+          } @else {
+            <!-- Current page (non-clickable) -->
+            <span
+              class="breadcrumb__current"
+              aria-current="page"
+            >
+              @if (showIcons() && item.icon) {
+                <app-icon
+                  [name]="item.icon"
+                  size="sm"
+                  class="breadcrumb__icon"
+                  [decorative]="true"
+                />
+              }
+              <span class="breadcrumb__label">{{ item.label }}</span>
+            </span>
+          }
+
+          <!-- Separator (not shown after last item) -->
+          @if (!isLast) {
+            <span
+              class="breadcrumb__separator"
+              aria-hidden="true"
+            >
+              @if (separatorIcon()) {
+                <app-icon
+                  [name]="separatorIcon()!"
+                  size="xs"
+                  [decorative]="true"
+                />
+              } @else {
+                {{ separatorText() }}
+              }
+            </span>
+          }
+        }
+      </li>
+    }
+  </ol>
+</nav>
