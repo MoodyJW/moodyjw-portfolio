@@ -1,0 +1,40 @@
+<div class="tabs">
+  <!-- Tab List -->
+  <div
+    [class]="tabListClasses()"
+    role="tablist"
+    [attr.aria-label]="ariaLabel()"
+    [attr.aria-orientation]="orientation()"
+  >
+    @for (tab of tabs(); track trackByTabId($index, tab); let i = $index) {
+      <button
+        class="tabs__tab"
+        [class.tabs__tab--active]="activeTabIndex() === i"
+        [class.tabs__tab--disabled]="tab.disabled()"
+        role="tab"
+        [id]="tab.tabId()"
+        [attr.aria-selected]="activeTabIndex() === i"
+        [attr.aria-controls]="tab.panelId()"
+        [attr.tabindex]="activeTabIndex() === i ? 0 : -1"
+        [disabled]="tab.disabled()"
+        (click)="selectTab(i)"
+        (keydown)="handleKeydown($event, i)"
+      >
+        @if (tab.icon()) {
+          <app-icon
+            [name]="tab.icon()!"
+            size="sm"
+            [decorative]="true"
+            class="tabs__tab-icon"
+          />
+        }
+        <span class="tabs__tab-label">{{ tab.label() }}</span>
+      </button>
+    }
+  </div>
+
+  <!-- Tab Panels -->
+  <div class="tabs__panels">
+    <ng-content />
+  </div>
+</div>
