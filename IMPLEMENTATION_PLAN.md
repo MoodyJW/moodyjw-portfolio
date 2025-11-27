@@ -412,7 +412,20 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
 
 **Form Components:**
 
-- [ ] InputComponent with validation states
+- [x] InputComponent with validation states
+  - [x] Standalone `InputComponent` with signal-based `input()` properties and `output()` events
+  - [x] Supports `type` variants (`text`, `email`, `password`, `tel`, `url`, `search`, `number`)
+  - [x] Validation states: `default`, `success`, `warning`, `error` with visual styling and ARIA (`aria-invalid`)
+  - [x] Prefix and suffix slots (text or icons) with appropriate `aria-hidden` handling
+  - [x] Character count support with `showCharCount` + `maxLength` and live `charCountText()` computed signal
+  - [x] Helper text with computed ID linking via `aria-describedby` and helper CSS classes
+  - [x] Full keyboard and focus handling (focus, blur, enter key events) and public focus/blur/select methods
+  - [x] OnPush change detection, BEM CSS with CSS variables, respects `prefers-reduced-motion`
+  - [x] Computed helpers for wrapper/input classes, aria attributes, and footer visibility
+  - [x] Unit tests: comprehensive spec file covering behavior (input handling, ARIA, computed values, events)
+  - [x] Storybook stories: documented primary state with helper text and character-count demonstrated
+  - [x] Accessibility: required `aria-label` enforced in tests; helper linked with `aria-describedby`; color contrast validated
+  - [x] Notes: Footer markup extracted into a small `InputFooterComponent` to reduce template cyclomatic complexity and improve testability
 - [ ] TextareaComponent
 - [ ] SelectComponent/DropdownComponent
 - [ ] CheckboxComponent
