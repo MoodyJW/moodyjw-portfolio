@@ -61,7 +61,7 @@ Current demo placeholders (scan results pre-filled, update if inaccurate):
   - owner: @MoodyJW
   - migrate-by: Never?
 
-- `src/app/core/layout/main-layout/*` (layout components with minimal logic)
+- `src/app/core/layout/*` (layout components with minimal logic)
 
   - name: `MainLayoutComponent` and children
   - reason: layout components with minimal logic; primarily structural
