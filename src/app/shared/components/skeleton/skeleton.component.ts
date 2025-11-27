@@ -1,10 +1,10 @@
-import {
-  Component,
-  ChangeDetectionStrategy,
-  input,
-  computed,
-} from '@angular/core';
 import { CommonModule } from '@angular/common';
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  input,
+} from '@angular/core';
 
 export type SkeletonVariant = 'text' | 'circular' | 'rectangular';
 export type SkeletonAnimation = 'pulse' | 'wave' | 'none';

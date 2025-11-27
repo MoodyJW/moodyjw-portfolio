@@ -7,6 +7,7 @@ import tsparser from '@typescript-eslint/parser';
 import angular from '@angular-eslint/eslint-plugin';
 import angularTemplate from '@angular-eslint/eslint-plugin-template';
 import angularTemplateParser from '@angular-eslint/template-parser';
+import simpleImportSort from 'eslint-plugin-simple-import-sort';
 
 export default [// Base ESLint recommended rules
 eslint.configs.recommended, // TypeScript files
@@ -23,8 +24,26 @@ eslint.configs.recommended, // TypeScript files
   plugins: {
     '@typescript-eslint': tseslint,
     '@angular-eslint': angular,
+    'simple-import-sort': simpleImportSort,
   },
   rules: {
+    // Import sorting: Angular, third-party, path-aliases, relative
+    'simple-import-sort/imports': ['error', {
+      groups: [
+        // Side effect imports
+        ['^\\u0000'],
+        // Angular packages first
+        ['^@angular(?=/|$)', '^@ng'],
+        // Third party packages (no leading @ or .)
+        ['^[^@./]'],
+        // Aliased imports: @shared, @app, @core, then other @ aliases (excluding @angular and @ng)
+        ['^@shared(/.*|$)', '^@app(/.*|$)', '^@core(/.*|$)', '^@(?!angular)(?!ng).+'],
+        // Parent imports
+          ['^[.]{2}(?!/?$)', '^[.]{2}/?$'],
+        // Same-folder imports
+          ['^[.]/(?=.*/)(?!/?$)', '^[.](?!/?$)'],
+      ],
+    }],
     // TypeScript core rules
     '@typescript-eslint/no-explicit-any': 'error',
     'no-unused-vars': 'off',

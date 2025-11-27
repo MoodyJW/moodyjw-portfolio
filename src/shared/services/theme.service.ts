@@ -2,7 +2,8 @@
 declare var window: Window;
 declare var document: Document;
 declare var localStorage: Storage;
-import { Injectable, signal, effect, computed } from '@angular/core';
+import { computed,effect, Injectable, signal } from '@angular/core';
+
 import { THEMES } from '../constants/themes.constants';
 
 const THEME_STORAGE_KEY = 'theme-preference-v1';

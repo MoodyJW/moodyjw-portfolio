@@ -1,4 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/angular';
+
 import { InputFooterComponent } from './input-footer.component';
 
 const meta: Meta<InputFooterComponent> = {

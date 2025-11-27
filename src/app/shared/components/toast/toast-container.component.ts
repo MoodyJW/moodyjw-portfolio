@@ -1,8 +1,10 @@
-import { Component, ChangeDetectionStrategy, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+
+import { ToastService } from '../../services/toast.service';
+
 import type { ToastPosition } from './toast.component';
 import { ToastComponent } from './toast.component';
-import { ToastService } from '../../services/toast.service';
 
 /**
  * Container component for displaying toast notifications.

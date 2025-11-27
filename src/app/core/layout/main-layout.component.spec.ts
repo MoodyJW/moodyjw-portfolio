@@ -1,9 +1,11 @@
 // @vitest-environment jsdom
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { MainLayoutComponent } from './main-layout.component';
 import { provideRouter } from '@angular/router';
-import { ROUTE_PATHS, NAV_ITEMS, APP_NAME, COPYRIGHT_YEAR } from '@shared/constants';
+
+import { APP_NAME, COPYRIGHT_YEAR,NAV_ITEMS, ROUTE_PATHS } from '@shared/constants';
+
+import { MainLayoutComponent } from './main-layout.component';
 
 describe('MainLayoutComponent', () => {
   let component: MainLayoutComponent;

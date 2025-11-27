@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { applicationConfig } from '@storybook/angular';
+
 import { TextareaComponent } from './textarea.component';
 
 const meta: Meta<TextareaComponent> = {

@@ -1,10 +1,13 @@
 /* eslint-disable no-undef */
+import { Component, inject } from '@angular/core';
+
 import type { Meta, StoryObj } from '@storybook/angular';
-import { argsToTemplate, applicationConfig } from '@storybook/angular';
+import { applicationConfig,argsToTemplate } from '@storybook/angular';
+
+import { ToastService } from '../../services/toast.service';
+
 import { ToastComponent } from './toast.component';
 import { ToastContainerComponent } from './toast-container.component';
-import { ToastService } from '../../services/toast.service';
-import { Component, inject } from '@angular/core';
 
 const meta: Meta<ToastComponent> = {
   title: 'Shared/Toast',

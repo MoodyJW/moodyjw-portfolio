@@ -1,13 +1,14 @@
 // @vitest-environment jsdom
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { TextareaComponent } from './textarea.component';
+
 import type {
-  TextareaVariant,
+  TextareaResize,
   TextareaSize,
   TextareaValidationState,
-  TextareaResize,
+  TextareaVariant,
 } from './textarea.component';
+import { TextareaComponent } from './textarea.component';
 
 describe('TextareaComponent', () => {
   let component: TextareaComponent;

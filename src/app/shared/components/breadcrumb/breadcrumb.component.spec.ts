@@ -1,9 +1,10 @@
 // @vitest-environment jsdom
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { BreadcrumbComponent } from './breadcrumb.component';
-import type { BreadcrumbItem, BreadcrumbVariant, BreadcrumbSize } from './breadcrumb.component';
 import { provideRouter } from '@angular/router';
+
+import type { BreadcrumbItem, BreadcrumbSize,BreadcrumbVariant } from './breadcrumb.component';
+import { BreadcrumbComponent } from './breadcrumb.component';
 
 describe('BreadcrumbComponent', () => {
   let component: BreadcrumbComponent;

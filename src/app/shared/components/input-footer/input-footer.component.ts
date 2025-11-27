@@ -1,5 +1,5 @@
-import { Component, ChangeDetectionStrategy, input, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
+import { ChangeDetectionStrategy, Component, computed,input } from '@angular/core';
 
 @Component({
   selector: 'app-input-footer',

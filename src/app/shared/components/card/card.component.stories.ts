@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
-import { argsToTemplate, applicationConfig } from '@storybook/angular';
+import { applicationConfig,argsToTemplate } from '@storybook/angular';
+
 import { CardComponent } from './card.component';
 
 const meta: Meta<CardComponent> = {

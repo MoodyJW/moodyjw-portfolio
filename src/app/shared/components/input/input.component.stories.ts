@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/angular';
 import { applicationConfig } from '@storybook/angular';
+
 import { InputComponent } from './input.component';
 
 const meta: Meta<InputComponent> = {

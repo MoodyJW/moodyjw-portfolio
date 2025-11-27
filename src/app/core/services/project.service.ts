@@ -1,8 +1,11 @@
-import { Injectable, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { inject,Injectable } from '@angular/core';
+
 import { Observable } from 'rxjs';
-import type { Project } from '../models/project.model';
+
 import { MOCK_ENDPOINTS } from '@shared/constants';
+
+import type { Project } from '../models/project.model';
 
 /**
  * Service for managing project/case study data

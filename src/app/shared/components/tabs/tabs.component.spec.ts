@@ -1,11 +1,13 @@
 // @vitest-environment jsdom
+import { Component } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { Component } from '@angular/core';
-import { TabsComponent } from './tabs.component';
-import { TabComponent } from './tab.component';
-import type { TabsVariant, TabsOrientation, TabsSize } from './tabs.component';
+
 import { ICON_NAMES } from '@shared/constants';
+
+import { TabComponent } from './tab.component';
+import type { TabsOrientation, TabsSize,TabsVariant } from './tabs.component';
+import { TabsComponent } from './tabs.component';
 
 // Test host component
 @Component({

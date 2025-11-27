@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+
+import type { ButtonSize, ButtonType,ButtonVariant } from './button.component';
 import { ButtonComponent } from './button.component';
-import type { ButtonVariant, ButtonSize, ButtonType } from './button.component';
 
 describe('ButtonComponent', () => {
   let component: ButtonComponent;

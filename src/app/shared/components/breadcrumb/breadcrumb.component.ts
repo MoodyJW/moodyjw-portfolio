@@ -1,14 +1,16 @@
+import { CommonModule } from '@angular/common';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
+  computed,
   input,
   output,
-  computed,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
-import { IconComponent } from '../icon/icon.component';
+
 import type { IconName } from '@shared/constants';
+
+import { IconComponent } from '../icon/icon.component';
 
 export type BreadcrumbVariant = 'default' | 'slash' | 'chevron' | 'arrow';
 export type BreadcrumbSize = 'sm' | 'md' | 'lg';

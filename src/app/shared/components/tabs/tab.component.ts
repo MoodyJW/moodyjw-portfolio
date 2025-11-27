@@ -1,11 +1,12 @@
+import { CommonModule } from '@angular/common';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
+  computed,
   input,
   signal,
-  computed,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
+
 import type { IconName } from '@shared/constants';
 
 /**

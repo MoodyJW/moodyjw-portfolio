@@ -1,6 +1,7 @@
-import { Component, ChangeDetectionStrategy, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
-import { ROUTE_PATHS, EXTERNAL_LINKS, LABELS } from '@shared/constants';
+
+import { EXTERNAL_LINKS, LABELS,ROUTE_PATHS } from '@shared/constants';
 
 @Component({
   selector: 'app-home',

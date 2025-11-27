@@ -1,8 +1,9 @@
+import { ICON_NAMES } from '@shared/constants';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { applicationConfig } from '@storybook/angular';
-import { TabsComponent } from './tabs.component';
+
 import { TabComponent } from './tab.component';
-import { ICON_NAMES } from '@shared/constants';
+import { TabsComponent } from './tabs.component';
 
 const meta: Meta<TabsComponent> = {
   title: 'Shared/Tabs',

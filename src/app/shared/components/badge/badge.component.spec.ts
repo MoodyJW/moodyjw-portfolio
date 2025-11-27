@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+
+import type { BadgePosition,BadgeSize, BadgeVariant } from './badge.component';
 import { BadgeComponent } from './badge.component';
-import type { BadgeVariant, BadgeSize, BadgePosition } from './badge.component';
 
 describe('BadgeComponent', () => {
   let component: BadgeComponent;

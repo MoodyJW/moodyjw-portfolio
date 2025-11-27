@@ -1,9 +1,11 @@
 import { computed } from '@angular/core';
+import { inject } from '@angular/core';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
-import { pipe, tap, switchMap, catchError, of } from 'rxjs';
+
+import { catchError, of,pipe, switchMap, tap } from 'rxjs';
+
 import type { Project } from '../models/project.model';
-import { inject } from '@angular/core';
 import { ProjectService } from '../services/project.service';
 
 /**
