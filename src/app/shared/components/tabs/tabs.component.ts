@@ -1,17 +1,19 @@
+import { CommonModule } from '@angular/common';
 import {
-  Component,
+  type AfterContentInit,
   ChangeDetectionStrategy,
+  Component,
+  computed,
+  contentChildren,
+  effect,
   input,
   output,
   signal,
-  computed,
-  effect,
-  contentChildren,
-  type AfterContentInit,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { TabComponent } from './tab.component';
+
 import { IconComponent } from '../icon/icon.component';
+
+import { TabComponent } from './tab.component';
 
 export type TabsVariant = 'default' | 'pills' | 'underline' | 'boxed';
 export type TabsOrientation = 'horizontal' | 'vertical';

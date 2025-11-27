@@ -1,5 +1,7 @@
 import type { HttpInterceptorFn } from '@angular/common/http';
+
 import { delay } from 'rxjs/operators';
+
 import { LATENCY_CONFIG } from '@shared/constants';
 
 /**

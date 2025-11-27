@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+
+import type { InputSize, InputType, InputValidationState,InputVariant } from './input.component';
 import { InputComponent } from './input.component';
-import type { InputVariant, InputSize, InputType, InputValidationState } from './input.component';
 
 describe('InputComponent', () => {
   let component: InputComponent;

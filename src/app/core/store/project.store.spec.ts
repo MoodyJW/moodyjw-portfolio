@@ -1,10 +1,13 @@
-import { TestBed } from '@angular/core/testing';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
-import { ProjectStore } from './project.store';
-import { ProjectService } from '../services/project.service';
-import type { Project } from '../models/project.model';
+import { TestBed } from '@angular/core/testing';
+
 import { of, throwError } from 'rxjs';
+
+import type { Project } from '../models/project.model';
+import { ProjectService } from '../services/project.service';
+
+import { ProjectStore } from './project.store';
 
 describe('ProjectStore', () => {
   let store: InstanceType<typeof ProjectStore>;

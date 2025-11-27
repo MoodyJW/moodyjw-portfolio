@@ -1,8 +1,11 @@
-import type { Meta, StoryObj } from '@storybook/angular';
 import { provideAnimations } from '@angular/platform-browser/animations';
-import { ToastContainerComponent } from './toast-container.component';
-import { ToastService } from '../../services/toast.service';
+
+import type { Meta, StoryObj } from '@storybook/angular';
 import { moduleMetadata } from '@storybook/angular';
+
+import { ToastService } from '../../services/toast.service';
+
+import { ToastContainerComponent } from './toast-container.component';
 
 /**
  * Storybook stories for the ToastContainerComponent.

@@ -1,9 +1,11 @@
 // @vitest-environment jsdom
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { HomeComponent } from './home.component';
 import { provideRouter } from '@angular/router';
-import { ROUTE_PATHS, EXTERNAL_LINKS, LABELS } from '@shared/constants';
+
+import { EXTERNAL_LINKS, LABELS,ROUTE_PATHS } from '@shared/constants';
+
+import { HomeComponent } from './home.component';
 
 describe('HomeComponent', () => {
   let component: HomeComponent;

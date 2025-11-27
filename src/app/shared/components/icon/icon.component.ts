@@ -1,10 +1,11 @@
 import {
-  Component,
   ChangeDetectionStrategy,
-  input,
+  Component,
   computed,
+  input,
 } from '@angular/core';
 import { NgIconComponent, provideIcons } from '@ng-icons/core';
+
 import { ICON_REGISTRY, type IconName } from '@shared/constants';
 
 export type IconSize = 'xs' | 'sm' | 'md' | 'lg' | 'xl' | '2xl';

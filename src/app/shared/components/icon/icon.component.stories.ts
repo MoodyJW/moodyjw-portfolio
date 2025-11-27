@@ -1,7 +1,8 @@
-import type { Meta, StoryObj } from '@storybook/angular';
-import { argsToTemplate, applicationConfig } from '@storybook/angular';
-import { IconComponent } from './icon.component';
 import { ICON_NAMES } from '@shared/constants';
+import type { Meta, StoryObj } from '@storybook/angular';
+import { applicationConfig,argsToTemplate } from '@storybook/angular';
+
+import { IconComponent } from './icon.component';
 
 const meta: Meta<IconComponent> = {
   title: 'Shared/Icon',

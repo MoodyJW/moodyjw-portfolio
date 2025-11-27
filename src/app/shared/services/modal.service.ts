@@ -1,7 +1,8 @@
 /* eslint-disable no-undef */
-// eslint-disable-next-line @typescript-eslint/consistent-type-imports
-import { Injectable, signal, createComponent, ApplicationRef, EnvironmentInjector } from '@angular/core';
-import type { ComponentRef, Type } from '@angular/core';
+ 
+import type { ApplicationRef, ComponentRef, EnvironmentInjector,Type } from '@angular/core';
+import { createComponent,Injectable, signal } from '@angular/core';
+
 import { ModalComponent } from '../components/modal/modal.component';
 
 /**

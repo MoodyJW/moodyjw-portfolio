@@ -1,16 +1,16 @@
+import { A11yModule } from '@angular/cdk/a11y';
+import { CommonModule } from '@angular/common';
+import type { ElementRef } from '@angular/core';
 import {
-  Component,
   ChangeDetectionStrategy,
-  input,
-  output,
+  Component,
   computed,
   effect,
+  input,
+  output,
   signal,
   viewChild,
 } from '@angular/core';
-import type { ElementRef } from '@angular/core';
-import { CommonModule } from '@angular/common';
-import { A11yModule } from '@angular/cdk/a11y';
 
 /* eslint-disable no-undef */
 export type ModalVariant = 'default' | 'fullscreen' | 'dialog' | 'sidebar';

@@ -1,8 +1,10 @@
 // @vitest-environment jsdom
 import { TestBed } from '@angular/core/testing';
+
+import { afterEach,beforeEach, vi } from 'vitest';
+
 import type { ToastConfig } from './toast.service';
 import { ToastService } from './toast.service';
-import { vi, beforeEach, afterEach } from 'vitest';
 
 describe('ToastService', () => {
   let service: ToastService;

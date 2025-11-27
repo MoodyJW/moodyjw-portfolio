@@ -1,11 +1,11 @@
+import { CommonModule } from '@angular/common';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
+  computed,
   input,
   output,
-  computed,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 
 export type ToastVariant = 'success' | 'error' | 'warning' | 'info';
 export type ToastPosition =

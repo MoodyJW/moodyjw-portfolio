@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
+
+import type { SkeletonAnimation,SkeletonVariant } from './skeleton.component';
 import { SkeletonComponent } from './skeleton.component';
-import type { SkeletonVariant, SkeletonAnimation } from './skeleton.component';
 
 describe('SkeletonComponent', () => {
   let component: SkeletonComponent;

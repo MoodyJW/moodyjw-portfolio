@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { LoadingSpinnerComponent } from './loading-spinner.component';
+
 import type { SpinnerSize, SpinnerVariant } from './loading-spinner.component';
+import { LoadingSpinnerComponent } from './loading-spinner.component';
 
 describe('LoadingSpinnerComponent', () => {
   let component: LoadingSpinnerComponent;

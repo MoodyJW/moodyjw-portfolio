@@ -2,9 +2,10 @@
 /// <reference types="vitest/globals" />
 
 import { TestBed } from '@angular/core/testing';
-// import { BrowserTestingModule, platformBrowserTesting } from '@angular/platform-browser/testing';
-import { ThemeService, getSystemThemeSlug, onSystemThemeChange } from './theme.service';
+
 import { THEMES } from '../constants/themes.constants';
+
+import { getSystemThemeSlug, onSystemThemeChange, ThemeService } from './theme.service';
 
 declare const window: Window & typeof globalThis;
 declare const document: Document;
@@ -31,51 +32,55 @@ function mockLocalStorage(store: Record<string, string>): Storage {
   };
 }
 describe('ThemeService', () => {
-    it('_applyTheme does not throw if document is undefined', () => {
-      const origDocument = window.document;
-      // @ts-expect-error
-      delete window.document;
-      const s = TestBed.inject(ThemeService);
-      // @ts-ignore
-      expect(() => s._applyTheme('aurora')).not.toThrow();
-      window.document = origDocument;
-    });
+  it('_applyTheme does not throw if document is undefined', () => {
+    const origDocument = window.document;
+    // @ts-expect-error
+    delete window.document;
+    const s = TestBed.inject(ThemeService);
+    // @ts-ignore
+    expect(() => s._applyTheme('aurora')).not.toThrow();
+    window.document = origDocument;
+  });
 
-    it('_getInitialThemeSlug returns system theme if pref is null', () => {
-      const s = TestBed.inject(ThemeService);
-      // @ts-ignore
-      vi.spyOn(s, '_getStoredPreference').mockReturnValue(null);
-      // @ts-ignore
-      expect(s._getInitialThemeSlug()).toBe(getSystemThemeSlug());
-    });
+  it('_getInitialThemeSlug returns system theme if pref is null', () => {
+    const s = TestBed.inject(ThemeService);
+    // @ts-ignore
+    vi.spyOn(s, '_getStoredPreference').mockReturnValue(null);
+    // @ts-ignore
+    expect(s._getInitialThemeSlug()).toBe(getSystemThemeSlug());
+  });
 
-    it('_getInitialThemeSlug returns system theme if pref.slug is not in availableThemes', () => {
-      const s = TestBed.inject(ThemeService);
-      // @ts-ignore
-      vi.spyOn(s, '_getStoredPreference').mockReturnValue({ slug: 'not-a-theme', timestamp: Date.now(), version: 1 });
-      // @ts-ignore
-      expect(s._getInitialThemeSlug()).toBe(getSystemThemeSlug());
+  it('_getInitialThemeSlug returns system theme if pref.slug is not in availableThemes', () => {
+    const s = TestBed.inject(ThemeService);
+    // @ts-ignore
+    vi.spyOn(s, '_getStoredPreference').mockReturnValue({
+      slug: 'not-a-theme',
+      timestamp: Date.now(),
+      version: 1,
     });
+    // @ts-ignore
+    expect(s._getInitialThemeSlug()).toBe(getSystemThemeSlug());
+  });
 
-    it('setTheme does nothing if slug is undefined', () => {
-      const s = TestBed.inject(ThemeService);
-      // @ts-ignore
-      expect(() => s.setTheme(undefined)).not.toThrow();
-    });
+  it('setTheme does nothing if slug is undefined', () => {
+    const s = TestBed.inject(ThemeService);
+    // @ts-ignore
+    expect(() => s.setTheme(undefined)).not.toThrow();
+  });
 
-    it('_getStoredPreference returns null for invalid JSON', () => {
-      window.localStorage.setItem('theme-preference-v1', '{invalid json');
-      const s = TestBed.inject(ThemeService);
-      // @ts-ignore
-      expect(s._getStoredPreference()).toBeNull();
-    });
+  it('_getStoredPreference returns null for invalid JSON', () => {
+    window.localStorage.setItem('theme-preference-v1', '{invalid json');
+    const s = TestBed.inject(ThemeService);
+    // @ts-ignore
+    expect(s._getStoredPreference()).toBeNull();
+  });
 
-    it('_getStoredPreference returns null for missing fields', () => {
-      window.localStorage.setItem('theme-preference-v1', JSON.stringify({ foo: 'bar' }));
-      const s = TestBed.inject(ThemeService);
-      // @ts-ignore
-      expect(s._getStoredPreference()).toBeNull();
-    });
+  it('_getStoredPreference returns null for missing fields', () => {
+    window.localStorage.setItem('theme-preference-v1', JSON.stringify({ foo: 'bar' }));
+    const s = TestBed.inject(ThemeService);
+    // @ts-ignore
+    expect(s._getStoredPreference()).toBeNull();
+  });
   // --- Additional coverage tests for uncovered branches/lines ---
 
   it('getSystemThemeSlug returns lumen if matchMedia is missing', () => {
@@ -310,7 +315,10 @@ describe('ThemeService', () => {
   });
 
   it('_getInitialThemeSlug returns stored preference slug when valid', () => {
-    window.localStorage.setItem('theme-preference-v1', JSON.stringify({ slug: 'cosmos', timestamp: Date.now(), version: 1 }));
+    window.localStorage.setItem(
+      'theme-preference-v1',
+      JSON.stringify({ slug: 'cosmos', timestamp: Date.now(), version: 1 })
+    );
     const s = TestBed.inject(ThemeService);
     // @ts-ignore
     expect(s._getInitialThemeSlug()).toBe('cosmos');

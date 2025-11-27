@@ -1,6 +1,7 @@
 /* eslint-disable no-undef */
 import { Injectable, signal } from '@angular/core';
-import type { ToastVariant, ToastPosition } from '../components/toast/toast.component';
+
+import type { ToastPosition,ToastVariant } from '../components/toast/toast.component';
 
 /**
  * Configuration options for displaying a toast notification

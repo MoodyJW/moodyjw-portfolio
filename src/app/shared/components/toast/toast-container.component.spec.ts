@@ -1,9 +1,12 @@
 // @vitest-environment jsdom
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { ToastContainerComponent } from './toast-container.component';
+
+import { afterEach,beforeEach, vi } from 'vitest';
+
 import { ToastService } from '../../services/toast.service';
-import { vi, beforeEach, afterEach } from 'vitest';
+
+import { ToastContainerComponent } from './toast-container.component';
 
 describe('ToastContainerComponent', () => {
   let component: ToastContainerComponent;

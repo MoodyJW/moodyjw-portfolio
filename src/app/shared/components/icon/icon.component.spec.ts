@@ -1,9 +1,11 @@
 // @vitest-environment jsdom
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import { IconComponent } from './icon.component';
-import type { IconSize, IconColor } from './icon.component';
+
 import { ICON_NAMES } from '@shared/constants';
+
+import type { IconColor,IconSize } from './icon.component';
+import { IconComponent } from './icon.component';
 
 describe('IconComponent', () => {
   let component: IconComponent;

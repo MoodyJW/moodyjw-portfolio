@@ -1,8 +1,10 @@
-import { inject, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import type { Translation, TranslocoLoader } from '@jsverse/transloco';
+import { inject, Injectable } from '@angular/core';
+
 import type { Observable } from 'rxjs';
+
 import { API_CONFIG } from '@shared/constants';
+import type { Translation, TranslocoLoader } from '@jsverse/transloco';
 
 /**
  * Custom Transloco loader for loading translation files

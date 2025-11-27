@@ -1,7 +1,8 @@
 // @vitest-environment jsdom
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
-import type { ToastVariant, ToastPosition } from './toast.component';
+
+import type { ToastPosition,ToastVariant } from './toast.component';
 import { ToastComponent } from './toast.component';
 
 describe('ToastComponent', () => {

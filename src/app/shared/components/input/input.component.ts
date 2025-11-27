@@ -1,16 +1,17 @@
+import { CommonModule } from '@angular/common';
 import {
-  Component,
   ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  type ElementRef,
   input,
   output,
-  computed,
   signal,
-  effect,
   viewChild,
-  type ElementRef,
 } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
+
 import { InputFooterComponent } from '../input-footer';
 
 export type InputVariant = 'default' | 'filled' | 'outlined';

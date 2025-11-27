@@ -1,4 +1,5 @@
 import type { Routes } from '@angular/router';
+
 import { ROUTES } from '@shared/constants';
 
 export const routes: Routes = [

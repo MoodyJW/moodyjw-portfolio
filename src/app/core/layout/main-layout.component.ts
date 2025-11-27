@@ -1,6 +1,7 @@
-import { Component, ChangeDetectionStrategy } from '@angular/core';
-import { RouterOutlet, RouterLink, RouterLinkActive } from '@angular/router';
-import { ROUTE_PATHS, NAV_ITEMS, APP_NAME, COPYRIGHT_YEAR } from '@shared/constants';
+import { ChangeDetectionStrategy,Component } from '@angular/core';
+import { RouterLink, RouterLinkActive,RouterOutlet } from '@angular/router';
+
+import { APP_NAME, COPYRIGHT_YEAR,NAV_ITEMS, ROUTE_PATHS } from '@shared/constants';
 
 @Component({
   selector: 'app-main-layout',

@@ -1,7 +1,9 @@
-import type { Meta, StoryObj } from '@storybook/angular';
-import { BreadcrumbComponent } from './breadcrumb.component';
-import type { BreadcrumbItem } from './breadcrumb.component';
 import { provideRouter } from '@angular/router';
+
+import type { Meta, StoryObj } from '@storybook/angular';
+
+import type { BreadcrumbItem } from './breadcrumb.component';
+import { BreadcrumbComponent } from './breadcrumb.component';
 
 const meta: Meta<BreadcrumbComponent> = {
   title: 'Shared/Breadcrumb',
