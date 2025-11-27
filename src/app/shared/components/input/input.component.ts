@@ -11,7 +11,7 @@ import {
 } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { InputFooterComponent } from './input-footer.component';
+import { InputFooterComponent } from '../input-footer';
 
 export type InputVariant = 'default' | 'filled' | 'outlined';
 export type InputSize = 'sm' | 'md' | 'lg';
