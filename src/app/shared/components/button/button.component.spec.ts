@@ -612,4 +612,159 @@ describe('ButtonComponent', () => {
       expect(component.ariaBusyValue()).toBeUndefined();
     });
   });
+
+  describe('Template Branch Coverage - Icon and Loading Combinations', () => {
+    it('should show iconLeft when not loading', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('iconLeft', 'arrow-left');
+      fixture.componentRef.setInput('loading', false);
+      fixture.detectChanges();
+
+      const iconLeft = fixture.nativeElement.querySelector('.btn__icon--left');
+      expect(iconLeft).toBeTruthy();
+      expect(iconLeft?.textContent?.trim()).toBe('arrow-left');
+    });
+
+    it('should NOT show iconLeft when loading is true', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('iconLeft', 'arrow-left');
+      fixture.componentRef.setInput('loading', true);
+      fixture.detectChanges();
+
+      const iconLeft = fixture.nativeElement.querySelector('.btn__icon--left');
+      expect(iconLeft).toBeNull();
+    });
+
+    it('should show iconRight when not loading and not iconOnly', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('iconRight', 'arrow-right');
+      fixture.componentRef.setInput('loading', false);
+      fixture.componentRef.setInput('iconOnly', false);
+      fixture.detectChanges();
+
+      const iconRight = fixture.nativeElement.querySelector('.btn__icon--right');
+      expect(iconRight).toBeTruthy();
+      expect(iconRight?.textContent?.trim()).toBe('arrow-right');
+    });
+
+    it('should NOT show iconRight when loading is true', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('iconRight', 'arrow-right');
+      fixture.componentRef.setInput('loading', true);
+      fixture.componentRef.setInput('iconOnly', false);
+      fixture.detectChanges();
+
+      const iconRight = fixture.nativeElement.querySelector('.btn__icon--right');
+      expect(iconRight).toBeNull();
+    });
+
+    it('should NOT show iconRight when iconOnly is true', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('iconRight', 'arrow-right');
+      fixture.componentRef.setInput('loading', false);
+      fixture.componentRef.setInput('iconOnly', true);
+      fixture.detectChanges();
+
+      const iconRight = fixture.nativeElement.querySelector('.btn__icon--right');
+      expect(iconRight).toBeNull();
+    });
+
+    it('should NOT show iconRight when both loading and iconOnly are true', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('iconRight', 'arrow-right');
+      fixture.componentRef.setInput('loading', true);
+      fixture.componentRef.setInput('iconOnly', true);
+      fixture.detectChanges();
+
+      const iconRight = fixture.nativeElement.querySelector('.btn__icon--right');
+      expect(iconRight).toBeNull();
+    });
+
+    it('should show content wrapper when iconOnly is false', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('iconOnly', false);
+      fixture.detectChanges();
+
+      const contentWrapper = fixture.nativeElement.querySelector('.btn__content');
+      expect(contentWrapper).toBeTruthy();
+    });
+
+    it('should NOT show content wrapper when iconOnly is true', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('iconOnly', true);
+      fixture.detectChanges();
+
+      const contentWrapper = fixture.nativeElement.querySelector('.btn__content');
+      expect(contentWrapper).toBeNull();
+    });
+
+    it('should show spinner when loading is true', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('loading', true);
+      fixture.detectChanges();
+
+      const spinner = fixture.nativeElement.querySelector('.btn__spinner-icon');
+      expect(spinner).toBeTruthy();
+    });
+
+    it('should NOT show spinner when loading is false', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('loading', false);
+      fixture.detectChanges();
+
+      const spinner = fixture.nativeElement.querySelector('.btn__spinner-icon');
+      expect(spinner).toBeNull();
+    });
+
+    it('should handle all icons with loading - only spinner shows', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('iconLeft', 'left');
+      fixture.componentRef.setInput('iconRight', 'right');
+      fixture.componentRef.setInput('loading', true);
+      fixture.componentRef.setInput('iconOnly', false);
+      fixture.detectChanges();
+
+      const spinner = fixture.nativeElement.querySelector('.btn__spinner-icon');
+      const iconLeft = fixture.nativeElement.querySelector('.btn__icon--left');
+      const iconRight = fixture.nativeElement.querySelector('.btn__icon--right');
+
+      expect(spinner).toBeTruthy();
+      expect(iconLeft).toBeNull();
+      expect(iconRight).toBeNull();
+    });
+
+    it('should handle iconLeft and iconRight together when not loading or iconOnly', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('iconLeft', 'left');
+      fixture.componentRef.setInput('iconRight', 'right');
+      fixture.componentRef.setInput('loading', false);
+      fixture.componentRef.setInput('iconOnly', false);
+      fixture.detectChanges();
+
+      const iconLeft = fixture.nativeElement.querySelector('.btn__icon--left');
+      const iconRight = fixture.nativeElement.querySelector('.btn__icon--right');
+      const content = fixture.nativeElement.querySelector('.btn__content');
+
+      expect(iconLeft).toBeTruthy();
+      expect(iconRight).toBeTruthy();
+      expect(content).toBeTruthy();
+    });
+
+    it('should show only iconLeft when iconOnly is true (no content, no iconRight)', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('iconLeft', 'left');
+      fixture.componentRef.setInput('iconRight', 'right');
+      fixture.componentRef.setInput('loading', false);
+      fixture.componentRef.setInput('iconOnly', true);
+      fixture.detectChanges();
+
+      const iconLeft = fixture.nativeElement.querySelector('.btn__icon--left');
+      const iconRight = fixture.nativeElement.querySelector('.btn__icon--right');
+      const content = fixture.nativeElement.querySelector('.btn__content');
+
+      expect(iconLeft).toBeTruthy();
+      expect(iconRight).toBeNull(); // iconRight requires !iconOnly
+      expect(content).toBeNull(); // content requires !iconOnly
+    });
+  });
 });

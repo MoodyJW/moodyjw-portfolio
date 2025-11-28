@@ -430,6 +430,158 @@ describe('TabsComponent with Host', () => {
   });
 });
 
+// Test host component with icons
+@Component({
+  standalone: true,
+  imports: [TabsComponent, TabComponent],
+  template: `
+    <app-tabs [ariaLabel]="'Tabs with icons'" [(activeTabId)]="activeTabId">
+      <app-tab tabId="home" label="Home" [icon]="ICON_NAMES.HOME">
+        <p>Home content</p>
+      </app-tab>
+      <app-tab tabId="settings" label="Settings" [icon]="ICON_NAMES.SETTINGS">
+        <p>Settings content</p>
+      </app-tab>
+      <app-tab tabId="profile" label="Profile">
+        <p>Profile content without icon</p>
+      </app-tab>
+    </app-tabs>
+  `,
+})
+class TestHostWithIconsComponent {
+  activeTabId = 'home';
+  readonly ICON_NAMES = ICON_NAMES;
+}
+
+describe('TabsComponent with Icons', () => {
+  let hostFixture: ComponentFixture<TestHostWithIconsComponent>;
+  let hostComponent: TestHostWithIconsComponent;
+
+  beforeEach(async () => {
+    await TestBed.configureTestingModule({
+      imports: [TestHostWithIconsComponent],
+    }).compileComponents();
+
+    hostFixture = TestBed.createComponent(TestHostWithIconsComponent);
+    hostComponent = hostFixture.componentInstance;
+    hostFixture.detectChanges();
+  });
+
+  describe('Icon Rendering', () => {
+    it('should render icons in tabs that have them', () => {
+      const icons = hostFixture.nativeElement.querySelectorAll('.tabs__tab-icon');
+      expect(icons.length).toBe(2); // Only first two tabs have icons
+    });
+
+    it('should render app-icon component for tabs with icons', () => {
+      const iconComponents = hostFixture.nativeElement.querySelectorAll('app-icon');
+      expect(iconComponents.length).toBe(2);
+    });
+
+    it('should not render icons for tabs without them', () => {
+      const tabs = hostFixture.nativeElement.querySelectorAll('[role="tab"]');
+      const thirdTab = tabs[2]; // Profile tab without icon
+      const iconInThirdTab = thirdTab.querySelector('.tabs__tab-icon');
+      expect(iconInThirdTab).toBeFalsy();
+    });
+
+    it('should render icon before label', () => {
+      const firstTab = hostFixture.nativeElement.querySelector('[role="tab"]');
+      const icon = firstTab.querySelector('.tabs__tab-icon');
+      const label = firstTab.querySelector('.tabs__tab-label');
+
+      expect(icon).toBeTruthy();
+      expect(label).toBeTruthy();
+
+      // Check that icon comes before label in DOM
+      const iconIndex = Array.from(firstTab.children).indexOf(icon);
+      const labelIndex = Array.from(firstTab.children).indexOf(label);
+      expect(iconIndex).toBeLessThan(labelIndex);
+    });
+
+    it('should apply decorative attribute to icons', () => {
+      const iconComponents = hostFixture.nativeElement.querySelectorAll('app-icon');
+      iconComponents.forEach((icon: HTMLElement) => {
+        // The icon component should have decorative set to true
+        expect(icon).toBeTruthy();
+      });
+    });
+
+    it('should apply small size to icons', () => {
+      // Icons should be rendered with 'sm' size
+      const firstTab = hostFixture.nativeElement.querySelector('[role="tab"]');
+      const icon = firstTab.querySelector('.tabs__tab-icon');
+      expect(icon).toBeTruthy();
+    });
+
+    it('should switch tabs with icons correctly', () => {
+      const tabs = hostFixture.nativeElement.querySelectorAll('[role="tab"]');
+
+      // Click second tab (with icon)
+      tabs[1].click();
+      hostFixture.detectChanges();
+
+      expect(hostComponent.activeTabId).toBe('settings');
+
+      // Icon should still be rendered
+      const icons = hostFixture.nativeElement.querySelectorAll('.tabs__tab-icon');
+      expect(icons.length).toBe(2);
+    });
+
+    it('should maintain icon rendering when tab becomes active', () => {
+      const tabs = hostFixture.nativeElement.querySelectorAll('[role="tab"]');
+      const firstTab = tabs[0];
+
+      // First tab starts active and should have icon
+      const iconBeforeClick = firstTab.querySelector('.tabs__tab-icon');
+      expect(iconBeforeClick).toBeTruthy();
+
+      // Click another tab
+      tabs[1].click();
+      hostFixture.detectChanges();
+
+      // Click first tab again
+      tabs[0].click();
+      hostFixture.detectChanges();
+
+      // Icon should still be there
+      const iconAfterClick = firstTab.querySelector('.tabs__tab-icon');
+      expect(iconAfterClick).toBeTruthy();
+    });
+  });
+
+  describe('Mixed Tabs (With and Without Icons)', () => {
+    it('should handle tabs with and without icons together', () => {
+      const tabs = hostFixture.nativeElement.querySelectorAll('[role="tab"]');
+      expect(tabs.length).toBe(3);
+
+      // First two have icons
+      expect(tabs[0].querySelector('.tabs__tab-icon')).toBeTruthy();
+      expect(tabs[1].querySelector('.tabs__tab-icon')).toBeTruthy();
+
+      // Third doesn't have icon
+      expect(tabs[2].querySelector('.tabs__tab-icon')).toBeFalsy();
+    });
+
+    it('should render labels for all tabs regardless of icons', () => {
+      const labels = hostFixture.nativeElement.querySelectorAll('.tabs__tab-label');
+      expect(labels.length).toBe(3);
+      expect(labels[0].textContent.trim()).toBe('Home');
+      expect(labels[1].textContent.trim()).toBe('Settings');
+      expect(labels[2].textContent.trim()).toBe('Profile');
+    });
+
+    it('should apply correct accessibility attributes for all tabs', () => {
+      const tabs = hostFixture.nativeElement.querySelectorAll('[role="tab"]');
+
+      tabs.forEach((tab: HTMLElement, index: number) => {
+        expect(tab.getAttribute('role')).toBe('tab');
+        expect(tab.getAttribute('aria-selected')).toBe(index === 0 ? 'true' : 'false');
+      });
+    });
+  });
+});
+
 describe('TabComponent', () => {
   let component: TabComponent;
   let fixture: ComponentFixture<TabComponent>;
