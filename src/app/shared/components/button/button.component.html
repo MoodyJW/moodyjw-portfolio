@@ -9,30 +9,12 @@
   [attr.aria-disabled]="disabled() ? 'true' : undefined"
   (click)="handleClick($event)"
 >
-  @if (loading()) {
-    <span class="btn__spinner" aria-hidden="true">
-      <!-- Placeholder for loading spinner - will be styled with CSS -->
-      <span class="btn__spinner-icon"></span>
-    </span>
-  }
-
-  @if (iconLeft() && !loading()) {
-    <span class="btn__icon btn__icon--left" aria-hidden="true">
-      <!-- Icon rendering will be implemented when icon system is added -->
-      {{ iconLeft() }}
-    </span>
-  }
-
-  @if (!iconOnly()) {
-    <span class="btn__content">
-      <ng-content />
-    </span>
-  }
-
-  @if (iconRight() && !loading() && !iconOnly()) {
-    <span class="btn__icon btn__icon--right" aria-hidden="true">
-      <!-- Icon rendering will be implemented when icon system is added -->
-      {{ iconRight() }}
-    </span>
-  }
+  <app-button-content
+    [loading]="loading()"
+    [iconLeft]="iconLeft()"
+    [iconRight]="iconRight()"
+    [iconOnly]="iconOnly()"
+  >
+    <ng-content />
+  </app-button-content>
 </button>

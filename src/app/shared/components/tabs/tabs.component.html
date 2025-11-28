@@ -7,29 +7,18 @@
     [attr.aria-orientation]="orientation()"
   >
     @for (tab of tabs(); track trackByTabId($index, tab); let i = $index) {
-      <button
-        class="tabs__tab"
-        [class.tabs__tab--active]="activeTabIndex() === i"
-        [class.tabs__tab--disabled]="tab.disabled()"
-        role="tab"
-        [id]="tab.tabId()"
-        [attr.aria-selected]="activeTabIndex() === i"
-        [attr.aria-controls]="tab.panelId()"
-        [attr.tabindex]="activeTabIndex() === i ? 0 : -1"
-        [disabled]="tab.disabled()"
-        (click)="selectTab(i)"
-        (keydown)="handleKeydown($event, i)"
-      >
-        @if (tab.icon()) {
-          <app-icon
-            [name]="tab.icon()!"
-            size="sm"
-            [decorative]="true"
-            class="tabs__tab-icon"
-          />
-        }
-        <span class="tabs__tab-label">{{ tab.label() }}</span>
-      </button>
+    <app-tab-button
+      [label]="tab.label()"
+      [icon]="tab.icon()"
+      [tabId]="tab.tabId()"
+      [isActive]="activeTabIndex() === i"
+      [disabled]="tab.disabled()"
+      [ariaControls]="tab.panelId()"
+      [ariaSelected]="activeTabIndex() === i"
+      [tabindex]="activeTabIndex() === i ? 0 : -1"
+      (clicked)="selectTab(i)"
+      (keydown)="handleKeydown($event, i)"
+    />
     }
   </div>
 

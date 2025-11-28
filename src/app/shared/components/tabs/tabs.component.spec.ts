@@ -407,7 +407,14 @@ describe('TabsComponent with Host', () => {
 
   it('should select tab on click', () => {
     const tabs = hostFixture.nativeElement.querySelectorAll('[role="tab"]');
-    tabs[1].click();
+    const tabEl = tabs[1];
+    const innerButton = tabEl.querySelector('button');
+    if (innerButton) {
+      innerButton.click();
+    } else {
+      tabEl.click();
+    }
+
     hostFixture.detectChanges();
 
     expect(hostComponent.activeTabId).toBe('tab2');
@@ -494,8 +501,11 @@ describe('TabsComponent with Icons', () => {
       expect(label).toBeTruthy();
 
       // Check that icon comes before label in DOM
-      const iconIndex = Array.from(firstTab.children).indexOf(icon);
-      const labelIndex = Array.from(firstTab.children).indexOf(label);
+      // Note: Icon and label are now inside btn__content wrapper within app-button-content
+      const contentWrapper = firstTab.querySelector('.btn__content');
+      expect(contentWrapper).toBeTruthy();
+      const iconIndex = Array.from(contentWrapper.children).indexOf(icon);
+      const labelIndex = Array.from(contentWrapper.children).indexOf(label);
       expect(iconIndex).toBeLessThan(labelIndex);
     });
 
@@ -517,8 +527,13 @@ describe('TabsComponent with Icons', () => {
     it('should switch tabs with icons correctly', () => {
       const tabs = hostFixture.nativeElement.querySelectorAll('[role="tab"]');
 
-      // Click second tab (with icon)
-      tabs[1].click();
+      // Click second tab (with icon) - need to click the inner button element
+      const secondTabButton = tabs[1].tagName === 'BUTTON' ? tabs[1] : tabs[1].querySelector('button');
+      if (secondTabButton) {
+        secondTabButton.click();
+      } else {
+        tabs[1].click();
+      }
       hostFixture.detectChanges();
 
       expect(hostComponent.activeTabId).toBe('settings');

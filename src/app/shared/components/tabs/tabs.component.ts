@@ -11,7 +11,7 @@ import {
   signal,
 } from '@angular/core';
 
-import { IconComponent } from '../icon/icon.component';
+import { TabButtonComponent } from '../tab-button/tab-button.component';
 
 import { TabComponent } from './tab.component';
 
@@ -41,7 +41,7 @@ export type TabsSize = 'sm' | 'md' | 'lg';
 @Component({
   selector: 'app-tabs',
   standalone: true,
-  imports: [CommonModule, IconComponent],
+  imports: [CommonModule, TabButtonComponent],
   templateUrl: './tabs.component.html',
   styleUrl: './tabs.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
