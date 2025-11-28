@@ -546,7 +546,7 @@ describe('SelectComponent', () => {
       fixture.componentRef.setInput('required', true);
       fixture.detectChanges();
 
-      const required = fixture.debugElement.query(By.css('.select-label__required'));
+      const required = fixture.debugElement.query(By.css('.input-label__required'));
       expect(required).toBeTruthy();
       expect(required.nativeElement.textContent).toBe('*');
     });

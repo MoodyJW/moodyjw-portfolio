@@ -1,141 +1,60 @@
-<!-- eslint-disable @angular-eslint/template/cyclomatic-complexity -->
 <div [class]="wrapperClasses()">
-  @if (label()) {
-  <label
-    [id]="labelId()"
-    [for]="'select-' + labelId()"
-    class="select-label"
-    [class.select-label--required]="required()"
-    [class.select-label--disabled]="disabled()"
-  >
-    {{ label() }}
-    @if (required()) {
-    <span class="select-label__required" aria-label="required" role="alert">*</span>
-    }
-  </label>
-  }
+  <app-input-label
+    [forId]="labelId()"
+    [label]="label()"
+    [required]="required()"
+    [labelClass]="'select-label' + (disabled() ? ' select-label--disabled' : '')"
+  />
 
   <div class="select-container">
-    <button
+    <app-select-button
       #selectButton
-      type="button"
-      [id]="label() ? 'select-' + labelId() : undefined"
-      [class]="buttonClasses()"
+      [buttonId]="label() ? 'select-' + labelId() : undefined"
+      [buttonClass]="buttonClasses()"
       [disabled]="disabled()"
-      [attr.aria-label]="ariaLabel()"
-      [attr.aria-labelledby]="labelId()"
-      [attr.aria-describedby]="computedAriaDescribedBy()"
-      [attr.aria-invalid]="computedAriaInvalid()"
-      [attr.aria-required]="required() ? 'true' : undefined"
-      [attr.aria-expanded]="isOpen()"
-      [attr.aria-haspopup]="'listbox'"
-      [attr.aria-controls]="listboxId()"
-      (click)="toggleDropdown()"
-      (focus)="handleFocus($event)"
-      (blur)="handleBlur($event)"
+      [ariaLabel]="ariaLabel()"
+      [ariaLabelledby]="labelId()"
+      [ariaDescribedby]="computedAriaDescribedBy()"
+      [ariaInvalid]="computedAriaInvalid()"
+      [ariaRequired]="required() ? 'true' : undefined"
+      [isOpen]="isOpen()"
+      [ariaControls]="listboxId()"
+      [displayText]="displayText()"
+      [hasValue]="hasValue()"
+      [showClear]="clearable() && hasValue() && !disabled()"
+      (clicked)="toggleDropdown()"
+      (clearClicked)="clearValue($event)"
+      (focused)="handleFocus($event)"
+      (blurred)="handleBlur($event)"
       (keydown)="handleKeydown($event)"
-    >
-      <span class="select-button__text" [class.select-button__text--placeholder]="!hasValue()">
-        {{ displayText() }}
-      </span>
-
-      <span class="select-button__icons">
-        @if (clearable() && hasValue() && !disabled()) {
-        <button
-          type="button"
-          class="select-button__clear"
-          aria-label="Clear selection"
-          (click)="clearValue($event)"
-        >
-          <app-icon [name]="'heroXMark'" [size]="'sm'" [ariaHidden]="true" />
-        </button>
-        }
-        <span class="select-button__arrow" [class.select-button__arrow--open]="isOpen()">
-          <app-icon [name]="'heroChevronDown'" [size]="'sm'" [ariaHidden]="true" />
-        </span>
-      </span>
-    </button>
+    />
 
     @if (isOpen()) {
-    <div [class]="dropdownClasses()" role="presentation">
-      @if (searchable()) {
-      <div class="select-search">
-        <input
-          #searchInput
-          type="text"
-          class="select-search__input"
-          placeholder="Search..."
-          [value]="searchQuery()"
-          (input)="handleSearchInput($event)"
-          (keydown)="handleKeydown($event)"
-          aria-label="Search options"
-        />
-        <span class="select-search__icon">
-          <app-icon [name]="'heroMagnifyingGlass'" [size]="'sm'" [ariaHidden]="true" />
-        </span>
-      </div>
-      }
-
-      <ul
-        [id]="listboxId()"
-        class="select-options"
-        role="listbox"
-        [attr.aria-label]="ariaLabel()"
-        [attr.aria-multiselectable]="multiple() ? 'true' : undefined"
-        [style.max-height.px]="maxVisibleOptions() * 40"
-      >
-        @if (filteredOptions().length === 0) {
-        <li class="select-option select-option--empty" role="option" aria-disabled="true">
-          No options found
-        </li>
-        } @for (option of filteredOptions(); track option.value; let i = $index) {
-        <li
-          class="select-option"
-          [class.select-option--selected]="isOptionSelected(option)"
-          [class.select-option--disabled]="option.disabled"
-          [class.select-option--highlighted]="highlightedIndex() === i"
-          role="option"
-          tabindex="0"
-          [attr.aria-selected]="isOptionSelected(option)"
-          [attr.aria-disabled]="option.disabled ? 'true' : undefined"
-          [attr.data-index]="i"
-          (click)="selectOption(option)"
-          (keydown.enter)="selectOption(option)"
-          (keydown.space)="selectOption(option)"
-          (mouseenter)="highlightedIndex.set(i)"
-        >
-          @if (multiple()) {
-          <span class="select-option__checkbox" [attr.aria-hidden]="true">
-            @if (isOptionSelected(option)) {
-            <app-icon [name]="'heroCheck'" [size]="'sm'" [ariaHidden]="true" />
-            }
-          </span>
-          } @if (!multiple() && isOptionSelected(option)) {
-          <span class="select-option__check" [attr.aria-hidden]="true">
-            <app-icon [name]="'heroCheck'" [size]="'sm'" [ariaHidden]="true" />
-          </span>
-          }
-
-          <span class="select-option__content">
-            <span class="select-option__label">{{ option.label }}</span>
-            @if (option.description) {
-            <span class="select-option__description">{{ option.description }}</span>
-            }
-          </span>
-        </li>
-        }
-      </ul>
-    </div>
+    <app-select-dropdown
+      #searchInput
+      [dropdownClass]="dropdownClasses()"
+      [searchable]="searchable()"
+      [searchQuery]="searchQuery()"
+      [listboxId]="listboxId()"
+      [ariaLabel]="ariaLabel()"
+      [isMultiple]="multiple()"
+      [maxHeight]="maxVisibleOptions() * 40"
+      [options]="filteredOptions()"
+      [highlightedIndex]="highlightedIndex()"
+      [isOptionSelected]="isOptionSelected.bind(this)"
+      (searchInput)="handleSearchInput($event)"
+      (searchKeydown)="handleKeydown($event)"
+      (optionClicked)="selectOption($event)"
+      (optionEnterPressed)="selectOption($event)"
+      (optionSpacePressed)="selectOption($event)"
+      (optionMouseEntered)="highlightedIndex.set($event)"
+    />
     }
   </div>
 
-  @if (showFooter()) {
-  <div class="select-footer">
-    @if (helperText()) {
-    <span [id]="helperTextId()" [class]="helperTextClasses()">
-      {{ helperText() }}
-    </span>
-    }
-  </div>
-  }
+  <app-input-footer
+    [helperText]="helperText()"
+    [helperTextId]="helperTextId()"
+    [helperTextClasses]="helperTextClasses()"
+  />
 </div>
