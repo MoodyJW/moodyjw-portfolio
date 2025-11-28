@@ -1,18 +1,7 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
 
-export type ButtonVariant =
-  | 'primary'
-  | 'secondary'
-  | 'tertiary'
-  | 'ghost'
-  | 'danger';
+export type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'danger';
 export type ButtonSize = 'sm' | 'md' | 'lg';
 export type ButtonType = 'button' | 'submit' | 'reset';
 
@@ -37,7 +26,7 @@ export type ButtonType = 'button' | 'submit' | 'reset';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './button.component.html',
-  styleUrl: './button.component.scss',
+  styleUrls: ['./button.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class ButtonComponent {
@@ -123,9 +112,7 @@ export class ButtonComponent {
   /**
    * Whether the button can be interacted with
    */
-  readonly isInteractive = computed(
-    () => !this.disabled() && !this.loading()
-  );
+  readonly isInteractive = computed(() => !this.disabled() && !this.loading());
 
   /**
    * Computed CSS classes for the button
@@ -135,9 +122,7 @@ export class ButtonComponent {
   /**
    * Computed aria-busy attribute value
    */
-  readonly ariaBusyValue = computed(() =>
-    this.loading() ? 'true' : undefined
-  );
+  readonly ariaBusyValue = computed(() => (this.loading() ? 'true' : undefined));
 
   /**
    * Handle button click events

@@ -1,5 +1,6 @@
 import { defineConfig } from 'vitest/config';
 import { fileURLToPath } from 'node:url';
+import type { Plugin } from 'vite';
 
 export default defineConfig({
   test: {
@@ -28,6 +29,30 @@ export default defineConfig({
       },
     },
   },
+  plugins: [
+    ((): Plugin => {
+      return {
+        name: 'ng-control-flow-preprocess',
+        enforce: 'pre',
+        transform(code: string, id: string) {
+          // Only run for spec/test TypeScript files
+          if (!/\.spec\.ts$/.test(id) && !/\.test\.ts$/.test(id)) return null;
+
+          // Replace @for="..." / @for='...' / @for=`...` with *ngFor="..."
+          const forRe = /@for\s*=\s*(?:"([^"]+)"|'([^']+)'|`([^`]+)`)/g;
+          // Replace @if="..." / @if='...' / @if=`...` with *ngIf="..."
+          const ifRe = /@if\s*=\s*(?:"([^"]+)"|'([^']+)'|`([^`]+)`)/g;
+
+          const transformed = code
+            .replace(forRe, (_m, a, b, c) => `*ngFor="${a || b || c}"`)
+            .replace(ifRe, (_m, a, b, c) => `*ngIf="${a || b || c}"`);
+
+          if (transformed === code) return null;
+          return { code: transformed, map: null };
+        },
+      };
+    })(),
+  ],
   resolve: {
     alias: {
       '@core': fileURLToPath(new URL('./src/app/core', import.meta.url)),

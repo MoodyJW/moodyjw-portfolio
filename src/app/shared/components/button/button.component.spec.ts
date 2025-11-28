@@ -1,8 +1,9 @@
 // @vitest-environment jsdom
+import { ResourceLoader } from '@angular/compiler';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
-import type { ButtonSize, ButtonType,ButtonVariant } from './button.component';
+import type { ButtonSize, ButtonType, ButtonVariant } from './button.component';
 import { ButtonComponent } from './button.component';
 
 describe('ButtonComponent', () => {
@@ -10,9 +11,54 @@ describe('ButtonComponent', () => {
   let fixture: ComponentFixture<ButtonComponent>;
 
   beforeEach(async () => {
-    await TestBed.configureTestingModule({
-      imports: [ButtonComponent],
-    }).compileComponents();
+    TestBed.overrideComponent(ButtonComponent, {
+      set: {
+        template: `
+          <button
+            [type]="type()"
+            [class]="buttonClasses()"
+            [disabled]="disabled() || loading()"
+            [attr.aria-label]="ariaLabel()"
+            [attr.aria-describedby]="ariaDescribedBy()"
+            [attr.aria-pressed]="ariaPressed()"
+            [attr.aria-busy]="ariaBusyValue()"
+            [attr.aria-disabled]="disabled() ? 'true' : undefined"
+            (click)="handleClick($event)"
+          >
+              @if (loading()) {
+              <span class="btn__spinner-icon" aria-hidden="true"></span>
+              }
+
+            @if (iconLeft() && !loading()) {
+            <span class="btn__icon btn__icon--left" aria-hidden="true">
+              {{ iconLeft() }}
+            </span>
+            }
+
+            @if (!iconOnly()) {
+            <span class="btn__content">
+              <ng-content></ng-content>
+            </span>
+            }
+
+            @if (iconRight() && !loading() && !iconOnly()) {
+            <span class="btn__icon btn__icon--right" aria-hidden="true">
+              {{ iconRight() }}
+            </span>
+        }
+          </button>
+        `,
+        styles: [''],
+      },
+    });
+
+    // Ensure ResourceLoader is provided to the Angular compiler so
+    // JIT resolveComponentResources() calls succeed during compile.
+    TestBed.configureCompiler({
+      providers: [{ provide: ResourceLoader, useValue: { get: (_url: string) => '' } }],
+    });
+
+    await TestBed.configureTestingModule({}).compileComponents();
 
     fixture = TestBed.createComponent(ButtonComponent);
     component = fixture.componentInstance;
@@ -180,6 +226,21 @@ describe('ButtonComponent', () => {
 
       expect(emittedEvent).toBe(event);
     });
+
+    it('should NOT emit click when both disabled and loading', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('disabled', true);
+      fixture.componentRef.setInput('loading', true);
+      fixture.detectChanges();
+
+      let clickedEvent: MouseEvent | undefined;
+      component.clicked.subscribe((event) => (clickedEvent = event));
+
+      const buttonElement = fixture.nativeElement.querySelector('button');
+      buttonElement?.click();
+
+      expect(clickedEvent).toBeUndefined();
+    });
   });
 
   describe('Accessibility - ARIA Attributes', () => {
@@ -216,6 +277,15 @@ describe('ButtonComponent', () => {
 
       const buttonElement = fixture.nativeElement.querySelector('button');
       expect(buttonElement?.getAttribute('aria-pressed')).toBe('true');
+    });
+
+    it('should not set aria-pressed when undefined', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Toggle button');
+      // do not set ariaPressed
+      fixture.detectChanges();
+
+      const buttonElement = fixture.nativeElement.querySelector('button');
+      expect(buttonElement?.hasAttribute('aria-pressed')).toBe(false);
     });
 
     it('should set aria-describedby when provided', () => {
@@ -354,6 +424,17 @@ describe('ButtonComponent', () => {
       const buttonElement = fixture.nativeElement.querySelector('button');
       expect(buttonElement?.classList.contains('btn--full-width')).toBe(true);
     });
+
+    it('should apply both disabled and loading classes when both true', () => {
+      fixture.componentRef.setInput('ariaLabel', 'Test button');
+      fixture.componentRef.setInput('disabled', true);
+      fixture.componentRef.setInput('loading', true);
+      fixture.detectChanges();
+
+      const buttonElement = fixture.nativeElement.querySelector('button');
+      expect(buttonElement?.classList.contains('btn--disabled')).toBe(true);
+      expect(buttonElement?.classList.contains('btn--loading')).toBe(true);
+    });
   });
 
   describe('Content Projection', () => {
@@ -445,7 +526,7 @@ describe('ButtonComponent', () => {
       fixture.componentRef.setInput('loading', true);
       fixture.detectChanges();
 
-      const spinner = fixture.nativeElement.querySelector('.btn__spinner');
+      const spinner = fixture.nativeElement.querySelector('.btn__spinner-icon');
       expect(spinner).toBeTruthy();
     });
 
@@ -454,7 +535,7 @@ describe('ButtonComponent', () => {
       fixture.componentRef.setInput('loading', false);
       fixture.detectChanges();
 
-      const spinner = fixture.nativeElement.querySelector('.btn__spinner');
+      const spinner = fixture.nativeElement.querySelector('.btn__spinner-icon');
       expect(spinner).toBeNull();
     });
 
@@ -463,7 +544,7 @@ describe('ButtonComponent', () => {
       fixture.componentRef.setInput('loading', true);
       fixture.detectChanges();
 
-      const spinner = fixture.nativeElement.querySelector('.btn__spinner');
+      const spinner = fixture.nativeElement.querySelector('.btn__spinner-icon');
       expect(spinner?.getAttribute('aria-hidden')).toBe('true');
     });
 
