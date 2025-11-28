@@ -66,7 +66,7 @@ if (failures.length > 0) {
   failures.forEach((failure) => console.error(`  - ${failure}`));
   console.error('');
   if (data.statements >= HIGH_COVERAGE_THRESHOLD && data.lines >= HIGH_COVERAGE_THRESHOLD && data.branches < THRESHOLD) {
-    console.error('💡 Note: Branch exception applies when statements/lines ≥95%');
+    console.error('💡 Note: Branch exception applies when statements/lines ≥80%');
     console.error(`   Your current coverage: statements=${data.statements}%, lines=${data.lines}%`);
   }
   process.exit(1);

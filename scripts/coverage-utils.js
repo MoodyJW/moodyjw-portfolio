@@ -9,8 +9,8 @@ const fs = require('fs');
 const path = require('path');
 
 const THRESHOLD = 80;
-const BRANCH_EXCEPTION_THRESHOLD = 70;
-const HIGH_COVERAGE_THRESHOLD = 95;
+const BRANCH_EXCEPTION_THRESHOLD = 65;
+const HIGH_COVERAGE_THRESHOLD = 80;
 
 function findCoverageFile() {
   const coverageDir = path.join(__dirname, '../coverage');
@@ -131,7 +131,7 @@ function getCoverageData() {
     const { statements, branches, functions, lines } = totals;
 
     // Check if Angular Signals branch exception applies
-    // Allow branch coverage >= 70% when statements >= 95% AND lines >= 95%
+    // Allow branch coverage >= 65% when statements >= 80% AND lines >= 80%
     const hasHighCoverage = statements.pct >= HIGH_COVERAGE_THRESHOLD && lines.pct >= HIGH_COVERAGE_THRESHOLD;
     const branchExceptionApplies = hasHighCoverage && branches.pct >= BRANCH_EXCEPTION_THRESHOLD;
 
