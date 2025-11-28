@@ -355,4 +355,278 @@ describe('SelectDropdownComponent', () => {
       expect(nativeInput).toBeFalsy();
     });
   });
+
+  describe('Signal Input Edge Cases', () => {
+    it('should handle empty string dropdown class', () => {
+      fixture.componentRef.setInput('dropdownClass', '');
+      fixture.detectChanges();
+
+      expect(component.dropdownClass()).toBe('');
+      const dropdown = compiled.querySelector('[role="presentation"]');
+      expect(dropdown).toBeTruthy();
+    });
+
+    it('should handle searchable toggling', () => {
+      // Start as non-searchable
+      fixture.componentRef.setInput('searchable', false);
+      fixture.detectChanges();
+      expect(component.searchable()).toBe(false);
+      expect(compiled.querySelector('.select-search__input')).toBeFalsy();
+
+      // Toggle to searchable
+      fixture.componentRef.setInput('searchable', true);
+      fixture.detectChanges();
+      expect(component.searchable()).toBe(true);
+      expect(compiled.querySelector('.select-search__input')).toBeTruthy();
+    });
+
+    it('should handle empty search query', () => {
+      fixture.componentRef.setInput('searchable', true);
+      fixture.componentRef.setInput('searchQuery', '');
+      fixture.detectChanges();
+
+      const searchInput = compiled.querySelector('.select-search__input') as HTMLInputElement;
+      expect(searchInput.value).toBe('');
+      expect(component.searchQuery()).toBe('');
+    });
+
+    it('should handle special characters in search query', () => {
+      fixture.componentRef.setInput('searchable', true);
+      fixture.componentRef.setInput('searchQuery', '<script>alert("xss")</script>');
+      fixture.detectChanges();
+
+      expect(component.searchQuery()).toBe('<script>alert("xss")</script>');
+      const searchInput = compiled.querySelector('.select-search__input') as HTMLInputElement;
+      expect(searchInput.value).toBe('<script>alert("xss")</script>');
+    });
+
+    it('should handle undefined ariaLabel', () => {
+      fixture.componentRef.setInput('ariaLabel', undefined);
+      fixture.detectChanges();
+
+      expect(component.ariaLabel()).toBeUndefined();
+      const listbox = compiled.querySelector('[role="listbox"]');
+      expect(listbox?.hasAttribute('aria-label')).toBe(false);
+    });
+
+    it('should handle empty string ariaLabel', () => {
+      fixture.componentRef.setInput('ariaLabel', '');
+      fixture.detectChanges();
+
+      expect(component.ariaLabel()).toBe('');
+      const listbox = compiled.querySelector('[role="listbox"]');
+      expect(listbox?.getAttribute('aria-label')).toBe('');
+    });
+
+    it('should handle isMultiple toggling', () => {
+      // Start as single
+      fixture.componentRef.setInput('isMultiple', false);
+      fixture.detectChanges();
+      expect(component.isMultiple()).toBe(false);
+
+      // Toggle to multiple
+      fixture.componentRef.setInput('isMultiple', true);
+      fixture.detectChanges();
+      expect(component.isMultiple()).toBe(true);
+    });
+
+    it('should handle zero maxHeight', () => {
+      fixture.componentRef.setInput('maxHeight', 0);
+      fixture.detectChanges();
+
+      expect(component.maxHeight()).toBe(0);
+      const listbox = compiled.querySelector('[role="listbox"]') as HTMLElement;
+      expect(listbox.style.maxHeight).toBe('0px');
+    });
+
+    it('should handle very large maxHeight', () => {
+      fixture.componentRef.setInput('maxHeight', 10000);
+      fixture.detectChanges();
+
+      expect(component.maxHeight()).toBe(10000);
+      const listbox = compiled.querySelector('[role="listbox"]') as HTMLElement;
+      expect(listbox.style.maxHeight).toBe('10000px');
+    });
+
+    it('should handle negative highlightedIndex', () => {
+      fixture.componentRef.setInput('highlightedIndex', -1);
+      fixture.detectChanges();
+
+      expect(component.highlightedIndex()).toBe(-1);
+    });
+
+    it('should handle highlightedIndex beyond options length', () => {
+      fixture.componentRef.setInput('highlightedIndex', 999);
+      fixture.detectChanges();
+
+      expect(component.highlightedIndex()).toBe(999);
+    });
+
+    it('should handle isOptionSelected function changes', () => {
+      const firstSelector = (opt: SelectOption) => opt.value === '1';
+      fixture.componentRef.setInput('isOptionSelected', firstSelector);
+      fixture.detectChanges();
+
+      expect(component.isOptionSelected()).toBe(firstSelector);
+
+      const secondSelector = (opt: SelectOption) => opt.value === '2';
+      fixture.componentRef.setInput('isOptionSelected', secondSelector);
+      fixture.detectChanges();
+
+      expect(component.isOptionSelected()).toBe(secondSelector);
+    });
+
+    it('should handle options array mutations', () => {
+      const options1 = [{ value: '1', label: 'One' }];
+      fixture.componentRef.setInput('options', options1);
+      fixture.detectChanges();
+
+      expect(component.options().length).toBe(1);
+
+      const options2 = [...options1, { value: '2', label: 'Two' }];
+      fixture.componentRef.setInput('options', options2);
+      fixture.detectChanges();
+
+      expect(component.options().length).toBe(2);
+    });
+
+    it('should handle listboxId changes', () => {
+      fixture.componentRef.setInput('listboxId', 'id-1');
+      fixture.detectChanges();
+      expect(component.listboxId()).toBe('id-1');
+
+      fixture.componentRef.setInput('listboxId', 'id-2');
+      fixture.detectChanges();
+      expect(component.listboxId()).toBe('id-2');
+    });
+
+    it('should handle dropdownClass changes', () => {
+      fixture.componentRef.setInput('dropdownClass', 'class-1');
+      fixture.detectChanges();
+      expect(component.dropdownClass()).toBe('class-1');
+
+      fixture.componentRef.setInput('dropdownClass', 'class-2 class-3');
+      fixture.detectChanges();
+      expect(component.dropdownClass()).toBe('class-2 class-3');
+    });
+  });
+
+  describe('Complex Option Scenarios', () => {
+    it('should handle option with all properties', () => {
+      const complexOption: SelectOption = {
+        value: 'complex',
+        label: 'Complex Option',
+        description: 'This is a complex option',
+        disabled: true,
+      };
+
+      fixture.componentRef.setInput('options', [complexOption]);
+      fixture.detectChanges();
+
+      const options = compiled.querySelectorAll('app-select-option');
+      expect(options.length).toBe(1);
+    });
+
+    it('should handle option with missing optional properties', () => {
+      const minimalOption: SelectOption = {
+        value: 'minimal',
+        label: 'Minimal Option',
+      };
+
+      fixture.componentRef.setInput('options', [minimalOption]);
+      fixture.detectChanges();
+
+      const options = compiled.querySelectorAll('app-select-option');
+      expect(options.length).toBe(1);
+    });
+
+    it('should handle mixed option types', () => {
+      const mixedOptions: SelectOption[] = [
+        { value: '1', label: 'Simple' },
+        { value: '2', label: 'With Description', description: 'Desc' },
+        { value: '3', label: 'Disabled', disabled: true },
+        { value: '4', label: 'Complete', description: 'Full', disabled: false },
+      ];
+
+      fixture.componentRef.setInput('options', mixedOptions);
+      fixture.detectChanges();
+
+      const options = compiled.querySelectorAll('app-select-option');
+      expect(options.length).toBe(4);
+    });
+
+    it('should handle rapid option changes', () => {
+      const options1 = [{ value: '1', label: 'One' }];
+      const options2 = [{ value: '2', label: 'Two' }];
+      const options3 = [{ value: '3', label: 'Three' }];
+
+      fixture.componentRef.setInput('options', options1);
+      fixture.detectChanges();
+      expect(compiled.querySelectorAll('app-select-option').length).toBe(1);
+
+      fixture.componentRef.setInput('options', options2);
+      fixture.detectChanges();
+      expect(compiled.querySelectorAll('app-select-option').length).toBe(1);
+
+      fixture.componentRef.setInput('options', options3);
+      fixture.detectChanges();
+      expect(compiled.querySelectorAll('app-select-option').length).toBe(1);
+    });
+  });
+
+  describe('Event Emission Validation', () => {
+    it('should emit events with correct data', () => {
+      let emittedOption: SelectOption | undefined;
+      component.optionClicked.subscribe((opt) => (emittedOption = opt));
+
+      const testOption = mockOptions[0];
+      component.optionClicked.emit(testOption);
+
+      expect(emittedOption).toBe(testOption);
+      expect(emittedOption?.value).toBe('1');
+    });
+
+    it('should emit multiple events independently', () => {
+      const clickSpy = vi.fn();
+      const enterSpy = vi.fn();
+      const spaceSpy = vi.fn();
+      const mouseSpy = vi.fn();
+
+      component.optionClicked.subscribe(clickSpy);
+      component.optionEnterPressed.subscribe(enterSpy);
+      component.optionSpacePressed.subscribe(spaceSpy);
+      component.optionMouseEntered.subscribe(mouseSpy);
+
+      component.optionClicked.emit(mockOptions[0]);
+      component.optionEnterPressed.emit(mockOptions[1]);
+      component.optionSpacePressed.emit(mockOptions[2]);
+      component.optionMouseEntered.emit(1);
+
+      expect(clickSpy).toHaveBeenCalledWith(mockOptions[0]);
+      expect(enterSpy).toHaveBeenCalledWith(mockOptions[1]);
+      expect(spaceSpy).toHaveBeenCalledWith(mockOptions[2]);
+      expect(mouseSpy).toHaveBeenCalledWith(1);
+    });
+
+    it('should emit search events with correct data', () => {
+      fixture.componentRef.setInput('searchable', true);
+      fixture.detectChanges();
+
+      const inputSpy = vi.fn();
+      const keydownSpy = vi.fn();
+
+      component.searchInput.subscribe(inputSpy);
+      component.searchKeydown.subscribe(keydownSpy);
+
+      const searchInput = compiled.querySelector('.select-search__input') as HTMLInputElement;
+      const inputEvent = new Event('input');
+      const keydownEvent = new KeyboardEvent('keydown', { key: 'Enter' });
+
+      searchInput.dispatchEvent(inputEvent);
+      searchInput.dispatchEvent(keydownEvent);
+
+      expect(inputSpy).toHaveBeenCalled();
+      expect(keydownSpy).toHaveBeenCalled();
+    });
+  });
 });
