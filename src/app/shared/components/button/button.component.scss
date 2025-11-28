@@ -1,61 +1,44 @@
-// Button component styles using BEM methodology
-// Integrates with existing theme system via CSS variables
-
 .btn {
-  // Base button styles
   position: relative;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: var(--spacing-sm);
   padding: 0 var(--spacing-lg);
+  min-height: 40px;
+  min-width: 80px;
   border: none;
   border-radius: var(--border-radius);
-  font-family: var(--font-family-base);
-  font-size: var(--font-size-base);
-  font-weight: var(--font-weight-medium);
-  line-height: 1.5;
-  text-align: center;
-  text-decoration: none;
+  font: var(--font-weight-medium) var(--font-size-base)/1.5 var(--font-family-base);
   white-space: nowrap;
   cursor: pointer;
   user-select: none;
-  transition-property: background-color, border-color, color, box-shadow, transform;
-  transition-duration: var(--transition-duration);
-  transition-timing-function: var(--transition-timing);
+  transition: all var(--transition-duration) var(--transition-timing);
 
-  // Height is set by size modifiers
-  min-height: 40px;
-  min-width: 80px;
-
-  // Touch target size (WCAG 2.1 AAA: minimum 44x44px)
   @media (pointer: coarse) {
     min-height: 44px;
   }
 
-  // Base state
   &:focus {
     outline: none;
   }
 
-  // Keyboard focus (not mouse clicks)
   &:focus-visible {
     outline: 2px solid var(--color-primary);
     outline-offset: 2px;
   }
 
-  // Hover state
-  &:hover:not(:disabled):not(.btn--disabled):not(.btn--loading) {
-    transform: translateY(-1px);
-    box-shadow: var(--shadow-sm);
+  &:not(:disabled):not(.btn--disabled):not(.btn--loading) {
+    &:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
   }
 
-  // Active state
-  &:active:not(:disabled):not(.btn--disabled):not(.btn--loading) {
-    transform: translateY(0);
-  }
-
-  // Disabled state
   &:disabled,
   &--disabled {
     opacity: 0.5;
@@ -63,101 +46,107 @@
     pointer-events: none;
   }
 
-  // Loading state
   &--loading {
     cursor: wait;
     pointer-events: none;
   }
 
-  // Respect reduced motion preference
   @media (prefers-reduced-motion: reduce) {
     transition: none;
-
     &:hover {
       transform: none;
     }
   }
+  &--primary,
+  &--tertiary,
+  &--danger {
+    border: 2px solid transparent;
+  }
 
-  // VARIANTS
+  &--tertiary,
+  &--ghost {
+    background-color: transparent;
+  }
 
-  // Primary variant (filled, high emphasis)
+  &--primary,
+  &--danger {
+    color: var(--color-background);
+  }
+
   &--primary {
     background-color: var(--color-primary);
-    color: var(--color-background); // High contrast
-    border: 2px solid transparent;
 
-    &:hover:not(:disabled):not(.btn--disabled):not(.btn--loading) {
-      background-color: var(--color-primary-hover);
-    }
+    &:not(:disabled):not(.btn--disabled):not(.btn--loading) {
+      &:hover {
+        background-color: var(--color-primary-hover);
+      }
 
-    &:active:not(:disabled):not(.btn--disabled):not(.btn--loading) {
-      background-color: var(--color-primary-active);
+      &:active {
+        background-color: var(--color-primary-active);
+      }
     }
   }
 
-  // Secondary variant (outlined, medium emphasis)
   &--secondary {
     background-color: var(--color-surface);
     color: var(--color-text);
     border: 2px solid var(--color-border);
 
-    &:hover:not(:disabled):not(.btn--disabled):not(.btn--loading) {
-      background-color: var(--color-surface-hover);
-      border-color: var(--color-border-hover);
-    }
+    &:not(:disabled):not(.btn--disabled):not(.btn--loading) {
+      &:hover {
+        background-color: var(--color-surface-hover);
+        border-color: var(--color-border-hover);
+      }
 
-    &:active:not(:disabled):not(.btn--disabled):not(.btn--loading) {
-      background-color: var(--color-surface-active);
+      &:active {
+        background-color: var(--color-surface-active);
+      }
     }
   }
 
-  // Tertiary variant (text only, low emphasis)
   &--tertiary {
-    background-color: transparent;
     color: var(--color-text-secondary);
-    border: 2px solid transparent;
 
-    &:hover:not(:disabled):not(.btn--disabled):not(.btn--loading) {
-      background-color: var(--color-surface-hover);
-      color: var(--color-text);
-      text-decoration: underline;
-    }
+    &:not(:disabled):not(.btn--disabled):not(.btn--loading) {
+      &:hover {
+        background-color: var(--color-surface-hover);
+        color: var(--color-text);
+        text-decoration: underline;
+      }
 
-    &:active:not(:disabled):not(.btn--disabled):not(.btn--loading) {
-      background-color: var(--color-surface-active);
+      &:active {
+        background-color: var(--color-surface-active);
+      }
     }
   }
 
-  // Ghost variant (transparent with border)
   &--ghost {
-    background-color: transparent;
     color: var(--color-text);
     border: 1px solid var(--color-border);
 
-    &:hover:not(:disabled):not(.btn--disabled):not(.btn--loading) {
-      background-color: var(--color-surface);
-      border-color: var(--color-border-hover);
-    }
+    &:not(:disabled):not(.btn--disabled):not(.btn--loading) {
+      &:hover {
+        background-color: var(--color-surface);
+        border-color: var(--color-border-hover);
+      }
 
-    &:active:not(:disabled):not(.btn--disabled):not(.btn--loading) {
-      background-color: var(--color-surface-hover);
+      &:active {
+        background-color: var(--color-surface-hover);
+      }
     }
   }
 
-  // Danger variant (destructive actions)
   &--danger {
     background-color: var(--color-error);
-    color: var(--color-background); // High contrast
-    border: 2px solid transparent;
 
-    &:hover:not(:disabled):not(.btn--disabled):not(.btn--loading) {
-      // Darken using CSS filter
-      filter: brightness(0.9);
-    }
+    &:not(:disabled):not(.btn--disabled):not(.btn--loading) {
+      &:hover {
+        filter: brightness(0.9);
+      }
 
-    &:active:not(:disabled):not(.btn--disabled):not(.btn--loading) {
-      // Darken more using CSS filter
-      filter: brightness(0.8);
+      &:active {
+        filter: brightness(0.8);
+      }
     }
 
     &:focus-visible {
@@ -165,174 +154,45 @@
     }
   }
 
-  // SIZES
-
-  // Small size
   &--sm {
     min-height: 32px;
     min-width: 64px;
     padding: 0 var(--spacing-md);
     font-size: var(--font-size-sm);
 
-    .btn__icon {
-      width: 16px;
-      height: 16px;
-      font-size: 16px;
-    }
-
-    // Icon-only small buttons
     &.btn--icon-only {
-      min-width: 32px;
-      padding: 0;
       width: 32px;
-
-      @media (pointer: coarse) {
-        min-width: 44px;
-        width: 44px;
-      }
     }
   }
 
-  // Medium size (default)
-  &--md {
-    min-height: 40px;
-    min-width: 80px;
-    padding: 0 var(--spacing-lg);
-    font-size: var(--font-size-base);
-
-    .btn__icon {
-      width: 20px;
-      height: 20px;
-      font-size: 20px;
-    }
-
-    // Icon-only medium buttons
-    &.btn--icon-only {
-      min-width: 40px;
-      padding: 0;
-      width: 40px;
-
-      @media (pointer: coarse) {
-        min-width: 44px;
-        width: 44px;
-      }
-    }
+  &--md.btn--icon-only {
+    width: 40px;
   }
 
-  // Large size
   &--lg {
     min-height: 48px;
     min-width: 96px;
     padding: 0 var(--spacing-xl);
     font-size: var(--font-size-lg);
 
-    .btn__icon {
-      width: 24px;
-      height: 24px;
-      font-size: 24px;
-    }
-
-    // Icon-only large buttons
     &.btn--icon-only {
-      min-width: 48px;
-      padding: 0;
       width: 48px;
     }
   }
 
-  // MODIFIERS
+  &--sm.btn--icon-only,
+  &--md.btn--icon-only {
+    @media (pointer: coarse) {
+      width: 44px;
+    }
+  }
 
-  // Full width button
   &--full-width {
     width: 100%;
-    min-width: 100%;
   }
 
-  // Icon-only button
   &--icon-only {
-    aspect-ratio: 1 / 1;
+    aspect-ratio: 1;
     padding: 0;
-
-    .btn__content {
-      // Hide content but keep in DOM for accessibility if needed
-      position: absolute;
-      width: 1px;
-      height: 1px;
-      padding: 0;
-      margin: -1px;
-      overflow: hidden;
-      clip: rect(0, 0, 0, 0);
-      white-space: nowrap;
-      border-width: 0;
-    }
-  }
-
-  // ELEMENTS
-
-  // Button content wrapper
-  &__content {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-  }
-
-  // Icon wrapper
-  &__icon {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
-    width: 20px;
-    height: 20px;
-    font-size: 20px;
-    line-height: 1;
-
-    // Icon positions
-    &--left {
-      margin-right: calc(var(--spacing-sm) * -0.5);
-    }
-
-    &--right {
-      margin-left: calc(var(--spacing-sm) * -0.5);
-    }
-  }
-
-  // Loading spinner
-  &__spinner {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    width: 20px;
-    height: 20px;
-  }
-
-  &__spinner-icon {
-    display: block;
-    width: 16px;
-    height: 16px;
-    border: 2px solid currentColor;
-    border-right-color: transparent;
-    border-radius: 50%;
-    animation: btn-spin 0.6s linear infinite;
-
-    @media (prefers-reduced-motion: reduce) {
-      animation: none;
-      // Show static indicator instead
-      &::after {
-        content: '…';
-        position: absolute;
-        font-size: var(--font-size-base);
-      }
-    }
-  }
-}
-
-// Keyframe for spinner animation
-@keyframes btn-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
   }
 }
