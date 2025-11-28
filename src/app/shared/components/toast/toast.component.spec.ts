@@ -2,7 +2,7 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
-import type { ToastPosition,ToastVariant } from './toast.component';
+import type { ToastPosition, ToastVariant } from './toast.component';
 import { ToastComponent } from './toast.component';
 
 describe('ToastComponent', () => {
@@ -270,7 +270,9 @@ describe('ToastComponent', () => {
       let dismissedCalled = false;
       component.dismissed.subscribe(() => (dismissedCalled = true));
 
-      const dismissButton = fixture.nativeElement.querySelector('.toast__dismiss');
+      const dismissButton =
+        fixture.nativeElement.querySelector('.toast__dismiss') ||
+        fixture.nativeElement.querySelector('app-button button');
       dismissButton?.click();
 
       expect(dismissedCalled).toBe(true);
@@ -313,8 +315,11 @@ describe('ToastComponent', () => {
       fixture.componentRef.setInput('variant', 'success');
       fixture.detectChanges();
 
-      const iconElement = fixture.nativeElement.querySelector('.toast__icon-symbol');
-      expect(iconElement?.textContent).toContain('✓');
+      // The icon is rendered by app-icon/ng-icon; look for the inner svg or the role=img wrapper
+      const renderedIcon =
+        fixture.nativeElement.querySelector('.toast__icon [role="img"]') ||
+        fixture.nativeElement.querySelector('.toast__icon svg');
+      expect(renderedIcon).toBeTruthy();
     });
 
     it('should set correct ARIA attributes on container', () => {
@@ -339,7 +344,9 @@ describe('ToastComponent', () => {
       fixture.componentRef.setInput('dismissible', true);
       fixture.detectChanges();
 
-      const dismissButton = fixture.nativeElement.querySelector('.toast__dismiss');
+      const dismissButton =
+        fixture.nativeElement.querySelector('.toast__dismiss') ||
+        fixture.nativeElement.querySelector('app-button button');
       expect(dismissButton?.getAttribute('aria-label')).toBe('Dismiss notification');
     });
   });

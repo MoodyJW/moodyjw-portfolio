@@ -18,7 +18,7 @@
   // Animation
   animation: toast-slide-in 0.3s var(--transition-timing);
   transition: opacity var(--transition-duration) var(--transition-timing),
-              transform var(--transition-duration) var(--transition-timing);
+    transform var(--transition-duration) var(--transition-timing);
 
   // Respect reduced motion preference
   @media (prefers-reduced-motion: reduce) {
@@ -53,11 +53,6 @@
       background-color: var(--color-success);
       opacity: 0.15;
     }
-
-    .toast__icon-symbol {
-      color: var(--color-success);
-      opacity: 1;
-    }
   }
 
   // Error variant
@@ -69,11 +64,6 @@
       color: var(--color-error);
       background-color: var(--color-error);
       opacity: 0.15;
-    }
-
-    .toast__icon-symbol {
-      color: var(--color-error);
-      opacity: 1;
     }
   }
 
@@ -88,10 +78,7 @@
       opacity: 0.15;
     }
 
-    .toast__icon-symbol {
-      color: var(--color-warning);
-      opacity: 1;
-    }
+    
   }
 
   // Info variant
@@ -105,10 +92,7 @@
       opacity: 0.15;
     }
 
-    .toast__icon-symbol {
-      color: var(--color-info);
-      opacity: 1;
-    }
+    
   }
 
   // ELEMENTS
@@ -127,13 +111,7 @@
   }
 
   // Icon symbol
-  &__icon-symbol {
-    position: relative;
-    z-index: 1;
-    font-size: var(--font-size-xl);
-    font-weight: var(--font-weight-bold);
-    line-height: 1;
-  }
+  // Removed textual icon symbol styles; using shared `app-icon` now
 
   // Content container
   &__content {
@@ -157,65 +135,6 @@
     color: var(--color-text-secondary);
     line-height: 1.5;
     word-wrap: break-word;
-  }
-
-  // Dismiss button
-  &__dismiss {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
-    min-width: 32px;
-    padding: 0;
-    margin: 0;
-    background: transparent;
-    border: none;
-    border-radius: var(--border-radius);
-    color: var(--color-text-secondary);
-    cursor: pointer;
-    flex-shrink: 0;
-    transition: background-color var(--transition-duration) var(--transition-timing),
-                color var(--transition-duration) var(--transition-timing);
-
-    // Keyboard focus
-    &:focus {
-      outline: none;
-    }
-
-    &:focus-visible {
-      outline: 2px solid var(--color-primary);
-      outline-offset: 2px;
-    }
-
-    // Hover state
-    &:hover {
-      background-color: var(--color-surface-hover);
-      color: var(--color-text);
-    }
-
-    // Active state
-    &:active {
-      background-color: var(--color-surface-active);
-    }
-
-    // Touch target (WCAG 2.1 AAA: minimum 44x44px)
-    @media (pointer: coarse) {
-      width: 44px;
-      height: 44px;
-      min-width: 44px;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-      transition: none;
-    }
-  }
-
-  // Dismiss icon
-  &__dismiss-icon {
-    font-size: var(--font-size-2xl);
-    line-height: 1;
-    font-weight: var(--font-weight-light);
   }
 }
 
