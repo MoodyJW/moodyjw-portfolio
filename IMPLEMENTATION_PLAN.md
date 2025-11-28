@@ -440,7 +440,22 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
   - [x] Unit tests: 79 comprehensive tests covering all functionality (100% pass rate)
   - [x] Storybook stories: 22 stories covering all variants, sizes, states, and use cases
   - [x] Accessibility: required `aria-label` enforced; helper linked with `aria-describedby`; WCAG 2.1 AAA compliant
-- [ ] SelectComponent/DropdownComponent
+- [x] SelectComponent/DropdownComponent
+  - [x] Standalone `SelectComponent<T>` with generic type support for option values
+  - [x] Single and multiple selection modes with `multiple` input
+  - [x] 3 visual variants (`default`, `filled`, `outlined`) and 3 size options (`sm`, `md`, `lg`)
+  - [x] Validation states: `default`, `success`, `warning`, `error` with visual styling and ARIA (`aria-invalid`)
+  - [x] Searchable dropdown with filter functionality via `searchable` input
+  - [x] Clearable selections with optional clear button via `clearable` input
+  - [x] Support for disabled options and option descriptions
+  - [x] Full keyboard navigation (Arrow keys, Home, End, Enter, Space, Escape, Tab)
+  - [x] Accessible listbox pattern with proper ARIA attributes (`aria-expanded`, `aria-selected`, `aria-multiselectable`)
+  - [x] Helper text with computed ID linking via `aria-describedby`
+  - [x] OnPush change detection, BEM CSS with CSS variables, respects `prefers-reduced-motion`
+  - [x] Unit tests: 100+ comprehensive tests covering all functionality (single/multiple modes, keyboard nav, search, validation)
+  - [x] Storybook stories: 25+ stories covering all variants, sizes, states, and real-world use cases
+  - [x] Accessibility: required `aria-label` enforced; full keyboard support; WCAG 2.1 AAA compliant
+  - [x] Notes: Kept separate from autocomplete component following best practices (different interaction patterns)
 - [ ] CheckboxComponent
 - [ ] RadioComponent
 - [ ] FormFieldComponent wrapper with label/error display
