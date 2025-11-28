@@ -4,7 +4,6 @@ import {
   Component,
   computed,
   effect,
-  type ElementRef,
   input,
   output,
   signal,
@@ -12,7 +11,11 @@ import {
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 
-import { IconComponent } from '../icon';
+import { InputFooterComponent } from '../input-footer';
+import { InputLabelComponent } from '../input-label';
+
+import { SelectButtonComponent } from './select-button/select-button.component';
+import { SelectDropdownComponent } from './select-dropdown/select-dropdown.component';
 
 export type SelectVariant = 'default' | 'filled' | 'outlined';
 export type SelectSize = 'sm' | 'md' | 'lg';
@@ -75,7 +78,14 @@ export interface SelectOption<T = unknown> {
 @Component({
   selector: 'app-select',
   standalone: true,
-  imports: [CommonModule, FormsModule, IconComponent],
+  imports: [
+    CommonModule,
+    FormsModule,
+    InputLabelComponent,
+    InputFooterComponent,
+    SelectButtonComponent,
+    SelectDropdownComponent,
+  ],
   templateUrl: './select.component.html',
   styleUrl: './select.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -219,14 +229,14 @@ export class SelectComponent<T = unknown> {
   readonly blurred = output<FocusEvent>();
 
   /**
-   * Reference to the select button element
+   * Reference to the select button component
    */
-  readonly selectButton = viewChild<ElementRef<HTMLButtonElement>>('selectButton');
+  readonly selectButton = viewChild<SelectButtonComponent>('selectButton');
 
   /**
-   * Reference to the search input element
+   * Reference to the dropdown component
    */
-  readonly searchInput = viewChild<ElementRef<HTMLInputElement>>('searchInput');
+  readonly searchInput = viewChild<SelectDropdownComponent>('searchInput');
 
   /**
    * Internal open state
@@ -432,7 +442,7 @@ export class SelectComponent<T = unknown> {
     if (this.searchable()) {
       // eslint-disable-next-line no-undef
       setTimeout(() => {
-        this.searchInput()?.nativeElement.focus();
+        this.searchInput()?.searchInputElement()?.nativeElement.focus();
       }, 0);
     }
   }
@@ -449,7 +459,7 @@ export class SelectComponent<T = unknown> {
     this.closed.emit();
 
     // Return focus to button
-    this.selectButton()?.nativeElement.focus();
+    this.selectButton()?.buttonElement()?.nativeElement.focus();
   }
 
   /**
@@ -478,7 +488,7 @@ export class SelectComponent<T = unknown> {
       // Keep dropdown open for multiple select
       if (this.searchable()) {
         this.searchQuery.set('');
-        this.searchInput()?.nativeElement.focus();
+        this.searchInput()?.searchInputElement()?.nativeElement.focus();
       }
     } else {
       this.internalValue.set(option.value);
@@ -542,7 +552,7 @@ export class SelectComponent<T = unknown> {
   handleBlur(event: FocusEvent): void {
     // Only blur if focus is moving outside the component
     const relatedTarget = event.relatedTarget as HTMLElement;
-    if (!relatedTarget || !this.selectButton()?.nativeElement.contains(relatedTarget)) {
+    if (!relatedTarget || !this.selectButton()?.buttonElement()?.nativeElement.contains(relatedTarget)) {
       this.isFocused.set(false);
       this.blurred.emit(event);
       // Close dropdown when focus leaves the component
@@ -670,14 +680,14 @@ export class SelectComponent<T = unknown> {
    * Focus the select programmatically
    */
   focus(): void {
-    this.selectButton()?.nativeElement.focus();
+    this.selectButton()?.buttonElement()?.nativeElement.focus();
   }
 
   /**
    * Blur the select programmatically
    */
   blur(): void {
-    this.selectButton()?.nativeElement.blur();
+    this.selectButton()?.buttonElement()?.nativeElement.blur();
   }
 
   /**
