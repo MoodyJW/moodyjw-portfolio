@@ -9,19 +9,21 @@ test.describe('Navigation', () => {
   test('should navigate to home page', async ({ page }) => {
     await page.goto('/');
     await expect(page).toHaveURL('/home');
-    await expect(page).toHaveTitle(/MoodyJW Portfolio/i);
+    await expect(page).toHaveTitle('MoodyJW - Home');
   });
 
   test('should navigate to case studies page', async ({ page }) => {
     await page.goto('/');
     await page.click('text=Case Studies');
     await expect(page).toHaveURL('/case-studies');
+    await expect(page).toHaveTitle('MoodyJW - Case Studies');
   });
 
   test('should navigate back to home from case studies', async ({ page }) => {
     await page.goto('/case-studies');
     await page.click('text=Home');
     await expect(page).toHaveURL('/home');
+    await expect(page).toHaveTitle('MoodyJW - Home');
   });
 });
 
