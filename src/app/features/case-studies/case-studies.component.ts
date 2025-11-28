@@ -1,4 +1,5 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject, OnInit, signal } from '@angular/core';
+import { Meta, Title } from '@angular/platform-browser';
 
 import { LABELS } from '@shared/constants';
 
@@ -17,7 +18,10 @@ interface CaseStudy {
   styleUrl: './case-studies.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CaseStudiesComponent {
+export class CaseStudiesComponent implements OnInit {
+  private readonly meta = inject(Meta);
+  private readonly metaTitle = inject(Title);
+
   /** UI labels */
   protected readonly LABELS = LABELS;
   protected readonly caseStudies = signal<CaseStudy[]>([
@@ -43,4 +47,12 @@ export class CaseStudiesComponent {
       technologies: ['Angular', 'SCSS', 'Storybook', 'Design Tokens'],
     },
   ]);
+
+  ngOnInit(): void {
+    this.metaTitle.setTitle('MoodyJW - Case Studies');
+    this.meta.updateTag({
+      name: 'case-studies',
+      content: 'Case Studies page of MoodyJW Portfolio',
+    });
+  }
 }
