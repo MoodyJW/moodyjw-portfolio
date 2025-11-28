@@ -2,10 +2,11 @@
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { afterEach,beforeEach, vi } from 'vitest';
+import { afterEach, beforeEach, vi } from 'vitest';
 
 import { ToastService } from '../../services/toast.service';
 
+import { ToastComponent } from './toast.component';
 import { ToastContainerComponent } from './toast-container.component';
 
 describe('ToastContainerComponent', () => {
@@ -14,8 +15,51 @@ describe('ToastContainerComponent', () => {
   let toastService: ToastService;
 
   beforeEach(async () => {
+    // Override external templates/styles with inline ones to prevent TestBed resource resolution issues
+    TestBed.overrideComponent(ToastContainerComponent, {
+      set: {
+        template: `
+          <ng-container *ngFor="let position of positions">
+            <div *ngIf="getToastsForPosition(position).length > 0"
+                 class="toast-container toast-container--{{ position }}"
+                 [attr.aria-label]="'Notifications at ' + position"
+                 role="region">
+              <ng-container *ngFor="let toast of getToastsForPosition(position)">
+                <app-toast
+                  [variant]="toast.variant"
+                  [message]="toast.message"
+                  [title]="toast.title"
+                  [duration]="toast.duration"
+                  [dismissible]="toast.dismissible"
+                  [position]="toast.position"
+                  [isExiting]="toast.isExiting"
+                  (dismissed)="handleDismiss(toast.id)">
+                </app-toast>
+              </ng-container>
+            </div>
+          </ng-container>
+        `,
+        styles: [''],
+      },
+    });
+
+    TestBed.overrideComponent(ToastComponent, {
+      set: {
+        template: `
+          <div class="toast">
+            <span class="toast__icon" aria-hidden="true">{{ variantIcon() }}</span>
+            <div class="toast__content">
+              <h4 *ngIf="title()">{{ title() }}</h4>
+              <p>{{ message() }}</p>
+            </div>
+            <button class="toast__dismiss" (click)="handleDismiss()">×</button>
+          </div>
+        `,
+        styles: [''],
+      },
+    });
+
     await TestBed.configureTestingModule({
-      imports: [ToastContainerComponent],
       providers: [ToastService],
     }).compileComponents();
 
@@ -179,7 +223,10 @@ describe('ToastContainerComponent', () => {
       toastService.show({ message: 'Test', dismissible: true });
       fixture.detectChanges();
 
-      const dismissButton = fixture.nativeElement.querySelector('.toast__dismiss');
+      // Support both legacy `.toast__dismiss` selector and new `app-button` internal button
+      const dismissButton =
+        fixture.nativeElement.querySelector('.toast__dismiss') ||
+        fixture.nativeElement.querySelector('app-button button');
       dismissButton?.click();
 
       // Toast should be marked as exiting

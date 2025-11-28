@@ -1,11 +1,10 @@
 import { CommonModule } from '@angular/common';
-import {
-  ChangeDetectionStrategy,
-  Component,
-  computed,
-  input,
-  output,
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input, output } from '@angular/core';
+
+import { ICON_NAMES } from '@shared/constants/icons.constants';
+
+import { ButtonComponent } from '../button/button.component';
+import { IconComponent } from '../icon/icon.component';
 
 export type ToastVariant = 'success' | 'error' | 'warning' | 'info';
 export type ToastPosition =
@@ -44,7 +43,7 @@ export type ToastPosition =
 @Component({
   selector: 'app-toast',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, ButtonComponent, IconComponent],
   templateUrl: './toast.component.html',
   styleUrl: './toast.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -96,9 +95,7 @@ export class ToastComponent {
    * - alert: For error messages (assertive)
    * - status: For success/info messages (polite)
    */
-  readonly ariaRole = computed(() =>
-    this.variant() === 'error' ? 'alert' : 'status'
-  );
+  readonly ariaRole = computed(() => (this.variant() === 'error' ? 'alert' : 'status'));
 
   /**
    * ARIA live region politeness
@@ -106,9 +103,7 @@ export class ToastComponent {
    * - polite: For success and info (doesn't interrupt)
    */
   readonly ariaLive = computed(() =>
-    this.variant() === 'error' || this.variant() === 'warning'
-      ? 'assertive'
-      : 'polite'
+    this.variant() === 'error' || this.variant() === 'warning' ? 'assertive' : 'polite'
   );
 
   /**
@@ -123,6 +118,22 @@ export class ToastComponent {
       info: 'ℹ',
     };
     return icons[this.variant()];
+  });
+
+  /**
+   * Map toast variant to a named icon from the registry
+   */
+  readonly variantIconName = computed(() => {
+    switch (this.variant()) {
+      case 'success':
+        return ICON_NAMES.SUCCESS;
+      case 'error':
+        return ICON_NAMES.ERROR;
+      case 'warning':
+        return ICON_NAMES.WARNING;
+      default:
+        return ICON_NAMES.INFO;
+    }
   });
 
   /**
