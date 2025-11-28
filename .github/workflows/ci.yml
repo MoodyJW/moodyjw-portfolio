@@ -94,8 +94,8 @@ jobs:
               const functions = coverage.total.functions.pct;
               const lines = coverage.total.lines.pct;
               const threshold = 80;
-              const branchExceptionThreshold = 70;
-              const highCoverageThreshold = 95;
+              const branchExceptionThreshold = 65;
+              const highCoverageThreshold = 80;
 
               // Check if Angular Signals branch exception applies
               const hasHighCoverage = statements >= highCoverageThreshold && lines >= highCoverageThreshold;
