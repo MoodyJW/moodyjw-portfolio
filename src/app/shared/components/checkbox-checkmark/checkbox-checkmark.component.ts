@@ -1,42 +1,39 @@
 import { CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, input } from '@angular/core';
+import { ChangeDetectionStrategy, Component, computed, input } from '@angular/core';
+
+import { IconComponent } from '../icon';
 
 /**
  * Reusable checkmark component for checkbox states
  *
- * Displays SVG icons for checked and indeterminate states.
+ * Displays icons for checked and indeterminate states using the shared Icon component.
  * Indeterminate takes precedence over checked.
+ *
+ * @example
+ * ```html
+ * <!-- Checked state -->
+ * <app-checkbox-checkmark [checked]="true" />
+ *
+ * <!-- Indeterminate state -->
+ * <app-checkbox-checkmark [indeterminate]="true" />
+ *
+ * <!-- Unchecked state (no icon shown) -->
+ * <app-checkbox-checkmark />
+ * ```
  */
 @Component({
   selector: 'app-checkbox-checkmark',
   standalone: true,
-  imports: [CommonModule],
+  imports: [CommonModule, IconComponent],
   template: `
     <span class="checkbox-checkmark" aria-hidden="true">
-      @if (indeterminate()) {
-        <svg
-          class="checkbox-icon checkbox-icon--indeterminate"
-          viewBox="0 0 16 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path d="M4 8H12" stroke="currentColor" stroke-width="2" stroke-linecap="round" />
-        </svg>
-      } @else if (checked()) {
-        <svg
-          class="checkbox-icon checkbox-icon--checked"
-          viewBox="0 0 16 16"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M13 4L6 11L3 8"
-            stroke="currentColor"
-            stroke-width="2"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
+      @if (showIcon()) {
+        <app-icon
+          [name]="iconName()"
+          size="sm"
+          [decorative]="true"
+          class="checkbox-icon"
+        />
       }
     </span>
   `,
@@ -61,8 +58,6 @@ import { ChangeDetectionStrategy, Component, input } from '@angular/core';
       }
 
       .checkbox-icon {
-        width: 100%;
-        height: 100%;
         color: var(--color-background);
         transition: opacity var(--transition-duration) var(--transition-timing);
 
@@ -84,4 +79,21 @@ export class CheckboxCheckmarkComponent {
    * Whether the checkbox is indeterminate
    */
   readonly indeterminate = input<boolean>(false);
+
+  /**
+   * Computed flag to determine if an icon should be shown
+   */
+  readonly showIcon = computed(() => this.checked() || this.indeterminate());
+
+  /**
+   * Computed icon name based on state
+   * - indeterminate: shows minus icon (heroMinus)
+   * - checked: shows check icon (heroCheck)
+   */
+  readonly iconName = computed(() => {
+    if (this.indeterminate()) {
+      return 'heroMinus' as const;
+    }
+    return 'heroCheck' as const;
+  });
 }
