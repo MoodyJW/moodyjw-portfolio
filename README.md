@@ -16,6 +16,7 @@
 - ✅ **Dark mode support** (auto-detects system preference)
 - ✅ **Mockend data layer** with simulated network latency for realistic development
 - ✅ **Complete CI/CD pipeline** with GitHub Actions (build, test, E2E, performance, security)
+- 🚧 **Client-side AI Career Chatbot** with WebLLM and RAG (Retrieval-Augmented Generation) - *Coming in Phase 5*
 
 # MoodyJW Portfolio
 
@@ -101,6 +102,45 @@ export class CaseStudiesComponent implements OnInit {
   }
 }
 ```
+
+## 🤖 Client-Side AI Career Chatbot (Planned - Phase 5)
+
+This portfolio will feature an innovative **client-side AI chatbot** that answers questions about Jay's career, experience, and technical expertise—all running locally in your browser with no backend required.
+
+### Architecture Overview
+
+**Technology Stack:**
+- **WebLLM**: Browser-based LLM inference using Llama-3.1-8B-Instruct (quantized)
+- **RAG (Retrieval-Augmented Generation)**: Vector search using pre-computed embeddings
+- **Sentence Transformers**: Build-time embedding generation with `all-MiniLM-L6-v2`
+- **Pure TypeScript**: Client-side vector similarity search (cosine similarity)
+- **IndexedDB**: Model caching to avoid re-downloading
+
+### Key Features
+
+- 🧠 **Fully Client-Side**: All AI processing happens in your browser
+- ⚡ **Fast Response Time**: Model loads in < 30 seconds, cached for subsequent visits
+- 🔒 **Privacy-First**: No data sent to external servers
+- 📚 **Knowledge Base**: Answers questions about career history, projects, skills, and achievements
+- ♿ **Accessible**: WCAG 2.1 AAA compliant with keyboard navigation and screen reader support
+- 📱 **Mobile-Friendly**: Responsive chat interface works on all devices
+
+### How It Works
+
+1. **Build Time**: Python script generates embeddings from career content corpus
+2. **First Load**: WebLLM model downloads and caches in IndexedDB (~1-2GB)
+3. **User Query**: Question is embedded and similar content chunks are retrieved via RAG
+4. **Response**: LLM generates contextual answer using only retrieved career information
+5. **Streaming**: Tokens stream in real-time for smooth UX
+
+### Example Queries
+
+- "What experience does Jay have with Angular?"
+- "Tell me about Jay's leadership experience"
+- "What are Jay's most significant technical achievements?"
+- "Has Jay worked with microservices architecture?"
+
+**Status**: Implementation planned for Phase 5 (see [IMPLEMENTATION_PLAN.md](IMPLEMENTATION_PLAN.md#L869-L906))
 
 ## 🎯 State Management with NgRx SignalStore
 

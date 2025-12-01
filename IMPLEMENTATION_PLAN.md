@@ -9,6 +9,7 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
 3. **Tests**: Required before merge. TDD preferred; test-after acceptable. Coverage: 85% goal, 80% acceptable.
 4. **Storybook**: Static build hosted under `/storybook` on GH Pages; PR preview artifacts attached in CI.
 5. **Coverage & Angular Signals**: V8 coverage tool counts Angular signal initialization (`input()`, `computed()`, `signal()`) as branches, which can lower branch coverage to 70-75% even when all executable code is tested. **Statement and line coverage are the primary metrics** for signal-heavy components. Branch coverage below 80% is acceptable if statement/line coverage is ≥95%.
+6. **Career Chatbot**: Client-side AI chatbot using WebLLM (Llama-3.1-8B) with RAG (Retrieval-Augmented Generation) for answering questions about career/experience. Build-time embeddings using `sentence-transformers` (all-MiniLM-L6-v2). Pure TypeScript vector search. All processing happens in-browser, no backend required. Model cached in IndexedDB.
 
 ---
 
@@ -516,6 +517,32 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
 - [ ] StackComponent for vertical spacing
 - [ ] DividerComponent
 
+**Chatbot UI Components:**
+
+- [ ] ChatMessageComponent for displaying user/bot messages
+  - [ ] User and assistant message variants
+  - [ ] Markdown rendering support for bot responses
+  - [ ] Timestamp display
+  - [ ] Loading indicator for streaming responses
+  - [ ] WCAG 2.1 AAA compliant (ARIA live regions, semantic HTML)
+  - [ ] Full TypeScript typing with signal-based inputs
+  - [ ] Unit tests and Storybook stories
+- [ ] ChatInputComponent for message composition
+  - [ ] Multi-line textarea with auto-expand
+  - [ ] Send button with keyboard shortcuts (Enter/Cmd+Enter)
+  - [ ] Character limit and validation
+  - [ ] Disabled state during message processing
+  - [ ] WCAG 2.1 AAA compliant (keyboard navigation, labels)
+  - [ ] Unit tests and Storybook stories
+- [ ] ChatContainerComponent for chat UI shell
+  - [ ] Message list with auto-scroll to bottom
+  - [ ] Empty state for new conversations
+  - [ ] Loading state while model initializes
+  - [ ] Error state with retry functionality
+  - [ ] Collapsible/expandable chat window
+  - [ ] WCAG 2.1 AAA compliant (focus management, ARIA)
+  - [ ] Unit tests and Storybook stories
+
 **App Shell:**
 
 - [ ] Update MainLayout with navigation menu
@@ -626,6 +653,39 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
 - [ ] Array and object utilities
 - [ ] Debounce and throttle functions
 - [ ] Regex patterns library
+
+**Career Chatbot Core Services:**
+
+- [ ] LlmService for WebLLM integration
+  - [ ] Install `@mlc-ai/web-llm` package
+  - [ ] Initialize WebLLM worker with Web Worker API
+  - [ ] Load small model (Llama-3.1-8B-Instruct-q4f32_1 or similar)
+  - [ ] Expose `embed(text)` method for query embeddings
+  - [ ] Expose `generate(prompt, context)` method for response generation
+  - [ ] Support streaming token generation for smooth UX
+  - [ ] Model loading progress tracking with signals
+  - [ ] Cache model in IndexedDB to avoid re-fetching
+  - [ ] Error handling for unsupported browsers/hardware
+  - [ ] Unit tests with mocked WebLLM worker
+  - [ ] TSDoc documentation
+- [ ] RagService for vector search and retrieval
+  - [ ] Load embeddings.json on app startup
+  - [ ] Implement cosine similarity function (pure TypeScript)
+  - [ ] Query method: compute similarity against all corpus vectors
+  - [ ] Return top K most relevant chunks (configurable, default 3-5)
+  - [ ] Build final prompt with context injection template
+  - [ ] Support for metadata filtering (optional)
+  - [ ] Signal-based state for loaded embeddings
+  - [ ] Unit tests covering similarity calculations
+  - [ ] TSDoc documentation
+- [ ] ChatbotStateService for conversation management
+  - [ ] Signal store for chat messages history
+  - [ ] Message interface (role, content, timestamp, id)
+  - [ ] Add/remove message methods
+  - [ ] Clear conversation method
+  - [ ] Persist conversation to LocalStorage (optional)
+  - [ ] Track loading/error states
+  - [ ] Unit tests covering state mutations
 
 **Custom Pipes:**
 
@@ -753,6 +813,20 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
 - [ ] GitHub profile link
 - [ ] LinkedIn profile link
 
+**Career Chatbot Knowledge Base:**
+
+- [ ] Prepare career knowledge base content
+  - [ ] Collect resume content (work history, achievements, technical skills)
+  - [ ] Document leadership experience and team management
+  - [ ] Create project summaries with technical details
+  - [ ] Organize education and certifications
+  - [ ] Compile speaking/writing/contributions
+  - [ ] Organize into clean Markdown or plain text sections
+  - [ ] Chunk text into ~300-500 token segments
+  - [ ] Create `/assets/chatbot/corpus.json` with chunk structure
+  - [ ] Format: `[{ "id": 1, "text": "...", "metadata": {...} }, ...]`
+  - [ ] Review for completeness and accuracy
+
 **Documentation (Phase 4):**
 
 - [ ] TSDoc comments on all component public APIs
@@ -795,11 +869,12 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
 
 ## Phase 5: Integrations & Extended Functionality
 
-**Goal**: Add external integrations and optional auth, plus advanced UX features.
+**Goal**: Add external integrations, client-side career chatbot with RAG, optional auth, and advanced UX features.
 
 ### Objectives
 
 - Add professional sections to showcase expertise
+- Implement client-side career chatbot with WebLLM and RAG
 - Integrate live data from GitHub
 - Implement interactive features
 - Add contact functionality
@@ -815,6 +890,37 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
 - [ ] Professional timeline/experience
 - [ ] Certifications and education
 - [ ] Downloadable resume (PDF)
+
+**Career Chatbot Integration & RAG Pipeline:**
+
+- [ ] Generate build-time embeddings
+  - [ ] Create Python script using `sentence-transformers`
+  - [ ] Install `sentence-transformers` and `all-MiniLM-L6-v2` model
+  - [ ] Load `corpus.json` and encode each chunk
+  - [ ] Write `/assets/chatbot/embeddings.json` with vectors + chunk IDs
+  - [ ] Format: `[{ "id": 1, "embedding": [...], "text": "..." }, ...]`
+  - [ ] Run script manually before deployment
+  - [ ] Document script usage in README
+  - [ ] Consider automating in CI/CD pipeline (optional)
+- [ ] Implement CareerChatbotComponent feature
+  - [ ] Inject LlmService, RagService, ChatbotStateService
+  - [ ] Initialize WebLLM model on component mount (or lazy load)
+  - [ ] Display model loading progress to user
+  - [ ] Implement chat message flow:
+    - [ ] User sends question → embed query → RAG retrieval → build prompt → generate response
+  - [ ] Stream response tokens for smooth UX (optional but recommended)
+  - [ ] Handle errors gracefully (model load failures, generation errors)
+  - [ ] Add "reset chat" functionality
+  - [ ] WCAG 2.1 AAA compliant (keyboard navigation, ARIA, screen reader support)
+  - [ ] Unit tests for component logic
+  - [ ] E2E tests for chat interaction flow
+  - [ ] Storybook stories demonstrating chatbot UI
+- [ ] Performance & UX enhancements
+  - [ ] Cache model in IndexedDB to avoid re-downloading
+  - [ ] Lazy-load WebLLM when chatbot is opened
+  - [ ] Add model loading progress bar
+  - [ ] Optimize embeddings file size (consider compression)
+  - [ ] Test on different devices/browsers for compatibility
 
 **GitHub Integration & Data Visualization:**
 
@@ -881,12 +987,18 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
 
 ### Acceptance Criteria
 
+- Career chatbot functional with RAG-powered responses
+- Chatbot provides accurate information about career/experience
+- Model loads efficiently and caches properly
 - Integrations documented
 - Dashboards show expected data
 - Optional auth flow demonstrable without blocking features
 
 ### Success Metrics
 
+- Career chatbot operational with accurate RAG responses
+- WebLLM model loads and caches efficiently (< 30 seconds initial load)
+- Chatbot UI accessible and mobile-responsive
 - GitHub integration working with live data
 - Contact form functional with spam protection
 - About section published with professional content
@@ -897,7 +1009,7 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
 
 ### Estimated Duration
 
-2-3 weeks
+3-4 weeks (includes chatbot implementation)
 
 ---
 
@@ -1397,19 +1509,19 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
 
 ## Phase Summary
 
-| Phase       | Focus                                     | Duration  | Status      |
-| ----------- | ----------------------------------------- | --------- | ----------- |
-| **Phase 1** | Enterprise Baseline & Infrastructure      | 2-3 days  | ✅ Complete |
-| **Phase 2** | Shared Component Library                  | 2-3 weeks | ⏳ Next Up  |
-| **Phase 3** | Core Services & Utilities                 | 1-2 weeks | ⏳ Pending  |
-| **Phase 4** | Pages, Stores, and Feature Implementation | 2-3 weeks | ⏳ Pending  |
-| **Phase 5** | Integrations & Extended Functionality     | 2-3 weeks | ⏳ Pending  |
-| **Phase 6** | Performance Verification & PWA            | 1-2 weeks | ⏳ Pending  |
-| **Phase 7** | QA, Accessibility, & Release Readiness    | 2 weeks   | ⏳ Pending  |
-| **Phase 8** | Deployment, Monitoring & DevOps           | 1 week    | ⏳ Pending  |
-| **Phase 9** | Final Polish & Project Management         | 3-5 days  | ⏳ Pending  |
+| Phase       | Focus                                                   | Duration  | Status      |
+| ----------- | ------------------------------------------------------- | --------- | ----------- |
+| **Phase 1** | Enterprise Baseline & Infrastructure                    | 2-3 days  | ✅ Complete |
+| **Phase 2** | Shared Component Library (includes chatbot UI)          | 2-3 weeks | ⏳ Next Up  |
+| **Phase 3** | Core Services & Utilities (includes LLM/RAG services)   | 1-2 weeks | ⏳ Pending  |
+| **Phase 4** | Pages, Stores, and Feature Implementation (+ corpus)    | 2-3 weeks | ⏳ Pending  |
+| **Phase 5** | Integrations & Extended Functionality (+ chatbot setup) | 3-4 weeks | ⏳ Pending  |
+| **Phase 6** | Performance Verification & PWA                          | 1-2 weeks | ⏳ Pending  |
+| **Phase 7** | QA, Accessibility, & Release Readiness                  | 2 weeks   | ⏳ Pending  |
+| **Phase 8** | Deployment, Monitoring & DevOps                         | 1 week    | ⏳ Pending  |
+| **Phase 9** | Final Polish & Project Management                       | 3-5 days  | ⏳ Pending  |
 
-**Total Estimated Duration**: 13-19 weeks (3-5 months)
+**Total Estimated Duration**: 14-21 weeks (3.5-5 months)
 
 ---
 
@@ -1427,7 +1539,7 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
 
 ---
 
-**Document Version**: 3.5 (Merged)  
-**Last Updated**: November 25, 2025  
-**Status**: Phase 1 ✅ Complete | Phase 2 Next Up  
-**Approach**: Infrastructure-First Enterprise Development | GitHub Pages Deployment
+**Document Version**: 3.6 (Career Chatbot Integration)
+**Last Updated**: December 1, 2025
+**Status**: Phase 1 ✅ Complete | Phase 2 Next Up
+**Approach**: Infrastructure-First Enterprise Development | Client-Side AI Career Chatbot | GitHub Pages Deployment
