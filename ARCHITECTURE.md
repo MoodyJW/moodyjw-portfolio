@@ -425,6 +425,231 @@ ng generate component features/new-feature --standalone
 - Modern build tool
 - Great DX
 
+## Client-Side AI Career Chatbot Architecture (Phase 5)
+
+### Overview
+
+The portfolio includes an innovative client-side AI chatbot that answers questions about Jay's career experience using **WebLLM** and **RAG (Retrieval-Augmented Generation)**—all processing happens in the browser with no backend required.
+
+### Architecture Components
+
+#### 1. Knowledge Base (Build-Time)
+
+**Career Corpus** (`/assets/chatbot/corpus.json`):
+```json
+[
+  {
+    "id": 1,
+    "text": "Jay has 5 years of experience with Angular, specializing in enterprise applications...",
+    "metadata": { "category": "technical-skills", "topic": "angular" }
+  }
+]
+```
+
+**Embeddings** (`/assets/chatbot/embeddings.json`):
+```json
+[
+  {
+    "id": 1,
+    "embedding": [0.123, -0.456, ...],  // 384-dimensional vector
+    "text": "Jay has 5 years of experience..."
+  }
+]
+```
+
+**Build Process**:
+- Python script using `sentence-transformers` library
+- Model: `all-MiniLM-L6-v2` (offline, lightweight, 384 dimensions)
+- Run manually before deployment: `python scripts/generate-embeddings.py`
+
+#### 2. Core Services
+
+**LlmService** (`core/services/llm.service.ts`):
+```typescript
+@Injectable({ providedIn: 'root' })
+export class LlmService {
+  private readonly modelLoaded = signal(false);
+  private readonly loadingProgress = signal(0);
+
+  // Initialize WebLLM worker
+  async initializeModel(): Promise<void>
+
+  // Embed query for RAG retrieval
+  async embed(text: string): Promise<number[]>
+
+  // Generate response with streaming
+  async generate(prompt: string, context: string): AsyncGenerator<string>
+}
+```
+
+**RagService** (`core/services/rag.service.ts`):
+```typescript
+@Injectable({ providedIn: 'root' })
+export class RagService {
+  private readonly embeddings = signal<Embedding[]>([]);
+
+  // Load embeddings on app startup
+  async loadEmbeddings(): Promise<void>
+
+  // Find most similar chunks via cosine similarity
+  async retrieveContext(queryEmbedding: number[], k = 5): Promise<string[]>
+
+  // Build final prompt with retrieved context
+  buildPrompt(query: string, context: string[]): string
+}
+```
+
+**ChatbotStateService** (`core/services/chatbot-state.service.ts`):
+```typescript
+@Injectable({ providedIn: 'root' })
+export class ChatbotStateService {
+  private readonly messages = signal<ChatMessage[]>([]);
+  private readonly isLoading = signal(false);
+
+  addMessage(role: 'user' | 'assistant', content: string): void
+  clearConversation(): void
+  persistToStorage(): void
+}
+```
+
+#### 3. UI Components
+
+**CareerChatbotComponent** (`features/career-chatbot/career-chatbot.component.ts`):
+- Main chat interface
+- Lazy-loaded when user opens chatbot
+- Manages conversation flow
+- Handles model initialization
+
+**ChatContainerComponent** (`shared/components/chat-container/`):
+- Reusable chat UI shell
+- Message list with auto-scroll
+- Loading states and error handling
+
+**ChatMessageComponent** (`shared/components/chat-message/`):
+- Individual message display
+- Markdown rendering for bot responses
+- Timestamp and avatar
+
+**ChatInputComponent** (`shared/components/chat-input/`):
+- Multi-line textarea
+- Send button with keyboard shortcuts
+- Character validation
+
+#### 4. Data Flow
+
+**User Query Flow**:
+```
+User Input
+  ↓
+ChatbotStateService (add user message)
+  ↓
+LlmService.embed(query)
+  ↓
+RagService.retrieveContext(embedding) → Top 5 relevant chunks
+  ↓
+RagService.buildPrompt(query, context)
+  ↓
+LlmService.generate(prompt) → Stream tokens
+  ↓
+ChatbotStateService (add assistant message)
+  ↓
+UI Update (display response)
+```
+
+### Technology Stack
+
+**WebLLM**:
+- Browser-based LLM inference using WebGPU/WebAssembly
+- Model: Llama-3.1-8B-Instruct-q4f32_1 (quantized for browser)
+- Size: ~1.5-2GB (cached in IndexedDB)
+- Inference: ~10-20 tokens/second on modern hardware
+
+**Sentence Transformers**:
+- Python library for generating embeddings
+- Model: `all-MiniLM-L6-v2` (lightweight, 80MB)
+- Output: 384-dimensional embeddings
+- Build-time only (not shipped to browser)
+
+**RAG Implementation**:
+- Pure TypeScript cosine similarity calculation
+- No external dependencies for vector search
+- O(n) search complexity (acceptable for < 1000 chunks)
+
+### Performance Optimizations
+
+1. **Model Caching**: IndexedDB stores downloaded model (~1.5GB) for instant subsequent loads
+2. **Lazy Loading**: Chatbot feature only loads when user opens it
+3. **Embedding Compression**: Consider quantizing embeddings to reduce JSON size
+4. **Progressive Loading**: Show model download progress to user
+5. **Worker Threads**: WebLLM runs in Web Worker to avoid blocking main thread
+
+### Security & Privacy
+
+- **No Backend**: All processing happens client-side
+- **No Telemetry**: User queries never leave the browser
+- **No PII**: Corpus contains only professional career information
+- **Browser Compatibility**: Graceful degradation for unsupported browsers
+
+### Accessibility
+
+- **WCAG 2.1 AAA Compliant**: Full keyboard navigation and screen reader support
+- **ARIA Live Regions**: Announce new messages to screen readers
+- **Focus Management**: Proper focus handling for modal dialog pattern
+- **Reduced Motion**: Respect `prefers-reduced-motion` for animations
+
+### Browser Compatibility
+
+**Supported Browsers**:
+- Chrome 113+ (WebGPU support)
+- Edge 113+
+- Firefox 117+ (with WebGPU flag)
+- Safari 17+ (experimental WebGPU)
+
+**Fallback Strategy**:
+- Detect WebGPU support on component mount
+- Show friendly error message for unsupported browsers
+- Provide alternative contact methods
+
+### Testing Strategy
+
+**Unit Tests**:
+- Mock WebLLM worker for service tests
+- Test cosine similarity calculations
+- Test RAG retrieval accuracy
+- Test state management logic
+
+**E2E Tests**:
+- Test chat interaction flow (send message, receive response)
+- Test model loading progress display
+- Test error handling (model load failure, generation timeout)
+- Test accessibility (keyboard navigation, screen reader)
+
+### Deployment Considerations
+
+**Build Process**:
+```bash
+# 1. Generate embeddings (run before deployment)
+python scripts/generate-embeddings.py
+
+# 2. Verify output files exist
+ls src/assets/chatbot/corpus.json
+ls src/assets/chatbot/embeddings.json
+
+# 3. Build application (includes static assets)
+npm run build
+```
+
+**Bundle Size Impact**:
+- `corpus.json`: ~50-100KB (depends on career content volume)
+- `embeddings.json`: ~500KB-1MB (384 dimensions × ~1000 chunks)
+- `@mlc-ai/web-llm`: ~200KB (library only, model downloaded at runtime)
+- Total Impact: ~1-1.5MB additional bundle size
+
+**CDN Considerations**:
+- Model files (~1.5GB) served from WebLLM CDN (Hugging Face)
+- Static assets (corpus, embeddings) served from GitHub Pages
+- Consider compressing embeddings.json with Brotli
+
 ## Future Considerations
 
 ### Potential Additions
