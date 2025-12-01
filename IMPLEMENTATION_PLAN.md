@@ -490,7 +490,24 @@ An infrastructure-first, enterprise-standard implementation plan following a pha
   - [x] Public methods: `focus()`, `blur()`, `select()`
   - [x] Complete accessibility documentation and keyboard navigation demo
   - [x] Two outputs: `checkedChange` for two-way binding and `selected` for value emission
-- [ ] FormFieldComponent wrapper with label/error display
+- [x] FormFieldComponent wrapper with label/error display
+  - [x] Standalone component with signal-based inputs
+  - [x] Automatic error detection from Angular FormControl
+  - [x] Manual error message input (string or array of strings)
+  - [x] Automatic validation state detection from FormControl
+  - [x] Manual validation state override (default, success, warning, error)
+  - [x] Reuses InputLabelComponent and InputFooterComponent
+  - [x] Custom error messages with placeholder replacement (e.g., {requiredLength})
+  - [x] Default error messages for common validators (required, email, minlength, etc.)
+  - [x] Configurable showErrorsOnTouched behavior
+  - [x] Content projection for wrapping any form control
+  - [x] WCAG 2.1 AAA compliant (ARIA associations, labels, describedby)
+  - [x] Full TypeScript typing with signal-based inputs
+  - [x] OnPush change detection, BEM CSS with CSS variables, respects `prefers-reduced-motion`
+  - [x] Comprehensive unit tests (57 tests covering all functionality, 100% pass rate)
+  - [x] 16 Storybook stories with standalone usage, Reactive Forms integration, and complete form examples
+  - [x] Complete TSDoc documentation with usage examples
+  - [x] Can be used independently or integrated with existing form components
 
 **Layout Components:**
 
