@@ -1,0 +1,227 @@
+@use '../../../../styles/variables';
+
+.stack {
+  display: flex;
+  box-sizing: border-box;
+
+  // Direction variants
+  &--vertical {
+    flex-direction: column;
+  }
+
+  &--horizontal {
+    flex-direction: row;
+  }
+
+  // Spacing variants (using gap for clean, modern approach)
+  &--spacing-none {
+    gap: 0;
+  }
+
+  &--spacing-xs {
+    gap: var(--spacing-xs); // 4px
+  }
+
+  &--spacing-sm {
+    gap: var(--spacing-sm); // 8px
+  }
+
+  &--spacing-md {
+    gap: var(--spacing-lg); // 16px
+  }
+
+  &--spacing-lg {
+    gap: var(--spacing-xl); // 24px
+  }
+
+  &--spacing-xl {
+    gap: var(--spacing-2xl); // 32px
+  }
+
+  &--spacing-2xl {
+    gap: var(--spacing-3xl); // 48px
+  }
+
+  &--spacing-3xl {
+    gap: var(--spacing-4xl); // 64px
+  }
+
+  &--spacing-4xl {
+    gap: 6rem; // 96px
+  }
+
+  // Alignment variants (align-items)
+  &--align-start {
+    align-items: flex-start;
+  }
+
+  &--align-center {
+    align-items: center;
+  }
+
+  &--align-end {
+    align-items: flex-end;
+  }
+
+  &--align-stretch {
+    align-items: stretch;
+  }
+
+  // Justify variants (justify-content)
+  &--justify-start {
+    justify-content: flex-start;
+  }
+
+  &--justify-center {
+    justify-content: center;
+  }
+
+  &--justify-end {
+    justify-content: flex-end;
+  }
+
+  &--justify-space-between {
+    justify-content: space-between;
+  }
+
+  &--justify-space-around {
+    justify-content: space-around;
+  }
+
+  &--justify-space-evenly {
+    justify-content: space-evenly;
+  }
+
+  // Full width/height modifier
+  &--full-width {
+    width: 100%;
+  }
+
+  // Wrap modifier
+  &--wrap {
+    flex-wrap: wrap;
+  }
+
+  // Inline modifier (for vertical stacks)
+  &--inline {
+    display: inline-flex;
+  }
+
+  // Divider modifier
+  &--divider {
+    &.stack--vertical {
+      > :not(:last-child)::after {
+        content: '';
+        display: block;
+        height: 1px;
+        background-color: var(--color-border);
+        margin-top: calc(var(--spacing-lg) / 2);
+        margin-bottom: calc(var(--spacing-lg) / 2);
+      }
+
+      // Adjust margins based on spacing
+      &.stack--spacing-none > :not(:last-child)::after {
+        margin-top: 0;
+        margin-bottom: 0;
+      }
+
+      &.stack--spacing-xs > :not(:last-child)::after {
+        margin-top: calc(var(--spacing-xs) / 2);
+        margin-bottom: calc(var(--spacing-xs) / 2);
+      }
+
+      &.stack--spacing-sm > :not(:last-child)::after {
+        margin-top: calc(var(--spacing-sm) / 2);
+        margin-bottom: calc(var(--spacing-sm) / 2);
+      }
+
+      &.stack--spacing-md > :not(:last-child)::after {
+        margin-top: calc(var(--spacing-lg) / 2);
+        margin-bottom: calc(var(--spacing-lg) / 2);
+      }
+
+      &.stack--spacing-lg > :not(:last-child)::after {
+        margin-top: calc(var(--spacing-xl) / 2);
+        margin-bottom: calc(var(--spacing-xl) / 2);
+      }
+
+      &.stack--spacing-xl > :not(:last-child)::after {
+        margin-top: calc(var(--spacing-2xl) / 2);
+        margin-bottom: calc(var(--spacing-2xl) / 2);
+      }
+
+      &.stack--spacing-2xl > :not(:last-child)::after {
+        margin-top: calc(var(--spacing-3xl) / 2);
+        margin-bottom: calc(var(--spacing-3xl) / 2);
+      }
+
+      &.stack--spacing-3xl > :not(:last-child)::after {
+        margin-top: calc(var(--spacing-4xl) / 2);
+        margin-bottom: calc(var(--spacing-4xl) / 2);
+      }
+
+      &.stack--spacing-4xl > :not(:last-child)::after {
+        margin-top: 3rem;
+        margin-bottom: 3rem;
+      }
+    }
+
+    &.stack--horizontal {
+      > :not(:last-child)::after {
+        content: '';
+        display: inline-block;
+        width: 1px;
+        height: 100%;
+        background-color: var(--color-border);
+        margin-left: calc(var(--spacing-lg) / 2);
+        margin-right: calc(var(--spacing-lg) / 2);
+      }
+
+      // Adjust margins based on spacing
+      &.stack--spacing-none > :not(:last-child)::after {
+        margin-left: 0;
+        margin-right: 0;
+      }
+
+      &.stack--spacing-xs > :not(:last-child)::after {
+        margin-left: calc(var(--spacing-xs) / 2);
+        margin-right: calc(var(--spacing-xs) / 2);
+      }
+
+      &.stack--spacing-sm > :not(:last-child)::after {
+        margin-left: calc(var(--spacing-sm) / 2);
+        margin-right: calc(var(--spacing-sm) / 2);
+      }
+
+      &.stack--spacing-md > :not(:last-child)::after {
+        margin-left: calc(var(--spacing-lg) / 2);
+        margin-right: calc(var(--spacing-lg) / 2);
+      }
+
+      &.stack--spacing-lg > :not(:last-child)::after {
+        margin-left: calc(var(--spacing-xl) / 2);
+        margin-right: calc(var(--spacing-xl) / 2);
+      }
+
+      &.stack--spacing-xl > :not(:last-child)::after {
+        margin-left: calc(var(--spacing-2xl) / 2);
+        margin-right: calc(var(--spacing-2xl) / 2);
+      }
+
+      &.stack--spacing-2xl > :not(:last-child)::after {
+        margin-left: calc(var(--spacing-3xl) / 2);
+        margin-right: calc(var(--spacing-3xl) / 2);
+      }
+
+      &.stack--spacing-3xl > :not(:last-child)::after {
+        margin-left: calc(var(--spacing-4xl) / 2);
+        margin-right: calc(var(--spacing-4xl) / 2);
+      }
+
+      &.stack--spacing-4xl > :not(:last-child)::after {
+        margin-left: 3rem;
+        margin-right: 3rem;
+      }
+    }
+  }
+}

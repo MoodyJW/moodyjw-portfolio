@@ -10,6 +10,7 @@ export * from './input';
 export * from './loading-spinner';
 export * from './modal';
 export * from './skeleton';
+export * from './stack';
 export * from './tabs';
 export * from './textarea';
 export * from './toast';
