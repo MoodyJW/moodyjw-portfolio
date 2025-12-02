@@ -2,6 +2,7 @@ export * from './badge';
 export * from './breadcrumb';
 export * from './button';
 export * from './card';
+export * from './container';
 export * from './form-field';
 export * from './icon';
 export * from './input';
