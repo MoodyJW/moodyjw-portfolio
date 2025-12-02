@@ -3,6 +3,7 @@ export * from './breadcrumb';
 export * from './button';
 export * from './card';
 export * from './container';
+export * from './divider';
 export * from './form-field';
 export * from './grid';
 export * from './icon';
