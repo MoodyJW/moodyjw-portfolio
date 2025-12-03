@@ -6,7 +6,6 @@ import { provideRouter } from '@angular/router';
 import {
   APP_NAME,
   ARIA_LABELS,
-  COPYRIGHT_YEAR,
   KEYBOARD_KEYS,
   NAV_ITEMS,
   ROUTE_PATHS,
@@ -44,10 +43,6 @@ describe('MainLayoutComponent', () => {
 
     it('should expose app name', () => {
       expect(component['APP_NAME']).toBe(APP_NAME);
-    });
-
-    it('should expose copyright year', () => {
-      expect(component['COPYRIGHT_YEAR']).toBe(COPYRIGHT_YEAR);
     });
 
     it('should expose ARIA labels', () => {
@@ -108,12 +103,10 @@ describe('MainLayoutComponent', () => {
       expect(routerOutlet).toBeTruthy();
     });
 
-    it('should render footer with copyright', () => {
+    it('should render footer component', () => {
       const compiled = fixture.nativeElement as HTMLElement;
-      const footer = compiled.querySelector('.main-layout__footer-text');
+      const footer = compiled.querySelector('app-footer');
       expect(footer).toBeTruthy();
-      expect(footer?.textContent).toContain(COPYRIGHT_YEAR.toString());
-      expect(footer?.textContent).toContain(APP_NAME);
     });
 
     it('should render main content with correct id', () => {

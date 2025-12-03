@@ -99,17 +99,24 @@ export const BREAKPOINTS = {
 } as const;
 
 /**
- * External links
+ * External links with metadata
  */
 export const EXTERNAL_LINKS = {
-  /** GitHub profile URL */
-  GITHUB_PROFILE: 'https://github.com/MoodyJW',
-  /** LinkedIn profile URL (placeholder) */
-  LINKEDIN_PROFILE: 'https://linkedin.com/in/placeholder',
-  /** Twitter/X profile URL (placeholder) */
-  TWITTER_PROFILE: 'https://twitter.com/placeholder',
-  /** Email contact (placeholder) */
-  EMAIL: 'mailto:contact@placeholder.com',
+  GITHUB: {
+    url: 'https://github.com/MoodyJW',
+    label: 'GitHub',
+    ariaLabel: 'Visit GitHub profile (opens in new tab)',
+  },
+  LINKEDIN: {
+    url: 'https://linkedin.com/in/placeholder',
+    label: 'LinkedIn',
+    ariaLabel: 'Visit LinkedIn profile (opens in new tab)',
+  },
+  EMAIL: {
+    url: 'mailto:contact@placeholder.com',
+    label: 'Email',
+    ariaLabel: 'Send an email',
+  },
 } as const;
 
 /**

@@ -1,0 +1,88 @@
+<footer class="footer">
+  <div class="footer__container">
+    <!-- Footer Content -->
+    <app-stack direction="vertical" spacing="md" class="footer__content">
+      <!-- Top Section: Navigation & Social -->
+      <div class="footer__top">
+        <!-- Brand & Description -->
+        <div class="footer__brand">
+          <h2 class="footer__brand-name">{{ APP_NAME }}</h2>
+          <p class="footer__brand-description">
+            Building modern, accessible web applications with Angular.
+          </p>
+        </div>
+
+        <!-- Footer Navigation -->
+        <nav class="footer__nav" aria-label="Footer navigation">
+          <h3 class="footer__nav-title">Navigate</h3>
+          <div class="footer__nav-links">
+            @for (item of NAV_ITEMS; track item.path) {
+              <a
+                [routerLink]="item.path"
+                class="footer__nav-link"
+                [attr.aria-label]="item.ariaLabel"
+              >
+                {{ item.label }}
+              </a>
+            }
+          </div>
+        </nav>
+
+        <!-- Social Links -->
+        <div class="footer__social">
+          <h3 class="footer__social-title">Connect</h3>
+          <div class="footer__social-links">
+            @for (link of socialLinks; track link.url) {
+              <a
+                [href]="link.url"
+                target="_blank"
+                rel="noopener noreferrer"
+                [attr.aria-label]="link.ariaLabel"
+                class="footer__social-link"
+              >
+                <app-icon
+                  [name]="link.icon"
+                  size="lg"
+                  class="footer__social-icon"
+                  [ariaLabel]="link.label"
+                />
+              </a>
+            }
+          </div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <app-divider variant="solid" spacing="none" />
+
+      <!-- Bottom Section: Copyright -->
+      <div class="footer__bottom">
+        <p class="footer__copyright">
+          &copy; {{ COPYRIGHT_YEAR }} {{ APP_NAME }}. All rights reserved.
+        </p>
+        <p class="footer__built-with">
+          Built with
+          <a
+            href="https://angular.dev"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer__tech-link"
+            aria-label="Angular framework (opens in new tab)"
+          >
+            Angular
+          </a>
+          and
+          <a
+            href="https://www.typescriptlang.org"
+            target="_blank"
+            rel="noopener noreferrer"
+            class="footer__tech-link"
+            aria-label="TypeScript (opens in new tab)"
+          >
+            TypeScript
+          </a>
+        </p>
+      </div>
+    </app-stack>
+  </div>
+</footer>
