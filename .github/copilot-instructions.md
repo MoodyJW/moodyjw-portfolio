@@ -240,6 +240,23 @@ Documentation & Tests (required)
   - Add unit tests (Vitest) that cover component behavior, signal updates, and key edge cases.
 - Small demo placeholder components are allowed, but MUST be listed in `STORYBOOK_EXCEPTIONS.md` and migrated to include stories/tests before Phase 9.
 
+**CRITICAL: Test Maintenance Rule**
+
+- **When modifying existing components or functionality**, you MUST update all related tests and documentation:
+  - **Unit tests** (.spec.ts files) - Update assertions, mocks, and test cases to match new behavior
+  - **E2E tests** (e2e/*.spec.ts) - Update selectors, assertions, and visual regression snapshots if UI changed
+  - **Storybook stories** (.stories.ts) - Add new states/variants, update existing stories
+  - **TSDoc comments** - Keep documentation in sync with code changes
+- **Before committing changes**, run the full test suite to catch any broken tests:
+  - `npm test` - Run all unit tests
+  - `npm run test:e2e` - Run all E2E tests (updates visual snapshots with `npm run test:e2e:update-snapshots` if needed)
+  - Check that all accessibility tests still pass
+- **Common scenarios requiring test updates**:
+  - Adding/removing DOM elements (E2E selectors may break)
+  - Changing component APIs (unit tests need new assertions)
+  - Modifying styles/layout (visual regression snapshots need updating)
+  - Refactoring constants or data structures (tests using old structure will fail)
+
 ### Adding a Shared Component
 
 1. Create in `shared/components/`
