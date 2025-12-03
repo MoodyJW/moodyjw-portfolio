@@ -14,7 +14,8 @@ test.describe('SPA Routing (404 fallback) - Local/Deployed', () => {
     await page.goto(base + deepPath, { waitUntil: 'networkidle' });
 
     // The app should render main layout and navigation
-    await expect(page.locator('nav')).toBeVisible();
+    const mainNav = page.getByRole('navigation', { name: 'Main navigation' });
+    await expect(mainNav).toBeVisible();
     await expect(page.locator('main')).toBeVisible();
 
     // Optional: assert that route-specific heading exists (tolerant)
@@ -27,7 +28,8 @@ test.describe('SPA Routing (404 fallback) - Local/Deployed', () => {
 
     await page.goto(base + '/this/path/does/not/exist', { waitUntil: 'networkidle' });
 
-    await expect(page.locator('nav')).toBeVisible();
+    const mainNav = page.getByRole('navigation', { name: 'Main navigation' });
+    await expect(mainNav).toBeVisible();
     await expect(page.locator('main')).toBeVisible();
   });
 });
