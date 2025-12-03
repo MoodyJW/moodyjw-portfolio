@@ -14,14 +14,44 @@ test.describe('Navigation', () => {
 
   test('should navigate to case studies page', async ({ page }) => {
     await page.goto('/');
-    await page.click('text=Case Studies');
+
+    // Check if we're on mobile viewport (hamburger menu visible)
+    const viewport = page.viewportSize();
+    const isMobile = viewport && viewport.width < 768;
+
+    if (isMobile) {
+      // On mobile, open the hamburger menu first
+      await page.click('.main-layout__mobile-toggle');
+      await page.waitForSelector('.main-layout__mobile-menu', { state: 'visible' });
+      // Click the visible mobile link
+      await page.click('.main-layout__mobile-link:has-text("Case Studies")');
+    } else {
+      // On desktop, click the visible desktop link
+      await page.click('.main-layout__menu--desktop .main-layout__menu-link:has-text("Case Studies")');
+    }
+
     await expect(page).toHaveURL('/case-studies');
     await expect(page).toHaveTitle('MoodyJW - Case Studies');
   });
 
   test('should navigate back to home from case studies', async ({ page }) => {
     await page.goto('/case-studies');
-    await page.click('text=Home');
+
+    // Check if we're on mobile viewport (hamburger menu visible)
+    const viewport = page.viewportSize();
+    const isMobile = viewport && viewport.width < 768;
+
+    if (isMobile) {
+      // On mobile, open the hamburger menu first
+      await page.click('.main-layout__mobile-toggle');
+      await page.waitForSelector('.main-layout__mobile-menu', { state: 'visible' });
+      // Click the visible mobile link
+      await page.click('.main-layout__mobile-link:has-text("Home")');
+    } else {
+      // On desktop, click the visible desktop link
+      await page.click('.main-layout__menu--desktop .main-layout__menu-link:has-text("Home")');
+    }
+
     await expect(page).toHaveURL('/home');
     await expect(page).toHaveTitle('MoodyJW - Home');
   });
