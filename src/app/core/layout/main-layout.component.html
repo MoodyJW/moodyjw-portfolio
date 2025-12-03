@@ -1,29 +1,98 @@
 <div class="main-layout">
+  <!-- Skip link for keyboard accessibility -->
   <a href="#main-content" class="main-layout__skip-link">Skip to main content</a>
-  
+
   <header class="main-layout__header">
     <nav class="main-layout__nav" aria-label="Main navigation">
+      <!-- Brand/Logo -->
       <div class="main-layout__brand">
-        <a [routerLink]="ROUTE_PATHS.ROOT" class="main-layout__brand-link">{{ APP_NAME }}</a>
+        <a
+          [routerLink]="ROUTE_PATHS.ROOT"
+          class="main-layout__brand-link"
+          [attr.aria-label]="'Navigate to ' + APP_NAME + ' homepage'"
+        >
+          {{ APP_NAME }}
+        </a>
       </div>
-      <ul class="main-layout__menu">
+
+      <!-- Desktop Navigation -->
+      <ul class="main-layout__menu main-layout__menu--desktop" role="menubar">
         @for (item of NAV_ITEMS; track item.path) {
-          <li class="main-layout__menu-item">
-            <a 
-              [routerLink]="item.path" 
-              routerLinkActive="active" 
-              class="main-layout__menu-link"
+          <li class="main-layout__menu-item" role="none">
+            <a
+              [routerLink]="item.path"
+              routerLinkActive="main-layout__menu-link--active"
               [attr.aria-label]="item.ariaLabel"
+              class="main-layout__menu-link"
+              role="menuitem"
             >
               {{ item.label }}
             </a>
           </li>
         }
       </ul>
+
+      <!-- Mobile Menu Toggle Button -->
+      <app-button
+        variant="ghost"
+        size="md"
+        [ariaLabel]="isMobileMenuOpen() ? ARIA_LABELS.CLOSE + ' menu' : ARIA_LABELS.OPEN + ' menu'"
+        [attr.aria-expanded]="isMobileMenuOpen()"
+        aria-controls="mobile-menu"
+        (click)="toggleMobileMenu()"
+        (keydown)="onMenuToggleKeydown($event)"
+        class="main-layout__mobile-toggle"
+      >
+        <app-icon
+          [name]="isMobileMenuOpen() ? 'heroXMark' : 'heroBars3'"
+          size="md"
+          [ariaLabel]="isMobileMenuOpen() ? 'Close icon' : 'Menu icon'"
+        />
+      </app-button>
     </nav>
+
+    <!-- Mobile Menu Drawer -->
+    @if (isMobileMenuOpen()) {
+      <div
+        class="main-layout__mobile-menu"
+        id="mobile-menu"
+        role="dialog"
+        aria-modal="true"
+        [attr.aria-label]="'Mobile navigation menu'"
+        (keydown)="onMenuCloseKeydown($event)"
+      >
+        <!-- Mobile Menu Backdrop -->
+        <div
+          class="main-layout__mobile-backdrop"
+          (click)="closeMobileMenu()"
+          (keydown.enter)="closeMobileMenu()"
+          (keydown.space)="closeMobileMenu()"
+          tabindex="0"
+          role="button"
+          [attr.aria-label]="'Close mobile menu'"
+        ></div>
+
+        <!-- Mobile Menu Content -->
+        <div class="main-layout__mobile-drawer">
+          <app-stack direction="vertical" spacing="sm" class="main-layout__mobile-nav">
+            @for (item of NAV_ITEMS; track item.path) {
+              <a
+                [routerLink]="item.path"
+                routerLinkActive="main-layout__menu-link--active"
+                [attr.aria-label]="item.ariaLabel"
+                (click)="closeMobileMenu()"
+                class="main-layout__mobile-link"
+              >
+                {{ item.label }}
+              </a>
+            }
+          </app-stack>
+        </div>
+      </div>
+    }
   </header>
 
-  <main id="main-content" class="main-layout__content">
+  <main id="main-content" class="main-layout__content" tabindex="-1">
     <router-outlet />
   </main>
 
