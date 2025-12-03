@@ -2,7 +2,8 @@
  * Icon Registry
  *
  * Centralized icon imports and type definitions for the application.
- * Uses Heroicons (outline and solid variants) from @ng-icons/heroicons.
+ * Uses Heroicons (outline and solid variants) from @ng-icons/heroicons
+ * and Ionicons for brand logos from @ng-icons/ionicons.
  *
  * @example
  * ```typescript
@@ -18,6 +19,7 @@
  * ```
  */
 
+// Ionicons imports (for brand logos)
 // Heroicons Outline imports
 import {
   heroAcademicCap,
@@ -127,12 +129,17 @@ import {
   heroUserSolid,
   heroXCircleSolid,
 } from '@ng-icons/heroicons/solid';
+import { ionLogoGithub, ionLogoLinkedin } from '@ng-icons/ionicons';
 
 /**
  * Icon registry object containing all available icons
  * Pass this to provideIcons() in component viewProviders
  */
 export const ICON_REGISTRY = {
+  // Brand Logos (Ionicons)
+  ionLogoGithub,
+  ionLogoLinkedin,
+
   // Navigation
   heroArrowLeft,
   heroArrowRight,
@@ -278,6 +285,10 @@ export type IconName = keyof typeof ICON_REGISTRY;
  * Organized by category for easy discovery
  */
 export const ICON_NAMES = {
+  // Brand Logos
+  GITHUB: 'ionLogoGithub' as IconName,
+  LINKEDIN: 'ionLogoLinkedin' as IconName,
+
   // Navigation
   ARROW_LEFT: 'heroArrowLeft' as IconName,
   ARROW_RIGHT: 'heroArrowRight' as IconName,

@@ -188,19 +188,6 @@
       outline: none;
     }
   }
-
-  &__footer {
-    background-color: var(--color-surface);
-    border-top: 1px solid var(--color-border);
-    padding: var(--spacing-lg);
-    text-align: center;
-  }
-
-  &__footer-text {
-    margin: 0;
-    color: var(--color-text-secondary);
-    font-size: var(--font-size-sm);
-  }
 }
 
 // Animations

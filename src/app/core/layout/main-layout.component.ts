@@ -10,12 +10,13 @@ import {
 import {
   APP_NAME,
   ARIA_LABELS,
-  COPYRIGHT_YEAR,
   ICON_REGISTRY,
   KEYBOARD_KEYS,
   NAV_ITEMS,
   ROUTE_PATHS,
 } from '@shared/constants';
+
+import { FooterComponent } from '../footer/footer.component';
 
 @Component({
   selector: 'app-main-layout',
@@ -27,6 +28,7 @@ import {
     ButtonComponent,
     IconComponent,
     StackComponent,
+    FooterComponent,
   ],
   viewProviders: [provideIcons(ICON_REGISTRY)],
   templateUrl: './main-layout.component.html',
@@ -42,9 +44,6 @@ export class MainLayoutComponent {
 
   /** Application name */
   protected readonly APP_NAME = APP_NAME;
-
-  /** Copyright year */
-  protected readonly COPYRIGHT_YEAR = COPYRIGHT_YEAR;
 
   /** ARIA labels for accessibility */
   protected readonly ARIA_LABELS = ARIA_LABELS;
