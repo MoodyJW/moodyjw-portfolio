@@ -157,32 +157,22 @@ export class DividerComponent {
   /**
    * Computed CSS classes for the divider container.
    */
-  readonly containerClasses = computed(() => {
-    const classes = ['divider'];
-    classes.push(`divider--${this.orientation()}`);
-    classes.push(`divider--${this.variant()}`);
-    classes.push(`divider--spacing-${this.spacing()}`);
-    classes.push(`divider--${this.thickness()}`);
-    if (this.inset()) {
-      classes.push('divider--inset');
-    }
-    if (this.label()) {
-      classes.push('divider--with-label');
-    }
-    return classes.join(' ');
-  });
+  readonly containerClasses = computed(() => [
+    'divider',
+    `divider--${this.orientation()}`,
+    `divider--${this.variant()}`,
+    `divider--spacing-${this.spacing()}`,
+    `divider--${this.thickness()}`,
+    this.inset() ? 'divider--inset' : '',
+    this.label() ? 'divider--with-label' : ''
+  ].filter(Boolean).join(' '));
 
   /**
    * Computed ARIA label for the divider.
    */
-  readonly computedAriaLabel = computed(() => {
-    if (this.ariaLabel()) {
-      return this.ariaLabel();
-    }
-    return this.orientation() === 'horizontal'
-      ? 'Horizontal divider'
-      : 'Vertical divider';
-  });
+  readonly computedAriaLabel = computed(() =>
+    this.ariaLabel() || (this.orientation() === 'horizontal' ? 'Horizontal divider' : 'Vertical divider')
+  );
 
   /**
    * Whether the divider has a label.

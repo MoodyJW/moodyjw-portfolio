@@ -132,43 +132,18 @@ export class StackComponent {
    * Generate BEM CSS classes based on component state
    */
   private _getStackClasses(): string {
-    const classes = ['stack'];
-
-    // Direction class
-    classes.push(`stack--${this.direction()}`);
-
-    // Spacing class
-    classes.push(`stack--spacing-${this.spacing()}`);
-
-    // Alignment class
-    classes.push(`stack--align-${this.align()}`);
-
-    // Justify class
     const justify = this.justify();
-    if (justify !== undefined) {
-      classes.push(`stack--justify-${justify}`);
-    }
 
-    // Full width/height
-    if (this.fullWidth()) {
-      classes.push('stack--full-width');
-    }
-
-    // Wrap
-    if (this.wrap()) {
-      classes.push('stack--wrap');
-    }
-
-    // Inline
-    if (this.inline()) {
-      classes.push('stack--inline');
-    }
-
-    // Divider
-    if (this.divider()) {
-      classes.push('stack--divider');
-    }
-
-    return classes.join(' ');
+    return [
+      'stack',
+      `stack--${this.direction()}`,
+      `stack--spacing-${this.spacing()}`,
+      `stack--align-${this.align()}`,
+      justify ? `stack--justify-${justify}` : '',
+      this.fullWidth() ? 'stack--full-width' : '',
+      this.wrap() ? 'stack--wrap' : '',
+      this.inline() ? 'stack--inline' : '',
+      this.divider() ? 'stack--divider' : ''
+    ].filter(Boolean).join(' ');
   }
 }

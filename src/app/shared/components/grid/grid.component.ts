@@ -152,84 +152,40 @@ export class GridComponent {
    * Generate BEM CSS classes based on component state
    */
   private _getGridClasses(): string {
-    const classes = ['grid'];
-
-    // Gap classes
     const gapX = this.gapX();
     const gapY = this.gapY();
-    const gap = this.gap();
+    const justify = this.justifyItems();
 
-    if (gapX !== undefined || gapY !== undefined) {
-      // Use specific gap values
-      if (gapX !== undefined) {
-        classes.push(`grid--gap-x-${gapX}`);
-      }
-      if (gapY !== undefined) {
-        classes.push(`grid--gap-y-${gapY}`);
-      }
-    } else {
-      // Use uniform gap
-      classes.push(`grid--gap-${gap}`);
-    }
-
-    // Alignment classes
-    classes.push(`grid--align-${this.alignItems()}`);
-
-    if (this.justifyItems() !== undefined) {
-      classes.push(`grid--justify-${this.justifyItems()}`);
-    }
-
-    // Full width
-    if (this.fullWidth()) {
-      classes.push('grid--full-width');
-    }
-
-    return classes.join(' ');
+    return [
+      'grid',
+      gapX ? `grid--gap-x-${gapX}` : gapY ? '' : `grid--gap-${this.gap()}`,
+      gapY ? `grid--gap-y-${gapY}` : '',
+      `grid--align-${this.alignItems()}`,
+      justify ? `grid--justify-${justify}` : '',
+      this.fullWidth() ? 'grid--full-width' : ''
+    ].filter(Boolean).join(' ');
   }
 
   /**
    * Generate inline styles for responsive columns
    */
   private _getGridStyles(): Record<string, string> {
-    const styles: Record<string, string> = {};
-    const cols = this.cols();
+    const getColValue = (cols: GridColumns | undefined) =>
+      cols === 'auto'
+        ? `repeat(auto-fit, minmax(min(${this.minColWidth()}, 100%), 1fr))`
+        : `repeat(${cols}, 1fr)`;
 
-    // Base columns (mobile-first)
-    if (cols === 'auto') {
-      styles['--grid-cols'] = `repeat(auto-fit, minmax(min(${this.minColWidth()}, 100%), 1fr))`;
-    } else {
-      styles['--grid-cols'] = `repeat(${cols}, 1fr)`;
-    }
+    const styles: Record<string, string> = {
+      '--grid-cols': getColValue(this.cols())
+    };
 
-    // Tablet breakpoint
     const colsMd = this.colsMd();
-    if (colsMd !== undefined) {
-      if (colsMd === 'auto') {
-        styles['--grid-cols-md'] = `repeat(auto-fit, minmax(min(${this.minColWidth()}, 100%), 1fr))`;
-      } else {
-        styles['--grid-cols-md'] = `repeat(${colsMd}, 1fr)`;
-      }
-    }
-
-    // Desktop breakpoint
     const colsLg = this.colsLg();
-    if (colsLg !== undefined) {
-      if (colsLg === 'auto') {
-        styles['--grid-cols-lg'] = `repeat(auto-fit, minmax(min(${this.minColWidth()}, 100%), 1fr))`;
-      } else {
-        styles['--grid-cols-lg'] = `repeat(${colsLg}, 1fr)`;
-      }
-    }
-
-    // Large desktop breakpoint
     const colsXl = this.colsXl();
-    if (colsXl !== undefined) {
-      if (colsXl === 'auto') {
-        styles['--grid-cols-xl'] = `repeat(auto-fit, minmax(min(${this.minColWidth()}, 100%), 1fr))`;
-      } else {
-        styles['--grid-cols-xl'] = `repeat(${colsXl}, 1fr)`;
-      }
-    }
+
+    if (colsMd) styles['--grid-cols-md'] = getColValue(colsMd);
+    if (colsLg) styles['--grid-cols-lg'] = getColValue(colsLg);
+    if (colsXl) styles['--grid-cols-xl'] = getColValue(colsXl);
 
     return styles;
   }
