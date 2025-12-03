@@ -8,6 +8,8 @@ import { test, expect } from './fixtures/accessibility';
 test.describe('Accessibility Compliance', () => {
   test('Home page should have no accessibility violations', async ({ page, makeAxeBuilder }) => {
     await page.goto('/');
+    await page.waitForLoadState('networkidle');
+    await page.waitForSelector('h1', { state: 'visible' });
 
     const accessibilityScanResults = await makeAxeBuilder().analyze();
 
@@ -19,6 +21,8 @@ test.describe('Accessibility Compliance', () => {
     makeAxeBuilder,
   }) => {
     await page.goto('/case-studies');
+    await page.waitForLoadState('networkidle');
+    await page.waitForSelector('h1', { state: 'visible' });
 
     const accessibilityScanResults = await makeAxeBuilder().analyze();
 
@@ -27,6 +31,10 @@ test.describe('Accessibility Compliance', () => {
 
   test('should have proper heading hierarchy', async ({ page }) => {
     await page.goto('/');
+    await page.waitForLoadState('networkidle');
+
+    // Wait for the h1 to be visible (Angular has rendered)
+    await page.waitForSelector('h1', { state: 'visible' });
 
     // Check for h1 (should be exactly 1)
     const h1Count = await page.locator('h1').count();
