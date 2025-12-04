@@ -16,6 +16,7 @@ import {
   ROUTE_PATHS,
 } from '@shared/constants';
 
+import { ThemePickerComponent } from '../../shared/components/theme-picker/theme-picker.component';
 import { FooterComponent } from '../footer/footer.component';
 
 @Component({
@@ -29,6 +30,7 @@ import { FooterComponent } from '../footer/footer.component';
     IconComponent,
     StackComponent,
     FooterComponent,
+    ThemePickerComponent,
   ],
   viewProviders: [provideIcons(ICON_REGISTRY)],
   templateUrl: './main-layout.component.html',

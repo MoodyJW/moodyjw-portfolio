@@ -1,5 +1,3 @@
-// @vitest-environment jsdom
-/* eslint-disable no-undef */
 import { TestBed } from '@angular/core/testing';
 
 import type { ModalConfig } from './modal.service';
@@ -95,7 +93,7 @@ describe('ModalService', () => {
       expect(service.openModalsCount).toBe(1);
 
       // After animation completes
-      await new Promise(resolve => setTimeout(resolve, 350));
+      await new Promise((resolve) => setTimeout(resolve, 350));
       expect(service.openModalsCount).toBe(0);
     });
 
@@ -126,7 +124,7 @@ describe('ModalService', () => {
 
       modalRef.close();
 
-      await new Promise(resolve => setTimeout(resolve, 350));
+      await new Promise((resolve) => setTimeout(resolve, 350));
       const modalElementAfterClose = document.querySelector('app-modal');
       expect(modalElementAfterClose).toBeNull();
     });
@@ -140,7 +138,7 @@ describe('ModalService', () => {
 
       service.closeAll();
 
-      await new Promise(resolve => setTimeout(resolve, 350));
+      await new Promise((resolve) => setTimeout(resolve, 350));
       expect(service.openModalsCount).toBe(0);
     });
   });
@@ -184,7 +182,7 @@ describe('ModalService', () => {
 
       service.closeAll();
 
-      await new Promise(resolve => setTimeout(resolve, 350));
+      await new Promise((resolve) => setTimeout(resolve, 350));
       expect(service.openModalsCount).toBe(0);
     });
   });
@@ -196,12 +194,10 @@ describe('ModalService', () => {
       });
 
       // Wait for DOM to be ready
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       const modalElement = document.querySelector('[role="dialog"]');
-      expect(modalElement?.getAttribute('aria-label')).toBe(
-        'Custom ARIA label'
-      );
+      expect(modalElement?.getAttribute('aria-label')).toBe('Custom ARIA label');
 
       modalRef.close();
     });
@@ -213,7 +209,7 @@ describe('ModalService', () => {
       });
 
       // Wait for DOM to be ready
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       const modalElement = document.querySelector('[role="dialog"]');
       expect(modalElement?.getAttribute('aria-labelledby')).toBe('heading-id');
@@ -228,12 +224,10 @@ describe('ModalService', () => {
       });
 
       // Wait for DOM to be ready
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       const modalElement = document.querySelector('[role="dialog"]');
-      expect(modalElement?.getAttribute('aria-describedby')).toBe(
-        'description-id'
-      );
+      expect(modalElement?.getAttribute('aria-describedby')).toBe('description-id');
 
       modalRef.close();
     });

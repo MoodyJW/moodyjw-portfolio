@@ -440,7 +440,7 @@ export class SelectComponent<T = unknown> {
 
     // Focus search input if searchable
     if (this.searchable()) {
-      // eslint-disable-next-line no-undef
+       
       setTimeout(() => {
         this.searchInput()?.searchInputElement()?.nativeElement.focus();
       }, 0);
@@ -556,7 +556,7 @@ export class SelectComponent<T = unknown> {
       this.isFocused.set(false);
       this.blurred.emit(event);
       // Close dropdown when focus leaves the component
-      // eslint-disable-next-line no-undef
+       
       setTimeout(() => {
         if (!this.isFocused()) {
           this.closeDropdown();

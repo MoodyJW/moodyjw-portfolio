@@ -12,7 +12,7 @@ import {
   viewChild,
 } from '@angular/core';
 
-/* eslint-disable no-undef */
+ 
 export type ModalVariant = 'default' | 'fullscreen' | 'dialog' | 'sidebar';
 export type ModalSize = 'sm' | 'md' | 'lg' | 'xl';
 

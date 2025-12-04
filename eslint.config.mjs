@@ -123,6 +123,10 @@ eslint.configs.recommended, // TypeScript files
       afterAll: 'readonly',
       vi: 'readonly',
       jest: 'readonly',
+      document: 'readonly',
+      window: 'readonly',
+      setTimeout: 'readonly',
+      clearTimeout: 'readonly',
     },
   },
 }, // Main.ts with console
@@ -131,6 +135,17 @@ eslint.configs.recommended, // TypeScript files
   languageOptions: {
     globals: {
       console: 'readonly',
+    },
+  },
+}, // Browser environment for components that need DOM access
+{
+  files: ['src/app/**/*.component.ts'],
+  languageOptions: {
+    globals: {
+      document: 'readonly',
+      window: 'readonly',
+      setTimeout: 'readonly',
+      clearTimeout: 'readonly',
     },
   },
 }, // Ignore patterns

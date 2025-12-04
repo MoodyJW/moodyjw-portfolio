@@ -18,19 +18,21 @@
       <!-- Desktop Navigation -->
       <ul class="main-layout__menu main-layout__menu--desktop" role="menubar">
         @for (item of NAV_ITEMS; track item.path) {
-          <li class="main-layout__menu-item" role="none">
-            <a
-              [routerLink]="item.path"
-              routerLinkActive="main-layout__menu-link--active"
-              [attr.aria-label]="item.ariaLabel"
-              class="main-layout__menu-link"
-              role="menuitem"
-            >
-              {{ item.label }}
-            </a>
-          </li>
+        <li class="main-layout__menu-item" role="none">
+          <a
+            [routerLink]="item.path"
+            routerLinkActive="main-layout__menu-link--active"
+            [attr.aria-label]="item.ariaLabel"
+            class="main-layout__menu-link"
+            role="menuitem"
+          >
+            {{ item.label }}
+          </a>
+        </li>
         }
       </ul>
+
+      <app-theme-picker class="main-layout__theme-picker" />
 
       <!-- Mobile Menu Toggle Button -->
       <app-button
@@ -53,42 +55,47 @@
 
     <!-- Mobile Menu Drawer -->
     @if (isMobileMenuOpen()) {
+    <div
+      class="main-layout__mobile-menu"
+      id="mobile-menu"
+      role="dialog"
+      aria-modal="true"
+      [attr.aria-label]="'Mobile navigation menu'"
+      (keydown)="onMenuCloseKeydown($event)"
+    >
+      <!-- Mobile Menu Backdrop -->
       <div
-        class="main-layout__mobile-menu"
-        id="mobile-menu"
-        role="dialog"
-        aria-modal="true"
-        [attr.aria-label]="'Mobile navigation menu'"
-        (keydown)="onMenuCloseKeydown($event)"
-      >
-        <!-- Mobile Menu Backdrop -->
-        <div
-          class="main-layout__mobile-backdrop"
-          (click)="closeMobileMenu()"
-          (keydown.enter)="closeMobileMenu()"
-          (keydown.space)="closeMobileMenu()"
-          tabindex="0"
-          role="button"
-          [attr.aria-label]="'Close mobile menu'"
-        ></div>
+        class="main-layout__mobile-backdrop"
+        (click)="closeMobileMenu()"
+        (keydown.enter)="closeMobileMenu()"
+        (keydown.space)="closeMobileMenu()"
+        tabindex="0"
+        role="button"
+        [attr.aria-label]="'Close mobile menu'"
+      ></div>
 
-        <!-- Mobile Menu Content -->
-        <div class="main-layout__mobile-drawer">
-          <app-stack direction="vertical" spacing="sm" class="main-layout__mobile-nav">
-            @for (item of NAV_ITEMS; track item.path) {
-              <a
-                [routerLink]="item.path"
-                routerLinkActive="main-layout__menu-link--active"
-                [attr.aria-label]="item.ariaLabel"
-                (click)="closeMobileMenu()"
-                class="main-layout__mobile-link"
-              >
-                {{ item.label }}
-              </a>
-            }
-          </app-stack>
-        </div>
+      <!-- Mobile Menu Content -->
+      <div class="main-layout__mobile-drawer">
+        <app-stack direction="vertical" spacing="sm" class="main-layout__mobile-nav">
+          @for (item of NAV_ITEMS; track item.path) {
+          <a
+            [routerLink]="item.path"
+            routerLinkActive="main-layout__menu-link--active"
+            [attr.aria-label]="item.ariaLabel"
+            (click)="closeMobileMenu()"
+            class="main-layout__mobile-link"
+          >
+            {{ item.label }}
+          </a>
+          }
+
+          <!-- Theme Picker in Mobile Menu -->
+          <div class="main-layout__mobile-theme-picker">
+            <app-theme-picker />
+          </div>
+        </app-stack>
       </div>
+    </div>
     }
   </header>
 
