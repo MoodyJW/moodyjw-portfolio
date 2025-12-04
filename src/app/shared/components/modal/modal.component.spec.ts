@@ -1,9 +1,7 @@
-// @vitest-environment jsdom
-/* eslint-disable no-undef */
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
-import type { ModalSize,ModalVariant } from './modal.component';
+import type { ModalSize, ModalVariant } from './modal.component';
 import { ModalComponent } from './modal.component';
 
 describe('ModalComponent', () => {
@@ -33,8 +31,7 @@ describe('ModalComponent', () => {
     });
 
     it('should be standalone', () => {
-      const metadata = (ModalComponent as unknown as { ɵcmp: { standalone: boolean } })
-        .ɵcmp;
+      const metadata = (ModalComponent as unknown as { ɵcmp: { standalone: boolean } }).ɵcmp;
       expect(metadata.standalone).toBe(true);
     });
 
@@ -52,12 +49,7 @@ describe('ModalComponent', () => {
     });
 
     it('should apply custom variant', () => {
-      const variants: ModalVariant[] = [
-        'default',
-        'fullscreen',
-        'dialog',
-        'sidebar',
-      ];
+      const variants: ModalVariant[] = ['default', 'fullscreen', 'dialog', 'sidebar'];
 
       variants.forEach((variant) => {
         fixture.componentRef.setInput('variant', variant);
@@ -384,7 +376,7 @@ describe('ModalComponent', () => {
       fixture.detectChanges();
 
       // Wait for effect to run
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
       expect(document.body.style.overflow).toBe('hidden');
     });
 
@@ -393,12 +385,12 @@ describe('ModalComponent', () => {
       fixture.componentRef.setInput('open', true);
       fixture.detectChanges();
 
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       fixture.componentRef.setInput('open', false);
       fixture.detectChanges();
 
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
       expect(document.body.style.overflow).toBe('');
       expect(document.body.style.paddingRight).toBe('');
     });
@@ -408,7 +400,7 @@ describe('ModalComponent', () => {
       fixture.componentRef.setInput('open', true);
       fixture.detectChanges();
 
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
       expect(document.body.style.overflow).not.toBe('hidden');
     });
   });
@@ -423,7 +415,7 @@ describe('ModalComponent', () => {
       fixture.componentRef.setInput('open', true);
       fixture.detectChanges();
 
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
       expect(openedChangeValue).toBe(true);
     });
 
@@ -436,12 +428,12 @@ describe('ModalComponent', () => {
         openedChangeValue = value;
       });
 
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
 
       fixture.componentRef.setInput('open', false);
       fixture.detectChanges();
 
-      await new Promise(resolve => setTimeout(resolve, 0));
+      await new Promise((resolve) => setTimeout(resolve, 0));
       expect(openedChangeValue).toBe(false);
     });
   });

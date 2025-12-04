@@ -46,7 +46,7 @@ export const ThemeRegistrySchema = z.array(ThemeSchema);
 export const THEMES = [
   {
     slug: 'lumen',
-    label: 'Lumen (Light)',
+    label: 'Lumen',
     isDark: false,
     tokens: {
       primary: '#0057FF',
@@ -71,7 +71,7 @@ export const THEMES = [
   },
   {
     slug: 'aurora',
-    label: 'Aurora (Light)',
+    label: 'Aurora',
     isDark: false,
     tokens: {
       primary: '#00897B',
@@ -96,7 +96,7 @@ export const THEMES = [
   },
   {
     slug: 'nocturne',
-    label: 'Nocturne (Dark)',
+    label: 'Nocturne',
     isDark: true,
     tokens: {
       primary: '#90CAF9',
@@ -121,7 +121,7 @@ export const THEMES = [
   },
   {
     slug: 'cosmos',
-    label: 'Cosmos (Dark)',
+    label: 'Cosmos',
     isDark: true,
     tokens: {
       primary: '#FF6F91',
