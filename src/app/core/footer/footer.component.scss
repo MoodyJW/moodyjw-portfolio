@@ -164,13 +164,13 @@
   }
 
   &__tech-link {
-    color: var(--color-primary);
+    color: var(--color-text);
     text-decoration: none;
     font-weight: var(--font-weight-medium);
     transition: color var(--transition-duration);
 
     &:hover {
-      color: var(--color-primary-hover);
+      color: var(--color-text-secondary);
       text-decoration: underline;
     }
 

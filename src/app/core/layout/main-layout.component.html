@@ -40,6 +40,7 @@
         size="md"
         [ariaLabel]="isMobileMenuOpen() ? ARIA_LABELS.CLOSE + ' menu' : ARIA_LABELS.OPEN + ' menu'"
         [attr.aria-expanded]="isMobileMenuOpen()"
+        [attr.data-test]="'menu-toggle'"
         aria-controls="mobile-menu"
         (click)="toggleMobileMenu()"
         (keydown)="onMenuToggleKeydown($event)"

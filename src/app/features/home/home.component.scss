@@ -43,23 +43,23 @@
     display: inline-block;
 
     &--primary {
-      background-color: var(--color-primary);
+      background-color: var(--color-text);
       color: var(--color-background);
 
       &:hover {
-        background-color: var(--color-primary-hover);
+        background-color: var(--color-text-secondary);
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       }
     }
 
     &--secondary {
-      border: 2px solid var(--color-primary);
-      color: var(--color-primary);
+      border: 2px solid var(--color-text);
+      color: var(--color-text);
       background-color: transparent;
 
       &:hover {
-        background-color: var(--color-primary);
+        background-color: var(--color-text);
         color: var(--color-background);
         transform: translateY(-2px);
       }
@@ -101,7 +101,7 @@
   &__skill-title {
     font-size: var(--font-size-xl);
     font-weight: var(--font-weight-semibold);
-    color: var(--color-primary);
+    color: var(--color-text);
     margin: 0 0 var(--spacing-sm) 0;
   }
 
