@@ -29,10 +29,12 @@ test.describe('Theme Picker', () => {
     await page.goto('/');
 
     const themePicker = page.locator('[data-test="theme-picker-button"]');
-    const text = await themePicker.textContent();
+    await expect(themePicker).toBeVisible();
 
-    // Should contain one of the theme names
-    expect(text).toMatch(/(Lumen|Aurora|Nocturne|Cosmos)/);
+    const ariaLabel = await themePicker.getAttribute('aria-label');
+
+    // aria-label should contain one of the theme names
+    expect(ariaLabel).toMatch(/(Lumen|Aurora|Nocturne|Cosmos)/);
   });
 
   test('should toggle dropdown when clicked', async ({ page }) => {
@@ -233,7 +235,7 @@ test.describe('Theme Picker', () => {
     expect(themeAttr).toBe('nocturne');
   });
 
-  test('should maintain theme across navigation', async ({ page }) => {
+  test('should maintain theme across navigation', async ({ page, viewport }) => {
     await page.goto('/');
 
     // Select Aurora theme
@@ -241,12 +243,27 @@ test.describe('Theme Picker', () => {
     await page.locator('[data-test="theme-option-aurora"]').click();
 
     // Navigate to case studies page
-    await page.locator('a[href="/case-studies"]').first().click();
+    // On mobile, we need to open the menu first
+    const isMobile = viewport ? viewport.width < 768 : false;
+    if (isMobile) {
+      // Click the menu toggle button on mobile
+      const menuToggle = page.locator('[data-test="menu-toggle"]');
+      await menuToggle.click();
+      // Wait for mobile menu to appear and click the link inside it
+      const mobileMenu = page.locator('#mobile-menu');
+      await mobileMenu.waitFor({ state: 'visible' });
+      const caseStudiesLink = mobileMenu.locator('a[href="/case-studies"]');
+      await caseStudiesLink.click();
+    } else {
+      await page.locator('a[href="/case-studies"]').first().click();
+    }
+
     await page.waitForURL('/case-studies');
 
-    // Theme should persist
+    // Theme should persist (check aria-label which is always present)
     const button = page.locator('[data-test="theme-picker-button"]').first();
-    await expect(button).toContainText('Aurora');
+    const ariaLabel = await button.getAttribute('aria-label');
+    expect(ariaLabel).toContain('Aurora');
 
     const themeAttr = await page.locator('html').getAttribute('data-theme');
     expect(themeAttr).toBe('aurora');
