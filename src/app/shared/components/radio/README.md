@@ -1,5 +1,9 @@
 # Radio Component
 
+> **Last Updated**: December 4, 2025
+> **Status**: Production Ready
+> **Test Coverage**: >95%
+
 An accessible radio button component following WCAG 2.1 AAA guidelines with full theme integration.
 
 ## Features
