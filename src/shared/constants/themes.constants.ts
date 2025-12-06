@@ -50,7 +50,7 @@ export const THEMES = [
     isDark: false,
     tokens: {
       primary: '#0049db',
-      primaryOnSurface: '#337aff',
+      primaryOnSurface: '#06224d',
       primaryHover: '#0057ff',
       background: '#FFFFFF',
       surface: '#F7F9FB',
