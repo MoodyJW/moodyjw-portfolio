@@ -2,7 +2,7 @@
 declare var window: Window;
 declare var document: Document;
 declare var localStorage: Storage;
-import { computed,effect, Injectable, signal } from '@angular/core';
+import { computed, effect, Injectable, signal } from '@angular/core';
 
 import { THEMES } from '../constants/themes.constants';
 
@@ -131,9 +131,10 @@ export class ThemeService {
     const theme = this.availableThemes.find((t) => t.slug === slug) || this.availableThemes[0];
     if (typeof document !== 'undefined') {
       document.documentElement.setAttribute('data-theme', theme.slug);
-      // Inject CSS variables
+      // Inject CSS variables, converting camelCase to kebab-case
       Object.entries(theme.tokens).forEach(([key, value]) => {
-        document.documentElement.style.setProperty(`--color-${key}`, value);
+        const kebabKey = key.replace(/([a-z])([A-Z])/g, '$1-$2').toLowerCase();
+        document.documentElement.style.setProperty(`--color-${kebabKey}`, value);
       });
     }
   }

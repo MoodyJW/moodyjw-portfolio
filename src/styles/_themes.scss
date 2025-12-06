@@ -4,9 +4,13 @@
 
 // Lumen (Light)
 $theme-lumen: (
-  primary: #0057ff,
+  primary: #0049db,
+  primary-on-surface: #337aff,
+  primary-hover: #0057ff,
   background: #ffffff,
   surface: #f7f9fb,
+  surface-active: #e5e7eb,
+  surface-hover: #f0f2f5,
   text: #111827,
   text-secondary: #4b5563,
   border: #e5e7eb,
@@ -20,9 +24,13 @@ $theme-lumen: (
 
 // Aurora (Light)
 $theme-aurora: (
-  primary: #00897b,
+  primary: #005c53,
+  primary-on-surface: #33aa9f,
+  primary-hover: #009e8f,
   background: #f5f7fa,
   surface: #ffffff,
+  surface-active: #e0e7ef,
+  surface-hover: #f0f4f8,
   text: #1a202c,
   text-secondary: #64748b,
   border: #cbd5e1,
@@ -37,8 +45,12 @@ $theme-aurora: (
 // Nocturne (Dark)
 $theme-nocturne: (
   primary: #90caf9,
+  primary-on-surface: #99ccff,
+  primary-hover: #a0d1ff,
   background: #181a20,
   surface: #23272f,
+  surface-active: #2d3748,
+  surface-hover: #2a2e38,
   text: #f3f4f6,
   text-secondary: #a1a1aa,
   border: #2d3748,
@@ -53,8 +65,12 @@ $theme-nocturne: (
 // Cosmos (Dark)
 $theme-cosmos: (
   primary: #ff6f91,
+  primary-on-surface: #ffb3c6,
+  primary-hover: #ff85a3,
   background: #101014,
   surface: #181a20,
+  surface-active: #101014,
+  surface-hover: #202028,
   text: #f8fafc,
   text-secondary: #a3a3a3,
   border: #23272f,
@@ -69,8 +85,10 @@ $theme-cosmos: (
 // Mixin: Inject theme as CSS variables
 @mixin theme-vars($theme) {
   --color-primary: map-get($theme, primary);
+  --color-primary-on-surface: map-get($theme, primary-on-surface);
   --color-background: map-get($theme, background);
   --color-surface: map-get($theme, surface);
+  --color-surface-active: map-get($theme, surface-active);
   --color-text: map-get($theme, text);
   --color-text-secondary: map-get($theme, text-secondary);
   --color-border: map-get($theme, border);
