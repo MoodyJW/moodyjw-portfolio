@@ -38,10 +38,10 @@ export class MyComponent {
       ariaLabel: 'User settings',
       size: 'lg',
       component: UserSettingsComponent,
-      data: { userId: 123 }
+      data: { userId: 123 },
     });
 
-    modalRef.afterClosed().then(result => {
+    modalRef.afterClosed().then((result) => {
       console.log('Modal closed with result:', result);
     });
   }
@@ -51,7 +51,7 @@ export class MyComponent {
       title: 'Delete Item',
       message: 'Are you sure? This cannot be undone.',
       confirmText: 'Delete',
-      confirmVariant: 'danger'
+      confirmVariant: 'danger',
     });
 
     if (confirmed) {
@@ -67,7 +67,7 @@ export class MyComponent {
 await modalService.alert({
   title: 'Info',
   message: 'Your changes have been saved.',
-  okText: 'OK'
+  okText: 'OK',
 });
 ```
 
@@ -80,18 +80,23 @@ modalService.closeAll();
 ## API
 
 ### `open<T>(config: ModalConfig): ModalRef<T>`
+
 Opens a modal with the given configuration. Returns a reference with `close()` and `afterClosed()`.
 
 ### `confirm(config: ConfirmDialogConfig): Promise<boolean>`
+
 Shows a confirmation dialog. Resolves to `true` if confirmed, `false` if canceled.
 
 ### `alert(config: AlertDialogConfig): Promise<void>`
+
 Shows an alert dialog. Resolves when closed.
 
 ### `closeAll(): void`
+
 Closes all open modals.
 
 ### `openModalsCount: number`
+
 Returns the number of currently open modals.
 
 ## Accessibility
