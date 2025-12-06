@@ -43,11 +43,11 @@
     display: inline-block;
 
     &--primary {
-      background-color: var(--color-text);
+      background-color: var(--color-primary-on-surface);
       color: var(--color-background);
 
       &:hover {
-        background-color: var(--color-text-secondary);
+        background-color: var(--color-primary);
         transform: translateY(-2px);
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
       }
