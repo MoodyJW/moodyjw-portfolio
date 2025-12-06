@@ -732,7 +732,13 @@ export function chunk(str: string, chunkSize: number): string[] {
  * ```
  */
 export function stripHtml(str: string): string {
-  return str.replace(/<[^>]*>/g, '');
+  let prev: string;
+  let curr: string = str;
+  do {
+    prev = curr;
+    curr = curr.replace(/<[^>]*>/g, '');
+  } while (curr !== prev);
+  return curr;
 }
 
 /**
