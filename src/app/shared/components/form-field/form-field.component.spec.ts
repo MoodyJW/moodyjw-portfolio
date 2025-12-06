@@ -1,10 +1,10 @@
-import type { ComponentFixture} from '@angular/core/testing';
+import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 import { FormControl, Validators } from '@angular/forms';
 
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { UniqueIdService } from '@shared/services/unique-id.service';
+import { UniqueIdService } from '@shared/services/unique-id/unique-id.service';
 
 import { InputFooterComponent } from '../input-footer';
 import { InputLabelComponent } from '../input-label';

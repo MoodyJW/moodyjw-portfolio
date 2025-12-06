@@ -10,7 +10,7 @@ import {
   signal,
 } from '@angular/core';
 
-import { ModalComponent } from '../components/modal/modal.component';
+import { ModalComponent } from '../../components/modal/modal.component';
 
 /**
  * Configuration options for programmatically opening modals
@@ -190,29 +190,52 @@ export class ModalService {
       resolveClose = resolve;
     });
 
+    // Track if already closing to prevent double-close
+    let isClosing = false;
+
     // Handle close
     const close = (result?: T) => {
-      modalRef.setInput('open', false);
+      if (isClosing) {
+        return;
+      }
+      isClosing = true;
+
+      try {
+        modalRef.setInput('open', false);
+      } catch {
+        // Ignore if already destroyed
+      }
 
       // Wait for close animation
       setTimeout(() => {
-        // Remove from active modals
-        this._activeModals.update((modals) => modals.filter((m) => m !== modalRef));
+        try {
+          // Unsubscribe from closed output
+          closedSubscription.unsubscribe();
 
-        // Cleanup
-        appRef.detachView(modalRef.hostView);
-        modalRef.destroy();
-        if (domElem.parentNode) {
-          domElem.parentNode.removeChild(domElem);
+          // Cleanup - check if appRef is still available
+          const currentAppRef = this._appRef();
+          if (currentAppRef) {
+            // Remove from active modals (only if appRef is available)
+            this._activeModals.update((modals) => modals.filter((m) => m !== modalRef));
+
+            currentAppRef.detachView(modalRef.hostView);
+            modalRef.destroy();
+            if (domElem.parentNode) {
+              domElem.parentNode.removeChild(domElem);
+            }
+          }
+
+          // Resolve promise
+          resolveClose(result);
+        } catch {
+          // Ignore errors if ApplicationRef is already destroyed
+          resolveClose(result);
         }
-
-        // Resolve promise
-        resolveClose(result);
       }, 300); // Match animation duration
     };
 
     // Subscribe to closed output
-    modalRef.instance.closed.subscribe(() => {
+    const closedSubscription = modalRef.instance.closed.subscribe(() => {
       close();
     });
 
@@ -267,12 +290,45 @@ export class ModalService {
    * Close all open modals
    */
   closeAll(): void {
+    const appRef = this._appRef();
     const modals = this._activeModals();
+
+    if (!appRef) {
+      // If appRef is destroyed, just clear the array
+      this._activeModals.set([]);
+      return;
+    }
+
     modals.forEach((modal) => {
-      modal.setInput('open', false);
+      try {
+        modal.setInput('open', false);
+      } catch {
+        // Ignore if already destroyed
+      }
     });
 
     setTimeout(() => {
+      // Only cleanup if appRef is still available
+      const currentAppRef = this._appRef();
+      if (!currentAppRef) {
+        this._activeModals.set([]);
+        return;
+      }
+
+      modals.forEach((modal) => {
+        try {
+          currentAppRef.detachView(modal.hostView);
+          modal.destroy();
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const domElem = (modal.hostView as any).rootNodes[0] as HTMLElement;
+          if (domElem && domElem.parentNode) {
+            domElem.parentNode.removeChild(domElem);
+          }
+        } catch {
+          // Ignore errors if already destroyed
+        }
+      });
+
       this._activeModals.set([]);
     }, 300);
   }

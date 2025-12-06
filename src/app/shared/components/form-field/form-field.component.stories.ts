@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { FormControl, ReactiveFormsModule, Validators } from '@angular/forms';
 
-import { UniqueIdService } from '@shared/services/unique-id.service';
+import { UniqueIdService } from '@shared/services/unique-id/unique-id.service';
 import type { Meta, StoryObj } from '@storybook/angular';
 import { argsToTemplate, componentWrapperDecorator, moduleMetadata } from '@storybook/angular';
 
@@ -25,7 +25,9 @@ const meta: Meta<FormFieldComponent> = {
       ],
       providers: [UniqueIdService],
     }),
-    componentWrapperDecorator((story) => `<div style="max-width: 500px; padding: 2rem;">${story}</div>`),
+    componentWrapperDecorator(
+      (story) => `<div style="max-width: 500px; padding: 2rem;">${story}</div>`
+    ),
   ],
   argTypes: {
     label: {
@@ -254,7 +256,10 @@ export const WithSelect: Story = {
  */
 export const WithReactiveFormsValid: Story = {
   render: () => {
-    const emailControl = new FormControl('user@example.com', [Validators.required, Validators.email]);
+    const emailControl = new FormControl('user@example.com', [
+      Validators.required,
+      Validators.email,
+    ]);
     emailControl.markAsTouched();
 
     return {

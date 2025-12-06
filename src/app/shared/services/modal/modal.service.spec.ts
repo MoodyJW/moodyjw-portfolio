@@ -14,9 +14,10 @@ describe('ModalService', () => {
   });
 
   afterEach(() => {
-    // Clean up any open modals
-    service.closeAll();
-    // Wait for animations
+    // Clean up any open modals immediately without animations
+    const modals = document.querySelectorAll('app-modal');
+    modals.forEach((modal) => modal.remove());
+    // Clear timers to prevent delayed cleanup
     vi.clearAllTimers();
   });
 

@@ -3,7 +3,7 @@ import { ResourceLoader } from '@angular/compiler';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { UniqueIdService } from '@shared/services/unique-id.service';
+import { UniqueIdService } from '@shared/services/unique-id/unique-id.service';
 
 import type { CheckboxSize, CheckboxValidationState } from './checkbox.component';
 import { CheckboxComponent } from './checkbox.component';
@@ -540,7 +540,9 @@ describe('CheckboxComponent', () => {
       fixture.componentRef.setInput('indeterminate', true);
       fixture.detectChanges();
 
-      const indeterminateIcon = fixture.nativeElement.querySelector('.checkbox-icon--indeterminate');
+      const indeterminateIcon = fixture.nativeElement.querySelector(
+        '.checkbox-icon--indeterminate'
+      );
       expect(indeterminateIcon).toBeTruthy();
     });
 
@@ -550,7 +552,9 @@ describe('CheckboxComponent', () => {
       fixture.detectChanges();
 
       const checkedIcon = fixture.nativeElement.querySelector('.checkbox-icon--checked');
-      const indeterminateIcon = fixture.nativeElement.querySelector('.checkbox-icon--indeterminate');
+      const indeterminateIcon = fixture.nativeElement.querySelector(
+        '.checkbox-icon--indeterminate'
+      );
       expect(checkedIcon).toBeNull();
       expect(indeterminateIcon).toBeNull();
     });
@@ -561,7 +565,9 @@ describe('CheckboxComponent', () => {
       fixture.detectChanges();
 
       const checkedIcon = fixture.nativeElement.querySelector('.checkbox-icon--checked');
-      const indeterminateIcon = fixture.nativeElement.querySelector('.checkbox-icon--indeterminate');
+      const indeterminateIcon = fixture.nativeElement.querySelector(
+        '.checkbox-icon--indeterminate'
+      );
       expect(indeterminateIcon).toBeTruthy();
       expect(checkedIcon).toBeNull();
     });
@@ -572,7 +578,7 @@ describe('CheckboxComponent', () => {
       fixture.detectChanges();
 
       const checkboxElement = fixture.nativeElement.querySelector(
-        'input[type="checkbox"]',
+        'input[type="checkbox"]'
       ) as HTMLInputElement;
       const focusSpy = vi.spyOn(checkboxElement, 'focus');
 
@@ -585,7 +591,7 @@ describe('CheckboxComponent', () => {
       fixture.detectChanges();
 
       const checkboxElement = fixture.nativeElement.querySelector(
-        'input[type="checkbox"]',
+        'input[type="checkbox"]'
       ) as HTMLInputElement;
       const blurSpy = vi.spyOn(checkboxElement, 'blur');
 
@@ -691,7 +697,6 @@ describe('CheckboxComponent', () => {
       expect(classes).toContain('checkbox-label--disabled');
       expect(classes).toContain('checkbox-label--required');
     });
-
   });
 
   describe('Template Branch Coverage', () => {
@@ -723,7 +728,9 @@ describe('CheckboxComponent', () => {
       fixture.detectChanges();
 
       const checkedIcon = fixture.nativeElement.querySelector('.checkbox-icon--checked');
-      const indeterminateIcon = fixture.nativeElement.querySelector('.checkbox-icon--indeterminate');
+      const indeterminateIcon = fixture.nativeElement.querySelector(
+        '.checkbox-icon--indeterminate'
+      );
       expect(checkedIcon).toBeTruthy();
       expect(indeterminateIcon).toBeNull();
     });
@@ -734,7 +741,9 @@ describe('CheckboxComponent', () => {
       fixture.detectChanges();
 
       const checkedIcon = fixture.nativeElement.querySelector('.checkbox-icon--checked');
-      const indeterminateIcon = fixture.nativeElement.querySelector('.checkbox-icon--indeterminate');
+      const indeterminateIcon = fixture.nativeElement.querySelector(
+        '.checkbox-icon--indeterminate'
+      );
       expect(indeterminateIcon).toBeTruthy();
       expect(checkedIcon).toBeNull();
     });
@@ -745,7 +754,9 @@ describe('CheckboxComponent', () => {
       fixture.detectChanges();
 
       const checkedIcon = fixture.nativeElement.querySelector('.checkbox-icon--checked');
-      const indeterminateIcon = fixture.nativeElement.querySelector('.checkbox-icon--indeterminate');
+      const indeterminateIcon = fixture.nativeElement.querySelector(
+        '.checkbox-icon--indeterminate'
+      );
       expect(checkedIcon).toBeNull();
       expect(indeterminateIcon).toBeNull();
     });
