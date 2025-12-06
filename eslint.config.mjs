@@ -148,6 +148,15 @@ eslint.configs.recommended, // TypeScript files
       clearTimeout: 'readonly',
     },
   },
+}, // Browser environment for services that need DOM access
+{
+  files: ['src/app/**/*.service.ts'],
+  languageOptions: {
+    globals: {
+      document: 'readonly',
+      window: 'readonly',
+    },
+  },
 }, // Ignore patterns
 {
   ignores: [
