@@ -39,11 +39,12 @@ All infrastructure, CI/CD, testing, and deployment foundations are in place.
 ### Current Metrics (as of December 6, 2025)
 
 - **Components**: 21 production-ready shared components
-- **Unit Tests**: 1,943 passing (2 skipped) across 46 test files
+- **Unit Tests**: 2,175+ passing (2 skipped) across 48 test files
 - **Services**: 7 production-ready services (Modal, Toast, SEO, Analytics, ErrorHandler, Cache, Logger)
+- **Utilities**: 2 utility modules (Date utilities with 112 tests, String utilities with 120 tests)
 - **E2E Tests**: 170 passing (40 skipped) across all browsers/viewports
 - **Test Coverage**: >95% statement/line coverage
-- **Documentation**: 21 component READMEs + 5 service READMEs + full Storybook + TSDoc
+- **Documentation**: 21 component READMEs + 5 service READMEs + 2 utility READMEs + full Storybook + TSDoc
 - **Accessibility**: 100% WCAG 2.1 AAA compliant
 - **Linting**: Zero errors
 
@@ -217,17 +218,38 @@ All shared components built, tested, documented, and production-ready.
 
 **Shared Utilities**:
 
-- [ ] **Date utilities**
+- [x] **Date utilities** ✅ Complete
 
-  - [ ] Date formatting functions
-  - [ ] Relative time (timeAgo)
-  - [ ] Date validation
+  - [x] Date formatting functions (ISO, long, medium, short, custom)
+  - [x] Time formatting (12/24 hour with optional seconds)
+  - [x] Relative time (timeAgo with customizable options)
+  - [x] Date validation (isValidDate type guard)
+  - [x] Date comparison (isToday, isYesterday, isTomorrow, isPast, isFuture, isSameDay)
+  - [x] Date math (addDays, addMonths, addYears, diffInDays, diffInHours)
+  - [x] Range checking (isWithinRange)
+  - [x] Boundary helpers (startOfDay, endOfDay, startOfMonth, endOfMonth)
+  - [x] 112 comprehensive unit tests
+  - [x] Full README documentation with examples, best practices, and common patterns
+  - [x] TypeScript interfaces (DateFormatOptions, RelativeTimeOptions, DateRange)
+  - [x] Locale support for all formatting functions
+  - [x] Zero dependencies, immutable functions
 
-- [ ] **String utilities**
+- [x] **String utilities** ✅ Complete
 
-  - [ ] Truncate with ellipsis
-  - [ ] Slug generation
-  - [ ] Capitalize, titleCase helpers
+  - [x] Truncate with ellipsis (end, middle, start positions, custom ellipsis, word-aware)
+  - [x] Slug generation (URL-friendly, custom separators, accent handling, custom replacements)
+  - [x] Capitalize, capitalizeFirst, titleCase helpers
+  - [x] Case conversion (camelCase, PascalCase, snake_case, kebab-case)
+  - [x] Text transformation (reverse, repeat, chunk, initials)
+  - [x] Whitespace control (remove, collapse, pad)
+  - [x] HTML utilities (escape, unescape, strip tags, escape regex)
+  - [x] Validation (isAlpha, isAlphanumeric, isNumeric, isLowerCase, isUpperCase)
+  - [x] Search utilities (startsWith, endsWith, contains with case-insensitive options)
+  - [x] Name utilities (initials extraction, word count)
+  - [x] 120 comprehensive unit tests
+  - [x] Full README documentation with examples, best practices, and migration guide
+  - [x] TypeScript interfaces (TruncateOptions, SlugOptions)
+  - [x] Zero dependencies, immutable functions
 
 - [ ] **Validation utilities**
 
