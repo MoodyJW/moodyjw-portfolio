@@ -7,7 +7,7 @@ import { TestBed } from '@angular/core/testing';
 
 import { afterEach, beforeEach, vi } from 'vitest';
 
-import { ToastService } from '../../services/toast.service';
+import { ToastService } from '../../services/toast/toast.service';
 
 import type { ToastPosition } from './toast.component';
 

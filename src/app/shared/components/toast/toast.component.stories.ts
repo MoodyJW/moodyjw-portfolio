@@ -2,9 +2,9 @@
 import { Component, inject } from '@angular/core';
 
 import type { Meta, StoryObj } from '@storybook/angular';
-import { applicationConfig,argsToTemplate } from '@storybook/angular';
+import { applicationConfig, argsToTemplate } from '@storybook/angular';
 
-import { ToastService } from '../../services/toast.service';
+import { ToastService } from '../../services/toast/toast.service';
 
 import { ToastComponent } from './toast.component';
 import { ToastContainerComponent } from './toast-container.component';
@@ -54,7 +54,14 @@ const meta: Meta<ToastComponent> = {
     },
     position: {
       control: 'select',
-      options: ['top-left', 'top-center', 'top-right', 'bottom-left', 'bottom-center', 'bottom-right'],
+      options: [
+        'top-left',
+        'top-center',
+        'top-right',
+        'bottom-left',
+        'bottom-center',
+        'bottom-right',
+      ],
       description: 'Position of the toast on screen',
       table: {
         type: { summary: 'ToastPosition' },
@@ -266,29 +273,33 @@ export const Interactive: Story = {
     <div style="display: flex; flex-direction: column; gap: 1rem; max-width: 600px;">
       <h3 style="margin: 0; font-size: 18px;">Toast Service Demo</h3>
       <p style="font-size: 14px; color: var(--color-text-secondary); margin: 0;">
-        Click the buttons below to trigger toast notifications using the ToastService.
-        Toasts will appear in the top-right corner and auto-dismiss after 5 seconds.
+        Click the buttons below to trigger toast notifications using the ToastService. Toasts will
+        appear in the top-right corner and auto-dismiss after 5 seconds.
       </p>
 
       <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
         <button
           (click)="showSuccess()"
-          style="padding: 8px 16px; background: var(--color-success); color: white; border: none; border-radius: 6px; cursor: pointer;">
+          style="padding: 8px 16px; background: var(--color-success); color: white; border: none; border-radius: 6px; cursor: pointer;"
+        >
           Show Success
         </button>
         <button
           (click)="showError()"
-          style="padding: 8px 16px; background: var(--color-error); color: white; border: none; border-radius: 6px; cursor: pointer;">
+          style="padding: 8px 16px; background: var(--color-error); color: white; border: none; border-radius: 6px; cursor: pointer;"
+        >
           Show Error
         </button>
         <button
           (click)="showWarning()"
-          style="padding: 8px 16px; background: var(--color-warning); color: white; border: none; border-radius: 6px; cursor: pointer;">
+          style="padding: 8px 16px; background: var(--color-warning); color: white; border: none; border-radius: 6px; cursor: pointer;"
+        >
           Show Warning
         </button>
         <button
           (click)="showInfo()"
-          style="padding: 8px 16px; background: var(--color-info); color: white; border: none; border-radius: 6px; cursor: pointer;">
+          style="padding: 8px 16px; background: var(--color-info); color: white; border: none; border-radius: 6px; cursor: pointer;"
+        >
           Show Info
         </button>
       </div>
@@ -296,22 +307,26 @@ export const Interactive: Story = {
       <div style="display: flex; gap: 0.5rem; flex-wrap: wrap;">
         <button
           (click)="showMultiple()"
-          style="padding: 8px 16px; background: var(--color-primary); color: white; border: none; border-radius: 6px; cursor: pointer;">
+          style="padding: 8px 16px; background: var(--color-primary); color: white; border: none; border-radius: 6px; cursor: pointer;"
+        >
           Show Multiple
         </button>
         <button
           (click)="showAtPosition('bottom-center')"
-          style="padding: 8px 16px; background: var(--color-primary); color: white; border: none; border-radius: 6px; cursor: pointer;">
+          style="padding: 8px 16px; background: var(--color-primary); color: white; border: none; border-radius: 6px; cursor: pointer;"
+        >
           Show Bottom Center
         </button>
         <button
           (click)="showPersistent()"
-          style="padding: 8px 16px; background: var(--color-primary); color: white; border: none; border-radius: 6px; cursor: pointer;">
+          style="padding: 8px 16px; background: var(--color-primary); color: white; border: none; border-radius: 6px; cursor: pointer;"
+        >
           Show Persistent (No Auto-Dismiss)
         </button>
         <button
           (click)="dismissAll()"
-          style="padding: 8px 16px; background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); border-radius: 6px; cursor: pointer;">
+          style="padding: 8px 16px; background: var(--color-surface); color: var(--color-text); border: 1px solid var(--color-border); border-radius: 6px; cursor: pointer;"
+        >
           Dismiss All
         </button>
       </div>
@@ -437,7 +452,8 @@ export const AccessibilityFeatures: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Overview of accessibility features including ARIA live regions, keyboard navigation, color contrast, and reduced motion support.',
+        story:
+          'Overview of accessibility features including ARIA live regions, keyboard navigation, color contrast, and reduced motion support.',
       },
     },
   },

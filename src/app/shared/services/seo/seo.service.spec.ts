@@ -336,9 +336,7 @@ describe('SeoService', () => {
         tags: ['angular', 'typescript'],
       };
       service.updateTags(config);
-      expect(addSpy).not.toHaveBeenCalledWith(
-        expect.objectContaining({ property: 'article:tag' })
-      );
+      expect(addSpy).not.toHaveBeenCalledWith(expect.objectContaining({ property: 'article:tag' }));
     });
 
     it('should handle empty article tags array', () => {
@@ -350,9 +348,7 @@ describe('SeoService', () => {
       };
       service.updateTags(config);
       expect(removeSpy).not.toHaveBeenCalled();
-      expect(addSpy).not.toHaveBeenCalledWith(
-        expect.objectContaining({ property: 'article:tag' })
-      );
+      expect(addSpy).not.toHaveBeenCalledWith(expect.objectContaining({ property: 'article:tag' }));
     });
   });
 

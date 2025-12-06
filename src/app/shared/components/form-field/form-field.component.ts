@@ -2,7 +2,7 @@ import { CommonModule } from '@angular/common';
 import { ChangeDetectionStrategy, Component, computed, inject, input } from '@angular/core';
 import type { AbstractControl } from '@angular/forms';
 
-import { UniqueIdService } from '@shared/services/unique-id.service';
+import { UniqueIdService } from '@shared/services/unique-id/unique-id.service';
 
 import { InputFooterComponent } from '../input-footer';
 import { InputLabelComponent } from '../input-label';
@@ -308,8 +308,12 @@ export class FormFieldComponent {
       email: 'Please enter a valid email address',
       min: `Value must be at least ${(value as { min?: number })?.min ?? 0}`,
       max: `Value must be at most ${(value as { max?: number })?.max ?? 0}`,
-      minlength: `Must be at least ${(value as { requiredLength?: number })?.requiredLength ?? 0} characters`,
-      maxlength: `Must be at most ${(value as { requiredLength?: number })?.requiredLength ?? 0} characters`,
+      minlength: `Must be at least ${
+        (value as { requiredLength?: number })?.requiredLength ?? 0
+      } characters`,
+      maxlength: `Must be at most ${
+        (value as { requiredLength?: number })?.requiredLength ?? 0
+      } characters`,
       pattern: 'Invalid format',
     };
 
