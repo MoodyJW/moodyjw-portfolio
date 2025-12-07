@@ -14,11 +14,18 @@ describe('ModalService', () => {
   });
 
   afterEach(() => {
-    // Clean up any open modals immediately without animations
+    // Clear all timers first to prevent any delayed operations
+    vi.clearAllTimers();
+
+    // Close all modals to clean up properly
+    service.closeAll();
+
+    // Clean up any remaining modal elements from DOM
     const modals = document.querySelectorAll('app-modal');
     modals.forEach((modal) => modal.remove());
-    // Clear timers to prevent delayed cleanup
-    vi.clearAllTimers();
+
+    // Reset TestBed to clean up ApplicationRef
+    TestBed.resetTestingModule();
   });
 
   describe('Service Creation', () => {

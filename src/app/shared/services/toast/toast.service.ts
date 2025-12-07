@@ -161,7 +161,7 @@ export class ToastService {
 
     // Set up auto-dismiss if duration is greater than 0
     if (toast.duration > 0) {
-      const timerId = window.setTimeout(() => {
+      const timerId = setTimeout(() => {
         this.dismiss(toast.id);
       }, toast.duration);
 
@@ -249,7 +249,7 @@ export class ToastService {
 
     // Clear the auto-dismiss timer if it exists
     if (toast.timerId) {
-      window.clearTimeout(toast.timerId);
+      clearTimeout(toast.timerId);
     }
 
     // Mark as exiting to trigger animation
@@ -258,7 +258,7 @@ export class ToastService {
     );
 
     // Remove from DOM after animation completes (300ms)
-    window.setTimeout(() => {
+    setTimeout(() => {
       this._toasts.update((toasts) => toasts.filter((t) => t.id !== id));
     }, 300);
   }
