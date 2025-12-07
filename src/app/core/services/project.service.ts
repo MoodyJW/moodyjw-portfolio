@@ -1,9 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { inject,Injectable } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 
-import { Observable } from 'rxjs';
+import type { Observable } from 'rxjs';
+import { catchError, map, of, timeout } from 'rxjs';
 
-import { MOCK_ENDPOINTS } from '@shared/constants';
+import { HTTP_TIMEOUTS, MOCK_ENDPOINTS } from '@shared/constants';
 
 import type { Project } from '../models/project.model';
 
@@ -32,15 +33,13 @@ export class ProjectService {
    * @returns Observable of Project or undefined if not found
    */
   getProjectById(id: string): Observable<Project | undefined> {
-    return new Observable((observer) => {
-      this.getProjects().subscribe({
-        next: (projects) => {
-          const project = projects.find((p) => p.id === id);
-          observer.next(project);
-          observer.complete();
-        },
-        error: (err) => observer.error(err),
-      });
-    });
+    return this.getProjects().pipe(
+      timeout(HTTP_TIMEOUTS.DEFAULT),
+      map((projects) => projects.find((p) => p.id === id)),
+      catchError((error) => {
+        console.error('Failed to load project', { id, error });
+        return of(undefined);
+      })
+    );
   }
 }

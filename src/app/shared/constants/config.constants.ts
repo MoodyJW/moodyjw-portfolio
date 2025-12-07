@@ -4,6 +4,28 @@
  */
 
 /**
+ * HTTP request timeouts (milliseconds)
+ */
+export const HTTP_TIMEOUTS = {
+  /** Default timeout for API requests */
+  DEFAULT: 5000,
+  /** Short timeout for quick operations */
+  SHORT: 2000,
+  /** Long timeout for heavy operations */
+  LONG: 10000,
+} as const;
+
+/**
+ * Focus management delays (milliseconds)
+ */
+export const FOCUS_DELAYS = {
+  /** Delay before restoring focus */
+  RESTORE: 0,
+  /** Delay before setting focus after dropdown opens */
+  DROPDOWN: 0,
+} as const;
+
+/**
  * Network latency simulation configuration (for Mockend pattern)
  */
 export const LATENCY_CONFIG = {
@@ -63,6 +85,8 @@ export const DEBOUNCE_DELAYS = {
   SEARCH: 300,
   /** Filter selection debounce */
   FILTER: 200,
+  /** Blur event debounce */
+  BLUR: 200,
   /** Window resize events */
   RESIZE: 150,
   /** Scroll events */

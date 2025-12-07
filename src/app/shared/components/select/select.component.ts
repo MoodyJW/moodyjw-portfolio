@@ -1,15 +1,22 @@
 import { CommonModule } from '@angular/common';
+import type {
+  OnDestroy} from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
   computed,
   effect,
+  inject,
   input,
   output,
   signal,
   viewChild,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+
+import { DEBOUNCE_DELAYS, FOCUS_DELAYS } from '@shared/constants';
+import { UniqueIdService } from '@shared/services/unique-id/unique-id.service';
+import { debounce } from '@shared/utilities/debounce-throttle/debounce-throttle.utils';
 
 import { InputFooterComponent } from '../input-footer';
 import { InputLabelComponent } from '../input-label';
@@ -97,7 +104,26 @@ export interface SelectOption<T = unknown> {
  * and keyboard navigation. All public inputs use `input()` signals and events
  * are exposed via `output()` for integration with parent forms and stores.
  */
-export class SelectComponent<T = unknown> {
+export class SelectComponent<T = unknown> implements OnDestroy {
+  /**
+   * Service for generating unique IDs
+   */
+  private readonly uniqueIdService = inject(UniqueIdService);
+
+  /**
+   * Track pending timers for cleanup
+   */
+  private readonly pendingTimers: ReturnType<typeof setTimeout>[] = [];
+
+  /**
+   * Debounced close function for blur handling
+   */
+  private readonly debouncedClose = debounce(() => {
+    if (!this.isFocused()) {
+      this.closeDropdown();
+    }
+  }, DEBOUNCE_DELAYS.BLUR);
+
   /**
    * Visual variant of the select
    * - default: Standard select with border
@@ -440,10 +466,10 @@ export class SelectComponent<T = unknown> {
 
     // Focus search input if searchable
     if (this.searchable()) {
-       
-      setTimeout(() => {
+      const timerId = setTimeout(() => {
         this.searchInput()?.searchInputElement()?.nativeElement.focus();
-      }, 0);
+      }, FOCUS_DELAYS.DROPDOWN);
+      this.pendingTimers.push(timerId);
     }
   }
 
@@ -555,13 +581,8 @@ export class SelectComponent<T = unknown> {
     if (!relatedTarget || !this.selectButton()?.buttonElement()?.nativeElement.contains(relatedTarget)) {
       this.isFocused.set(false);
       this.blurred.emit(event);
-      // Close dropdown when focus leaves the component
-       
-      setTimeout(() => {
-        if (!this.isFocused()) {
-          this.closeDropdown();
-        }
-      }, 200);
+      // Close dropdown when focus leaves the component (debounced)
+      this.debouncedClose();
     }
   }
 
@@ -758,6 +779,18 @@ export class SelectComponent<T = unknown> {
    * Generate a unique ID for this component instance
    */
   private _generateId(): string {
-    return `${Math.random().toString(36).substring(2, 9)}`;
+    return this.uniqueIdService.generateId('select');
+  }
+
+  /**
+   * Cleanup lifecycle hook
+   */
+  ngOnDestroy(): void {
+    // Cancel debounced close
+    this.debouncedClose.cancel();
+
+    // Clear all pending timers
+    this.pendingTimers.forEach((timerId) => clearTimeout(timerId));
+    this.pendingTimers.length = 0;
   }
 }

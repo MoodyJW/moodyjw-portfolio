@@ -3,7 +3,9 @@ import { inject } from '@angular/core';
 import { patchState, signalStore, withComputed, withMethods, withState } from '@ngrx/signals';
 import { rxMethod } from '@ngrx/signals/rxjs-interop';
 
-import { catchError, of,pipe, switchMap, tap } from 'rxjs';
+import { catchError, of, pipe, switchMap, tap } from 'rxjs';
+
+import { flatten, uniqueBy } from '@shared/utilities/array-object/array-object.utils';
 
 import type { Project } from '../models/project.model';
 import { ProjectService } from '../services/project.service';
@@ -73,11 +75,11 @@ export const ProjectStore = signalStore(
      * Gets unique tags from all projects
      */
     allTags: computed(() => {
-      const tags = new Set<string>();
-      projects().forEach((project) => {
-        project.tags.forEach((tag) => tags.add(tag));
-      });
-      return Array.from(tags).sort();
+      const allTags = flatten(
+        projects().map((p) => p.tags),
+        1
+      );
+      return uniqueBy(allTags).sort();
     }),
   })),
   withMethods((store, projectService = inject(ProjectService)) => ({
