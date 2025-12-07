@@ -66,7 +66,7 @@ describe('ArrayObjectUtils', () => {
     });
 
     it('should clone Map objects', () => {
-      const map = new Map([
+      const map = new Map<string, unknown>([
         ['key1', 'value1'],
         ['key2', { nested: true }],
       ]);
@@ -445,7 +445,8 @@ describe('ArrayObjectUtils', () => {
     it('should merge nested objects', () => {
       const obj1 = { theme: 'light', settings: { fontSize: 14, lineHeight: 1.5 } };
       const obj2 = { settings: { fontSize: 16, fontFamily: 'Arial' } };
-      const result = ArrayObjectUtils.deepMerge(obj1, obj2);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const result = ArrayObjectUtils.deepMerge(obj1, obj2 as any);
 
       expect(result).toEqual({
         theme: 'light',
@@ -457,7 +458,8 @@ describe('ArrayObjectUtils', () => {
       const obj1 = { a: 1 };
       const obj2 = { b: 2 };
       const obj3 = { c: 3 };
-      const result = ArrayObjectUtils.deepMerge(obj1, obj2, obj3);
+      // eslint-disable-next-line @typescript-eslint/no-explicit-any
+      const result = ArrayObjectUtils.deepMerge(obj1, obj2 as any, obj3 as any);
 
       expect(result).toEqual({ a: 1, b: 2, c: 3 });
     });
