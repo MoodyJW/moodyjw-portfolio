@@ -583,11 +583,19 @@ export function setPath<T extends object>(
   path: string | string[],
   value: unknown
 ): T {
+  // Prevent prototype pollution via dangerous keys anywhere in the path.
+  const forbidden = ['__proto__', 'prototype', 'constructor'];
+  const keys = Array.isArray(path) ? path : path.split('.');
+  if (keys.some((k) => forbidden.includes(k))) {
+    throw new Error(
+      'Attempt to set forbidden property on object (prototype pollution blocked)'
+    );
+  }
+
   if (typeof obj !== 'object' || obj === null) {
     throw new TypeError('First argument must be an object');
   }
 
-  const keys = Array.isArray(path) ? path : path.split('.');
   let current: Record<string, unknown> = obj as Record<string, unknown>;
 
   for (let i = 0; i < keys.length - 1; i++) {
