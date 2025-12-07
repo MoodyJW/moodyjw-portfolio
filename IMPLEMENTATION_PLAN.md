@@ -39,12 +39,12 @@ All infrastructure, CI/CD, testing, and deployment foundations are in place.
 ### Current Metrics (as of December 6, 2025)
 
 - **Components**: 21 production-ready shared components
-- **Unit Tests**: 2,243+ passing (2 skipped) across 49 test files
+- **Unit Tests**: 2,327+ passing (2 skipped) across 50 test files
 - **Services**: 7 production-ready services (Modal, Toast, SEO, Analytics, ErrorHandler, Cache, Logger)
-- **Utilities**: 3 utility modules (Date: 112 tests, String: 120 tests, Validation: 68 tests)
+- **Utilities**: 4 utility modules (Date: 112 tests, String: 120 tests, Validation: 68 tests, Array/Object: 84 tests)
 - **E2E Tests**: 170 passing (40 skipped) across all browsers/viewports
 - **Test Coverage**: >95% statement/line coverage
-- **Documentation**: 21 component READMEs + 5 service READMEs + 3 utility READMEs + full Storybook + TSDoc
+- **Documentation**: 21 component READMEs + 5 service READMEs + 4 utility READMEs + full Storybook + TSDoc
 - **Accessibility**: 100% WCAG 2.1 AAA compliant
 - **Linting**: Zero errors
 
@@ -270,12 +270,18 @@ All shared components built, tested, documented, and production-ready.
   - [x] TypeScript interfaces (EmailValidationOptions, UrlValidationOptions, PhoneValidationOptions, PasswordStrengthOptions)
   - [x] Zero dependencies, fully type-safe
 
-- [ ] **Array/Object utilities**
-
-  - [ ] Deep clone
-  - [ ] Group by
-  - [ ] Unique by key
-  - [ ] Sort helpers
+- [x] **Array/Object utilities** ✅ Complete
+  - [x] Deep clone (objects, arrays, Date, RegExp, Map, Set with circular reference protection)
+  - [x] Group by (property key or function)
+  - [x] Unique by key (property key or function)
+  - [x] Sort helpers (ascending/descending, case-insensitive, custom comparator)
+  - [x] Array utilities (flatten, chunk, compact, arrayDifference)
+  - [x] Set operations (intersection, union)
+  - [x] Object utilities (pick, omit, deepMerge, isEmpty, invert)
+  - [x] Nested property access (getPath, setPath with dot notation)
+  - [x] 84 comprehensive unit tests
+  - [x] TypeScript interfaces (DeepCloneOptions, SortOptions, ArrayDifference)
+  - [x] Zero dependencies, fully type-safe
 
 - [ ] **Debounce/Throttle**
   - [ ] Debounce function
