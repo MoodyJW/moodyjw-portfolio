@@ -1,6 +1,8 @@
 /* eslint-disable no-undef */
 import { Injectable, signal } from '@angular/core';
 
+import { TOAST_DURATIONS } from '@shared/constants';
+
 import type { ToastPosition, ToastVariant } from '../../components/toast/toast.component';
 
 /**
@@ -150,7 +152,7 @@ export class ToastService {
       message: config.message,
       title: config.title,
       variant: config.variant ?? 'info',
-      duration: config.duration ?? 5000,
+      duration: config.duration ?? TOAST_DURATIONS.DEFAULT,
       dismissible: config.dismissible ?? true,
       position: config.position ?? 'top-right',
       isExiting: false,

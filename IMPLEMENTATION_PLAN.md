@@ -39,12 +39,12 @@ All infrastructure, CI/CD, testing, and deployment foundations are in place.
 ### Current Metrics (as of December 6, 2025)
 
 - **Components**: 21 production-ready shared components
-- **Unit Tests**: 2,327+ passing (2 skipped) across 50 test files
+- **Unit Tests**: 2,364+ passing (2 skipped) across 51 test files
 - **Services**: 7 production-ready services (Modal, Toast, SEO, Analytics, ErrorHandler, Cache, Logger)
-- **Utilities**: 4 utility modules (Date: 112 tests, String: 120 tests, Validation: 68 tests, Array/Object: 84 tests)
+- **Utilities**: 5 utility modules (Date: 112 tests, String: 120 tests, Validation: 68 tests, Array/Object: 84 tests, Debounce/Throttle: 37 tests)
 - **E2E Tests**: 170 passing (40 skipped) across all browsers/viewports
 - **Test Coverage**: >95% statement/line coverage
-- **Documentation**: 21 component READMEs + 5 service READMEs + 4 utility READMEs + full Storybook + TSDoc
+- **Documentation**: 21 component READMEs + 5 service READMEs + 5 utility READMEs + full Storybook + TSDoc
 - **Accessibility**: 100% WCAG 2.1 AAA compliant
 - **Linting**: Zero errors
 
@@ -283,10 +283,15 @@ All shared components built, tested, documented, and production-ready.
   - [x] TypeScript interfaces (DeepCloneOptions, SortOptions, ArrayDifference)
   - [x] Zero dependencies, fully type-safe
 
-- [ ] **Debounce/Throttle**
-  - [ ] Debounce function
-  - [ ] Throttle function
-  - [ ] RxJS operators
+- [x] **Debounce/Throttle** ✅ Complete
+  - [x] Debounce function (leading/trailing edge, maxWait, cancel/flush)
+  - [x] Throttle function (leading/trailing edge)
+  - [x] RxJS operators (rxDebounce, rxThrottle)
+  - [x] Additional utilities (once, rateLimit, delay, memoize)
+  - [x] 37 comprehensive unit tests
+  - [x] Full TypeScript type safety with generics
+  - [x] Angular v21 best practices
+  - [x] Extensive documentation with Angular examples
 
 **Custom Pipes**:
 
