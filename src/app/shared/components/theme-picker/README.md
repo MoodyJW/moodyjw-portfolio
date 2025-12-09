@@ -1,16 +1,18 @@
 # Theme Picker Component
 
-> **Last Updated**: December 4, 2025
+> **Last Updated**: December 7, 2025
 > **Status**: Production Ready
 > **Test Coverage**: >95%
 
-A dropdown component for switching between application themes with full keyboard navigation and accessibility support.
+A dropdown component for switching between application themes with full keyboard navigation, accessibility support, and visual color previews.
 
 ## Features
 
 - ✅ **Multiple Themes**: Supports Lumen (light), Aurora (light), Nocturne (dark), and Cosmos (dark) themes
+- ✅ **Color Swatches**: Visual preview of primary, background, and accent colors for each theme
 - ✅ **System Default**: Option to use system preference for theme selection
-- ✅ **Visual Indicators**: Icons for light/dark themes, badge for system default
+- ✅ **Visual Indicators**: Icons for light/dark themes, checkmark for active theme, badge for system default
+- ✅ **Persistent Menu**: Dropdown stays open after selection to allow previewing multiple themes
 - ✅ **Keyboard Navigation**: Full support for Enter, Space, and Escape keys
 - ✅ **Click Outside**: Automatically closes when clicking outside the dropdown
 - ✅ **Accessible**: WCAG 2.1 AAA compliant with proper ARIA attributes
@@ -41,6 +43,28 @@ The component displays all available themes in a dropdown menu:
 - **Aurora**: Light theme with teal primary color
 - **Nocturne**: Dark theme with light blue primary color
 - **Cosmos**: Dark theme with pink primary color
+
+Each theme option displays:
+- A sun/moon icon indicating light or dark theme
+- The theme name
+- Color swatches showing the primary, background, and accent colors (for non-selected themes)
+- A checkmark icon for the currently active theme
+
+### Color Swatches
+
+Each theme option (except the currently selected one) displays three small color squares showing:
+1. **Primary Color**: The main brand color used for buttons, links, and accents
+2. **Background Color**: The main background color for the theme
+3. **Accent Color**: Secondary accent color used for highlights
+
+This visual preview helps users understand what each theme looks like before switching.
+
+### Persistent Menu
+
+The dropdown menu stays open after selecting a theme, allowing users to:
+- Preview multiple themes without reopening the menu
+- Compare themes easily
+- Close the menu manually by clicking outside or pressing Escape
 
 ### System Default
 
@@ -152,6 +176,20 @@ The component uses BEM methodology and integrates with the theme system:
   &__dropdown {
     background-color: var(--color-surface);
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
+
+  // Color swatch styling
+  &__swatch {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+  }
+
+  &__swatch-color {
+    width: 16px;
+    height: 16px;
+    border-radius: var(--radius-xs);
+    border: 1px solid var(--color-border);
   }
 }
 ```

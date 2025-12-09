@@ -17,8 +17,10 @@ import { ThemePickerComponent } from './theme-picker.component';
  * ## Features
  * - Displays current theme with appropriate icon
  * - Dropdown menu with all available themes
+ * - Color swatches showing primary, background, and accent colors for each theme
+ * - Menu stays open after selection to allow previewing multiple themes
  * - System default theme option
- * - Visual indicator for active theme
+ * - Visual checkmark indicator for active theme
  * - Keyboard navigation support
  * - WCAG 2.1 AAA compliant
  *
@@ -139,13 +141,35 @@ export const LightTheme: Story = {
 /**
  * Interactive theme picker
  *
- * Try clicking to open the dropdown and selecting different themes
+ * Try clicking to open the dropdown and selecting different themes.
+ * The menu stays open after selection to allow previewing multiple themes.
  */
 export const Interactive: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Click the button to open the dropdown and try selecting different themes.',
+        story: 'Click the button to open the dropdown and try selecting different themes. Notice the color swatches showing each theme\'s primary, background, and accent colors. The menu stays open after selection to allow previewing multiple themes.',
+      },
+    },
+  },
+};
+
+/**
+ * Color swatches demo
+ *
+ * Demonstrates the color swatch preview feature for non-selected themes.
+ */
+export const ColorSwatches: Story = {
+  play: async ({ canvasElement }) => {
+    const button = canvasElement.querySelector('[data-test="theme-picker-button"]') as HTMLElement;
+    if (button) {
+      button.click();
+    }
+  },
+  parameters: {
+    docs: {
+      description: {
+        story: 'Each theme option displays color swatches showing the primary, background, and accent colors. The currently selected theme shows a checkmark instead of swatches. This helps users preview theme colors before switching.',
       },
     },
   },

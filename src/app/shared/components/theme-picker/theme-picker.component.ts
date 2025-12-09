@@ -22,9 +22,12 @@ import { StackComponent } from '../stack/stack.component';
  * @remarks
  * This component provides a dropdown interface for theme selection with the following features:
  * - Displays current theme with appropriate icon
- * - Shows all available themes in a dropdown menu
+ * - Shows all available themes in a dropdown menu with color swatches
+ * - Color swatches display primary, background, and accent colors for each theme
+ * - Menu stays open after theme selection to allow previewing multiple themes
  * - Supports system default theme option
  * - Indicates when system default is active
+ * - Shows checkmark for selected theme, color swatches for unselected themes
  * - Keyboard navigation support (Enter, Space, Escape)
  * - Click-outside-to-close functionality
  * - WCAG 2.1 AAA compliant
@@ -33,12 +36,6 @@ import { StackComponent } from '../stack/stack.component';
  * Basic usage:
  * ```html
  * <app-theme-picker />
- * ```
- *
- * @example
- * With custom aria-label:
- * ```html
- * <app-theme-picker ariaLabel="Select application theme" />
  * ```
  */
 @Component({
@@ -113,18 +110,18 @@ export class ThemePickerComponent implements OnDestroy {
 
   /**
    * Select a theme by slug
+   * Note: Menu stays open after selection to allow users to preview multiple themes
    */
   selectTheme(slug: string): void {
     this.themeService.setTheme(slug);
-    this.close();
   }
 
   /**
    * Reset to system default theme
+   * Note: Menu stays open after selection to allow users to preview multiple themes
    */
   selectSystemDefault(): void {
     this.themeService.resetToSystem();
-    this.close();
   }
 
   /**
