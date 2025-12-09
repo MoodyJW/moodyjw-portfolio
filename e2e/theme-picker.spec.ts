@@ -86,8 +86,8 @@ test.describe('Theme Picker', () => {
     // Select Nocturne (dark theme)
     await page.locator('[data-test="theme-option-nocturne"]').click();
 
-    // Dropdown should close
-    await expect(page.locator('[data-test="theme-picker-dropdown"]')).not.toBeVisible();
+    // Dropdown should stay open (new behavior to allow previewing multiple themes)
+    await expect(page.locator('[data-test="theme-picker-dropdown"]')).toBeVisible();
 
     // Button should now show Nocturne
     const button = page.locator('[data-test="theme-picker-button"]');
@@ -135,13 +135,13 @@ test.describe('Theme Picker', () => {
   test('should highlight active theme in dropdown', async ({ page }) => {
     await page.goto('/');
 
-    // Select Lumen theme
+    // Open dropdown
     await page.locator('[data-test="theme-picker-button"]').click();
+
+    // Select Lumen theme
     await page.locator('[data-test="theme-option-lumen"]').click();
 
-    // Open dropdown again
-    await page.locator('[data-test="theme-picker-button"]').click();
-
+    // Dropdown stays open (new behavior), so we can check immediately
     // Lumen option should have active class
     const lumenOption = page.locator('[data-test="theme-option-lumen"]');
     await expect(lumenOption).toHaveClass(/theme-picker__option--active/);
@@ -241,6 +241,10 @@ test.describe('Theme Picker', () => {
     // Select Aurora theme
     await page.locator('[data-test="theme-picker-button"]').click();
     await page.locator('[data-test="theme-option-aurora"]').click();
+
+    // Close the dropdown by clicking outside (since it stays open after selection)
+    await page.locator('main').click();
+    await expect(page.locator('[data-test="theme-picker-dropdown"]')).not.toBeVisible();
 
     // Navigate to case studies page
     // On mobile, we need to open the menu first
