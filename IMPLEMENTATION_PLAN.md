@@ -293,14 +293,50 @@ All shared components built, tested, documented, and production-ready.
   - [x] Angular v21 best practices
   - [x] Extensive documentation with Angular examples
 
-**Custom Pipes**:
+**Custom Pipes**: ✅ Complete
 
-- [ ] **DateAgoPipe** (relative dates) - "2 hours ago"
-- [ ] **TruncatePipe** (text truncation with ellipsis)
-- [ ] **SafeHtmlPipe** (sanitization for trusted HTML)
-- [ ] **HighlightPipe** (search term highlighting)
-- [ ] **FilterPipe** (array filtering)
-- [ ] **SortPipe** (array sorting)
+- [x] **DateAgoPipe** (relative dates) - "2 hours ago"
+  - [x] Transforms dates into relative time strings
+  - [x] Customizable options (includeSuffix, maxUnit, short format)
+  - [x] 40 comprehensive unit tests
+  - [x] Full README documentation with examples
+  - [x] TypeScript interfaces for type safety
+- [x] **TruncatePipe** (text truncation with ellipsis)
+  - [x] Truncates text to specified length with ellipsis
+  - [x] Multiple truncation positions (end, middle, start)
+  - [x] Custom ellipsis character support
+  - [x] Word-aware truncation option
+  - [x] 25 comprehensive unit tests
+  - [x] Full README documentation
+- [x] **SafeHtmlPipe** (sanitization for trusted HTML)
+  - [x] Sanitizes HTML content using Angular's DomSanitizer
+  - [x] Returns SafeHtml type for secure rendering
+  - [x] Comprehensive security warnings in documentation
+  - [x] 28 comprehensive unit tests
+  - [x] Full README documentation with security best practices
+- [x] **HighlightPipe** (search term highlighting)
+  - [x] Highlights search terms with <mark> tags
+  - [x] Case-sensitive and case-insensitive modes
+  - [x] HTML escaping for XSS prevention
+  - [x] Regex special character handling
+  - [x] 40 comprehensive unit tests
+  - [x] Full README documentation
+- [x] **FilterPipe** (array filtering)
+  - [x] Filters arrays by predicate function or property matching
+  - [x] Case-insensitive string search
+  - [x] Impure pipe for array change detection
+  - [x] 37 comprehensive unit tests
+  - [x] Full README documentation with performance warnings
+- [x] **SortPipe** (array sorting)
+  - [x] Sorts arrays by property or custom comparator
+  - [x] Ascending/descending order support
+  - [x] String, number, and Date type support
+  - [x] Null/undefined handling (sorts to end)
+  - [x] Impure pipe for array change detection
+  - [x] 35 comprehensive unit tests
+  - [x] Full README documentation with performance warnings
+
+**Total**: 205 tests passing across 6 custom pipes
 
 **Documentation**:
 
