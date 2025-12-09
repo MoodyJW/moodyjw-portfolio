@@ -10,20 +10,16 @@
     (keydown)="onButtonKeydown($event)"
     data-test="theme-picker-button"
   >
-    <app-icon
-      [name]="currentIcon()"
-      size="md"
-      [ariaLabel]="currentTheme().label + ' theme icon'"
-    />
+    <app-icon [name]="currentIcon()" size="md" [ariaLabel]="currentTheme().label + ' theme icon'" />
     <span class="theme-picker__label">{{ currentTheme().label }}</span>
     @if (isSystemDefault()) {
-      <app-badge
-        variant="secondary"
-        size="sm"
-        ariaLabel="System theme indicator"
-        [content]="'System'"
-        class="theme-picker__badge"
-      />
+    <app-badge
+      variant="secondary"
+      size="sm"
+      ariaLabel="System theme indicator"
+      [content]="'System'"
+      class="theme-picker__badge"
+    />
     }
     <app-icon
       [name]="isOpen() ? 'heroChevronUp' : 'heroChevronDown'"
@@ -34,73 +30,89 @@
 
   <!-- Dropdown Menu -->
   @if (isOpen()) {
-    <div
-      class="theme-picker__dropdown"
-      role="menu"
-      [attr.aria-label]="'Theme selection menu'"
-      data-test="theme-picker-dropdown"
-    >
-      <app-stack direction="vertical" spacing="xs" role="">
-        <!-- System Default Option -->
-        <button
-          type="button"
-          role="menuitem"
-          class="theme-picker__option"
-          [class.theme-picker__option--active]="isSystemDefault()"
-          (click)="selectSystemDefault()"
-          (keydown.enter)="selectSystemDefault()"
-          (keydown.space)="$event.preventDefault(); selectSystemDefault()"
-          [attr.aria-label]="'Use system default theme'"
-          data-test="theme-option-system"
-        >
-          <app-icon
-            name="heroComputerDesktop"
-            size="md"
-            ariaLabel="System default icon"
-          />
-          <span class="theme-picker__option-label">System Default</span>
-          @if (isSystemDefault()) {
-            <app-icon
-              name="heroCheck"
-              size="sm"
-              color="primary"
-              ariaLabel="Selected"
-              class="theme-picker__option-check"
-            />
-          }
-        </button>
-
-        <!-- Theme Options -->
-        @for (theme of themes(); track theme.slug) {
-          <button
-            type="button"
-            role="menuitem"
-            class="theme-picker__option"
-            [class.theme-picker__option--active]="isActiveTheme(theme.slug)"
-            (click)="selectTheme(theme.slug)"
-            (keydown.enter)="selectTheme(theme.slug)"
-            (keydown.space)="$event.preventDefault(); selectTheme(theme.slug)"
-            [attr.aria-label]="'Switch to ' + theme.label + ' theme'"
-            [attr.data-test]="'theme-option-' + theme.slug"
-          >
-            <app-icon
-              [name]="theme.isDark ? 'heroMoon' : 'heroSun'"
-              size="md"
-              [ariaLabel]="theme.label + ' theme icon'"
-            />
-            <span class="theme-picker__option-label">{{ theme.label }}</span>
-            @if (isActiveTheme(theme.slug)) {
-              <app-icon
-                name="heroCheck"
-                size="sm"
-                color="primary"
-                ariaLabel="Selected"
-                class="theme-picker__option-check"
-              />
-            }
-          </button>
+  <div
+    class="theme-picker__dropdown"
+    role="menu"
+    [attr.aria-label]="'Theme selection menu'"
+    data-test="theme-picker-dropdown"
+  >
+    <app-stack direction="vertical" spacing="xs" role="">
+      <!-- System Default Option -->
+      <button
+        type="button"
+        role="menuitem"
+        class="theme-picker__option"
+        [class.theme-picker__option--active]="isSystemDefault()"
+        (click)="selectSystemDefault()"
+        (keydown.enter)="selectSystemDefault()"
+        (keydown.space)="$event.preventDefault(); selectSystemDefault()"
+        [attr.aria-label]="'Use system default theme'"
+        data-test="theme-option-system"
+      >
+        <app-icon name="heroComputerDesktop" size="md" ariaLabel="System default icon" />
+        <span class="theme-picker__option-label">System Default</span>
+        @if (isSystemDefault()) {
+        <app-icon
+          name="heroCheck"
+          size="sm"
+          color="primary"
+          ariaLabel="Selected"
+          class="theme-picker__option-check"
+        />
         }
-      </app-stack>
-    </div>
+      </button>
+
+      <!-- Theme Options -->
+      @for (theme of themes(); track theme.slug) {
+      <button
+        type="button"
+        role="menuitem"
+        class="theme-picker__option"
+        [class.theme-picker__option--active]="isActiveTheme(theme.slug)"
+        (click)="selectTheme(theme.slug)"
+        (keydown.enter)="selectTheme(theme.slug)"
+        (keydown.space)="$event.preventDefault(); selectTheme(theme.slug)"
+        [attr.aria-label]="'Switch to ' + theme.label + ' theme'"
+        [attr.data-test]="'theme-option-' + theme.slug"
+      >
+        <div class="theme-picker__option-content">
+          <app-icon
+            [name]="theme.isDark ? 'heroMoon' : 'heroSun'"
+            size="md"
+            [ariaLabel]="theme.label + ' theme icon'"
+          />
+          <span class="theme-picker__option-label">{{ theme.label }}</span>
+        </div>
+
+        <!-- Color Swatch Legend -->
+        @if (isActiveTheme(theme.slug)) {
+        <app-icon
+          name="heroCheck"
+          size="sm"
+          color="primary"
+          ariaLabel="Selected"
+          class="theme-picker__option-check"
+        />
+        } @else {
+        <div
+          class="theme-picker__swatch"
+          [attr.aria-label]="'Color preview for ' + theme.label + ' theme'"
+        >
+          <span
+            class="theme-picker__swatch-color"
+            [style.background-color]="theme.tokens.primary"
+            [attr.aria-label]="'Primary color'"
+          ></span>
+          <span
+            class="theme-picker__swatch-color"
+            [style.background-color]="theme.tokens.background"
+            [attr.aria-label]="'Background color'"
+          ></span>
+        </div>
+        }
+      </button>
+      }
+    </app-stack>
+  </div>
   }
 </div>

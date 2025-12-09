@@ -169,14 +169,14 @@ describe('ThemePickerComponent', () => {
       expect(themeServiceMock.setTheme).toHaveBeenCalledWith(themeSlug);
     });
 
-    it('should close dropdown after selecting a theme', () => {
+    it('should keep dropdown open after selecting a theme', () => {
       component.toggle();
       fixture.detectChanges();
       expect(component.isOpen()).toBe(true);
 
       component.selectTheme(mockThemes[0].slug);
       fixture.detectChanges();
-      expect(component.isOpen()).toBe(false);
+      expect(component.isOpen()).toBe(true);
     });
 
     it('should call resetToSystem when system default is selected', () => {
@@ -185,14 +185,14 @@ describe('ThemePickerComponent', () => {
       expect(themeServiceMock.resetToSystem).toHaveBeenCalled();
     });
 
-    it('should close dropdown after selecting system default', () => {
+    it('should keep dropdown open after selecting system default', () => {
       component.toggle();
       fixture.detectChanges();
       expect(component.isOpen()).toBe(true);
 
       component.selectSystemDefault();
       fixture.detectChanges();
-      expect(component.isOpen()).toBe(false);
+      expect(component.isOpen()).toBe(true);
     });
 
     it('should highlight active theme', () => {
