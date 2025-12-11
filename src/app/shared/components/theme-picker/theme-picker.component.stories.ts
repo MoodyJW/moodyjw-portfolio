@@ -1,11 +1,9 @@
 import { signal } from '@angular/core';
 import { provideRouter } from '@angular/router';
 
-import type { Meta, StoryObj} from '@storybook/angular';
+import { THEMES, ThemeService } from '@core/theme';
+import type { Meta, StoryObj } from '@storybook/angular';
 import { applicationConfig } from '@storybook/angular';
-
-import { THEMES } from '../../../../shared/constants/themes.constants';
-import { ThemeService } from '../../../../shared/services/theme.service';
 
 import { ThemePickerComponent } from './theme-picker.component';
 
@@ -104,7 +102,7 @@ export const DarkTheme: Story = {
           provide: ThemeService,
           useValue: {
             themes: signal(THEMES),
-            activeTheme: signal(THEMES.find(t => t.isDark) || THEMES[0]),
+            activeTheme: signal(THEMES.find((t) => t.isDark) || THEMES[0]),
             isSystemDefault: signal(false),
             setTheme: () => {},
             resetToSystem: () => {},
@@ -127,7 +125,7 @@ export const LightTheme: Story = {
           provide: ThemeService,
           useValue: {
             themes: signal(THEMES),
-            activeTheme: signal(THEMES.find(t => !t.isDark) || THEMES[0]),
+            activeTheme: signal(THEMES.find((t) => !t.isDark) || THEMES[0]),
             isSystemDefault: signal(false),
             setTheme: () => {},
             resetToSystem: () => {},
@@ -148,7 +146,8 @@ export const Interactive: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Click the button to open the dropdown and try selecting different themes. Notice the color swatches showing each theme\'s primary, background, and accent colors. The menu stays open after selection to allow previewing multiple themes.',
+        story:
+          "Click the button to open the dropdown and try selecting different themes. Notice the color swatches showing each theme's primary, background, and accent colors. The menu stays open after selection to allow previewing multiple themes.",
       },
     },
   },
@@ -169,7 +168,8 @@ export const ColorSwatches: Story = {
   parameters: {
     docs: {
       description: {
-        story: 'Each theme option displays color swatches showing the primary, background, and accent colors. The currently selected theme shows a checkmark instead of swatches. This helps users preview theme colors before switching.',
+        story:
+          'Each theme option displays color swatches showing the primary, background, and accent colors. The currently selected theme shows a checkmark instead of swatches. This helps users preview theme colors before switching.',
       },
     },
   },
@@ -185,7 +185,8 @@ export const Mobile: Story = {
     },
     docs: {
       description: {
-        story: 'Theme picker optimized for mobile viewports. Theme label is hidden on small screens.',
+        story:
+          'Theme picker optimized for mobile viewports. Theme label is hidden on small screens.',
       },
     },
   },

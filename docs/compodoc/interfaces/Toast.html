@@ -1,0 +1,973 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  Toast</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/services/toast/toast.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Internal toast representation with unique ID and dismissal state</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#dismissible" 
+>
+                                            dismissible
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#duration" 
+>
+                                            duration
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#id" 
+>
+                                            id
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#isExiting" 
+>
+                                            isExiting
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#message" 
+>
+                                            message
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#position" 
+>
+                                            position
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#timerId" 
+>
+                                            timerId
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#title" 
+>
+                                            title
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#variant" 
+>
+                                            variant
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="dismissible"></a>
+                                        <span class="name "><b>dismissible</b>
+                                            <a href="#dismissible">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>dismissible:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Whether the toast can be manually dismissed</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="duration"></a>
+                                        <span class="name "><b>duration</b>
+                                            <a href="#duration">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>duration:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Auto-dismiss duration in milliseconds</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="id"></a>
+                                        <span class="name "><b>id</b>
+                                            <a href="#id">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>id:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Unique identifier for the toast</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="isExiting"></a>
+                                        <span class="name "><b>isExiting</b>
+                                            <a href="#isExiting">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>isExiting:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Whether the toast is currently animating out</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="message"></a>
+                                        <span class="name "><b>message</b>
+                                            <a href="#message">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>message:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>The message to display</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="position"></a>
+                                        <span class="name "><b>position</b>
+                                            <a href="#position">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>position:         <code><a href="../miscellaneous/typealiases.html#ToastPosition" target="_self" >ToastPosition</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ToastPosition" target="_self" >ToastPosition</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Position of the toast on screen</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="timerId"></a>
+                                        <span class="name "><b>timerId</b>
+                                            <a href="#timerId">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>timerId:     <code>ReturnType&lt;unknown&gt;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>ReturnType&lt;unknown&gt;</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Timer ID for auto-dismiss</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="title"></a>
+                                        <span class="name "><b>title</b>
+                                            <a href="#title">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>title:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Optional title for the toast</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="variant"></a>
+                                        <span class="name "><b>variant</b>
+                                            <a href="#variant">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>variant:         <code><a href="../miscellaneous/typealiases.html#ToastVariant" target="_self" >ToastVariant</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ToastVariant" target="_self" >ToastVariant</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Visual variant of the toast</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, signal } from &#x27;@angular/core&#x27;;
+
+import { TOAST_DURATIONS } from &#x27;@shared/constants&#x27;;
+
+import type { ToastPosition, ToastVariant } from &#x27;../../components/toast/toast.component&#x27;;
+
+/**
+ * Configuration options for displaying a toast notification
+ */
+export interface ToastConfig {
+  /**
+   * The message to display
+   */
+  message: string;
+
+  /**
+   * Optional title for the toast
+   */
+  title?: string;
+
+  /**
+   * Visual variant of the toast
+   */
+  variant?: ToastVariant;
+
+  /**
+   * Auto-dismiss duration in milliseconds
+   * Set to 0 to disable auto-dismiss
+   * @default 5000
+   */
+  duration?: number;
+
+  /**
+   * Whether the toast can be manually dismissed
+   * @default true
+   */
+  dismissible?: boolean;
+
+  /**
+   * Position of the toast on screen
+   * @default &#x27;top-right&#x27;
+   */
+  position?: ToastPosition;
+}
+
+/**
+ * Internal toast representation with unique ID and dismissal state
+ */
+export interface Toast {
+  /**
+   * Unique identifier for the toast
+   */
+  id: string;
+
+  /**
+   * The message to display
+   */
+  message: string;
+
+  /**
+   * Optional title for the toast
+   */
+  title?: string;
+
+  /**
+   * Visual variant of the toast
+   */
+  variant: ToastVariant;
+
+  /**
+   * Auto-dismiss duration in milliseconds
+   */
+  duration: number;
+
+  /**
+   * Whether the toast can be manually dismissed
+   */
+  dismissible: boolean;
+
+  /**
+   * Position of the toast on screen
+   */
+  position: ToastPosition;
+
+  /**
+   * Whether the toast is currently animating out
+   */
+  isExiting: boolean;
+
+  /**
+   * Timer ID for auto-dismiss
+   */
+  timerId?: ReturnType&lt;typeof setTimeout&gt;;
+}
+
+/**
+ * Service for managing toast notifications throughout the application.
+ * Provides methods to show success, error, warning, and info toasts.
+ * Handles auto-dismiss and manual dismissal of toasts.
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * constructor(private toastService: ToastService) {}
+ *
+ * // Show a success toast
+ * this.toastService.success(&#x27;Changes saved successfully!&#x27;);
+ *
+ * // Show an error toast with custom duration
+ * this.toastService.error(&#x27;Failed to save changes&#x27;, {
+ *   duration: 10000,
+ *   title: &#x27;Error&#x27;
+ * });
+ *
+ * // Show a custom toast
+ * this.toastService.show({
+ *   message: &#x27;Custom message&#x27;,
+ *   variant: &#x27;info&#x27;,
+ *   position: &#x27;bottom-center&#x27;,
+ *   duration: 3000
+ * });
+ * &#x60;&#x60;&#x60;
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class ToastService {
+  /**
+   * Signal containing all active toasts
+   */
+  private readonly _toasts &#x3D; signal&lt;Toast[]&gt;([]);
+
+  /**
+   * Counter for generating unique toast IDs
+   */
+  private _idCounter &#x3D; 0;
+
+  /**
+   * Public read-only access to toasts
+   */
+  readonly toasts &#x3D; this._toasts.asReadonly();
+
+  /**
+   * Show a generic toast notification
+   *
+   * @param config Toast configuration options
+   * @returns Unique ID of the created toast
+   */
+  show(config: ToastConfig): string {
+    const toast: Toast &#x3D; {
+      id: this._generateId(),
+      message: config.message,
+      title: config.title,
+      variant: config.variant ?? &#x27;info&#x27;,
+      duration: config.duration ?? TOAST_DURATIONS.DEFAULT,
+      dismissible: config.dismissible ?? true,
+      position: config.position ?? &#x27;top-right&#x27;,
+      isExiting: false,
+    };
+
+    // Add toast to the list
+    this._toasts.update((toasts) &#x3D;&gt; [...toasts, toast]);
+
+    // Set up auto-dismiss if duration is greater than 0
+    if (toast.duration &gt; 0) {
+      const timerId &#x3D; setTimeout(() &#x3D;&gt; {
+        this.dismiss(toast.id);
+      }, toast.duration);
+
+      // Store timer ID for cleanup
+      this._toasts.update((toasts) &#x3D;&gt;
+        toasts.map((t) &#x3D;&gt; (t.id &#x3D;&#x3D;&#x3D; toast.id ? { ...t, timerId } : t))
+      );
+    }
+
+    return toast.id;
+  }
+
+  /**
+   * Show a success toast notification
+   *
+   * @param message The message to display
+   * @param config Optional additional configuration
+   * @returns Unique ID of the created toast
+   */
+  success(message: string, config?: Partial&lt;ToastConfig&gt;): string {
+    return this.show({
+      ...config,
+      message,
+      variant: &#x27;success&#x27;,
+    });
+  }
+
+  /**
+   * Show an error toast notification
+   *
+   * @param message The message to display
+   * @param config Optional additional configuration
+   * @returns Unique ID of the created toast
+   */
+  error(message: string, config?: Partial&lt;ToastConfig&gt;): string {
+    return this.show({
+      ...config,
+      message,
+      variant: &#x27;error&#x27;,
+    });
+  }
+
+  /**
+   * Show a warning toast notification
+   *
+   * @param message The message to display
+   * @param config Optional additional configuration
+   * @returns Unique ID of the created toast
+   */
+  warning(message: string, config?: Partial&lt;ToastConfig&gt;): string {
+    return this.show({
+      ...config,
+      message,
+      variant: &#x27;warning&#x27;,
+    });
+  }
+
+  /**
+   * Show an info toast notification
+   *
+   * @param message The message to display
+   * @param config Optional additional configuration
+   * @returns Unique ID of the created toast
+   */
+  info(message: string, config?: Partial&lt;ToastConfig&gt;): string {
+    return this.show({
+      ...config,
+      message,
+      variant: &#x27;info&#x27;,
+    });
+  }
+
+  /**
+   * Dismiss a toast notification by ID
+   * Triggers exit animation before removing from DOM
+   *
+   * @param id The unique ID of the toast to dismiss
+   */
+  dismiss(id: string): void {
+    // Find the toast
+    const toast &#x3D; this._toasts().find((t) &#x3D;&gt; t.id &#x3D;&#x3D;&#x3D; id);
+    if (!toast) {
+      return;
+    }
+
+    // Clear the auto-dismiss timer if it exists
+    if (toast.timerId) {
+      clearTimeout(toast.timerId);
+    }
+
+    // Mark as exiting to trigger animation
+    this._toasts.update((toasts) &#x3D;&gt;
+      toasts.map((t) &#x3D;&gt; (t.id &#x3D;&#x3D;&#x3D; id ? { ...t, isExiting: true } : t))
+    );
+
+    // Remove from DOM after animation completes (300ms)
+    setTimeout(() &#x3D;&gt; {
+      this._toasts.update((toasts) &#x3D;&gt; toasts.filter((t) &#x3D;&gt; t.id !&#x3D;&#x3D; id));
+    }, 300);
+  }
+
+  /**
+   * Dismiss all active toast notifications
+   */
+  dismissAll(): void {
+    const ids &#x3D; this._toasts().map((t) &#x3D;&gt; t.id);
+    ids.forEach((id) &#x3D;&gt; this.dismiss(id));
+  }
+
+  /**
+   * Get toasts by position for rendering in toast container
+   *
+   * @param position The position to filter by
+   * @returns Array of toasts at the specified position
+   */
+  getToastsByPosition(position: ToastPosition): Toast[] {
+    return this._toasts().filter((t) &#x3D;&gt; t.position &#x3D;&#x3D;&#x3D; position);
+  }
+
+  /**
+   * Generate a unique ID for a toast
+   */
+  private _generateId(): string {
+    return &#x60;toast-${++this._idCounter}-${Date.now()}&#x60;;
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'Toast.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

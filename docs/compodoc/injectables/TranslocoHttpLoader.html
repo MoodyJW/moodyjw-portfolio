@@ -217,8 +217,8 @@ Loads translations from assets/i18n/{lang}.json</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="20"
-                                    class="link-to-prism">src/app/transloco-loader.ts:20</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="22"
+                                    class="link-to-prism">src/app/transloco-loader.ts:22</a></div>
                         </td>
                     </tr>
 
@@ -305,7 +305,7 @@ Loads translations from assets/i18n/{lang}.json</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="13" class="link-to-prism">src/app/transloco-loader.ts:13</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/transloco-loader.ts:15</a></div>
                         </td>
                     </tr>
 
@@ -318,11 +318,13 @@ Loads translations from assets/i18n/{lang}.json</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { inject, Injectable } from &#x27;@angular/core&#x27;;
-import { HttpClient } from &#x27;@angular/common/http&#x27;;
-import type { Translation, TranslocoLoader } from &#x27;@jsverse/transloco&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { inject, Injectable } from &#x27;@angular/core&#x27;;
+
 import type { Observable } from &#x27;rxjs&#x27;;
+
 import { API_CONFIG } from &#x27;@shared/constants&#x27;;
+import type { Translation, TranslocoLoader } from &#x27;@jsverse/transloco&#x27;;
 
 /**
  * Custom Transloco loader for loading translation files

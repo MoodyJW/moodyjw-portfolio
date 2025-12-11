@@ -338,11 +338,15 @@
 
     <div class="tab-pane fade  tab-source-code" id="source">
         <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { computed } from &#x27;@angular/core&#x27;;
+import { inject } from &#x27;@angular/core&#x27;;
 import { patchState, signalStore, withComputed, withMethods, withState } from &#x27;@ngrx/signals&#x27;;
 import { rxMethod } from &#x27;@ngrx/signals/rxjs-interop&#x27;;
-import { pipe, tap, switchMap, catchError, of } from &#x27;rxjs&#x27;;
+
+import { catchError, of, pipe, switchMap, tap } from &#x27;rxjs&#x27;;
+
+import { flatten, uniqueBy } from &#x27;@shared/utilities/array-object/array-object.utils&#x27;;
+
 import type { Project } from &#x27;../models/project.model&#x27;;
-import { inject } from &#x27;@angular/core&#x27;;
 import { ProjectService } from &#x27;../services/project.service&#x27;;
 
 /**
@@ -410,11 +414,11 @@ export const ProjectStore &#x3D; signalStore(
      * Gets unique tags from all projects
      */
     allTags: computed(() &#x3D;&gt; {
-      const tags &#x3D; new Set&lt;string&gt;();
-      projects().forEach((project) &#x3D;&gt; {
-        project.tags.forEach((tag) &#x3D;&gt; tags.add(tag));
-      });
-      return Array.from(tags).sort();
+      const allTags &#x3D; flatten(
+        projects().map((p) &#x3D;&gt; p.tags),
+        1
+      );
+      return uniqueBy(allTags).sort();
     }),
   })),
   withMethods((store, projectService &#x3D; inject(ProjectService)) &#x3D;&gt; ({

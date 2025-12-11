@@ -1,0 +1,1085 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  ArrayDifference</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/utilities/array-object/array-object.utils.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Result of array difference operation</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#added" 
+>
+                                            added
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#removed" 
+>
+                                            removed
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#unchanged" 
+>
+                                            unchanged
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="added"></a>
+                                        <span class="name "><b>added</b>
+                                            <a href="#added">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>added:     <code>T[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>T[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Items only in first array</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="removed"></a>
+                                        <span class="name "><b>removed</b>
+                                            <a href="#removed">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>removed:     <code>T[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>T[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Items only in second array</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="unchanged"></a>
+                                        <span class="name "><b>unchanged</b>
+                                            <a href="#unchanged">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>unchanged:     <code>T[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>T[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Items in both arrays</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface DeepCloneOptions {
+  /** Whether to preserve prototypes (default: false) */
+  preservePrototypes?: boolean;
+  /** Maximum depth to clone (prevents circular reference issues, default: 100) */
+  maxDepth?: number;
+}
+
+/**
+ * Options for sorting operations
+ */
+export interface SortOptions&lt;T&gt; {
+  /** Sort order */
+  order?: &#x27;asc&#x27; | &#x27;desc&#x27;;
+  /** Custom comparator function */
+  comparator?: (a: T, b: T) &#x3D;&gt; number;
+  /** Case-sensitive string comparison (default: false) */
+  caseSensitive?: boolean;
+}
+
+/**
+ * Result of array difference operation
+ */
+export interface ArrayDifference&lt;T&gt; {
+  /** Items only in first array */
+  added: T[];
+  /** Items only in second array */
+  removed: T[];
+  /** Items in both arrays */
+  unchanged: T[];
+}
+
+/**
+ * Creates a deep clone of any value (objects, arrays, primitives, dates, etc.)
+ *
+ * @param value - The value to clone
+ * @param options - Cloning options
+ * @returns A deep clone of the input value
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const original &#x3D; { name: &#x27;John&#x27;, address: { city: &#x27;NYC&#x27; } };
+ * const cloned &#x3D; deepClone(original);
+ * cloned.address.city &#x3D; &#x27;LA&#x27;;
+ * console.log(original.address.city); // &#x27;NYC&#x27; (unchanged)
+ * &#x60;&#x60;&#x60;
+ */
+export function deepClone&lt;T&gt;(value: T, options: DeepCloneOptions &#x3D; {}): T {
+  const { preservePrototypes &#x3D; false, maxDepth &#x3D; 100 } &#x3D; options;
+
+  function cloneRecursive(val: unknown, depth: number): unknown {
+    // Prevent infinite recursion
+    if (depth &gt; maxDepth) {
+      throw new Error(&#x60;Maximum clone depth (${maxDepth}) exceeded&#x60;);
+    }
+
+    // Handle null and undefined
+    if (val &#x3D;&#x3D;&#x3D; null || val &#x3D;&#x3D;&#x3D; undefined) {
+      return val;
+    }
+
+    // Handle primitives
+    if (typeof val !&#x3D;&#x3D; &#x27;object&#x27;) {
+      return val;
+    }
+
+    // Handle Date
+    if (val instanceof Date) {
+      return new Date(val.getTime());
+    }
+
+    // Handle RegExp
+    if (val instanceof RegExp) {
+      return new RegExp(val.source, val.flags);
+    }
+
+    // Handle Map
+    if (val instanceof Map) {
+      const clonedMap &#x3D; new Map();
+      val.forEach((value, key) &#x3D;&gt; {
+        clonedMap.set(cloneRecursive(key, depth + 1), cloneRecursive(value, depth + 1));
+      });
+      return clonedMap;
+    }
+
+    // Handle Set
+    if (val instanceof Set) {
+      const clonedSet &#x3D; new Set();
+      val.forEach((value) &#x3D;&gt; {
+        clonedSet.add(cloneRecursive(value, depth + 1));
+      });
+      return clonedSet;
+    }
+
+    // Handle Array
+    if (Array.isArray(val)) {
+      return val.map((item) &#x3D;&gt; cloneRecursive(item, depth + 1));
+    }
+
+    // Handle Object
+    const clonedObj: Record&lt;string, unknown&gt; &#x3D; preservePrototypes
+      ? Object.create(Object.getPrototypeOf(val))
+      : {};
+
+    for (const key in val) {
+      if (Object.prototype.hasOwnProperty.call(val, key)) {
+        clonedObj[key] &#x3D; cloneRecursive((val as Record&lt;string, unknown&gt;)[key], depth + 1);
+      }
+    }
+
+    return clonedObj;
+  }
+
+  return cloneRecursive(value, 0) as T;
+}
+
+/**
+ * Groups array elements by a key or key function
+ *
+ * @param array - The array to group
+ * @param key - Property key or function that returns the grouping key
+ * @returns Object with grouped elements
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const users &#x3D; [
+ *   { name: &#x27;John&#x27;, role: &#x27;admin&#x27; },
+ *   { name: &#x27;Jane&#x27;, role: &#x27;user&#x27; },
+ *   { name: &#x27;Bob&#x27;, role: &#x27;admin&#x27; }
+ * ];
+ * const byRole &#x3D; groupBy(users, &#x27;role&#x27;);
+ * // { admin: [{name: &#x27;John&#x27;, ...}, {name: &#x27;Bob&#x27;, ...}], user: [{name: &#x27;Jane&#x27;, ...}] }
+ *
+ * const byFirstLetter &#x3D; groupBy(users, (u) &#x3D;&gt; u.name[0]);
+ * // { J: [{name: &#x27;John&#x27;, ...}, {name: &#x27;Jane&#x27;, ...}], B: [{name: &#x27;Bob&#x27;, ...}] }
+ * &#x60;&#x60;&#x60;
+ */
+export function groupBy&lt;T&gt;(
+  array: T[],
+  key: keyof T | ((item: T) &#x3D;&gt; string | number)
+): Record&lt;string, T[]&gt; {
+  if (!Array.isArray(array)) {
+    throw new TypeError(&#x27;First argument must be an array&#x27;);
+  }
+
+  const result: Record&lt;string, T[]&gt; &#x3D; {};
+
+  for (const item of array) {
+    const groupKey &#x3D;
+      typeof key &#x3D;&#x3D;&#x3D; &#x27;function&#x27; ? String(key(item)) : String(item[key]);
+
+    if (!result[groupKey]) {
+      result[groupKey] &#x3D; [];
+    }
+    result[groupKey].push(item);
+  }
+
+  return result;
+}
+
+/**
+ * Returns unique array elements based on a key or key function
+ *
+ * @param array - The array to filter
+ * @param key - Property key or function that returns the uniqueness key
+ * @returns Array with unique elements (first occurrence kept)
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const users &#x3D; [
+ *   { id: 1, name: &#x27;John&#x27; },
+ *   { id: 2, name: &#x27;Jane&#x27; },
+ *   { id: 1, name: &#x27;John Doe&#x27; }
+ * ];
+ * const unique &#x3D; uniqueBy(users, &#x27;id&#x27;);
+ * // [{ id: 1, name: &#x27;John&#x27; }, { id: 2, name: &#x27;Jane&#x27; }]
+ * &#x60;&#x60;&#x60;
+ */
+export function uniqueBy&lt;T&gt;(
+  array: T[],
+  key?: keyof T | ((item: T) &#x3D;&gt; unknown)
+): T[] {
+  if (!Array.isArray(array)) {
+    throw new TypeError(&#x27;First argument must be an array&#x27;);
+  }
+
+  if (!key) {
+    // Use Set for primitive uniqueness
+    return Array.from(new Set(array));
+  }
+
+  const seen &#x3D; new Set&lt;unknown&gt;();
+  const result: T[] &#x3D; [];
+
+  for (const item of array) {
+    const uniqueKey &#x3D; typeof key &#x3D;&#x3D;&#x3D; &#x27;function&#x27; ? key(item) : item[key];
+
+    if (!seen.has(uniqueKey)) {
+      seen.add(uniqueKey);
+      result.push(item);
+    }
+  }
+
+  return result;
+}
+
+/**
+ * Sorts an array by a key or custom comparator
+ *
+ * @param array - The array to sort
+ * @param key - Property key to sort by
+ * @param options - Sorting options
+ * @returns New sorted array (does not mutate original)
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const users &#x3D; [
+ *   { name: &#x27;John&#x27;, age: 30 },
+ *   { name: &#x27;Jane&#x27;, age: 25 },
+ *   { name: &#x27;Bob&#x27;, age: 35 }
+ * ];
+ * const sorted &#x3D; sortBy(users, &#x27;age&#x27;);
+ * // [{ name: &#x27;Jane&#x27;, age: 25 }, { name: &#x27;John&#x27;, age: 30 }, { name: &#x27;Bob&#x27;, age: 35 }]
+ *
+ * const descending &#x3D; sortBy(users, &#x27;age&#x27;, { order: &#x27;desc&#x27; });
+ * // [{ name: &#x27;Bob&#x27;, age: 35 }, { name: &#x27;John&#x27;, age: 30 }, { name: &#x27;Jane&#x27;, age: 25 }]
+ * &#x60;&#x60;&#x60;
+ */
+export function sortBy&lt;T&gt;(
+  array: T[],
+  key: keyof T,
+  options: SortOptions&lt;T&gt; &#x3D; {}
+): T[] {
+  if (!Array.isArray(array)) {
+    throw new TypeError(&#x27;First argument must be an array&#x27;);
+  }
+
+  const { order &#x3D; &#x27;asc&#x27;, comparator, caseSensitive &#x3D; false } &#x3D; options;
+  const multiplier &#x3D; order &#x3D;&#x3D;&#x3D; &#x27;asc&#x27; ? 1 : -1;
+
+  return [...array].sort((a, b) &#x3D;&gt; {
+    if (comparator) {
+      return comparator(a, b) * multiplier;
+    }
+
+    let aVal &#x3D; a[key];
+    let bVal &#x3D; b[key];
+
+    // Handle case-insensitive string comparison
+    if (!caseSensitive &amp;&amp; typeof aVal &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; typeof bVal &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+      aVal &#x3D; aVal.toLowerCase() as T[keyof T];
+      bVal &#x3D; bVal.toLowerCase() as T[keyof T];
+    }
+
+    if (aVal &lt; bVal) return -1 * multiplier;
+    if (aVal &gt; bVal) return 1 * multiplier;
+    return 0;
+  });
+}
+
+/**
+ * Flattens a nested array to a specified depth
+ *
+ * @param array - The array to flatten
+ * @param depth - Maximum depth to flatten (default: 1)
+ * @returns Flattened array
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const nested &#x3D; [1, [2, [3, [4]]]];
+ * flatten(nested, 1); // [1, 2, [3, [4]]]
+ * flatten(nested, 2); // [1, 2, 3, [4]]
+ * flatten(nested, Infinity); // [1, 2, 3, 4]
+ * &#x60;&#x60;&#x60;
+ */
+export function flatten&lt;T&gt;(array: T[], depth &#x3D; 1): T[] {
+  if (!Array.isArray(array)) {
+    throw new TypeError(&#x27;First argument must be an array&#x27;);
+  }
+
+  if (depth &lt; 1) {
+    return array;
+  }
+
+  return array.reduce((acc: T[], val: T) &#x3D;&gt; {
+    if (Array.isArray(val)) {
+      acc.push(...(flatten(val, depth - 1) as T[]));
+    } else {
+      acc.push(val);
+    }
+    return acc;
+  }, []);
+}
+
+/**
+ * Chunks an array into smaller arrays of specified size
+ *
+ * @param array - The array to chunk
+ * @param size - Size of each chunk
+ * @returns Array of chunks
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const numbers &#x3D; [1, 2, 3, 4, 5, 6, 7];
+ * chunk(numbers, 3); // [[1, 2, 3], [4, 5, 6], [7]]
+ * &#x60;&#x60;&#x60;
+ */
+export function chunk&lt;T&gt;(array: T[], size: number): T[][] {
+  if (!Array.isArray(array)) {
+    throw new TypeError(&#x27;First argument must be an array&#x27;);
+  }
+
+  if (!Number.isInteger(size) || size &lt; 1) {
+    throw new TypeError(&#x27;Chunk size must be a positive integer&#x27;);
+  }
+
+  const result: T[][] &#x3D; [];
+  for (let i &#x3D; 0; i &lt; array.length; i +&#x3D; size) {
+    result.push(array.slice(i, i + size));
+  }
+  return result;
+}
+
+/**
+ * Computes the difference between two arrays
+ *
+ * @param array1 - First array
+ * @param array2 - Second array
+ * @param key - Optional key function for object comparison
+ * @returns Object containing added, removed, and unchanged items
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const old &#x3D; [1, 2, 3, 4];
+ * const new &#x3D; [3, 4, 5, 6];
+ * arrayDifference(old, new);
+ * // { added: [5, 6], removed: [1, 2], unchanged: [3, 4] }
+ * &#x60;&#x60;&#x60;
+ */
+export function arrayDifference&lt;T&gt;(
+  array1: T[],
+  array2: T[],
+  key?: (item: T) &#x3D;&gt; unknown
+): ArrayDifference&lt;T&gt; {
+  if (!Array.isArray(array1) || !Array.isArray(array2)) {
+    throw new TypeError(&#x27;Both arguments must be arrays&#x27;);
+  }
+
+  const getKey &#x3D; key || ((item: T) &#x3D;&gt; item);
+
+  const set1 &#x3D; new Map(array1.map((item) &#x3D;&gt; [getKey(item), item]));
+  const set2 &#x3D; new Map(array2.map((item) &#x3D;&gt; [getKey(item), item]));
+
+  const added: T[] &#x3D; [];
+  const removed: T[] &#x3D; [];
+  const unchanged: T[] &#x3D; [];
+
+  // Find added and unchanged
+  set2.forEach((item, k) &#x3D;&gt; {
+    if (set1.has(k)) {
+      unchanged.push(item);
+    } else {
+      added.push(item);
+    }
+  });
+
+  // Find removed
+  set1.forEach((item, k) &#x3D;&gt; {
+    if (!set2.has(k)) {
+      removed.push(item);
+    }
+  });
+
+  return { added, removed, unchanged };
+}
+
+/**
+ * Picks specified properties from an object
+ *
+ * @param obj - The source object
+ * @param keys - Keys to pick
+ * @returns New object with only specified keys
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const user &#x3D; { id: 1, name: &#x27;John&#x27;, email: &#x27;john@example.com&#x27;, password: &#x27;secret&#x27; };
+ * pick(user, [&#x27;id&#x27;, &#x27;name&#x27;, &#x27;email&#x27;]);
+ * // { id: 1, name: &#x27;John&#x27;, email: &#x27;john@example.com&#x27; }
+ * &#x60;&#x60;&#x60;
+ */
+export function pick&lt;T extends object, K extends keyof T&gt;(
+  obj: T,
+  keys: K[]
+): Pick&lt;T, K&gt; {
+  if (typeof obj !&#x3D;&#x3D; &#x27;object&#x27; || obj &#x3D;&#x3D;&#x3D; null) {
+    throw new TypeError(&#x27;First argument must be an object&#x27;);
+  }
+
+  const result &#x3D; {} as Pick&lt;T, K&gt;;
+  for (const key of keys) {
+    if (key in obj) {
+      result[key] &#x3D; obj[key];
+    }
+  }
+  return result;
+}
+
+/**
+ * Omits specified properties from an object
+ *
+ * @param obj - The source object
+ * @param keys - Keys to omit
+ * @returns New object without specified keys
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const user &#x3D; { id: 1, name: &#x27;John&#x27;, email: &#x27;john@example.com&#x27;, password: &#x27;secret&#x27; };
+ * omit(user, [&#x27;password&#x27;]);
+ * // { id: 1, name: &#x27;John&#x27;, email: &#x27;john@example.com&#x27; }
+ * &#x60;&#x60;&#x60;
+ */
+export function omit&lt;T extends object, K extends keyof T&gt;(
+  obj: T,
+  keys: K[]
+): Omit&lt;T, K&gt; {
+  if (typeof obj !&#x3D;&#x3D; &#x27;object&#x27; || obj &#x3D;&#x3D;&#x3D; null) {
+    throw new TypeError(&#x27;First argument must be an object&#x27;);
+  }
+
+  const result &#x3D; { ...obj };
+  for (const key of keys) {
+    delete result[key];
+  }
+  return result;
+}
+
+/**
+ * Merges multiple objects deeply
+ *
+ * @param target - Target object
+ * @param sources - Source objects to merge
+ * @returns Merged object
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const defaults &#x3D; { theme: &#x27;light&#x27;, fontSize: 14, features: { search: true } };
+ * const user &#x3D; { fontSize: 16, features: { darkMode: true } };
+ * deepMerge(defaults, user);
+ * // { theme: &#x27;light&#x27;, fontSize: 16, features: { search: true, darkMode: true } }
+ * &#x60;&#x60;&#x60;
+ */
+export function deepMerge&lt;T extends object&gt;(target: T, ...sources: Partial&lt;T&gt;[]): T {
+  if (!sources.length) return target;
+
+  const result &#x3D; { ...target };
+
+  for (const source of sources) {
+    if (typeof source !&#x3D;&#x3D; &#x27;object&#x27; || source &#x3D;&#x3D;&#x3D; null) {
+      continue;
+    }
+
+    for (const key in source) {
+      if (Object.prototype.hasOwnProperty.call(source, key)) {
+        const sourceValue &#x3D; source[key];
+        const targetValue &#x3D; result[key];
+
+        if (
+          sourceValue &amp;&amp;
+          typeof sourceValue &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp;
+          !Array.isArray(sourceValue) &amp;&amp;
+          targetValue &amp;&amp;
+          typeof targetValue &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp;
+          !Array.isArray(targetValue)
+        ) {
+          result[key] &#x3D; deepMerge(targetValue, sourceValue) as T[Extract&lt;keyof T, string&gt;];
+        } else {
+          result[key] &#x3D; sourceValue as T[Extract&lt;keyof T, string&gt;];
+        }
+      }
+    }
+  }
+
+  return result;
+}
+
+/**
+ * Checks if an object is empty (no own properties)
+ *
+ * @param obj - Object to check
+ * @returns True if object is empty
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * isEmpty({}); // true
+ * isEmpty({ name: &#x27;John&#x27; }); // false
+ * isEmpty([]); // true
+ * isEmpty([1, 2]); // false
+ * &#x60;&#x60;&#x60;
+ */
+export function isEmpty(obj: object): boolean {
+  if (obj &#x3D;&#x3D;&#x3D; null || obj &#x3D;&#x3D;&#x3D; undefined) {
+    return true;
+  }
+
+  if (Array.isArray(obj)) {
+    return obj.length &#x3D;&#x3D;&#x3D; 0;
+  }
+
+  if (obj instanceof Map || obj instanceof Set) {
+    return obj.size &#x3D;&#x3D;&#x3D; 0;
+  }
+
+  return Object.keys(obj).length &#x3D;&#x3D;&#x3D; 0;
+}
+
+/**
+ * Gets a nested property value from an object using a path
+ *
+ * @param obj - The source object
+ * @param path - Path to the property (dot notation or array)
+ * @param defaultValue - Default value if path doesn&#x27;t exist
+ * @returns The property value or default value
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const user &#x3D; { name: &#x27;John&#x27;, address: { city: &#x27;NYC&#x27;, zip: &#x27;10001&#x27; } };
+ * getPath(user, &#x27;address.city&#x27;); // &#x27;NYC&#x27;
+ * getPath(user, [&#x27;address&#x27;, &#x27;zip&#x27;]); // &#x27;10001&#x27;
+ * getPath(user, &#x27;address.country&#x27;, &#x27;USA&#x27;); // &#x27;USA&#x27; (default)
+ * &#x60;&#x60;&#x60;
+ */
+export function getPath&lt;T&gt;(
+  obj: unknown,
+  path: string | string[],
+  defaultValue?: T
+): T | undefined {
+  if (typeof obj !&#x3D;&#x3D; &#x27;object&#x27; || obj &#x3D;&#x3D;&#x3D; null) {
+    return defaultValue;
+  }
+
+  const keys &#x3D; Array.isArray(path) ? path : path.split(&#x27;.&#x27;);
+  let result: unknown &#x3D; obj;
+
+  for (const key of keys) {
+    if (result &amp;&amp; typeof result &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp; key in result) {
+      result &#x3D; (result as Record&lt;string, unknown&gt;)[key];
+    } else {
+      return defaultValue;
+    }
+  }
+
+  return result as T;
+}
+
+/**
+ * Sets a nested property value in an object using a path
+ *
+ * @param obj - The target object
+ * @param path - Path to the property (dot notation or array)
+ * @param value - Value to set
+ * @returns The modified object
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const user &#x3D; { name: &#x27;John&#x27; };
+ * setPath(user, &#x27;address.city&#x27;, &#x27;NYC&#x27;);
+ * // { name: &#x27;John&#x27;, address: { city: &#x27;NYC&#x27; } }
+ * &#x60;&#x60;&#x60;
+ */
+export function setPath&lt;T extends object&gt;(
+  obj: T,
+  path: string | string[],
+  value: unknown
+): T {
+  // Prevent prototype pollution via dangerous keys anywhere in the path.
+  const forbidden &#x3D; [&#x27;__proto__&#x27;, &#x27;prototype&#x27;, &#x27;constructor&#x27;];
+  const keys &#x3D; Array.isArray(path) ? path : path.split(&#x27;.&#x27;);
+  if (keys.some((k) &#x3D;&gt; forbidden.includes(k))) {
+    throw new Error(
+      &#x27;Attempt to set forbidden property on object (prototype pollution blocked)&#x27;
+    );
+  }
+
+  if (typeof obj !&#x3D;&#x3D; &#x27;object&#x27; || obj &#x3D;&#x3D;&#x3D; null) {
+    throw new TypeError(&#x27;First argument must be an object&#x27;);
+  }
+
+  let current: Record&lt;string, unknown&gt; &#x3D; obj as Record&lt;string, unknown&gt;;
+
+  for (let i &#x3D; 0; i &lt; keys.length - 1; i++) {
+    const key &#x3D; keys[i];
+    if (!(key in current) || typeof current[key] !&#x3D;&#x3D; &#x27;object&#x27;) {
+      current[key] &#x3D; {};
+    }
+    current &#x3D; current[key] as Record&lt;string, unknown&gt;;
+  }
+
+  current[keys[keys.length - 1]] &#x3D; value;
+  return obj;
+}
+
+/**
+ * Inverts an object (swaps keys and values)
+ *
+ * @param obj - Object to invert
+ * @returns Inverted object
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const status &#x3D; { active: 1, inactive: 0, pending: 2 };
+ * invert(status); // { &#x27;1&#x27;: &#x27;active&#x27;, &#x27;0&#x27;: &#x27;inactive&#x27;, &#x27;2&#x27;: &#x27;pending&#x27; }
+ * &#x60;&#x60;&#x60;
+ */
+export function invert(obj: Record&lt;string, string | number&gt;): Record&lt;string, string&gt; {
+  if (typeof obj !&#x3D;&#x3D; &#x27;object&#x27; || obj &#x3D;&#x3D;&#x3D; null) {
+    throw new TypeError(&#x27;Argument must be an object&#x27;);
+  }
+
+  const result: Record&lt;string, string&gt; &#x3D; {};
+  for (const key in obj) {
+    if (Object.prototype.hasOwnProperty.call(obj, key)) {
+      result[String(obj[key])] &#x3D; key;
+    }
+  }
+  return result;
+}
+
+/**
+ * Compacts an array by removing falsy values
+ *
+ * @param array - Array to compact
+ * @returns Array with falsy values removed
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * compact([0, 1, false, 2, &#x27;&#x27;, 3, null, undefined, NaN]);
+ * // [1, 2, 3]
+ * &#x60;&#x60;&#x60;
+ */
+export function compact&lt;T&gt;(array: (T | null | undefined | false | 0 | &#x27;&#x27;)[]): T[] {
+  if (!Array.isArray(array)) {
+    throw new TypeError(&#x27;Argument must be an array&#x27;);
+  }
+
+  return array.filter((item): item is T &#x3D;&gt; Boolean(item));
+}
+
+/**
+ * Returns the intersection of two or more arrays
+ *
+ * @param arrays - Arrays to intersect
+ * @returns Array containing only elements present in all input arrays
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * intersection([1, 2, 3], [2, 3, 4], [3, 4, 5]); // [3]
+ * &#x60;&#x60;&#x60;
+ */
+export function intersection&lt;T&gt;(...arrays: T[][]): T[] {
+  if (arrays.length &#x3D;&#x3D;&#x3D; 0) return [];
+  if (arrays.some((arr) &#x3D;&gt; !Array.isArray(arr))) {
+    throw new TypeError(&#x27;All arguments must be arrays&#x27;);
+  }
+
+  const [first, ...rest] &#x3D; arrays;
+  return uniqueBy(first).filter((item) &#x3D;&gt; rest.every((arr) &#x3D;&gt; arr.includes(item)));
+}
+
+/**
+ * Returns the union of two or more arrays (unique elements from all arrays)
+ *
+ * @param arrays - Arrays to unite
+ * @returns Array containing unique elements from all input arrays
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * union([1, 2], [2, 3], [3, 4]); // [1, 2, 3, 4]
+ * &#x60;&#x60;&#x60;
+ */
+export function union&lt;T&gt;(...arrays: T[][]): T[] {
+  if (arrays.some((arr) &#x3D;&gt; !Array.isArray(arr))) {
+    throw new TypeError(&#x27;All arguments must be arrays&#x27;);
+  }
+
+  return uniqueBy(arrays.flat());
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'ArrayDifference.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

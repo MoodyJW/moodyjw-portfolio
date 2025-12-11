@@ -1,6 +1,5 @@
 import { CommonModule } from '@angular/common';
-import type {
-  OnDestroy} from '@angular/core';
+import type { OnDestroy } from '@angular/core';
 import {
   ChangeDetectionStrategy,
   Component,
@@ -11,7 +10,7 @@ import {
   signal,
 } from '@angular/core';
 
-import { ThemeService } from '../../../../shared/services/theme.service';
+import { ThemeService } from '../../../core/theme/theme.service';
 import { BadgeComponent } from '../badge/badge.component';
 import { IconComponent } from '../icon/icon.component';
 import { StackComponent } from '../stack/stack.component';
@@ -98,7 +97,7 @@ export class ThemePickerComponent implements OnDestroy {
    * Toggle dropdown open/closed
    */
   toggle(): void {
-    this.isOpen.update(open => !open);
+    this.isOpen.update((open) => !open);
   }
 
   /**

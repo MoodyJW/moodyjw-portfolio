@@ -1,0 +1,2432 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  RadioComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/shared/components/radio/radio.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Accessible radio button component with validation states and comprehensive features.
+Follows WCAG 2.1 AAA guidelines and integrates with the theme system.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;!-- Basic radio button --&gt;
+&lt;app-radio
+  label=&quot;Option A&quot;
+  name=&quot;choice&quot;
+  value=&quot;a&quot;
+  [(checked)]=&quot;selected&quot;
+  ariaLabel=&quot;Option A&quot;
+/&gt;
+
+
+&lt;!-- Radio button with validation --&gt;
+&lt;app-radio
+  label=&quot;Premium plan&quot;
+  name=&quot;plan&quot;
+  value=&quot;premium&quot;
+  [(checked)]=&quot;selectedPlan&quot;
+  validationState=&quot;error&quot;
+  helperText=&quot;This field is required&quot;
+  ariaLabel=&quot;Premium plan&quot;
+/&gt;
+
+
+&lt;!-- Radio group --&gt;
+&lt;div role=&quot;radiogroup&quot; aria-label=&quot;Payment method&quot;&gt;
+  &lt;app-radio
+    label=&quot;Credit Card&quot;
+    name=&quot;payment&quot;
+    value=&quot;credit&quot;
+    [(checked)]=&quot;paymentMethod&quot;
+    ariaLabel=&quot;Credit Card&quot;
+  /&gt;
+  &lt;app-radio
+    label=&quot;PayPal&quot;
+    name=&quot;payment&quot;
+    value=&quot;paypal&quot;
+    [(checked)]=&quot;paymentMethod&quot;
+    ariaLabel=&quot;PayPal&quot;
+  /&gt;
+&lt;/div&gt;</code></pre></div>
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-radio</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>FormsModule</code>
+                                <code><a href="../components/InputFooterComponent.html" target="_self" >InputFooterComponent</a></code>
+                                <code><a href="../components/InputLabelComponent.html" target="_self" >InputLabelComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./radio.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./radio.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#computedAriaDescribedBy" >computedAriaDescribedBy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#computedAriaInvalid" >computedAriaInvalid</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#helperTextClasses" >helperTextClasses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#helperTextId" >helperTextId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isFocused" >isFocused</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#labelClasses" >labelClasses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#labelId" >labelId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#radioClasses" >radioClasses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#radioElement" >radioElement</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#radioId" >radioId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#uniqueIdService" >uniqueIdService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#wrapperClasses" >wrapperClasses</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_getLabelClasses" >_getLabelClasses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_getRadioClasses" >_getRadioClasses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_getWrapperClasses" >_getWrapperClasses</a>
+                            </li>
+                            <li>
+                                <a href="#blur" >blur</a>
+                            </li>
+                            <li>
+                                <a href="#focus" >focus</a>
+                            </li>
+                            <li>
+                                <a href="#handleBlur" >handleBlur</a>
+                            </li>
+                            <li>
+                                <a href="#handleChange" >handleChange</a>
+                            </li>
+                            <li>
+                                <a href="#handleFocus" >handleFocus</a>
+                            </li>
+                            <li>
+                                <a href="#select" >select</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ariaDescribedBy" >ariaDescribedBy</a>
+                            </li>
+                            <li>
+                                <a href="#ariaInvalid" >ariaInvalid</a>
+                            </li>
+                            <li>
+                                <a href="#ariaLabel" >ariaLabel</a>
+                            </li>
+                            <li>
+                                <a href="#checked" >checked</a>
+                            </li>
+                            <li>
+                                <a href="#disabled" >disabled</a>
+                            </li>
+                            <li>
+                                <a href="#helperText" >helperText</a>
+                            </li>
+                            <li>
+                                <a href="#label" >label</a>
+                            </li>
+                            <li>
+                                <a href="#name" >name</a>
+                            </li>
+                            <li>
+                                <a href="#required" >required</a>
+                            </li>
+                            <li>
+                                <a href="#size" >size</a>
+                            </li>
+                            <li>
+                                <a href="#validationState" >validationState</a>
+                            </li>
+                            <li>
+                                <a href="#value" >value</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#blurred" >blurred</a>
+                            </li>
+                            <li>
+                                <a href="#checkedChange" >checkedChange</a>
+                            </li>
+                            <li>
+                                <a href="#focused" >focused</a>
+                            </li>
+                            <li>
+                                <a href="#selected" >selected</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ariaDescribedBy"></a>
+                        <b>ariaDescribedBy</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>undefined</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="141" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:141</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>ID of element that describes the radio button</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ariaInvalid"></a>
+                        <b>ariaInvalid</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="147" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:147</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the radio button value is invalid
+Used for ARIA attributes</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ariaLabel"></a>
+                        <b>ariaLabel</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="136" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:136</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>ARIA label for the radio button (REQUIRED for accessibility)</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="checked"></a>
+                        <b>checked</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:91</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Current checked state of the radio button
+Two-way bindable with [(checked)]</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="disabled"></a>
+                        <b>disabled</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="116" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:116</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the radio button is disabled</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="helperText"></a>
+                        <b>helperText</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:102</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Helper text displayed below the radio button
+Can be used for instructions or validation messages</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="label"></a>
+                        <b>label</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:96</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Label text displayed next to the radio button</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="name"></a>
+                        <b>name</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="131" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:131</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Name attribute for the radio button input (required for grouping)</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="required"></a>
+                        <b>required</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="121" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:121</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the radio button is required</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="size"></a>
+                        <b>size</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#RadioSize" target="_self" >RadioSize</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;md&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:85</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Size of the radio button</p>
+<ul>
+<li>sm: 16px, 14px font</li>
+<li>md: 20px, 16px font (default)</li>
+<li>lg: 24px, 18px font</li>
+</ul>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="validationState"></a>
+                        <b>validationState</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#RadioValidationState" target="_self" >RadioValidationState</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;default&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="111" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:111</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Validation state of the radio button</p>
+<ul>
+<li>default: No validation styling</li>
+<li>success: Valid state (green)</li>
+<li>warning: Warning state (yellow)</li>
+<li>error: Error state (red)</li>
+</ul>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="value"></a>
+                        <b>value</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:126</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Value for the radio button (required for radio groups)</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="blurred"></a>
+                        <b>blurred</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FocusEvent</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="169" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:169</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emitted when the radio button loses focus</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="checkedChange"></a>
+                        <b>checkedChange</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="153" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:153</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emitted when the radio button checked state changes
+Used for two-way binding with [(checked)]</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="focused"></a>
+                        <b>focused</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FocusEvent</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="164" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:164</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emitted when the radio button receives focus</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="selected"></a>
+                        <b>selected</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="159" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:159</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emitted when the radio button is selected
+Includes the radio button&#39;s value</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_getLabelClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_getLabelClasses</b></span>
+                        <a href="#_getLabelClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>_getLabelClasses()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="353"
+                                    class="link-to-prism">src/app/shared/components/radio/radio.component.ts:353</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Generate BEM CSS classes for the label</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_getRadioClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_getRadioClasses</b></span>
+                        <a href="#_getRadioClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>_getRadioClasses()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="324"
+                                    class="link-to-prism">src/app/shared/components/radio/radio.component.ts:324</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Generate BEM CSS classes for the radio input</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_getWrapperClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_getWrapperClasses</b></span>
+                        <a href="#_getWrapperClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>_getWrapperClasses()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="307"
+                                    class="link-to-prism">src/app/shared/components/radio/radio.component.ts:307</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Generate BEM CSS classes for the wrapper</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="blur"></a>
+                    <span class="name">
+                        <span ><b>blur</b></span>
+                        <a href="#blur"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>blur()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="290"
+                                    class="link-to-prism">src/app/shared/components/radio/radio.component.ts:290</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Blur the radio button programmatically</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="focus"></a>
+                    <span class="name">
+                        <span ><b>focus</b></span>
+                        <a href="#focus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>focus()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="283"
+                                    class="link-to-prism">src/app/shared/components/radio/radio.component.ts:283</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Focus the radio button programmatically</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleBlur"></a>
+                    <span class="name">
+                        <span ><b>handleBlur</b></span>
+                        <a href="#handleBlur"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleBlur(event: FocusEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="275"
+                                    class="link-to-prism">src/app/shared/components/radio/radio.component.ts:275</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handle blur events</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>FocusEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleChange"></a>
+                    <span class="name">
+                        <span ><b>handleChange</b></span>
+                        <a href="#handleChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleChange(event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="255"
+                                    class="link-to-prism">src/app/shared/components/radio/radio.component.ts:255</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handle radio button change events</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleFocus"></a>
+                    <span class="name">
+                        <span ><b>handleFocus</b></span>
+                        <a href="#handleFocus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleFocus(event: FocusEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="267"
+                                    class="link-to-prism">src/app/shared/components/radio/radio.component.ts:267</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handle focus events</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>FocusEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="select"></a>
+                    <span class="name">
+                        <span ><b>select</b></span>
+                        <a href="#select"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>select()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="297"
+                                    class="link-to-prism">src/app/shared/components/radio/radio.component.ts:297</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Select the radio button programmatically</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="computedAriaDescribedBy"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>computedAriaDescribedBy</b></span>
+                        <a href="#computedAriaDescribedBy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const parts: string[] &#x3D; [];
+    const helperTextId &#x3D; this.helperTextId();
+    const userDescribedBy &#x3D; this.ariaDescribedBy();
+
+    if (helperTextId) parts.push(helperTextId);
+    if (userDescribedBy) parts.push(userDescribedBy);
+
+    return parts.length &gt; 0 ? parts.join(&#x27; &#x27;) : undefined;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="205" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:205</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed aria-describedby value</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="computedAriaInvalid"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>computedAriaInvalid</b></span>
+                        <a href="#computedAriaInvalid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    return this.ariaInvalid() || this.validationState() &#x3D;&#x3D;&#x3D; &#x27;error&#x27; ? &#x27;true&#x27; : undefined;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="219" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:219</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed aria-invalid value</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="helperTextClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>helperTextClasses</b></span>
+                        <a href="#helperTextClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const classes &#x3D; [&#x27;input-helper-text&#x27;];
+    const state &#x3D; this.validationState();
+
+    if (state &#x3D;&#x3D;&#x3D; &#x27;success&#x27;) classes.push(&#x27;input-helper-text--success&#x27;);
+    if (state &#x3D;&#x3D;&#x3D; &#x27;warning&#x27;) classes.push(&#x27;input-helper-text--warning&#x27;);
+    if (state &#x3D;&#x3D;&#x3D; &#x27;error&#x27;) classes.push(&#x27;input-helper-text--error&#x27;);
+
+    return classes.join(&#x27; &#x27;);
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="241" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:241</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed CSS classes for helper text</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="helperTextId"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>helperTextId</b></span>
+                        <a href="#helperTextId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const helperText &#x3D; this.helperText();
+    return helperText ? this.uniqueIdService.generateId(&#x27;radio-helper&#x27;) : undefined;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="197" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:197</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unique ID for the helper text element</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isFocused"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isFocused</b></span>
+                        <a href="#isFocused"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="179" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:179</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Internal focused state</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="labelClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>labelClasses</b></span>
+                        <a href="#labelClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this._getLabelClasses())</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="236" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:236</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed CSS classes for the label</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="labelId"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>labelId</b></span>
+                        <a href="#labelId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const label &#x3D; this.label();
+    return label ? this.uniqueIdService.generateId(&#x27;radio-label&#x27;) : undefined;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="189" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:189</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unique ID for the label element</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="radioClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>radioClasses</b></span>
+                        <a href="#radioClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this._getRadioClasses())</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="231" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:231</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed CSS classes for the radio input</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="radioElement"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>radioElement</b></span>
+                        <a href="#radioElement"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>viewChild&lt;ElementRef&lt;HTMLInputElement&gt;&gt;(&#x27;radioElement&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="174" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:174</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reference to the native radio input element</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="radioId"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>radioId</b></span>
+                        <a href="#radioId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this.uniqueIdService.generateId(&#x27;radio&#x27;))</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="184" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:184</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unique ID for the radio input</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uniqueIdService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>uniqueIdService</b></span>
+                        <a href="#uniqueIdService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UniqueIdService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="77" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:77</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="wrapperClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>wrapperClasses</b></span>
+                        <a href="#wrapperClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this._getWrapperClasses())</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="226" class="link-to-prism">src/app/shared/components/radio/radio.component.ts:226</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed CSS classes for the radio wrapper</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  type ElementRef,
+  inject,
+  input,
+  output,
+  signal,
+  viewChild,
+} from &#x27;@angular/core&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+
+import { UniqueIdService } from &#x27;@shared/services/unique-id/unique-id.service&#x27;;
+
+import { InputFooterComponent } from &#x27;../input-footer&#x27;;
+import { InputLabelComponent } from &#x27;../input-label&#x27;;
+
+export type RadioSize &#x3D; &#x27;sm&#x27; | &#x27;md&#x27; | &#x27;lg&#x27;;
+export type RadioValidationState &#x3D; &#x27;default&#x27; | &#x27;success&#x27; | &#x27;warning&#x27; | &#x27;error&#x27;;
+
+/**
+ * Accessible radio button component with validation states and comprehensive features.
+ * Follows WCAG 2.1 AAA guidelines and integrates with the theme system.
+ *
+ * @example
+ * &#x60;&#x60;&#x60;html
+ * &lt;!-- Basic radio button --&gt;
+ * &lt;app-radio
+ *   label&#x3D;&quot;Option A&quot;
+ *   name&#x3D;&quot;choice&quot;
+ *   value&#x3D;&quot;a&quot;
+ *   [(checked)]&#x3D;&quot;selected&quot;
+ *   ariaLabel&#x3D;&quot;Option A&quot;
+ * /&gt;
+ *
+ * &lt;!-- Radio button with validation --&gt;
+ * &lt;app-radio
+ *   label&#x3D;&quot;Premium plan&quot;
+ *   name&#x3D;&quot;plan&quot;
+ *   value&#x3D;&quot;premium&quot;
+ *   [(checked)]&#x3D;&quot;selectedPlan&quot;
+ *   validationState&#x3D;&quot;error&quot;
+ *   helperText&#x3D;&quot;This field is required&quot;
+ *   ariaLabel&#x3D;&quot;Premium plan&quot;
+ * /&gt;
+ *
+ * &lt;!-- Radio group --&gt;
+ * &lt;div role&#x3D;&quot;radiogroup&quot; aria-label&#x3D;&quot;Payment method&quot;&gt;
+ *   &lt;app-radio
+ *     label&#x3D;&quot;Credit Card&quot;
+ *     name&#x3D;&quot;payment&quot;
+ *     value&#x3D;&quot;credit&quot;
+ *     [(checked)]&#x3D;&quot;paymentMethod&quot;
+ *     ariaLabel&#x3D;&quot;Credit Card&quot;
+ *   /&gt;
+ *   &lt;app-radio
+ *     label&#x3D;&quot;PayPal&quot;
+ *     name&#x3D;&quot;payment&quot;
+ *     value&#x3D;&quot;paypal&quot;
+ *     [(checked)]&#x3D;&quot;paymentMethod&quot;
+ *     ariaLabel&#x3D;&quot;PayPal&quot;
+ *   /&gt;
+ * &lt;/div&gt;
+ * &#x60;&#x60;&#x60;
+ */
+@Component({
+  selector: &#x27;app-radio&#x27;,
+  standalone: true,
+  imports: [CommonModule, FormsModule, InputFooterComponent, InputLabelComponent],
+  templateUrl: &#x27;./radio.component.html&#x27;,
+  styleUrl: &#x27;./radio.component.scss&#x27;,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class RadioComponent {
+  private readonly uniqueIdService &#x3D; inject(UniqueIdService);
+
+  /**
+   * Size of the radio button
+   * - sm: 16px, 14px font
+   * - md: 20px, 16px font (default)
+   * - lg: 24px, 18px font
+   */
+  readonly size &#x3D; input&lt;RadioSize&gt;(&#x27;md&#x27;);
+
+  /**
+   * Current checked state of the radio button
+   * Two-way bindable with [(checked)]
+   */
+  readonly checked &#x3D; input&lt;boolean&gt;(false);
+
+  /**
+   * Label text displayed next to the radio button
+   */
+  readonly label &#x3D; input&lt;string&gt;(&#x27;&#x27;);
+
+  /**
+   * Helper text displayed below the radio button
+   * Can be used for instructions or validation messages
+   */
+  readonly helperText &#x3D; input&lt;string&gt;(&#x27;&#x27;);
+
+  /**
+   * Validation state of the radio button
+   * - default: No validation styling
+   * - success: Valid state (green)
+   * - warning: Warning state (yellow)
+   * - error: Error state (red)
+   */
+  readonly validationState &#x3D; input&lt;RadioValidationState&gt;(&#x27;default&#x27;);
+
+  /**
+   * Whether the radio button is disabled
+   */
+  readonly disabled &#x3D; input&lt;boolean&gt;(false);
+
+  /**
+   * Whether the radio button is required
+   */
+  readonly required &#x3D; input&lt;boolean&gt;(false);
+
+  /**
+   * Value for the radio button (required for radio groups)
+   */
+  readonly value &#x3D; input.required&lt;string&gt;();
+
+  /**
+   * Name attribute for the radio button input (required for grouping)
+   */
+  readonly name &#x3D; input.required&lt;string&gt;();
+
+  /**
+   * ARIA label for the radio button (REQUIRED for accessibility)
+   */
+  readonly ariaLabel &#x3D; input.required&lt;string&gt;();
+
+  /**
+   * ID of element that describes the radio button
+   */
+  readonly ariaDescribedBy &#x3D; input&lt;string | undefined&gt;(undefined);
+
+  /**
+   * Whether the radio button value is invalid
+   * Used for ARIA attributes
+   */
+  readonly ariaInvalid &#x3D; input&lt;boolean&gt;(false);
+
+  /**
+   * Emitted when the radio button checked state changes
+   * Used for two-way binding with [(checked)]
+   */
+  readonly checkedChange &#x3D; output&lt;boolean&gt;();
+
+  /**
+   * Emitted when the radio button is selected
+   * Includes the radio button&#x27;s value
+   */
+  readonly selected &#x3D; output&lt;string&gt;();
+
+  /**
+   * Emitted when the radio button receives focus
+   */
+  readonly focused &#x3D; output&lt;FocusEvent&gt;();
+
+  /**
+   * Emitted when the radio button loses focus
+   */
+  readonly blurred &#x3D; output&lt;FocusEvent&gt;();
+
+  /**
+   * Reference to the native radio input element
+   */
+  readonly radioElement &#x3D; viewChild&lt;ElementRef&lt;HTMLInputElement&gt;&gt;(&#x27;radioElement&#x27;);
+
+  /**
+   * Internal focused state
+   */
+  readonly isFocused &#x3D; signal&lt;boolean&gt;(false);
+
+  /**
+   * Unique ID for the radio input
+   */
+  readonly radioId &#x3D; computed(() &#x3D;&gt; this.uniqueIdService.generateId(&#x27;radio&#x27;));
+
+  /**
+   * Unique ID for the label element
+   */
+  readonly labelId &#x3D; computed(() &#x3D;&gt; {
+    const label &#x3D; this.label();
+    return label ? this.uniqueIdService.generateId(&#x27;radio-label&#x27;) : undefined;
+  });
+
+  /**
+   * Unique ID for the helper text element
+   */
+  readonly helperTextId &#x3D; computed(() &#x3D;&gt; {
+    const helperText &#x3D; this.helperText();
+    return helperText ? this.uniqueIdService.generateId(&#x27;radio-helper&#x27;) : undefined;
+  });
+
+  /**
+   * Computed aria-describedby value
+   */
+  readonly computedAriaDescribedBy &#x3D; computed(() &#x3D;&gt; {
+    const parts: string[] &#x3D; [];
+    const helperTextId &#x3D; this.helperTextId();
+    const userDescribedBy &#x3D; this.ariaDescribedBy();
+
+    if (helperTextId) parts.push(helperTextId);
+    if (userDescribedBy) parts.push(userDescribedBy);
+
+    return parts.length &gt; 0 ? parts.join(&#x27; &#x27;) : undefined;
+  });
+
+  /**
+   * Computed aria-invalid value
+   */
+  readonly computedAriaInvalid &#x3D; computed(() &#x3D;&gt; {
+    return this.ariaInvalid() || this.validationState() &#x3D;&#x3D;&#x3D; &#x27;error&#x27; ? &#x27;true&#x27; : undefined;
+  });
+
+  /**
+   * Computed CSS classes for the radio wrapper
+   */
+  readonly wrapperClasses &#x3D; computed(() &#x3D;&gt; this._getWrapperClasses());
+
+  /**
+   * Computed CSS classes for the radio input
+   */
+  readonly radioClasses &#x3D; computed(() &#x3D;&gt; this._getRadioClasses());
+
+  /**
+   * Computed CSS classes for the label
+   */
+  readonly labelClasses &#x3D; computed(() &#x3D;&gt; this._getLabelClasses());
+
+  /**
+   * Computed CSS classes for helper text
+   */
+  readonly helperTextClasses &#x3D; computed(() &#x3D;&gt; {
+    const classes &#x3D; [&#x27;input-helper-text&#x27;];
+    const state &#x3D; this.validationState();
+
+    if (state &#x3D;&#x3D;&#x3D; &#x27;success&#x27;) classes.push(&#x27;input-helper-text--success&#x27;);
+    if (state &#x3D;&#x3D;&#x3D; &#x27;warning&#x27;) classes.push(&#x27;input-helper-text--warning&#x27;);
+    if (state &#x3D;&#x3D;&#x3D; &#x27;error&#x27;) classes.push(&#x27;input-helper-text--error&#x27;);
+
+    return classes.join(&#x27; &#x27;);
+  });
+
+  /**
+   * Handle radio button change events
+   */
+  handleChange(event: Event): void {
+    const target &#x3D; event.target as HTMLInputElement;
+    const newChecked &#x3D; target.checked;
+    this.checkedChange.emit(newChecked);
+    if (newChecked) {
+      this.selected.emit(this.value());
+    }
+  }
+
+  /**
+   * Handle focus events
+   */
+  handleFocus(event: FocusEvent): void {
+    this.isFocused.set(true);
+    this.focused.emit(event);
+  }
+
+  /**
+   * Handle blur events
+   */
+  handleBlur(event: FocusEvent): void {
+    this.isFocused.set(false);
+    this.blurred.emit(event);
+  }
+
+  /**
+   * Focus the radio button programmatically
+   */
+  focus(): void {
+    this.radioElement()?.nativeElement.focus();
+  }
+
+  /**
+   * Blur the radio button programmatically
+   */
+  blur(): void {
+    this.radioElement()?.nativeElement.blur();
+  }
+
+  /**
+   * Select the radio button programmatically
+   */
+  select(): void {
+    if (!this.disabled() &amp;&amp; !this.checked()) {
+      this.checkedChange.emit(true);
+      this.selected.emit(this.value());
+    }
+  }
+
+  /**
+   * Generate BEM CSS classes for the wrapper
+   */
+  private _getWrapperClasses(): string {
+    const classes &#x3D; [&#x27;radio-wrapper&#x27;];
+
+    // Size class
+    classes.push(&#x60;radio-wrapper--${this.size()}&#x60;);
+
+    // State classes
+    if (this.disabled()) {
+      classes.push(&#x27;radio-wrapper--disabled&#x27;);
+    }
+
+    return classes.join(&#x27; &#x27;);
+  }
+
+  /**
+   * Generate BEM CSS classes for the radio input
+   */
+  private _getRadioClasses(): string {
+    const classes &#x3D; [&#x27;radio&#x27;];
+
+    // Size class
+    classes.push(&#x60;radio--${this.size()}&#x60;);
+
+    // Validation state class
+    const validation &#x3D; this.validationState();
+    if (validation !&#x3D;&#x3D; &#x27;default&#x27;) {
+      classes.push(&#x60;radio--${validation}&#x60;);
+    }
+
+    // State classes
+    if (this.disabled()) {
+      classes.push(&#x27;radio--disabled&#x27;);
+    }
+    if (this.isFocused()) {
+      classes.push(&#x27;radio--focused&#x27;);
+    }
+    if (this.checked()) {
+      classes.push(&#x27;radio--checked&#x27;);
+    }
+
+    return classes.join(&#x27; &#x27;);
+  }
+
+  /**
+   * Generate BEM CSS classes for the label
+   */
+  private _getLabelClasses(): string {
+    const classes &#x3D; [&#x27;radio-label&#x27;];
+
+    // Size class
+    classes.push(&#x60;radio-label--${this.size()}&#x60;);
+
+    // State classes
+    if (this.disabled()) {
+      classes.push(&#x27;radio-label--disabled&#x27;);
+    }
+    if (this.required()) {
+      classes.push(&#x27;radio-label--required&#x27;);
+    }
+
+    return classes.join(&#x27; &#x27;);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div [class]&#x3D;&quot;wrapperClasses()&quot;&gt;
+  &lt;div class&#x3D;&quot;radio-input-wrapper&quot;&gt;
+    &lt;input
+      #radioElement
+      type&#x3D;&quot;radio&quot;
+      [id]&#x3D;&quot;radioId()&quot;
+      [class]&#x3D;&quot;radioClasses()&quot;
+      [checked]&#x3D;&quot;checked()&quot;
+      [disabled]&#x3D;&quot;disabled()&quot;
+      [required]&#x3D;&quot;required()&quot;
+      [value]&#x3D;&quot;value()&quot;
+      [name]&#x3D;&quot;name()&quot;
+      [attr.aria-label]&#x3D;&quot;ariaLabel()&quot;
+      [attr.aria-describedby]&#x3D;&quot;computedAriaDescribedBy()&quot;
+      [attr.aria-invalid]&#x3D;&quot;computedAriaInvalid()&quot;
+      [attr.aria-labelledby]&#x3D;&quot;labelId()&quot;
+      (change)&#x3D;&quot;handleChange($event)&quot;
+      (focus)&#x3D;&quot;handleFocus($event)&quot;
+      (blur)&#x3D;&quot;handleBlur($event)&quot;
+    /&gt;
+    &lt;span class&#x3D;&quot;radio-indicator&quot; aria-hidden&#x3D;&quot;true&quot;&gt;
+      @if (checked()) {
+        &lt;span class&#x3D;&quot;radio-indicator__dot&quot;&gt;&lt;/span&gt;
+      }
+    &lt;/span&gt;
+  &lt;/div&gt;
+
+  &lt;app-input-label
+    [forId]&#x3D;&quot;radioId()&quot;
+    [label]&#x3D;&quot;label()&quot;
+    [required]&#x3D;&quot;required()&quot;
+    [labelClass]&#x3D;&quot;labelClasses()&quot;
+  /&gt;
+
+  &lt;app-input-footer
+    [helperText]&#x3D;&quot;helperText()&quot;
+    [helperTextId]&#x3D;&quot;helperTextId()&quot;
+    [helperTextClasses]&#x3D;&quot;helperTextClasses()&quot;
+  /&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div [class]="wrapperClasses()">  <div class="radio-input-wrapper">    <input      #radioElement      type="radio"      [id]="radioId()"      [class]="radioClasses()"      [checked]="checked()"      [disabled]="disabled()"      [required]="required()"      [value]="value()"      [name]="name()"      [attr.aria-label]="ariaLabel()"      [attr.aria-describedby]="computedAriaDescribedBy()"      [attr.aria-invalid]="computedAriaInvalid()"      [attr.aria-labelledby]="labelId()"      (change)="handleChange($event)"      (focus)="handleFocus($event)"      (blur)="handleBlur($event)"    />    <span class="radio-indicator" aria-hidden="true">      @if (checked()) {        <span class="radio-indicator__dot"></span>      }    </span>  </div>  <app-input-label    [forId]="radioId()"    [label]="label()"    [required]="required()"    [labelClass]="labelClasses()"  />  <app-input-footer    [helperText]="helperText()"    [helperTextId]="helperTextId()"    [helperTextClasses]="helperTextClasses()"  /></div></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'BadgeComponent', 'selector': 'app-badge'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'ButtonContentComponent', 'selector': 'app-button-content'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CaseStudiesComponent', 'selector': 'app-case-studies'},{'name': 'CheckboxCheckmarkComponent', 'selector': 'app-checkbox-checkmark'},{'name': 'CheckboxComponent', 'selector': 'app-checkbox'},{'name': 'ContainerComponent', 'selector': 'app-container'},{'name': 'DividerComponent', 'selector': 'app-divider'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormFieldComponent', 'selector': 'app-form-field'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IconComponent', 'selector': 'app-icon'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputFooterComponent', 'selector': 'app-input-footer'},{'name': 'InputLabelComponent', 'selector': 'app-input-label'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'MainLayoutComponent', 'selector': 'app-main-layout'},{'name': 'ModalComponent', 'selector': 'app-modal'},{'name': 'RadioComponent', 'selector': 'app-radio'},{'name': 'SelectButtonComponent', 'selector': 'app-select-button'},{'name': 'SelectComponent', 'selector': 'app-select'},{'name': 'SelectDropdownComponent', 'selector': 'app-select-dropdown'},{'name': 'SelectOptionComponent', 'selector': 'app-select-option'},{'name': 'SkeletonComponent', 'selector': 'app-skeleton'},{'name': 'StackComponent', 'selector': 'app-stack'},{'name': 'TabButtonComponent', 'selector': 'app-tab-button'},{'name': 'TabComponent', 'selector': 'app-tab'},{'name': 'TabsComponent', 'selector': 'app-tabs'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'TextareaComponent', 'selector': 'app-textarea'},{'name': 'ThemePickerComponent', 'selector': 'app-theme-picker'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'ToastDemoComponent', 'selector': 'app-toast-demo'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'RadioComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'RadioComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

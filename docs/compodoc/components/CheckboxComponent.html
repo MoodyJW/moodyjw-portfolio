@@ -1,0 +1,2414 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  CheckboxComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/shared/components/checkbox/checkbox.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Accessible checkbox component with validation states and comprehensive features.
+Follows WCAG 2.1 AAA guidelines and integrates with the theme system.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;!-- Basic checkbox --&gt;
+&lt;app-checkbox
+  label=&quot;Accept terms and conditions&quot;
+  [(checked)]=&quot;accepted&quot;
+  ariaLabel=&quot;Accept terms and conditions&quot;
+/&gt;
+
+
+&lt;!-- Checkbox with validation --&gt;
+&lt;app-checkbox
+  label=&quot;Subscribe to newsletter&quot;
+  [(checked)]=&quot;subscribed&quot;
+  validationState=&quot;error&quot;
+  helperText=&quot;This field is required&quot;
+  ariaLabel=&quot;Subscribe to newsletter&quot;
+/&gt;
+
+
+&lt;!-- Indeterminate checkbox --&gt;
+&lt;app-checkbox
+  label=&quot;Select all items&quot;
+  [(checked)]=&quot;selectAll&quot;
+  [indeterminate]=&quot;someSelected&quot;
+  ariaLabel=&quot;Select all items&quot;
+/&gt;</code></pre></div>
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-checkbox</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                            <code>FormsModule</code>
+                                <code><a href="../components/CheckboxCheckmarkComponent.html" target="_self" >CheckboxCheckmarkComponent</a></code>
+                                <code><a href="../components/InputFooterComponent.html" target="_self" >InputFooterComponent</a></code>
+                                <code><a href="../components/InputLabelComponent.html" target="_self" >InputLabelComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./checkbox.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./checkbox.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#checkboxClasses" >checkboxClasses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#checkboxElement" >checkboxElement</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#checkboxId" >checkboxId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#computedAriaDescribedBy" >computedAriaDescribedBy</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#computedAriaInvalid" >computedAriaInvalid</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#helperTextClasses" >helperTextClasses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#helperTextId" >helperTextId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isFocused" >isFocused</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#labelClasses" >labelClasses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#labelId" >labelId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#uniqueIdService" >uniqueIdService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#wrapperClasses" >wrapperClasses</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_getCheckboxClasses" >_getCheckboxClasses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_getLabelClasses" >_getLabelClasses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_getWrapperClasses" >_getWrapperClasses</a>
+                            </li>
+                            <li>
+                                <a href="#blur" >blur</a>
+                            </li>
+                            <li>
+                                <a href="#focus" >focus</a>
+                            </li>
+                            <li>
+                                <a href="#handleBlur" >handleBlur</a>
+                            </li>
+                            <li>
+                                <a href="#handleChange" >handleChange</a>
+                            </li>
+                            <li>
+                                <a href="#handleFocus" >handleFocus</a>
+                            </li>
+                            <li>
+                                <a href="#toggle" >toggle</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ariaDescribedBy" >ariaDescribedBy</a>
+                            </li>
+                            <li>
+                                <a href="#ariaInvalid" >ariaInvalid</a>
+                            </li>
+                            <li>
+                                <a href="#ariaLabel" >ariaLabel</a>
+                            </li>
+                            <li>
+                                <a href="#checked" >checked</a>
+                            </li>
+                            <li>
+                                <a href="#disabled" >disabled</a>
+                            </li>
+                            <li>
+                                <a href="#helperText" >helperText</a>
+                            </li>
+                            <li>
+                                <a href="#indeterminate" >indeterminate</a>
+                            </li>
+                            <li>
+                                <a href="#label" >label</a>
+                            </li>
+                            <li>
+                                <a href="#name" >name</a>
+                            </li>
+                            <li>
+                                <a href="#required" >required</a>
+                            </li>
+                            <li>
+                                <a href="#size" >size</a>
+                            </li>
+                            <li>
+                                <a href="#validationState" >validationState</a>
+                            </li>
+                            <li>
+                                <a href="#value" >value</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#blurred" >blurred</a>
+                            </li>
+                            <li>
+                                <a href="#checkedChange" >checkedChange</a>
+                            </li>
+                            <li>
+                                <a href="#focused" >focused</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ariaDescribedBy"></a>
+                        <b>ariaDescribedBy</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>undefined</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="140" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:140</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>ID of element that describes the checkbox</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ariaInvalid"></a>
+                        <b>ariaInvalid</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="146" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:146</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the checkbox value is invalid
+Used for ARIA attributes</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ariaLabel"></a>
+                        <b>ariaLabel</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="135" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:135</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>ARIA label for the checkbox (REQUIRED for accessibility)</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="checked"></a>
+                        <b>checked</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:84</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Current checked state of the checkbox
+Two-way bindable with [(checked)]</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="disabled"></a>
+                        <b>disabled</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="115" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:115</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the checkbox is disabled</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="helperText"></a>
+                        <b>helperText</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="101" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:101</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Helper text displayed below the checkbox
+Can be used for instructions or validation messages</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="indeterminate"></a>
+                        <b>indeterminate</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="90" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:90</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the checkbox is in an indeterminate state
+Used for &quot;select all&quot; scenarios where some items are selected</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="label"></a>
+                        <b>label</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="95" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:95</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Label text displayed next to the checkbox</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="name"></a>
+                        <b>name</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="130" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:130</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Name attribute for the checkbox input</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="required"></a>
+                        <b>required</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="120" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:120</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the checkbox is required</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="size"></a>
+                        <b>size</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#CheckboxSize" target="_self" >CheckboxSize</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;md&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="78" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:78</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Size of the checkbox</p>
+<ul>
+<li>sm: 16px, 14px font</li>
+<li>md: 20px, 16px font (default)</li>
+<li>lg: 24px, 18px font</li>
+</ul>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="validationState"></a>
+                        <b>validationState</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#CheckboxValidationState" target="_self" >CheckboxValidationState</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;default&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="110" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:110</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Validation state of the checkbox</p>
+<ul>
+<li>default: No validation styling</li>
+<li>success: Valid state (green)</li>
+<li>warning: Warning state (yellow)</li>
+<li>error: Error state (red)</li>
+</ul>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="value"></a>
+                        <b>value</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="125" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:125</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Custom value for the checkbox (useful in checkbox groups)</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="blurred"></a>
+                        <b>blurred</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FocusEvent</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="162" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:162</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emitted when the checkbox loses focus</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="checkedChange"></a>
+                        <b>checkedChange</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="152" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:152</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emitted when the checkbox checked state changes
+Used for two-way binding with [(checked)]</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="focused"></a>
+                        <b>focused</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>FocusEvent</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="157" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:157</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emitted when the checkbox receives focus</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_getCheckboxClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_getCheckboxClasses</b></span>
+                        <a href="#_getCheckboxClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>_getCheckboxClasses()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="314"
+                                    class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:314</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Generate BEM CSS classes for the checkbox input</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_getLabelClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_getLabelClasses</b></span>
+                        <a href="#_getLabelClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>_getLabelClasses()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="346"
+                                    class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:346</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Generate BEM CSS classes for the label</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_getWrapperClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_getWrapperClasses</b></span>
+                        <a href="#_getWrapperClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>_getWrapperClasses()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="297"
+                                    class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:297</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Generate BEM CSS classes for the wrapper</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="blur"></a>
+                    <span class="name">
+                        <span ><b>blur</b></span>
+                        <a href="#blur"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>blur()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="280"
+                                    class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:280</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Blur the checkbox programmatically</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="focus"></a>
+                    <span class="name">
+                        <span ><b>focus</b></span>
+                        <a href="#focus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>focus()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="273"
+                                    class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:273</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Focus the checkbox programmatically</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleBlur"></a>
+                    <span class="name">
+                        <span ><b>handleBlur</b></span>
+                        <a href="#handleBlur"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleBlur(event: FocusEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="265"
+                                    class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:265</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handle blur events</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>FocusEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleChange"></a>
+                    <span class="name">
+                        <span ><b>handleChange</b></span>
+                        <a href="#handleChange"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleChange(event: Event)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="248"
+                                    class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:248</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handle checkbox change events</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>Event</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleFocus"></a>
+                    <span class="name">
+                        <span ><b>handleFocus</b></span>
+                        <a href="#handleFocus"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleFocus(event: FocusEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="257"
+                                    class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:257</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handle focus events</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>FocusEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggle"></a>
+                    <span class="name">
+                        <span ><b>toggle</b></span>
+                        <a href="#toggle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggle()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="287"
+                                    class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:287</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Toggle the checkbox state programmatically</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkboxClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>checkboxClasses</b></span>
+                        <a href="#checkboxClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this._getCheckboxClasses())</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="224" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:224</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed CSS classes for the checkbox input</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkboxElement"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>checkboxElement</b></span>
+                        <a href="#checkboxElement"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>viewChild&lt;ElementRef&lt;HTMLInputElement&gt;&gt;(&#x27;checkboxElement&#x27;)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="167" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:167</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Reference to the native checkbox input element</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="checkboxId"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>checkboxId</b></span>
+                        <a href="#checkboxId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this.uniqueIdService.generateId(&#x27;checkbox&#x27;))</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="177" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:177</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unique ID for the checkbox input</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="computedAriaDescribedBy"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>computedAriaDescribedBy</b></span>
+                        <a href="#computedAriaDescribedBy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const parts: string[] &#x3D; [];
+    const helperTextId &#x3D; this.helperTextId();
+    const userDescribedBy &#x3D; this.ariaDescribedBy();
+
+    if (helperTextId) parts.push(helperTextId);
+    if (userDescribedBy) parts.push(userDescribedBy);
+
+    return parts.length &gt; 0 ? parts.join(&#x27; &#x27;) : undefined;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="198" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:198</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed aria-describedby value</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="computedAriaInvalid"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>computedAriaInvalid</b></span>
+                        <a href="#computedAriaInvalid"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    return this.ariaInvalid() || this.validationState() &#x3D;&#x3D;&#x3D; &#x27;error&#x27; ? &#x27;true&#x27; : undefined;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="212" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:212</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed aria-invalid value</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="helperTextClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>helperTextClasses</b></span>
+                        <a href="#helperTextClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const classes &#x3D; [&#x27;input-helper-text&#x27;];
+    const state &#x3D; this.validationState();
+
+    if (state &#x3D;&#x3D;&#x3D; &#x27;success&#x27;) classes.push(&#x27;input-helper-text--success&#x27;);
+    if (state &#x3D;&#x3D;&#x3D; &#x27;warning&#x27;) classes.push(&#x27;input-helper-text--warning&#x27;);
+    if (state &#x3D;&#x3D;&#x3D; &#x27;error&#x27;) classes.push(&#x27;input-helper-text--error&#x27;);
+
+    return classes.join(&#x27; &#x27;);
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="234" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:234</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed CSS classes for helper text</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="helperTextId"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>helperTextId</b></span>
+                        <a href="#helperTextId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const helperText &#x3D; this.helperText();
+    return helperText ? this.uniqueIdService.generateId(&#x27;checkbox-helper&#x27;) : undefined;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="190" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:190</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unique ID for the helper text element</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isFocused"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isFocused</b></span>
+                        <a href="#isFocused"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal&lt;boolean&gt;(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="172" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:172</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Internal focused state</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="labelClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>labelClasses</b></span>
+                        <a href="#labelClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this._getLabelClasses())</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="229" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:229</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed CSS classes for the label</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="labelId"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>labelId</b></span>
+                        <a href="#labelId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const label &#x3D; this.label();
+    return label ? this.uniqueIdService.generateId(&#x27;checkbox-label&#x27;) : undefined;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="182" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:182</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unique ID for the label element</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uniqueIdService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>uniqueIdService</b></span>
+                        <a href="#uniqueIdService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UniqueIdService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="wrapperClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>wrapperClasses</b></span>
+                        <a href="#wrapperClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this._getWrapperClasses())</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="219" class="link-to-prism">src/app/shared/components/checkbox/checkbox.component.ts:219</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed CSS classes for the checkbox wrapper</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  type ElementRef,
+  inject,
+  input,
+  output,
+  signal,
+  viewChild,
+} from &#x27;@angular/core&#x27;;
+import { FormsModule } from &#x27;@angular/forms&#x27;;
+
+import { UniqueIdService } from &#x27;@shared/services/unique-id/unique-id.service&#x27;;
+
+import { CheckboxCheckmarkComponent } from &#x27;../checkbox-checkmark&#x27;;
+import { InputFooterComponent } from &#x27;../input-footer&#x27;;
+import { InputLabelComponent } from &#x27;../input-label&#x27;;
+
+export type CheckboxSize &#x3D; &#x27;sm&#x27; | &#x27;md&#x27; | &#x27;lg&#x27;;
+export type CheckboxValidationState &#x3D; &#x27;default&#x27; | &#x27;success&#x27; | &#x27;warning&#x27; | &#x27;error&#x27;;
+
+/**
+ * Accessible checkbox component with validation states and comprehensive features.
+ * Follows WCAG 2.1 AAA guidelines and integrates with the theme system.
+ *
+ * @example
+ * &#x60;&#x60;&#x60;html
+ * &lt;!-- Basic checkbox --&gt;
+ * &lt;app-checkbox
+ *   label&#x3D;&quot;Accept terms and conditions&quot;
+ *   [(checked)]&#x3D;&quot;accepted&quot;
+ *   ariaLabel&#x3D;&quot;Accept terms and conditions&quot;
+ * /&gt;
+ *
+ * &lt;!-- Checkbox with validation --&gt;
+ * &lt;app-checkbox
+ *   label&#x3D;&quot;Subscribe to newsletter&quot;
+ *   [(checked)]&#x3D;&quot;subscribed&quot;
+ *   validationState&#x3D;&quot;error&quot;
+ *   helperText&#x3D;&quot;This field is required&quot;
+ *   ariaLabel&#x3D;&quot;Subscribe to newsletter&quot;
+ * /&gt;
+ *
+ * &lt;!-- Indeterminate checkbox --&gt;
+ * &lt;app-checkbox
+ *   label&#x3D;&quot;Select all items&quot;
+ *   [(checked)]&#x3D;&quot;selectAll&quot;
+ *   [indeterminate]&#x3D;&quot;someSelected&quot;
+ *   ariaLabel&#x3D;&quot;Select all items&quot;
+ * /&gt;
+ * &#x60;&#x60;&#x60;
+ */
+@Component({
+  selector: &#x27;app-checkbox&#x27;,
+  standalone: true,
+  imports: [
+    CommonModule,
+    FormsModule,
+    CheckboxCheckmarkComponent,
+    InputFooterComponent,
+    InputLabelComponent,
+  ],
+  templateUrl: &#x27;./checkbox.component.html&#x27;,
+  styleUrl: &#x27;./checkbox.component.scss&#x27;,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class CheckboxComponent {
+  private readonly uniqueIdService &#x3D; inject(UniqueIdService);
+
+  /**
+   * Size of the checkbox
+   * - sm: 16px, 14px font
+   * - md: 20px, 16px font (default)
+   * - lg: 24px, 18px font
+   */
+  readonly size &#x3D; input&lt;CheckboxSize&gt;(&#x27;md&#x27;);
+
+  /**
+   * Current checked state of the checkbox
+   * Two-way bindable with [(checked)]
+   */
+  readonly checked &#x3D; input&lt;boolean&gt;(false);
+
+  /**
+   * Whether the checkbox is in an indeterminate state
+   * Used for &quot;select all&quot; scenarios where some items are selected
+   */
+  readonly indeterminate &#x3D; input&lt;boolean&gt;(false);
+
+  /**
+   * Label text displayed next to the checkbox
+   */
+  readonly label &#x3D; input&lt;string&gt;(&#x27;&#x27;);
+
+  /**
+   * Helper text displayed below the checkbox
+   * Can be used for instructions or validation messages
+   */
+  readonly helperText &#x3D; input&lt;string&gt;(&#x27;&#x27;);
+
+  /**
+   * Validation state of the checkbox
+   * - default: No validation styling
+   * - success: Valid state (green)
+   * - warning: Warning state (yellow)
+   * - error: Error state (red)
+   */
+  readonly validationState &#x3D; input&lt;CheckboxValidationState&gt;(&#x27;default&#x27;);
+
+  /**
+   * Whether the checkbox is disabled
+   */
+  readonly disabled &#x3D; input&lt;boolean&gt;(false);
+
+  /**
+   * Whether the checkbox is required
+   */
+  readonly required &#x3D; input&lt;boolean&gt;(false);
+
+  /**
+   * Custom value for the checkbox (useful in checkbox groups)
+   */
+  readonly value &#x3D; input&lt;string&gt;(&#x27;&#x27;);
+
+  /**
+   * Name attribute for the checkbox input
+   */
+  readonly name &#x3D; input&lt;string&gt;(&#x27;&#x27;);
+
+  /**
+   * ARIA label for the checkbox (REQUIRED for accessibility)
+   */
+  readonly ariaLabel &#x3D; input.required&lt;string&gt;();
+
+  /**
+   * ID of element that describes the checkbox
+   */
+  readonly ariaDescribedBy &#x3D; input&lt;string | undefined&gt;(undefined);
+
+  /**
+   * Whether the checkbox value is invalid
+   * Used for ARIA attributes
+   */
+  readonly ariaInvalid &#x3D; input&lt;boolean&gt;(false);
+
+  /**
+   * Emitted when the checkbox checked state changes
+   * Used for two-way binding with [(checked)]
+   */
+  readonly checkedChange &#x3D; output&lt;boolean&gt;();
+
+  /**
+   * Emitted when the checkbox receives focus
+   */
+  readonly focused &#x3D; output&lt;FocusEvent&gt;();
+
+  /**
+   * Emitted when the checkbox loses focus
+   */
+  readonly blurred &#x3D; output&lt;FocusEvent&gt;();
+
+  /**
+   * Reference to the native checkbox input element
+   */
+  readonly checkboxElement &#x3D; viewChild&lt;ElementRef&lt;HTMLInputElement&gt;&gt;(&#x27;checkboxElement&#x27;);
+
+  /**
+   * Internal focused state
+   */
+  readonly isFocused &#x3D; signal&lt;boolean&gt;(false);
+
+  /**
+   * Unique ID for the checkbox input
+   */
+  readonly checkboxId &#x3D; computed(() &#x3D;&gt; this.uniqueIdService.generateId(&#x27;checkbox&#x27;));
+
+  /**
+   * Unique ID for the label element
+   */
+  readonly labelId &#x3D; computed(() &#x3D;&gt; {
+    const label &#x3D; this.label();
+    return label ? this.uniqueIdService.generateId(&#x27;checkbox-label&#x27;) : undefined;
+  });
+
+  /**
+   * Unique ID for the helper text element
+   */
+  readonly helperTextId &#x3D; computed(() &#x3D;&gt; {
+    const helperText &#x3D; this.helperText();
+    return helperText ? this.uniqueIdService.generateId(&#x27;checkbox-helper&#x27;) : undefined;
+  });
+
+  /**
+   * Computed aria-describedby value
+   */
+  readonly computedAriaDescribedBy &#x3D; computed(() &#x3D;&gt; {
+    const parts: string[] &#x3D; [];
+    const helperTextId &#x3D; this.helperTextId();
+    const userDescribedBy &#x3D; this.ariaDescribedBy();
+
+    if (helperTextId) parts.push(helperTextId);
+    if (userDescribedBy) parts.push(userDescribedBy);
+
+    return parts.length &gt; 0 ? parts.join(&#x27; &#x27;) : undefined;
+  });
+
+  /**
+   * Computed aria-invalid value
+   */
+  readonly computedAriaInvalid &#x3D; computed(() &#x3D;&gt; {
+    return this.ariaInvalid() || this.validationState() &#x3D;&#x3D;&#x3D; &#x27;error&#x27; ? &#x27;true&#x27; : undefined;
+  });
+
+  /**
+   * Computed CSS classes for the checkbox wrapper
+   */
+  readonly wrapperClasses &#x3D; computed(() &#x3D;&gt; this._getWrapperClasses());
+
+  /**
+   * Computed CSS classes for the checkbox input
+   */
+  readonly checkboxClasses &#x3D; computed(() &#x3D;&gt; this._getCheckboxClasses());
+
+  /**
+   * Computed CSS classes for the label
+   */
+  readonly labelClasses &#x3D; computed(() &#x3D;&gt; this._getLabelClasses());
+
+  /**
+   * Computed CSS classes for helper text
+   */
+  readonly helperTextClasses &#x3D; computed(() &#x3D;&gt; {
+    const classes &#x3D; [&#x27;input-helper-text&#x27;];
+    const state &#x3D; this.validationState();
+
+    if (state &#x3D;&#x3D;&#x3D; &#x27;success&#x27;) classes.push(&#x27;input-helper-text--success&#x27;);
+    if (state &#x3D;&#x3D;&#x3D; &#x27;warning&#x27;) classes.push(&#x27;input-helper-text--warning&#x27;);
+    if (state &#x3D;&#x3D;&#x3D; &#x27;error&#x27;) classes.push(&#x27;input-helper-text--error&#x27;);
+
+    return classes.join(&#x27; &#x27;);
+  });
+
+  /**
+   * Handle checkbox change events
+   */
+  handleChange(event: Event): void {
+    const target &#x3D; event.target as HTMLInputElement;
+    const newChecked &#x3D; target.checked;
+    this.checkedChange.emit(newChecked);
+  }
+
+  /**
+   * Handle focus events
+   */
+  handleFocus(event: FocusEvent): void {
+    this.isFocused.set(true);
+    this.focused.emit(event);
+  }
+
+  /**
+   * Handle blur events
+   */
+  handleBlur(event: FocusEvent): void {
+    this.isFocused.set(false);
+    this.blurred.emit(event);
+  }
+
+  /**
+   * Focus the checkbox programmatically
+   */
+  focus(): void {
+    this.checkboxElement()?.nativeElement.focus();
+  }
+
+  /**
+   * Blur the checkbox programmatically
+   */
+  blur(): void {
+    this.checkboxElement()?.nativeElement.blur();
+  }
+
+  /**
+   * Toggle the checkbox state programmatically
+   */
+  toggle(): void {
+    if (!this.disabled()) {
+      const newChecked &#x3D; !this.checked();
+      this.checkedChange.emit(newChecked);
+    }
+  }
+
+  /**
+   * Generate BEM CSS classes for the wrapper
+   */
+  private _getWrapperClasses(): string {
+    const classes &#x3D; [&#x27;checkbox-wrapper&#x27;];
+
+    // Size class
+    classes.push(&#x60;checkbox-wrapper--${this.size()}&#x60;);
+
+    // State classes
+    if (this.disabled()) {
+      classes.push(&#x27;checkbox-wrapper--disabled&#x27;);
+    }
+
+    return classes.join(&#x27; &#x27;);
+  }
+
+  /**
+   * Generate BEM CSS classes for the checkbox input
+   */
+  private _getCheckboxClasses(): string {
+    const classes &#x3D; [&#x27;checkbox&#x27;];
+
+    // Size class
+    classes.push(&#x60;checkbox--${this.size()}&#x60;);
+
+    // Validation state class
+    const validation &#x3D; this.validationState();
+    if (validation !&#x3D;&#x3D; &#x27;default&#x27;) {
+      classes.push(&#x60;checkbox--${validation}&#x60;);
+    }
+
+    // State classes
+    if (this.disabled()) {
+      classes.push(&#x27;checkbox--disabled&#x27;);
+    }
+    if (this.isFocused()) {
+      classes.push(&#x27;checkbox--focused&#x27;);
+    }
+    if (this.checked()) {
+      classes.push(&#x27;checkbox--checked&#x27;);
+    }
+    if (this.indeterminate()) {
+      classes.push(&#x27;checkbox--indeterminate&#x27;);
+    }
+
+    return classes.join(&#x27; &#x27;);
+  }
+
+  /**
+   * Generate BEM CSS classes for the label
+   */
+  private _getLabelClasses(): string {
+    const classes &#x3D; [&#x27;checkbox-label&#x27;];
+
+    // Size class
+    classes.push(&#x60;checkbox-label--${this.size()}&#x60;);
+
+    // State classes
+    if (this.disabled()) {
+      classes.push(&#x27;checkbox-label--disabled&#x27;);
+    }
+    if (this.required()) {
+      classes.push(&#x27;checkbox-label--required&#x27;);
+    }
+
+    return classes.join(&#x27; &#x27;);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div [class]&#x3D;&quot;wrapperClasses()&quot;&gt;
+  &lt;div class&#x3D;&quot;checkbox-input-wrapper&quot;&gt;
+    &lt;input
+      #checkboxElement
+      type&#x3D;&quot;checkbox&quot;
+      [id]&#x3D;&quot;checkboxId()&quot;
+      [class]&#x3D;&quot;checkboxClasses()&quot;
+      [checked]&#x3D;&quot;checked()&quot;
+      [indeterminate]&#x3D;&quot;indeterminate()&quot;
+      [disabled]&#x3D;&quot;disabled()&quot;
+      [required]&#x3D;&quot;required()&quot;
+      [value]&#x3D;&quot;value()&quot;
+      [name]&#x3D;&quot;name()&quot;
+      [attr.aria-label]&#x3D;&quot;ariaLabel()&quot;
+      [attr.aria-describedby]&#x3D;&quot;computedAriaDescribedBy()&quot;
+      [attr.aria-invalid]&#x3D;&quot;computedAriaInvalid()&quot;
+      [attr.aria-labelledby]&#x3D;&quot;labelId()&quot;
+      (change)&#x3D;&quot;handleChange($event)&quot;
+      (focus)&#x3D;&quot;handleFocus($event)&quot;
+      (blur)&#x3D;&quot;handleBlur($event)&quot;
+    /&gt;
+    &lt;app-checkbox-checkmark [checked]&#x3D;&quot;checked()&quot; [indeterminate]&#x3D;&quot;indeterminate()&quot; /&gt;
+  &lt;/div&gt;
+
+  &lt;app-input-label
+    [forId]&#x3D;&quot;checkboxId()&quot;
+    [label]&#x3D;&quot;label()&quot;
+    [required]&#x3D;&quot;required()&quot;
+    [labelClass]&#x3D;&quot;labelClasses()&quot;
+  /&gt;
+
+  &lt;app-input-footer
+    [helperText]&#x3D;&quot;helperText()&quot;
+    [helperTextId]&#x3D;&quot;helperTextId()&quot;
+    [helperTextClasses]&#x3D;&quot;helperTextClasses()&quot;
+  /&gt;
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div [class]="wrapperClasses()">  <div class="checkbox-input-wrapper">    <input      #checkboxElement      type="checkbox"      [id]="checkboxId()"      [class]="checkboxClasses()"      [checked]="checked()"      [indeterminate]="indeterminate()"      [disabled]="disabled()"      [required]="required()"      [value]="value()"      [name]="name()"      [attr.aria-label]="ariaLabel()"      [attr.aria-describedby]="computedAriaDescribedBy()"      [attr.aria-invalid]="computedAriaInvalid()"      [attr.aria-labelledby]="labelId()"      (change)="handleChange($event)"      (focus)="handleFocus($event)"      (blur)="handleBlur($event)"    />    <app-checkbox-checkmark [checked]="checked()" [indeterminate]="indeterminate()" />  </div>  <app-input-label    [forId]="checkboxId()"    [label]="label()"    [required]="required()"    [labelClass]="labelClasses()"  />  <app-input-footer    [helperText]="helperText()"    [helperTextId]="helperTextId()"    [helperTextClasses]="helperTextClasses()"  /></div></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'BadgeComponent', 'selector': 'app-badge'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'ButtonContentComponent', 'selector': 'app-button-content'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CaseStudiesComponent', 'selector': 'app-case-studies'},{'name': 'CheckboxCheckmarkComponent', 'selector': 'app-checkbox-checkmark'},{'name': 'CheckboxComponent', 'selector': 'app-checkbox'},{'name': 'ContainerComponent', 'selector': 'app-container'},{'name': 'DividerComponent', 'selector': 'app-divider'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormFieldComponent', 'selector': 'app-form-field'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IconComponent', 'selector': 'app-icon'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputFooterComponent', 'selector': 'app-input-footer'},{'name': 'InputLabelComponent', 'selector': 'app-input-label'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'MainLayoutComponent', 'selector': 'app-main-layout'},{'name': 'ModalComponent', 'selector': 'app-modal'},{'name': 'RadioComponent', 'selector': 'app-radio'},{'name': 'SelectButtonComponent', 'selector': 'app-select-button'},{'name': 'SelectComponent', 'selector': 'app-select'},{'name': 'SelectDropdownComponent', 'selector': 'app-select-dropdown'},{'name': 'SelectOptionComponent', 'selector': 'app-select-option'},{'name': 'SkeletonComponent', 'selector': 'app-skeleton'},{'name': 'StackComponent', 'selector': 'app-stack'},{'name': 'TabButtonComponent', 'selector': 'app-tab-button'},{'name': 'TabComponent', 'selector': 'app-tab'},{'name': 'TabsComponent', 'selector': 'app-tabs'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'TextareaComponent', 'selector': 'app-textarea'},{'name': 'ThemePickerComponent', 'selector': 'app-theme-picker'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'ToastDemoComponent', 'selector': 'app-toast-demo'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'CheckboxComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'CheckboxComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -67,9 +67,9 @@ export const THEMES = [
       info: '#1976D2',
     },
     contrast: {
-      textOnBackground: 14.0, // AAA
-      textOnSurface: 12.5, // AAA
-      accentOnBackground: 7.2, // AAA
+      textOnBackground: 14.0,
+      textOnSurface: 12.5,
+      accentOnBackground: 7.2,
     },
     description: 'Bright, clean, and accessible. Default light theme.',
   },
@@ -96,9 +96,9 @@ export const THEMES = [
       info: '#0288D1',
     },
     contrast: {
-      textOnBackground: 13.2, // AAA
-      textOnSurface: 12.0, // AAA
-      accentOnBackground: 7.0, // AAA
+      textOnBackground: 13.2,
+      textOnSurface: 12.0,
+      accentOnBackground: 7.0,
     },
     description: 'Soft, warm, and modern. Alternate light theme.',
   },
@@ -125,9 +125,9 @@ export const THEMES = [
       info: '#29B6F6',
     },
     contrast: {
-      textOnBackground: 13.5, // AAA
-      textOnSurface: 12.8, // AAA
-      accentOnBackground: 7.1, // AAA
+      textOnBackground: 13.5,
+      textOnSurface: 12.8,
+      accentOnBackground: 7.1,
     },
     description: 'Deep, high-contrast, and easy on the eyes. Default dark theme.',
   },
@@ -154,9 +154,9 @@ export const THEMES = [
       info: '#18FFFF',
     },
     contrast: {
-      textOnBackground: 14.2, // AAA
-      textOnSurface: 13.0, // AAA
-      accentOnBackground: 7.3, // AAA
+      textOnBackground: 14.2,
+      textOnSurface: 13.0,
+      accentOnBackground: 7.3,
     },
     description: 'Vivid, futuristic, and ultra-accessible. Alternate dark theme.',
   },
@@ -164,12 +164,3 @@ export const THEMES = [
 
 // Validate themes at runtime (fail fast if invalid)
 ThemeRegistrySchema.parse(THEMES);
-
-/**
- * To contribute a new theme:
- * 1. Add a new object to THEMES with slug, label, isDark, tokens, contrast, and description.
- * 2. Ensure all color tokens are present and meet WCAG AAA contrast (≥7:1 for text, 4.5:1 for large text).
- * 3. Validate with ThemeRegistrySchema.
- * 4. Document contrast ratios in the theme object.
- * 5. Add a description for the theme’s intent and style.
- */

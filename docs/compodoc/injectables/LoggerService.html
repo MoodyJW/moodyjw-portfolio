@@ -1,0 +1,3240 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content injectable">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Injectables</li>
+  <li class="breadcrumb-item" >LoggerService</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/services/logger/logger.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Structured logging service with configurable log levels and console abstraction</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">export class MyComponent {
+  private logger = inject(LoggerService);
+
+
+  ngOnInit() {
+    this.logger.info(&#39;Component initialized&#39;);
+    this.logger.debug(&#39;Debug data:&#39;, this.data);
+
+
+    this.logger.startTimer(&#39;data-load&#39;);
+    await this.loadData();
+    this.logger.endTimer(&#39;data-load&#39;);
+  }
+}</code></pre></div>
+            </p>
+
+
+
+            <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#config" >config</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#currentLevel" >currentLevel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#history" >history</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#MAX_HISTORY" >MAX_HISTORY</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#timers" >timers</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#assert" >assert</a>
+                            </li>
+                            <li>
+                                <a href="#clear" >clear</a>
+                            </li>
+                            <li>
+                                <a href="#clearHistory" >clearHistory</a>
+                            </li>
+                            <li>
+                                <a href="#configure" >configure</a>
+                            </li>
+                            <li>
+                                <a href="#createLogger" >createLogger</a>
+                            </li>
+                            <li>
+                                <a href="#debug" >debug</a>
+                            </li>
+                            <li>
+                                <a href="#endTimer" >endTimer</a>
+                            </li>
+                            <li>
+                                <a href="#error" >error</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#formatMessage" >formatMessage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#formatTimestamp" >formatTimestamp</a>
+                            </li>
+                            <li>
+                                <a href="#getActiveTimers" >getActiveTimers</a>
+                            </li>
+                            <li>
+                                <a href="#getHistory" >getHistory</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#getLogStyle" >getLogStyle</a>
+                            </li>
+                            <li>
+                                <a href="#group" >group</a>
+                            </li>
+                            <li>
+                                <a href="#groupEnd" >groupEnd</a>
+                            </li>
+                            <li>
+                                <a href="#info" >info</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#log" >log</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#logWithContext" >logWithContext</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Async</span>
+                                <a href="#measure" >measure</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#outputToConsole" >outputToConsole</a>
+                            </li>
+                            <li>
+                                <a href="#setLevel" >setLevel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#shouldLog" >shouldLog</a>
+                            </li>
+                            <li>
+                                <a href="#startTimer" >startTimer</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#storeInHistory" >storeInHistory</a>
+                            </li>
+                            <li>
+                                <a href="#table" >table</a>
+                            </li>
+                            <li>
+                                <a href="#warn" >warn</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="assert"></a>
+                    <span class="name">
+                        <span ><b>assert</b></span>
+                        <a href="#assert"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>assert(condition: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank">boolean</a>, message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="285"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:285</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Assert a condition and log an error if false</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>condition</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Condition to assert</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Error message if assertion fails</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clear"></a>
+                    <span class="name">
+                        <span ><b>clear</b></span>
+                        <a href="#clear"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clear()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="294"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:294</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Clear the console (only in development)</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clearHistory"></a>
+                    <span class="name">
+                        <span ><b>clearHistory</b></span>
+                        <a href="#clearHistory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>clearHistory()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="312"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:312</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Clear log history</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="configure"></a>
+                    <span class="name">
+                        <span ><b>configure</b></span>
+                        <a href="#configure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>configure(config: <a href="../interfaces/LoggerConfig.html" target="_self">LoggerConfig</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Configure the logger</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>config</td>
+                                            <td>
+                                                            <code><a href="../interfaces/LoggerConfig.html" target="_self" >LoggerConfig</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Logger configuration options</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="createLogger"></a>
+                    <span class="name">
+                        <span ><b>createLogger</b></span>
+                        <a href="#createLogger"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>createLogger(context: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="168"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:168</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Create a logger instance with a specific context</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>context</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Context/source identifier</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>{ debug: (message: string, ...data: {}) &#x3D;&gt; void; info: (message: string, ...data: {}) &#x3D;&gt; void; warn: (message: string, ...data: {}) &#x3D;&gt; void; error: (message: string, error?: any, ...data: {}) &#x3D;&gt; void; }</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Logger function bound to the context</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="debug"></a>
+                    <span class="name">
+                        <span ><b>debug</b></span>
+                        <a href="#debug"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>debug(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, ...data: unknown[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="131"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:131</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Log a debug message (only in development)</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Message to log</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                        <code>unknown[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Additional data to log</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="endTimer"></a>
+                    <span class="name">
+                        <span ><b>endTimer</b></span>
+                        <a href="#endTimer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>endTimer(label: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="203"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:203</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>End a performance timer and log the duration</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>label</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Timer label</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>number | undefined</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Duration in milliseconds or undefined if timer not found</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="error"></a>
+                    <span class="name">
+                        <span ><b>error</b></span>
+                        <a href="#error"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>error(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, error?: <a href="../Storys/Error.html" target="_self">Error | unknown</a>, ...data: unknown[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="158"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:158</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Log an error message</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Message to log</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>error</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/variables.html#Error" target="_self" >Error | unknown</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Error object or additional data</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                        <code>unknown[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatMessage"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>formatMessage</b></span>
+                        <a href="#formatMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>formatMessage(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, context?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, timestamp?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="436"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:436</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Format log message with optional timestamp and context</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Message to format</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>context</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Optional context</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>timestamp</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Optional timestamp</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Formatted message</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="formatTimestamp"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>formatTimestamp</b></span>
+                        <a href="#formatTimestamp"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>formatTimestamp(timestamp: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank">Date</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="469"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:469</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Format timestamp for display</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>timestamp</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date" target="_blank" >Date</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Date to format</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Formatted timestamp string</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getActiveTimers"></a>
+                    <span class="name">
+                        <span ><b>getActiveTimers</b></span>
+                        <a href="#getActiveTimers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getActiveTimers()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="320"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:320</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get all active timers</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/PerformanceEntry.html" target="_self" >Map&lt;string, PerformanceEntry&gt;</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Map of active performance timers</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getHistory"></a>
+                    <span class="name">
+                        <span ><b>getHistory</b></span>
+                        <a href="#getHistory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>getHistory()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="305"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:305</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get log history (only available in development)</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="../interfaces/LogEntry.html" target="_self" >LogEntry[]</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Array of log entries</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="getLogStyle"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>getLogStyle</b></span>
+                        <a href="#getLogStyle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>getLogStyle(_level: <a href="../undefineds/LogLevel.html" target="_self">LogLevel</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="483"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:483</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get console style for log level (currently unused, reserved for future styled logging)</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>_level</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/enumerations.html#LogLevel" target="_self" >LogLevel</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>CSS style string</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="group"></a>
+                    <span class="name">
+                        <span ><b>group</b></span>
+                        <a href="#group"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>group(label: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, collapsed: unknown)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="246"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:246</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Group related log messages</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>label</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Group label</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>collapsed</td>
+                                            <td>
+                                                        <code>unknown</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>false</code>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Whether to start collapsed (default: false)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="groupEnd"></a>
+                    <span class="name">
+                        <span ><b>groupEnd</b></span>
+                        <a href="#groupEnd"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>groupEnd()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="259"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:259</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>End the current log group</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="info"></a>
+                    <span class="name">
+                        <span ><b>info</b></span>
+                        <a href="#info"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>info(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, ...data: unknown[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="140"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:140</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Log an info message</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Message to log</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                        <code>unknown[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Additional data to log</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="log"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>log</b></span>
+                        <a href="#log"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>log(level: <a href="../undefineds/LogLevel.html" target="_self">LogLevel</a>, message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, data: unknown[], context?: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="331"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:331</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Core logging method</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>level</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/enumerations.html#LogLevel" target="_self" >LogLevel</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Log level</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Message to log</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                        <code>unknown[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Additional data</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>context</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Optional context</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="logWithContext"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>logWithContext</b></span>
+                        <a href="#logWithContext"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>logWithContext(level: <a href="../undefineds/LogLevel.html" target="_self">LogLevel</a>, context: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, data: unknown[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="365"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:365</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Log with a specific context</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>level</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/enumerations.html#LogLevel" target="_self" >LogLevel</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Log level</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>context</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Context identifier</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Message to log</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                        <code>unknown[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Additional data</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="measure"></a>
+                    <span class="name">
+                            <span class="modifier">Async</span>
+                        <span ><b>measure</b></span>
+                        <a href="#measure"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>measure(label: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, operation: () => void)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="232"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:232</a></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>T</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Measure the execution time of an async operation</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>label</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Timer label</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>operation</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Async operation to measure</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>Promise&lt;T&gt;</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Result of the operation</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="outputToConsole"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>outputToConsole</b></span>
+                        <a href="#outputToConsole"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>outputToConsole(entry: <a href="../interfaces/LogEntry.html" target="_self">LogEntry</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="387"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:387</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Output log entry to console</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>entry</td>
+                                            <td>
+                                                            <code><a href="../interfaces/LogEntry.html" target="_self" >LogEntry</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Log entry to output</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setLevel"></a>
+                    <span class="name">
+                        <span ><b>setLevel</b></span>
+                        <a href="#setLevel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>setLevel(level: <a href="../undefineds/LogLevel.html" target="_self">LogLevel</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="121"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:121</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Set the minimum log level</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>level</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/enumerations.html#LogLevel" target="_self" >LogLevel</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Minimum log level to display</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="shouldLog"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>shouldLog</b></span>
+                        <a href="#shouldLog"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>shouldLog(level: <a href="../undefineds/LogLevel.html" target="_self">LogLevel</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="379"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:379</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Check if a log level should be displayed</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>level</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/enumerations.html#LogLevel" target="_self" >LogLevel</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Log level to check</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>True if should log</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="startTimer"></a>
+                    <span class="name">
+                        <span ><b>startTimer</b></span>
+                        <a href="#startTimer"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>startTimer(label: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="187"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:187</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Start a performance timer</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>label</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Timer label</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="storeInHistory"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>storeInHistory</b></span>
+                        <a href="#storeInHistory"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>storeInHistory(entry: <a href="../interfaces/LogEntry.html" target="_self">LogEntry</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="492"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:492</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Store log entry in history</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>entry</td>
+                                            <td>
+                                                            <code><a href="../interfaces/LogEntry.html" target="_self" >LogEntry</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Log entry to store</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="table"></a>
+                    <span class="name">
+                        <span ><b>table</b></span>
+                        <a href="#table"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>table(data: unknown, columns?: string[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="270"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:270</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Log a table (useful for arrays of objects)</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                        <code>unknown</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Data to display as a table</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>columns</td>
+                                            <td>
+                                                        <code>string[]</code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Optional column names to display</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="warn"></a>
+                    <span class="name">
+                        <span ><b>warn</b></span>
+                        <a href="#warn"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>warn(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, ...data: unknown[])</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="149"
+                                    class="link-to-prism">src/app/shared/services/logger/logger.service.ts:149</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Log a warning message</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Message to log</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>data</td>
+                                            <td>
+                                                        <code>unknown[]</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Additional data to log</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+            <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="config"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>config</b></span>
+                        <a href="#config"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/LoggerConfig.html" target="_self" >Required&lt;LoggerConfig&gt;</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{
+    level: this.currentLevel,
+    showTimestamp: true,
+    showContext: true,
+    prefix: &#x27;&#x27;,
+  }</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/shared/services/logger/logger.service.ts:86</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Configuration options</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentLevel"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>currentLevel</b></span>
+                        <a href="#currentLevel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/enumerations.html#LogLevel" target="_self" >LogLevel</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>isDevMode() ? LogLevel.Debug : LogLevel.Warn</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="83" class="link-to-prism">src/app/shared/services/logger/logger.service.ts:83</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Current log level</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="history"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>history</b></span>
+                        <a href="#history"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../interfaces/LogEntry.html" target="_self" >LogEntry[]</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>[]</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/shared/services/logger/logger.service.ts:97</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Log history (only in development)</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="MAX_HISTORY"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>MAX_HISTORY</b></span>
+                        <a href="#MAX_HISTORY"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>100</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="100" class="link-to-prism">src/app/shared/services/logger/logger.service.ts:100</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Maximum history size</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="timers"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>timers</b></span>
+                        <a href="#timers"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>new Map&lt;string, PerformanceEntry&gt;()</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="94" class="link-to-prism">src/app/shared/services/logger/logger.service.ts:94</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Performance timers</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, isDevMode } from &#x27;@angular/core&#x27;;
+
+/**
+ * Log levels in order of severity
+ */
+export enum LogLevel {
+  Debug &#x3D; 0,
+  Info &#x3D; 1,
+  Warn &#x3D; 2,
+  Error &#x3D; 3,
+  None &#x3D; 4,
+}
+
+/**
+ * Logger configuration options
+ */
+export interface LoggerConfig {
+  /** Minimum log level to display */
+  level?: LogLevel;
+  /** Whether to include timestamps */
+  showTimestamp?: boolean;
+  /** Whether to include source context */
+  showContext?: boolean;
+  /** Custom prefix for all logs */
+  prefix?: string;
+}
+
+/**
+ * Log entry structure
+ */
+export interface LogEntry {
+  /** Log level */
+  level: LogLevel;
+  /** Log message */
+  message: string;
+  /** Timestamp */
+  timestamp: Date;
+  /** Optional context/source */
+  context?: string;
+  /** Optional additional data */
+  data?: unknown[];
+}
+
+/**
+ * Performance timing entry
+ */
+export interface PerformanceEntry {
+  /** Label for the timing */
+  label: string;
+  /** Start time in milliseconds */
+  startTime: number;
+  /** End time in milliseconds */
+  endTime?: number;
+  /** Duration in milliseconds */
+  duration?: number;
+}
+
+/**
+ * Structured logging service with configurable log levels and console abstraction
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * export class MyComponent {
+ *   private logger &#x3D; inject(LoggerService);
+ *
+ *   ngOnInit() {
+ *     this.logger.info(&#x27;Component initialized&#x27;);
+ *     this.logger.debug(&#x27;Debug data:&#x27;, this.data);
+ *
+ *     this.logger.startTimer(&#x27;data-load&#x27;);
+ *     await this.loadData();
+ *     this.logger.endTimer(&#x27;data-load&#x27;);
+ *   }
+ * }
+ * &#x60;&#x60;&#x60;
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class LoggerService {
+  /** Current log level */
+  private currentLevel: LogLevel &#x3D; isDevMode() ? LogLevel.Debug : LogLevel.Warn;
+
+  /** Configuration options */
+  private config: Required&lt;LoggerConfig&gt; &#x3D; {
+    level: this.currentLevel,
+    showTimestamp: true,
+    showContext: true,
+    prefix: &#x27;&#x27;,
+  };
+
+  /** Performance timers */
+  private timers &#x3D; new Map&lt;string, PerformanceEntry&gt;();
+
+  /** Log history (only in development) */
+  private history: LogEntry[] &#x3D; [];
+
+  /** Maximum history size */
+  private readonly MAX_HISTORY &#x3D; 100;
+
+  /**
+   * Configure the logger
+   * @param config - Logger configuration options
+   */
+  configure(config: LoggerConfig): void {
+    this.config &#x3D; {
+      ...this.config,
+      ...config,
+    };
+
+    if (config.level !&#x3D;&#x3D; undefined) {
+      this.currentLevel &#x3D; config.level;
+    }
+  }
+
+  /**
+   * Set the minimum log level
+   * @param level - Minimum log level to display
+   */
+  setLevel(level: LogLevel): void {
+    this.currentLevel &#x3D; level;
+    this.config.level &#x3D; level;
+  }
+
+  /**
+   * Log a debug message (only in development)
+   * @param message - Message to log
+   * @param data - Additional data to log
+   */
+  debug(message: string, ...data: unknown[]): void {
+    this.log(LogLevel.Debug, message, data);
+  }
+
+  /**
+   * Log an info message
+   * @param message - Message to log
+   * @param data - Additional data to log
+   */
+  info(message: string, ...data: unknown[]): void {
+    this.log(LogLevel.Info, message, data);
+  }
+
+  /**
+   * Log a warning message
+   * @param message - Message to log
+   * @param data - Additional data to log
+   */
+  warn(message: string, ...data: unknown[]): void {
+    this.log(LogLevel.Warn, message, data);
+  }
+
+  /**
+   * Log an error message
+   * @param message - Message to log
+   * @param error - Error object or additional data
+   */
+  error(message: string, error?: Error | unknown, ...data: unknown[]): void {
+    const allData &#x3D; error ? [error, ...data] : data;
+    this.log(LogLevel.Error, message, allData);
+  }
+
+  /**
+   * Create a logger instance with a specific context
+   * @param context - Context/source identifier
+   * @returns Logger function bound to the context
+   */
+  createLogger(context: string) {
+    return {
+      debug: (message: string, ...data: unknown[]) &#x3D;&gt;
+        this.logWithContext(LogLevel.Debug, context, message, data),
+      info: (message: string, ...data: unknown[]) &#x3D;&gt;
+        this.logWithContext(LogLevel.Info, context, message, data),
+      warn: (message: string, ...data: unknown[]) &#x3D;&gt;
+        this.logWithContext(LogLevel.Warn, context, message, data),
+      error: (message: string, error?: Error | unknown, ...data: unknown[]) &#x3D;&gt; {
+        const allData &#x3D; error ? [error, ...data] : data;
+        this.logWithContext(LogLevel.Error, context, message, allData);
+      },
+    };
+  }
+
+  /**
+   * Start a performance timer
+   * @param label - Timer label
+   */
+  startTimer(label: string): void {
+    this.timers.set(label, {
+      label,
+      startTime: performance.now(),
+    });
+
+    if (this.shouldLog(LogLevel.Debug)) {
+      this.debug(&#x60;⏱️ Timer started: ${label}&#x60;);
+    }
+  }
+
+  /**
+   * End a performance timer and log the duration
+   * @param label - Timer label
+   * @returns Duration in milliseconds or undefined if timer not found
+   */
+  endTimer(label: string): number | undefined {
+    const timer &#x3D; this.timers.get(label);
+
+    if (!timer) {
+      this.warn(&#x60;Timer &quot;${label}&quot; not found&#x60;);
+      return undefined;
+    }
+
+    const endTime &#x3D; performance.now();
+    const duration &#x3D; endTime - timer.startTime;
+
+    timer.endTime &#x3D; endTime;
+    timer.duration &#x3D; duration;
+
+    this.timers.delete(label);
+
+    if (this.shouldLog(LogLevel.Info)) {
+      this.info(&#x60;⏱️ ${label}: ${duration.toFixed(2)}ms&#x60;);
+    }
+
+    return duration;
+  }
+
+  /**
+   * Measure the execution time of an async operation
+   * @param label - Timer label
+   * @param operation - Async operation to measure
+   * @returns Result of the operation
+   */
+  async measure&lt;T&gt;(label: string, operation: () &#x3D;&gt; Promise&lt;T&gt;): Promise&lt;T&gt; {
+    this.startTimer(label);
+    try {
+      return await operation();
+    } finally {
+      this.endTimer(label);
+    }
+  }
+
+  /**
+   * Group related log messages
+   * @param label - Group label
+   * @param collapsed - Whether to start collapsed (default: false)
+   */
+  group(label: string, collapsed &#x3D; false): void {
+    if (this.shouldLog(LogLevel.Debug)) {
+      if (collapsed) {
+        console.groupCollapsed(this.formatMessage(label));
+      } else {
+        console.group(this.formatMessage(label));
+      }
+    }
+  }
+
+  /**
+   * End the current log group
+   */
+  groupEnd(): void {
+    if (this.shouldLog(LogLevel.Debug)) {
+      console.groupEnd();
+    }
+  }
+
+  /**
+   * Log a table (useful for arrays of objects)
+   * @param data - Data to display as a table
+   * @param columns - Optional column names to display
+   */
+  table(data: unknown, columns?: string[]): void {
+    if (this.shouldLog(LogLevel.Debug)) {
+      if (columns) {
+        console.table(data, columns);
+      } else {
+        console.table(data);
+      }
+    }
+  }
+
+  /**
+   * Assert a condition and log an error if false
+   * @param condition - Condition to assert
+   * @param message - Error message if assertion fails
+   */
+  assert(condition: boolean, message: string): void {
+    if (!condition) {
+      this.error(&#x60;Assertion failed: ${message}&#x60;);
+    }
+  }
+
+  /**
+   * Clear the console (only in development)
+   */
+  clear(): void {
+    if (isDevMode()) {
+      console.clear();
+      this.history &#x3D; [];
+    }
+  }
+
+  /**
+   * Get log history (only available in development)
+   * @returns Array of log entries
+   */
+  getHistory(): LogEntry[] {
+    return [...this.history];
+  }
+
+  /**
+   * Clear log history
+   */
+  clearHistory(): void {
+    this.history &#x3D; [];
+  }
+
+  /**
+   * Get all active timers
+   * @returns Map of active performance timers
+   */
+  getActiveTimers(): Map&lt;string, PerformanceEntry&gt; {
+    return new Map(this.timers);
+  }
+
+  /**
+   * Core logging method
+   * @param level - Log level
+   * @param message - Message to log
+   * @param data - Additional data
+   * @param context - Optional context
+   */
+  private log(
+    level: LogLevel,
+    message: string,
+    data: unknown[],
+    context?: string
+  ): void {
+    if (!this.shouldLog(level)) {
+      return;
+    }
+
+    const entry: LogEntry &#x3D; {
+      level,
+      message,
+      timestamp: new Date(),
+      context,
+      data,
+    };
+
+    // Store in history (only in development)
+    if (isDevMode()) {
+      this.storeInHistory(entry);
+    }
+
+    // Format and output to console
+    this.outputToConsole(entry);
+  }
+
+  /**
+   * Log with a specific context
+   * @param level - Log level
+   * @param context - Context identifier
+   * @param message - Message to log
+   * @param data - Additional data
+   */
+  private logWithContext(
+    level: LogLevel,
+    context: string,
+    message: string,
+    data: unknown[]
+  ): void {
+    this.log(level, message, data, context);
+  }
+
+  /**
+   * Check if a log level should be displayed
+   * @param level - Log level to check
+   * @returns True if should log
+   */
+  private shouldLog(level: LogLevel): boolean {
+    return level &gt;&#x3D; this.currentLevel;
+  }
+
+  /**
+   * Output log entry to console
+   * @param entry - Log entry to output
+   */
+  private outputToConsole(entry: LogEntry): void {
+    const formattedMessage &#x3D; this.formatMessage(
+      entry.message,
+      entry.context,
+      entry.timestamp
+    );
+
+    switch (entry.level) {
+      case LogLevel.Debug:
+        if (entry.data &amp;&amp; entry.data.length &gt; 0) {
+          console.debug(formattedMessage, ...entry.data);
+        } else {
+          console.debug(formattedMessage);
+        }
+        break;
+
+      case LogLevel.Info:
+        if (entry.data &amp;&amp; entry.data.length &gt; 0) {
+          console.info(formattedMessage, ...entry.data);
+        } else {
+          console.info(formattedMessage);
+        }
+        break;
+
+      case LogLevel.Warn:
+        if (entry.data &amp;&amp; entry.data.length &gt; 0) {
+          console.warn(formattedMessage, ...entry.data);
+        } else {
+          console.warn(formattedMessage);
+        }
+        break;
+
+      case LogLevel.Error:
+        if (entry.data &amp;&amp; entry.data.length &gt; 0) {
+          console.error(formattedMessage, ...entry.data);
+        } else {
+          console.error(formattedMessage);
+        }
+        break;
+    }
+  }
+
+  /**
+   * Format log message with optional timestamp and context
+   * @param message - Message to format
+   * @param context - Optional context
+   * @param timestamp - Optional timestamp
+   * @returns Formatted message
+   */
+  private formatMessage(
+    message: string,
+    context?: string,
+    timestamp?: Date
+  ): string {
+    const parts: string[] &#x3D; [];
+
+    // Add prefix if configured
+    if (this.config.prefix) {
+      parts.push(&#x60;[${this.config.prefix}]&#x60;);
+    }
+
+    // Add timestamp if enabled
+    if (this.config.showTimestamp &amp;&amp; timestamp) {
+      parts.push(&#x60;[${this.formatTimestamp(timestamp)}]&#x60;);
+    }
+
+    // Add context if available and enabled
+    if (this.config.showContext &amp;&amp; context) {
+      parts.push(&#x60;[${context}]&#x60;);
+    }
+
+    // Add message
+    parts.push(message);
+
+    return parts.join(&#x27; &#x27;);
+  }
+
+  /**
+   * Format timestamp for display
+   * @param timestamp - Date to format
+   * @returns Formatted timestamp string
+   */
+  private formatTimestamp(timestamp: Date): string {
+    const hours &#x3D; timestamp.getHours().toString().padStart(2, &#x27;0&#x27;);
+    const minutes &#x3D; timestamp.getMinutes().toString().padStart(2, &#x27;0&#x27;);
+    const seconds &#x3D; timestamp.getSeconds().toString().padStart(2, &#x27;0&#x27;);
+    const ms &#x3D; timestamp.getMilliseconds().toString().padStart(3, &#x27;0&#x27;);
+
+    return &#x60;${hours}:${minutes}:${seconds}.${ms}&#x60;;
+  }
+
+  /**
+   * Get console style for log level (currently unused, reserved for future styled logging)
+   * @param level - Log level
+   * @returns CSS style string
+   */
+  private getLogStyle(_level: LogLevel): string {
+    // Reserved for future use with styled console logging
+    return &#x27;&#x27;;
+  }
+
+  /**
+   * Store log entry in history
+   * @param entry - Log entry to store
+   */
+  private storeInHistory(entry: LogEntry): void {
+    this.history.unshift(entry);
+
+    // Limit history size
+    if (this.history.length &gt; this.MAX_HISTORY) {
+      this.history &#x3D; this.history.slice(0, this.MAX_HISTORY);
+    }
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'injectable';
+            var COMPODOC_CURRENT_PAGE_URL = 'LoggerService.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

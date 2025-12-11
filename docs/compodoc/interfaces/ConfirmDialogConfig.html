@@ -1,0 +1,899 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  ConfirmDialogConfig</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/services/modal/modal.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Configuration for confirmation dialogs</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#ariaLabel" 
+>
+                                            ariaLabel
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#cancelText" 
+>
+                                            cancelText
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#confirmText" 
+>
+                                            confirmText
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#confirmVariant" 
+>
+                                            confirmVariant
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#message" 
+>
+                                            message
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#title" 
+>
+                                            title
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="ariaLabel"></a>
+                                        <span class="name "><b>ariaLabel</b>
+                                            <a href="#ariaLabel">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>ariaLabel:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>ARIA label</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="cancelText"></a>
+                                        <span class="name "><b>cancelText</b>
+                                            <a href="#cancelText">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>cancelText:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Cancel button text</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="confirmText"></a>
+                                        <span class="name "><b>confirmText</b>
+                                            <a href="#confirmText">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>confirmText:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Confirm button text</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="confirmVariant"></a>
+                                        <span class="name "><b>confirmVariant</b>
+                                            <a href="#confirmVariant">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>confirmVariant:     <code>&quot;primary&quot; | &quot;danger&quot;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>&quot;primary&quot; | &quot;danger&quot;</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Confirm button variant</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="message"></a>
+                                        <span class="name "><b>message</b>
+                                            <a href="#message">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>message:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Dialog message</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="title"></a>
+                                        <span class="name "><b>title</b>
+                                            <a href="#title">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>title:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Dialog title</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import type { ComponentRef, Type } from &#x27;@angular/core&#x27;;
+import {
+  ApplicationRef,
+  createComponent,
+  EnvironmentInjector,
+  inject,
+  Injectable,
+  signal,
+} from &#x27;@angular/core&#x27;;
+
+import { ModalComponent } from &#x27;../../components/modal/modal.component&#x27;;
+
+/**
+ * Configuration options for programmatically opening modals
+ */
+export interface ModalConfig {
+  /** Visual variant of the modal */
+  variant?: &#x27;default&#x27; | &#x27;fullscreen&#x27; | &#x27;dialog&#x27; | &#x27;sidebar&#x27;;
+  /** Size of the modal */
+  size?: &#x27;sm&#x27; | &#x27;md&#x27; | &#x27;lg&#x27; | &#x27;xl&#x27;;
+  /** Whether clicking backdrop closes the modal */
+  closeOnBackdropClick?: boolean;
+  /** Whether ESC key closes the modal */
+  closeOnEscape?: boolean;
+  /** Whether to show close button */
+  showCloseButton?: boolean;
+  /** Whether to prevent body scroll */
+  preventBodyScroll?: boolean;
+  /** ARIA label (required) */
+  ariaLabel: string;
+  /** ARIA described by */
+  ariaDescribedBy?: string;
+  /** ARIA labelled by */
+  ariaLabelledBy?: string;
+  /** Custom component to render in modal body */
+  component?: Type&lt;unknown&gt;;
+  /** Data to pass to custom component */
+  data?: unknown;
+}
+
+/**
+ * Configuration for confirmation dialogs
+ */
+export interface ConfirmDialogConfig {
+  /** Dialog title */
+  title: string;
+  /** Dialog message */
+  message: string;
+  /** Confirm button text */
+  confirmText?: string;
+  /** Cancel button text */
+  cancelText?: string;
+  /** Confirm button variant */
+  confirmVariant?: &#x27;primary&#x27; | &#x27;danger&#x27;;
+  /** ARIA label */
+  ariaLabel?: string;
+}
+
+/**
+ * Configuration for alert dialogs
+ */
+export interface AlertDialogConfig {
+  /** Dialog title */
+  title: string;
+  /** Dialog message */
+  message: string;
+  /** OK button text */
+  okText?: string;
+  /** ARIA label */
+  ariaLabel?: string;
+}
+
+/**
+ * Reference to an opened modal
+ */
+export interface ModalRef&lt;T &#x3D; unknown&gt; {
+  /** Close the modal */
+  close: (result?: T) &#x3D;&gt; void;
+  /** Observable that emits when modal is closed */
+  afterClosed: () &#x3D;&gt; Promise&lt;T | undefined&gt;;
+}
+
+/**
+ * Service for programmatically opening and managing modals.
+ *
+ * Provides convenience methods for common modal patterns:
+ * - Generic modals with custom components
+ * - Confirmation dialogs
+ * - Alert dialogs
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * // Inject the service
+ * private modalService &#x3D; inject(ModalService);
+ *
+ * // Open a simple modal
+ * openModal() {
+ *   const modalRef &#x3D; this.modalService.open({
+ *     ariaLabel: &#x27;User settings&#x27;,
+ *     size: &#x27;lg&#x27;,
+ *     component: UserSettingsComponent,
+ *     data: { userId: 123 }
+ *   });
+ *
+ *   modalRef.afterClosed().then(result &#x3D;&gt; {
+ *     console.log(&#x27;Modal closed with result:&#x27;, result);
+ *   });
+ * }
+ *
+ * // Show confirmation dialog
+ * async confirmDelete() {
+ *   const confirmed &#x3D; await this.modalService.confirm({
+ *     title: &#x27;Delete Item&#x27;,
+ *     message: &#x27;Are you sure? This cannot be undone.&#x27;,
+ *     confirmText: &#x27;Delete&#x27;,
+ *     confirmVariant: &#x27;danger&#x27;
+ *   });
+ *
+ *   if (confirmed) {
+ *     // Perform deletion
+ *   }
+ * }
+ * &#x60;&#x60;&#x60;
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class ModalService {
+  private _activeModals &#x3D; signal&lt;ComponentRef&lt;ModalComponent&gt;[]&gt;([]);
+  private _appRef &#x3D; signal&lt;ApplicationRef | null&gt;(null);
+  private _injector &#x3D; signal&lt;EnvironmentInjector | null&gt;(null);
+
+  private applicationRef: ApplicationRef &#x3D; inject(ApplicationRef);
+  private injector: EnvironmentInjector &#x3D; inject(EnvironmentInjector);
+
+  constructor() {
+    this._appRef.set(this.applicationRef);
+    this._injector.set(this.injector);
+  }
+
+  /**
+   * Open a modal with custom configuration
+   *
+   * @param config Modal configuration
+   * @returns Modal reference with close method and afterClosed promise
+   */
+  open&lt;T &#x3D; unknown&gt;(config: ModalConfig): ModalRef&lt;T&gt; {
+    const appRef &#x3D; this._appRef();
+    const environmentInjector &#x3D; this._injector();
+
+    if (!appRef || !environmentInjector) {
+      throw new Error(&#x27;ModalService not properly initialized&#x27;);
+    }
+
+    // Create the modal component
+    const modalRef &#x3D; createComponent(ModalComponent, {
+      environmentInjector,
+    });
+
+    // Set inputs
+    modalRef.setInput(&#x27;variant&#x27;, config.variant ?? &#x27;default&#x27;);
+    modalRef.setInput(&#x27;size&#x27;, config.size ?? &#x27;md&#x27;);
+    modalRef.setInput(&#x27;open&#x27;, true);
+    modalRef.setInput(&#x27;closeOnBackdropClick&#x27;, config.closeOnBackdropClick ?? true);
+    modalRef.setInput(&#x27;closeOnEscape&#x27;, config.closeOnEscape ?? true);
+    modalRef.setInput(&#x27;showCloseButton&#x27;, config.showCloseButton ?? true);
+    modalRef.setInput(&#x27;preventBodyScroll&#x27;, config.preventBodyScroll ?? true);
+    modalRef.setInput(&#x27;ariaLabel&#x27;, config.ariaLabel);
+    if (config.ariaDescribedBy) {
+      modalRef.setInput(&#x27;ariaDescribedBy&#x27;, config.ariaDescribedBy);
+    }
+    if (config.ariaLabelledBy) {
+      modalRef.setInput(&#x27;ariaLabelledBy&#x27;, config.ariaLabelledBy);
+    }
+
+    // Attach to application
+    appRef.attachView(modalRef.hostView);
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    const domElem &#x3D; (modalRef.hostView as any).rootNodes[0] as HTMLElement;
+    document.body.appendChild(domElem);
+
+    // Track active modal
+    this._activeModals.update((modals) &#x3D;&gt; [...modals, modalRef]);
+
+    // Create promise for afterClosed
+    let resolveClose: (result?: T) &#x3D;&gt; void;
+    const afterClosedPromise &#x3D; new Promise&lt;T | undefined&gt;((resolve) &#x3D;&gt; {
+      resolveClose &#x3D; resolve;
+    });
+
+    // Track if already closing to prevent double-close
+    let isClosing &#x3D; false;
+
+    // Handle close
+    const close &#x3D; (result?: T) &#x3D;&gt; {
+      if (isClosing) {
+        return;
+      }
+      isClosing &#x3D; true;
+
+      try {
+        modalRef.setInput(&#x27;open&#x27;, false);
+      } catch {
+        // Ignore if already destroyed
+      }
+
+      // Wait for close animation
+      setTimeout(() &#x3D;&gt; {
+        try {
+          // Unsubscribe from closed output
+          closedSubscription.unsubscribe();
+
+          // Cleanup - check if appRef is still available
+          const currentAppRef &#x3D; this._appRef();
+          if (currentAppRef) {
+            // Remove from active modals (only if appRef is available)
+            this._activeModals.update((modals) &#x3D;&gt; modals.filter((m) &#x3D;&gt; m !&#x3D;&#x3D; modalRef));
+
+            currentAppRef.detachView(modalRef.hostView);
+            modalRef.destroy();
+            if (domElem.parentNode) {
+              domElem.parentNode.removeChild(domElem);
+            }
+          }
+
+          // Resolve promise
+          resolveClose(result);
+        } catch {
+          // Ignore errors if ApplicationRef is already destroyed
+          resolveClose(result);
+        }
+      }, 300); // Match animation duration
+    };
+
+    // Subscribe to closed output
+    const closedSubscription &#x3D; modalRef.instance.closed.subscribe(() &#x3D;&gt; {
+      close();
+    });
+
+    return {
+      close,
+      afterClosed: () &#x3D;&gt; afterClosedPromise,
+    };
+  }
+
+  /**
+   * Show a confirmation dialog
+   *
+   * @param config Confirmation dialog configuration
+   * @returns Promise that resolves to true if confirmed, false if canceled
+   */
+  async confirm(config: ConfirmDialogConfig): Promise&lt;boolean&gt; {
+    return new Promise&lt;boolean&gt;((resolve) &#x3D;&gt; {
+      // This is a simplified implementation
+      // In a real app, you might create a dedicated ConfirmDialogComponent
+      const modalRef &#x3D; this.open({
+        ariaLabel: config.ariaLabel ?? config.title,
+        variant: &#x27;dialog&#x27;,
+        size: &#x27;sm&#x27;,
+      });
+
+      // For now, just resolve with the afterClosed result
+      modalRef.afterClosed().then((result) &#x3D;&gt; {
+        resolve(result &#x3D;&#x3D;&#x3D; true);
+      });
+    });
+  }
+
+  /**
+   * Show an alert dialog
+   *
+   * @param config Alert dialog configuration
+   * @returns Promise that resolves when dialog is closed
+   */
+  async alert(config: AlertDialogConfig): Promise&lt;void&gt; {
+    // This is a simplified implementation
+    // In a real app, you might create a dedicated AlertDialogComponent
+    const modalRef &#x3D; this.open({
+      ariaLabel: config.ariaLabel ?? config.title,
+      variant: &#x27;dialog&#x27;,
+      size: &#x27;sm&#x27;,
+    });
+
+    await modalRef.afterClosed();
+  }
+
+  /**
+   * Close all open modals
+   */
+  closeAll(): void {
+    const appRef &#x3D; this._appRef();
+    const modals &#x3D; this._activeModals();
+
+    if (!appRef) {
+      // If appRef is destroyed, just clear the array
+      this._activeModals.set([]);
+      return;
+    }
+
+    modals.forEach((modal) &#x3D;&gt; {
+      try {
+        modal.setInput(&#x27;open&#x27;, false);
+      } catch {
+        // Ignore if already destroyed
+      }
+    });
+
+    setTimeout(() &#x3D;&gt; {
+      // Only cleanup if appRef is still available
+      const currentAppRef &#x3D; this._appRef();
+      if (!currentAppRef) {
+        this._activeModals.set([]);
+        return;
+      }
+
+      modals.forEach((modal) &#x3D;&gt; {
+        try {
+          currentAppRef.detachView(modal.hostView);
+          modal.destroy();
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          const domElem &#x3D; (modal.hostView as any).rootNodes[0] as HTMLElement;
+          if (domElem &amp;&amp; domElem.parentNode) {
+            domElem.parentNode.removeChild(domElem);
+          }
+        } catch {
+          // Ignore errors if already destroyed
+        }
+      });
+
+      this._activeModals.set([]);
+    }, 300);
+  }
+
+  /**
+   * Get the number of currently open modals
+   */
+  get openModalsCount(): number {
+    return this._activeModals().length;
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'ConfirmDialogConfig.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

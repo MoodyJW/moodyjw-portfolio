@@ -1,0 +1,1870 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  FormFieldComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/shared/components/form-field/form-field.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Reusable form field wrapper component that provides consistent label and error display.
+Can be used standalone or integrated with existing form components.</p>
+<p>Features:</p>
+<ul>
+<li>Automatic error detection from Angular FormControl</li>
+<li>Manual error message input</li>
+<li>Automatic validation state detection</li>
+<li>Manual validation state override</li>
+<li>Reuses InputLabelComponent and InputFooterComponent</li>
+<li>Full WCAG 2.1 AAA accessibility support</li>
+</ul>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;!-- Standalone usage with content projection --&gt;
+&lt;app-form-field
+  label=&quot;Email&quot;
+  [required]=&quot;true&quot;
+  [control]=&quot;emailControl&quot;
+&gt;
+  &lt;input type=&quot;email&quot; [formControl]=&quot;emailControl&quot; /&gt;
+&lt;/app-form-field&gt;
+
+
+&lt;!-- With manual error messages --&gt;
+&lt;app-form-field
+  label=&quot;Username&quot;
+  [errors]=&quot;[&#39;Username is required&#39;, &#39;Must be at least 3 characters&#39;]&quot;
+  validationState=&quot;error&quot;
+&gt;
+  &lt;input type=&quot;text&quot; /&gt;
+&lt;/app-form-field&gt;
+
+
+&lt;!-- With helper text --&gt;
+&lt;app-form-field
+  label=&quot;Password&quot;
+  helperText=&quot;Must be at least 8 characters&quot;
+  [required]=&quot;true&quot;
+&gt;
+  &lt;input type=&quot;password&quot; /&gt;
+&lt;/app-form-field&gt;</code></pre></div>
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-form-field</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                                <code><a href="../components/InputLabelComponent.html" target="_self" >InputLabelComponent</a></code>
+                                <code><a href="../components/InputFooterComponent.html" target="_self" >InputFooterComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./form-field.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./form-field.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#computedErrors" >computedErrors</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#computedValidationState" >computedValidationState</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#fieldId" >fieldId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#footerClasses" >footerClasses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#footerText" >footerText</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#helperId" >helperId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#labelId" >labelId</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#showFooter" >showFooter</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#uniqueIdService" >uniqueIdService</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#wrapperClasses" >wrapperClasses</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_extractErrorMessages" >_extractErrorMessages</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_getDefaultErrorMessage" >_getDefaultErrorMessage</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_replacePlaceholders" >_replacePlaceholders</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#control" >control</a>
+                            </li>
+                            <li>
+                                <a href="#errorMessages" >errorMessages</a>
+                            </li>
+                            <li>
+                                <a href="#errors" >errors</a>
+                            </li>
+                            <li>
+                                <a href="#helperText" >helperText</a>
+                            </li>
+                            <li>
+                                <a href="#label" >label</a>
+                            </li>
+                            <li>
+                                <a href="#required" >required</a>
+                            </li>
+                            <li>
+                                <a href="#showErrorsOnTouched" >showErrorsOnTouched</a>
+                            </li>
+                            <li>
+                                <a href="#validationState" >validationState</a>
+                            </li>
+                            <li>
+                                <a href="#wrapperClass" >wrapperClass</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="control"></a>
+                        <b>control</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>AbstractControl | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:91</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Angular FormControl for automatic error detection
+When provided, errors will be automatically extracted</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="errorMessages"></a>
+                        <b>errorMessages</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>Record&lt;string, string&gt;</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>{}</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="119" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:119</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Custom error messages for specific validation errors
+Maps validation error keys to user-friendly messages</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">errorMessages: {
+  required: &#39;This field is required&#39;,
+  email: &#39;Please enter a valid email address&#39;,
+  minlength: &#39;Must be at least {requiredLength} characters&#39;
+}</code></pre></div></div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="errors"></a>
+                        <b>errors</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | string[] | null</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="85" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:85</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Manual error messages to display
+Can be a single string or array of strings</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="helperText"></a>
+                        <b>helperText</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:79</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Helper text displayed below the form field
+Shows when there are no errors</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="label"></a>
+                        <b>label</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="68" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:68</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Label text displayed above the form field</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="required"></a>
+                        <b>required</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:73</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the field is required</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="showErrorsOnTouched"></a>
+                        <b>showErrorsOnTouched</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="104" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:104</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether to show errors only after the field is touched
+Only applies when using FormControl
+Default: true</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="validationState"></a>
+                        <b>validationState</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#FormFieldValidationState" target="_self" >FormFieldValidationState | null</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>null</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="97" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:97</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Manual validation state override
+When not provided, state is automatically derived from errors or control</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="wrapperClass"></a>
+                        <b>wrapperClass</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="124" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:124</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Additional CSS classes to apply to the form field wrapper</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_extractErrorMessages"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_extractErrorMessages</b></span>
+                        <a href="#_extractErrorMessages"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>_extractErrorMessages(control: AbstractControl)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="261"
+                                    class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:261</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Extract user-friendly error messages from FormControl</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>control</td>
+                                            <td>
+                                                        <code>AbstractControl</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>string[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_getDefaultErrorMessage"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_getDefaultErrorMessage</b></span>
+                        <a href="#_getDefaultErrorMessage"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>_getDefaultErrorMessage(key: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, value: unknown)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="305"
+                                    class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:305</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Get default error message for common validators</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>key</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                        <code>unknown</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_replacePlaceholders"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_replacePlaceholders</b></span>
+                        <a href="#_replacePlaceholders"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>_replacePlaceholders(message: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>, params: Record<string | unknown>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="293"
+                                    class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:293</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Replace placeholders in error messages with actual values</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>message</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>params</td>
+                                            <td>
+                                                        <code>Record&lt;string | unknown&gt;</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="computedErrors"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>computedErrors</b></span>
+                        <a href="#computedErrors"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed((): string[] &#x3D;&gt; {
+    const manualErrors &#x3D; this.errors();
+    const control &#x3D; this.control();
+    const showOnTouched &#x3D; this.showErrorsOnTouched();
+
+    // Manual errors take precedence
+    if (manualErrors) {
+      if (Array.isArray(manualErrors)) {
+        return manualErrors;
+      }
+      return [manualErrors];
+    }
+
+    // Extract errors from FormControl
+    if (control) {
+      // Only show errors if control is invalid and (not pristine or touched)
+      const shouldShowErrors &#x3D; showOnTouched ? control.touched || control.dirty : true;
+
+      if (control.invalid &amp;&amp; shouldShowErrors &amp;&amp; control.errors) {
+        return this._extractErrorMessages(control);
+      }
+    }
+
+    return [];
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="153" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:153</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed errors from either manual input or FormControl</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="computedValidationState"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>computedValidationState</b></span>
+                        <a href="#computedValidationState"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed((): FormFieldValidationState &#x3D;&gt; {
+    const manualState &#x3D; this.validationState();
+
+    // Manual state takes precedence
+    if (manualState) {
+      return manualState;
+    }
+
+    // Derive state from errors
+    const errors &#x3D; this.computedErrors();
+    if (errors.length &gt; 0) {
+      return &#x27;error&#x27;;
+    }
+
+    // Derive state from FormControl
+    const control &#x3D; this.control();
+    if (control) {
+      if (control.valid &amp;&amp; (control.touched || control.dirty)) {
+        return &#x27;success&#x27;;
+      }
+    }
+
+    return &#x27;default&#x27;;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="182" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:182</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed validation state from errors, control, or manual override</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="fieldId"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>fieldId</b></span>
+                        <a href="#fieldId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this.uniqueIdService.generateId(&#x27;form-field&#x27;))</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="129" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:129</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unique ID for the form field</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="footerClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>footerClasses</b></span>
+                        <a href="#footerClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed((): string &#x3D;&gt; {
+    const classes &#x3D; [&#x27;form-field-helper-text&#x27;];
+    const state &#x3D; this.computedValidationState();
+
+    if (state &#x3D;&#x3D;&#x3D; &#x27;success&#x27;) classes.push(&#x27;form-field-helper-text--success&#x27;);
+    if (state &#x3D;&#x3D;&#x3D; &#x27;warning&#x27;) classes.push(&#x27;form-field-helper-text--warning&#x27;);
+    if (state &#x3D;&#x3D;&#x3D; &#x27;error&#x27;) classes.push(&#x27;form-field-helper-text--error&#x27;);
+
+    return classes.join(&#x27; &#x27;);
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="221" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:221</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed CSS classes for the footer text</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="footerText"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>footerText</b></span>
+                        <a href="#footerText"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed((): string &#x3D;&gt; {
+    const errors &#x3D; this.computedErrors();
+    if (errors.length &gt; 0) {
+      return errors.join(&#x27; &#x27;);
+    }
+    return this.helperText();
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="210" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:210</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed text to display in footer (errors or helper text)</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="helperId"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>helperId</b></span>
+                        <a href="#helperId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const hasHelperText &#x3D; !!this.helperText();
+    const hasErrors &#x3D; this.computedErrors().length &gt; 0;
+    return hasHelperText || hasErrors
+      ? this.uniqueIdService.generateId(&#x27;form-field-helper&#x27;)
+      : undefined;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:142</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unique ID for the error/helper text element</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="labelId"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>labelId</b></span>
+                        <a href="#labelId"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const label &#x3D; this.label();
+    return label ? this.uniqueIdService.generateId(&#x27;form-field-label&#x27;) : undefined;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="134" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:134</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Unique ID for the label element</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="showFooter"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>showFooter</b></span>
+                        <a href="#showFooter"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    return !!this.footerText();
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="254" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:254</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Whether to show the footer section</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="uniqueIdService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>uniqueIdService</b></span>
+                        <a href="#uniqueIdService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(UniqueIdService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="63" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:63</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="wrapperClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>wrapperClasses</b></span>
+                        <a href="#wrapperClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed((): string &#x3D;&gt; {
+    const classes &#x3D; [&#x27;form-field&#x27;];
+    const customClass &#x3D; this.wrapperClass();
+    const state &#x3D; this.computedValidationState();
+
+    if (state !&#x3D;&#x3D; &#x27;default&#x27;) {
+      classes.push(&#x60;form-field--${state}&#x60;);
+    }
+
+    if (customClass) {
+      classes.push(customClass);
+    }
+
+    return classes.join(&#x27; &#x27;);
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="235" class="link-to-prism">src/app/shared/components/form-field/form-field.component.ts:235</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed CSS classes for the wrapper</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ChangeDetectionStrategy, Component, computed, inject, input } from &#x27;@angular/core&#x27;;
+import type { AbstractControl } from &#x27;@angular/forms&#x27;;
+
+import { UniqueIdService } from &#x27;@shared/services/unique-id/unique-id.service&#x27;;
+
+import { InputFooterComponent } from &#x27;../input-footer&#x27;;
+import { InputLabelComponent } from &#x27;../input-label&#x27;;
+
+export type FormFieldValidationState &#x3D; &#x27;default&#x27; | &#x27;success&#x27; | &#x27;warning&#x27; | &#x27;error&#x27;;
+
+/**
+ * Reusable form field wrapper component that provides consistent label and error display.
+ * Can be used standalone or integrated with existing form components.
+ *
+ * Features:
+ * - Automatic error detection from Angular FormControl
+ * - Manual error message input
+ * - Automatic validation state detection
+ * - Manual validation state override
+ * - Reuses InputLabelComponent and InputFooterComponent
+ * - Full WCAG 2.1 AAA accessibility support
+ *
+ * @example
+ * &#x60;&#x60;&#x60;html
+ * &lt;!-- Standalone usage with content projection --&gt;
+ * &lt;app-form-field
+ *   label&#x3D;&quot;Email&quot;
+ *   [required]&#x3D;&quot;true&quot;
+ *   [control]&#x3D;&quot;emailControl&quot;
+ * &gt;
+ *   &lt;input type&#x3D;&quot;email&quot; [formControl]&#x3D;&quot;emailControl&quot; /&gt;
+ * &lt;/app-form-field&gt;
+ *
+ * &lt;!-- With manual error messages --&gt;
+ * &lt;app-form-field
+ *   label&#x3D;&quot;Username&quot;
+ *   [errors]&#x3D;&quot;[&#x27;Username is required&#x27;, &#x27;Must be at least 3 characters&#x27;]&quot;
+ *   validationState&#x3D;&quot;error&quot;
+ * &gt;
+ *   &lt;input type&#x3D;&quot;text&quot; /&gt;
+ * &lt;/app-form-field&gt;
+ *
+ * &lt;!-- With helper text --&gt;
+ * &lt;app-form-field
+ *   label&#x3D;&quot;Password&quot;
+ *   helperText&#x3D;&quot;Must be at least 8 characters&quot;
+ *   [required]&#x3D;&quot;true&quot;
+ * &gt;
+ *   &lt;input type&#x3D;&quot;password&quot; /&gt;
+ * &lt;/app-form-field&gt;
+ * &#x60;&#x60;&#x60;
+ */
+@Component({
+  selector: &#x27;app-form-field&#x27;,
+  standalone: true,
+  imports: [CommonModule, InputLabelComponent, InputFooterComponent],
+  templateUrl: &#x27;./form-field.component.html&#x27;,
+  styleUrl: &#x27;./form-field.component.scss&#x27;,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class FormFieldComponent {
+  private readonly uniqueIdService &#x3D; inject(UniqueIdService);
+
+  /**
+   * Label text displayed above the form field
+   */
+  readonly label &#x3D; input&lt;string&gt;(&#x27;&#x27;);
+
+  /**
+   * Whether the field is required
+   */
+  readonly required &#x3D; input&lt;boolean&gt;(false);
+
+  /**
+   * Helper text displayed below the form field
+   * Shows when there are no errors
+   */
+  readonly helperText &#x3D; input&lt;string&gt;(&#x27;&#x27;);
+
+  /**
+   * Manual error messages to display
+   * Can be a single string or array of strings
+   */
+  readonly errors &#x3D; input&lt;string | string[] | null&gt;(null);
+
+  /**
+   * Angular FormControl for automatic error detection
+   * When provided, errors will be automatically extracted
+   */
+  readonly control &#x3D; input&lt;AbstractControl | null&gt;(null);
+
+  /**
+   * Manual validation state override
+   * When not provided, state is automatically derived from errors or control
+   */
+  readonly validationState &#x3D; input&lt;FormFieldValidationState | null&gt;(null);
+
+  /**
+   * Whether to show errors only after the field is touched
+   * Only applies when using FormControl
+   * Default: true
+   */
+  readonly showErrorsOnTouched &#x3D; input&lt;boolean&gt;(true);
+
+  /**
+   * Custom error messages for specific validation errors
+   * Maps validation error keys to user-friendly messages
+   *
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * errorMessages: {
+   *   required: &#x27;This field is required&#x27;,
+   *   email: &#x27;Please enter a valid email address&#x27;,
+   *   minlength: &#x27;Must be at least {requiredLength} characters&#x27;
+   * }
+   * &#x60;&#x60;&#x60;
+   */
+  readonly errorMessages &#x3D; input&lt;Record&lt;string, string&gt;&gt;({});
+
+  /**
+   * Additional CSS classes to apply to the form field wrapper
+   */
+  readonly wrapperClass &#x3D; input&lt;string&gt;(&#x27;&#x27;);
+
+  /**
+   * Unique ID for the form field
+   */
+  readonly fieldId &#x3D; computed(() &#x3D;&gt; this.uniqueIdService.generateId(&#x27;form-field&#x27;));
+
+  /**
+   * Unique ID for the label element
+   */
+  readonly labelId &#x3D; computed(() &#x3D;&gt; {
+    const label &#x3D; this.label();
+    return label ? this.uniqueIdService.generateId(&#x27;form-field-label&#x27;) : undefined;
+  });
+
+  /**
+   * Unique ID for the error/helper text element
+   */
+  readonly helperId &#x3D; computed(() &#x3D;&gt; {
+    const hasHelperText &#x3D; !!this.helperText();
+    const hasErrors &#x3D; this.computedErrors().length &gt; 0;
+    return hasHelperText || hasErrors
+      ? this.uniqueIdService.generateId(&#x27;form-field-helper&#x27;)
+      : undefined;
+  });
+
+  /**
+   * Computed errors from either manual input or FormControl
+   */
+  readonly computedErrors &#x3D; computed((): string[] &#x3D;&gt; {
+    const manualErrors &#x3D; this.errors();
+    const control &#x3D; this.control();
+    const showOnTouched &#x3D; this.showErrorsOnTouched();
+
+    // Manual errors take precedence
+    if (manualErrors) {
+      if (Array.isArray(manualErrors)) {
+        return manualErrors;
+      }
+      return [manualErrors];
+    }
+
+    // Extract errors from FormControl
+    if (control) {
+      // Only show errors if control is invalid and (not pristine or touched)
+      const shouldShowErrors &#x3D; showOnTouched ? control.touched || control.dirty : true;
+
+      if (control.invalid &amp;&amp; shouldShowErrors &amp;&amp; control.errors) {
+        return this._extractErrorMessages(control);
+      }
+    }
+
+    return [];
+  });
+
+  /**
+   * Computed validation state from errors, control, or manual override
+   */
+  readonly computedValidationState &#x3D; computed((): FormFieldValidationState &#x3D;&gt; {
+    const manualState &#x3D; this.validationState();
+
+    // Manual state takes precedence
+    if (manualState) {
+      return manualState;
+    }
+
+    // Derive state from errors
+    const errors &#x3D; this.computedErrors();
+    if (errors.length &gt; 0) {
+      return &#x27;error&#x27;;
+    }
+
+    // Derive state from FormControl
+    const control &#x3D; this.control();
+    if (control) {
+      if (control.valid &amp;&amp; (control.touched || control.dirty)) {
+        return &#x27;success&#x27;;
+      }
+    }
+
+    return &#x27;default&#x27;;
+  });
+
+  /**
+   * Computed text to display in footer (errors or helper text)
+   */
+  readonly footerText &#x3D; computed((): string &#x3D;&gt; {
+    const errors &#x3D; this.computedErrors();
+    if (errors.length &gt; 0) {
+      return errors.join(&#x27; &#x27;);
+    }
+    return this.helperText();
+  });
+
+  /**
+   * Computed CSS classes for the footer text
+   */
+  readonly footerClasses &#x3D; computed((): string &#x3D;&gt; {
+    const classes &#x3D; [&#x27;form-field-helper-text&#x27;];
+    const state &#x3D; this.computedValidationState();
+
+    if (state &#x3D;&#x3D;&#x3D; &#x27;success&#x27;) classes.push(&#x27;form-field-helper-text--success&#x27;);
+    if (state &#x3D;&#x3D;&#x3D; &#x27;warning&#x27;) classes.push(&#x27;form-field-helper-text--warning&#x27;);
+    if (state &#x3D;&#x3D;&#x3D; &#x27;error&#x27;) classes.push(&#x27;form-field-helper-text--error&#x27;);
+
+    return classes.join(&#x27; &#x27;);
+  });
+
+  /**
+   * Computed CSS classes for the wrapper
+   */
+  readonly wrapperClasses &#x3D; computed((): string &#x3D;&gt; {
+    const classes &#x3D; [&#x27;form-field&#x27;];
+    const customClass &#x3D; this.wrapperClass();
+    const state &#x3D; this.computedValidationState();
+
+    if (state !&#x3D;&#x3D; &#x27;default&#x27;) {
+      classes.push(&#x60;form-field--${state}&#x60;);
+    }
+
+    if (customClass) {
+      classes.push(customClass);
+    }
+
+    return classes.join(&#x27; &#x27;);
+  });
+
+  /**
+   * Whether to show the footer section
+   */
+  readonly showFooter &#x3D; computed(() &#x3D;&gt; {
+    return !!this.footerText();
+  });
+
+  /**
+   * Extract user-friendly error messages from FormControl
+   */
+  private _extractErrorMessages(control: AbstractControl): string[] {
+    const errors &#x3D; control.errors;
+    if (!errors) return [];
+
+    const messages: string[] &#x3D; [];
+    const customMessages &#x3D; this.errorMessages();
+
+    for (const [key, value] of Object.entries(errors)) {
+      let message &#x3D; customMessages[key];
+
+      if (message) {
+        // Replace placeholders in custom messages
+        // e.g., &quot;Must be at least {requiredLength} characters&quot;
+        if (typeof value &#x3D;&#x3D;&#x3D; &#x27;object&#x27; &amp;&amp; value !&#x3D;&#x3D; null) {
+          message &#x3D; this._replacePlaceholders(message, value as Record&lt;string, unknown&gt;);
+        }
+        messages.push(message);
+      } else {
+        // Provide default messages for common validators
+        message &#x3D; this._getDefaultErrorMessage(key, value);
+        if (message) {
+          messages.push(message);
+        }
+      }
+    }
+
+    return messages;
+  }
+
+  /**
+   * Replace placeholders in error messages with actual values
+   */
+  private _replacePlaceholders(message: string, params: Record&lt;string, unknown&gt;): string {
+    let result &#x3D; message;
+    for (const [key, value] of Object.entries(params)) {
+      const placeholder &#x3D; &#x60;{${key}}&#x60;;
+      result &#x3D; result.replace(placeholder, String(value));
+    }
+    return result;
+  }
+
+  /**
+   * Get default error message for common validators
+   */
+  private _getDefaultErrorMessage(key: string, value: unknown): string {
+    const defaultMessages: Record&lt;string, string&gt; &#x3D; {
+      required: &#x27;This field is required&#x27;,
+      email: &#x27;Please enter a valid email address&#x27;,
+      min: &#x60;Value must be at least ${(value as { min?: number })?.min ?? 0}&#x60;,
+      max: &#x60;Value must be at most ${(value as { max?: number })?.max ?? 0}&#x60;,
+      minlength: &#x60;Must be at least ${
+        (value as { requiredLength?: number })?.requiredLength ?? 0
+      } characters&#x60;,
+      maxlength: &#x60;Must be at most ${
+        (value as { requiredLength?: number })?.requiredLength ?? 0
+      } characters&#x60;,
+      pattern: &#x27;Invalid format&#x27;,
+    };
+
+    return defaultMessages[key] || &#x60;Validation error: ${key}&#x60;;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div [class]&#x3D;&quot;wrapperClasses()&quot;&gt;
+  @if (label()) {
+  &lt;app-input-label
+    [forId]&#x3D;&quot;fieldId()&quot;
+    [label]&#x3D;&quot;label()&quot;
+    [required]&#x3D;&quot;required()&quot;
+    [labelClass]&#x3D;&quot;&#x27;form-field-label&#x27;&quot;
+  /&gt;
+  }
+
+  &lt;div class&#x3D;&quot;form-field__content&quot;&gt;
+    &lt;ng-content /&gt;
+  &lt;/div&gt;
+
+  @if (showFooter()) {
+  &lt;app-input-footer
+    [helperText]&#x3D;&quot;footerText()&quot;
+    [helperTextId]&#x3D;&quot;helperId()&quot;
+    [helperTextClasses]&#x3D;&quot;footerClasses()&quot;
+  /&gt;
+  }
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div [class]="wrapperClasses()">  @if (label()) {  <app-input-label    [forId]="fieldId()"    [label]="label()"    [required]="required()"    [labelClass]="\'form-field-label\'"  />  }  <div class="form-field__content">    <ng-content />  </div>  @if (showFooter()) {  <app-input-footer    [helperText]="footerText()"    [helperTextId]="helperId()"    [helperTextClasses]="footerClasses()"  />  }</div></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'BadgeComponent', 'selector': 'app-badge'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'ButtonContentComponent', 'selector': 'app-button-content'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CaseStudiesComponent', 'selector': 'app-case-studies'},{'name': 'CheckboxCheckmarkComponent', 'selector': 'app-checkbox-checkmark'},{'name': 'CheckboxComponent', 'selector': 'app-checkbox'},{'name': 'ContainerComponent', 'selector': 'app-container'},{'name': 'DividerComponent', 'selector': 'app-divider'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormFieldComponent', 'selector': 'app-form-field'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IconComponent', 'selector': 'app-icon'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputFooterComponent', 'selector': 'app-input-footer'},{'name': 'InputLabelComponent', 'selector': 'app-input-label'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'MainLayoutComponent', 'selector': 'app-main-layout'},{'name': 'ModalComponent', 'selector': 'app-modal'},{'name': 'RadioComponent', 'selector': 'app-radio'},{'name': 'SelectButtonComponent', 'selector': 'app-select-button'},{'name': 'SelectComponent', 'selector': 'app-select'},{'name': 'SelectDropdownComponent', 'selector': 'app-select-dropdown'},{'name': 'SelectOptionComponent', 'selector': 'app-select-option'},{'name': 'SkeletonComponent', 'selector': 'app-skeleton'},{'name': 'StackComponent', 'selector': 'app-stack'},{'name': 'TabButtonComponent', 'selector': 'app-tab-button'},{'name': 'TabComponent', 'selector': 'app-tab'},{'name': 'TabsComponent', 'selector': 'app-tabs'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'TextareaComponent', 'selector': 'app-textarea'},{'name': 'ThemePickerComponent', 'selector': 'app-theme-picker'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'ToastDemoComponent', 'selector': 'app-toast-demo'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'FormFieldComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'FormFieldComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

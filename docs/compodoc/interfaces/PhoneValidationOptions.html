@@ -1,0 +1,1109 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  PhoneValidationOptions</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/utilities/validation/validation.utils.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Phone validation options</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#allowExtensions" 
+>
+                                            allowExtensions
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#country" 
+>
+                                            country
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="allowExtensions"></a>
+                                        <span class="name "><b>allowExtensions</b>
+                                            <a href="#allowExtensions">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>allowExtensions:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Allow extensions (default: true)</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="country"></a>
+                                        <span class="name "><b>country</b>
+                                            <a href="#country">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>country:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Country code (e.g., &#39;US&#39;, &#39;UK&#39;, &#39;CA&#39;)</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import type { AbstractControl, ValidationErrors, ValidatorFn } from &#x27;@angular/forms&#x27;;
+
+/**
+ * Email validation options
+ */
+export interface EmailValidationOptions {
+  /** Allow plus sign in local part (default: true) */
+  allowPlus?: boolean;
+  /** Allow IP addresses in domain (default: false) */
+  allowIpDomain?: boolean;
+  /** Require TLD (top-level domain) (default: true) */
+  requireTld?: boolean;
+}
+
+/**
+ * URL validation options
+ */
+export interface UrlValidationOptions {
+  /** Allowed protocols (default: [&#x27;http&#x27;, &#x27;https&#x27;]) */
+  protocols?: string[];
+  /** Require protocol (default: true) */
+  requireProtocol?: boolean;
+  /** Require TLD (default: true) */
+  requireTld?: boolean;
+  /** Allow query string (default: true) */
+  allowQueryString?: boolean;
+  /** Allow fragments (default: true) */
+  allowFragments?: boolean;
+}
+
+/**
+ * Phone validation options
+ */
+export interface PhoneValidationOptions {
+  /** Country code (e.g., &#x27;US&#x27;, &#x27;UK&#x27;, &#x27;CA&#x27;) */
+  country?: string;
+  /** Allow extensions (default: true) */
+  allowExtensions?: boolean;
+}
+
+/**
+ * Password strength options
+ */
+export interface PasswordStrengthOptions {
+  /** Minimum length (default: 8) */
+  minLength?: number;
+  /** Require uppercase letter (default: true) */
+  requireUppercase?: boolean;
+  /** Require lowercase letter (default: true) */
+  requireLowercase?: boolean;
+  /** Require digit (default: true) */
+  requireDigit?: boolean;
+  /** Require special character (default: true) */
+  requireSpecialChar?: boolean;
+}
+
+/**
+ * Validate email address
+ *
+ * @param email - Email address to validate
+ * @param options - Validation options
+ * @returns True if email is valid
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * isValidEmail(&#x27;user@example.com&#x27;); // true
+ * isValidEmail(&#x27;invalid@&#x27;); // false
+ * isValidEmail(&#x27;user+tag@example.com&#x27;); // true
+ * &#x60;&#x60;&#x60;
+ */
+export function isValidEmail(
+  email: string,
+  options: EmailValidationOptions &#x3D; {}
+): boolean {
+  if (!email || typeof email !&#x3D;&#x3D; &#x27;string&#x27;) {
+    return false;
+  }
+
+  const { allowPlus &#x3D; true, allowIpDomain &#x3D; false, requireTld &#x3D; true } &#x3D; options;
+
+  // Basic email regex pattern
+  const localPart &#x3D; allowPlus ? &#x27;[a-zA-Z0-9.!#$%&amp;\&#x27;*+/&#x3D;?^_&#x60;{|}~-]+&#x27; : &#x27;[a-zA-Z0-9.!#$%&amp;\&#x27;*\\/&#x3D;?^_&#x60;{|}~-]+&#x27;;
+  const domain &#x3D; requireTld ? &#x27;[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*\\.[a-zA-Z]{2,}&#x27; : &#x27;[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?(?:\\.[a-zA-Z0-9](?:[a-zA-Z0-9-]{0,61}[a-zA-Z0-9])?)*&#x27;;
+
+  let pattern: RegExp;
+
+  if (allowIpDomain) {
+    const ipPattern &#x3D; &#x27;\\[(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\\]&#x27;;
+    pattern &#x3D; new RegExp(&#x60;^${localPart}@(?:${domain}|${ipPattern})$&#x60;);
+  } else {
+    pattern &#x3D; new RegExp(&#x60;^${localPart}@${domain}$&#x60;);
+  }
+
+  return pattern.test(email);
+}
+
+/**
+ * Validate URL
+ *
+ * @param url - URL to validate
+ * @param options - Validation options
+ * @returns True if URL is valid
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * isValidUrl(&#x27;https://example.com&#x27;); // true
+ * isValidUrl(&#x27;http://localhost:3000&#x27;); // true
+ * isValidUrl(&#x27;example.com&#x27;); // false (requires protocol)
+ * &#x60;&#x60;&#x60;
+ */
+export function isValidUrl(url: string, options: UrlValidationOptions &#x3D; {}): boolean {
+  if (!url || typeof url !&#x3D;&#x3D; &#x27;string&#x27;) {
+    return false;
+  }
+
+  const {
+    protocols &#x3D; [&#x27;http&#x27;, &#x27;https&#x27;],
+    requireProtocol &#x3D; true,
+    requireTld &#x3D; true,
+    allowQueryString &#x3D; true,
+    allowFragments &#x3D; true,
+  } &#x3D; options;
+
+  try {
+    const urlObj &#x3D; new URL(url);
+
+    // Check protocol
+    if (requireProtocol &amp;&amp; !urlObj.protocol) {
+      return false;
+    }
+
+    if (protocols.length &gt; 0) {
+      const protocol &#x3D; urlObj.protocol.replace(&#x27;:&#x27;, &#x27;&#x27;);
+      if (!protocols.includes(protocol)) {
+        return false;
+      }
+    }
+
+    // Check TLD
+    if (requireTld &amp;&amp; urlObj.hostname) {
+      const parts &#x3D; urlObj.hostname.split(&#x27;.&#x27;);
+      if (parts.length &lt; 2 || parts[parts.length - 1].length &lt; 2) {
+        return false;
+      }
+    }
+
+    // Check query string
+    if (!allowQueryString &amp;&amp; urlObj.search) {
+      return false;
+    }
+
+    // Check fragments
+    if (!allowFragments &amp;&amp; urlObj.hash) {
+      return false;
+    }
+
+    return true;
+  } catch {
+    // If URL constructor throws, try without protocol if allowed
+    if (!requireProtocol) {
+      try {
+        new URL(&#x60;http://${url}&#x60;);
+        return isValidUrl(&#x60;http://${url}&#x60;, { ...options, requireProtocol: true });
+      } catch {
+        return false;
+      }
+    }
+    return false;
+  }
+}
+
+/**
+ * Validate phone number
+ *
+ * @param phone - Phone number to validate
+ * @param options - Validation options
+ * @returns True if phone number is valid
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * isValidPhone(&#x27;(555) 123-4567&#x27;); // true
+ * isValidPhone(&#x27;555-123-4567&#x27;); // true
+ * isValidPhone(&#x27;+1-555-123-4567&#x27;); // true
+ * &#x60;&#x60;&#x60;
+ */
+export function isValidPhone(
+  phone: string,
+  options: PhoneValidationOptions &#x3D; {}
+): boolean {
+  if (!phone || typeof phone !&#x3D;&#x3D; &#x27;string&#x27;) {
+    return false;
+  }
+
+  const { allowExtensions &#x3D; true } &#x3D; options;
+
+  // Remove common formatting characters
+  const cleaned &#x3D; phone.replace(/[\s(). -]/g, &#x27;&#x27;);
+
+  // Basic pattern: optional +, 10-15 digits, optional extension
+  const basePattern &#x3D; allowExtensions
+    ? /^\+?[1-9]\d{9,14}(?:x\d+)?$/
+    : /^\+?[1-9]\d{9,14}$/;
+
+  if (!basePattern.test(cleaned)) {
+    return false;
+  }
+
+  // US-specific validation
+  if (options.country &#x3D;&#x3D;&#x3D; &#x27;US&#x27;) {
+    // US format: optional +1, then 10 digits
+    const usPattern &#x3D; /^\+?1?\d{10}$/;
+    return usPattern.test(cleaned);
+  }
+
+  return true;
+}
+
+/**
+ * Validate credit card number using Luhn algorithm
+ *
+ * @param cardNumber - Credit card number to validate
+ * @returns True if card number is valid
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * isValidCreditCard(&#x27;4532015112830366&#x27;); // true (Visa)
+ * isValidCreditCard(&#x27;1234567890123456&#x27;); // false (invalid)
+ * &#x60;&#x60;&#x60;
+ */
+export function isValidCreditCard(cardNumber: string): boolean {
+  if (!cardNumber || typeof cardNumber !&#x3D;&#x3D; &#x27;string&#x27;) {
+    return false;
+  }
+
+  // Remove spaces and hyphens
+  const cleaned &#x3D; cardNumber.replace(/[\s-]/g, &#x27;&#x27;);
+
+  // Must be 13-19 digits
+  if (!/^\d{13,19}$/.test(cleaned)) {
+    return false;
+  }
+
+  // Luhn algorithm
+  let sum &#x3D; 0;
+  let isEven &#x3D; false;
+
+  for (let i &#x3D; cleaned.length - 1; i &gt;&#x3D; 0; i--) {
+    let digit &#x3D; parseInt(cleaned[i], 10);
+
+    if (isEven) {
+      digit *&#x3D; 2;
+      if (digit &gt; 9) {
+        digit -&#x3D; 9;
+      }
+    }
+
+    sum +&#x3D; digit;
+    isEven &#x3D; !isEven;
+  }
+
+  return sum % 10 &#x3D;&#x3D;&#x3D; 0;
+}
+
+/**
+ * Validate password strength
+ *
+ * @param password - Password to validate
+ * @param options - Strength requirements
+ * @returns Object with validity and unmet requirements
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * validatePasswordStrength(&#x27;MyP@ss123&#x27;);
+ * // Returns: { isValid: true, unmetRequirements: [] }
+ *
+ * validatePasswordStrength(&#x27;weak&#x27;);
+ * // Returns: { isValid: false, unmetRequirements: [&#x27;minLength&#x27;, &#x27;uppercase&#x27;, ...] }
+ * &#x60;&#x60;&#x60;
+ */
+export function validatePasswordStrength(
+  password: string,
+  options: PasswordStrengthOptions &#x3D; {}
+): { isValid: boolean; unmetRequirements: string[] } {
+  const {
+    minLength &#x3D; 8,
+    requireUppercase &#x3D; true,
+    requireLowercase &#x3D; true,
+    requireDigit &#x3D; true,
+    requireSpecialChar &#x3D; true,
+  } &#x3D; options;
+
+  const unmetRequirements: string[] &#x3D; [];
+
+  if (!password || typeof password !&#x3D;&#x3D; &#x27;string&#x27;) {
+    return {
+      isValid: false,
+      unmetRequirements: [&#x27;password is required&#x27;],
+    };
+  }
+
+  if (password.length &lt; minLength) {
+    unmetRequirements.push(&#x27;minLength&#x27;);
+  }
+
+  if (requireUppercase &amp;&amp; !/[A-Z]/.test(password)) {
+    unmetRequirements.push(&#x27;uppercase&#x27;);
+  }
+
+  if (requireLowercase &amp;&amp; !/[a-z]/.test(password)) {
+    unmetRequirements.push(&#x27;lowercase&#x27;);
+  }
+
+  if (requireDigit &amp;&amp; !/\d/.test(password)) {
+    unmetRequirements.push(&#x27;digit&#x27;);
+  }
+
+  if (requireSpecialChar &amp;&amp; !/[!@#$%^&amp;*()_+\-&#x3D;[\]{};&#x27;:&quot;\\|,.&lt;&gt;/?]/.test(password)) {
+    unmetRequirements.push(&#x27;specialChar&#x27;);
+  }
+
+  return {
+    isValid: unmetRequirements.length &#x3D;&#x3D;&#x3D; 0,
+    unmetRequirements,
+  };
+}
+
+/**
+ * Validate postal code
+ *
+ * @param postalCode - Postal code to validate
+ * @param country - Country code (default: &#x27;US&#x27;)
+ * @returns True if postal code is valid
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * isValidPostalCode(&#x27;12345&#x27;, &#x27;US&#x27;); // true
+ * isValidPostalCode(&#x27;12345-6789&#x27;, &#x27;US&#x27;); // true
+ * isValidPostalCode(&#x27;SW1A 1AA&#x27;, &#x27;UK&#x27;); // true
+ * &#x60;&#x60;&#x60;
+ */
+export function isValidPostalCode(postalCode: string, country &#x3D; &#x27;US&#x27;): boolean {
+  if (!postalCode || typeof postalCode !&#x3D;&#x3D; &#x27;string&#x27;) {
+    return false;
+  }
+
+  const patterns: Record&lt;string, RegExp&gt; &#x3D; {
+    US: /^\d{5}(?:-\d{4})?$/, // 12345 or 12345-6789
+    UK: /^[A-Z]{1,2}\d{1,2}[A-Z]?\s?\d[A-Z]{2}$/i, // SW1A 1AA
+    CA: /^[A-Z]\d[A-Z]\s?\d[A-Z]\d$/i, // K1A 0B1
+    DE: /^\d{5}$/, // 12345
+    FR: /^\d{5}$/, // 75001
+    JP: /^\d{3}-?\d{4}$/, // 123-4567
+    AU: /^\d{4}$/, // 1234
+  };
+
+  const pattern &#x3D; patterns[country.toUpperCase()];
+  if (!pattern) {
+    return false;
+  }
+
+  return pattern.test(postalCode.trim());
+}
+
+/**
+ * Validate IP address (IPv4 or IPv6)
+ *
+ * @param ip - IP address to validate
+ * @param version - IP version (4 or 6, or &#x27;both&#x27;)
+ * @returns True if IP address is valid
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * isValidIpAddress(&#x27;192.168.1.1&#x27;); // true
+ * isValidIpAddress(&#x27;2001:0db8:85a3::8a2e:0370:7334&#x27;); // true
+ * &#x60;&#x60;&#x60;
+ */
+export function isValidIpAddress(ip: string, version: 4 | 6 | &#x27;both&#x27; &#x3D; &#x27;both&#x27;): boolean {
+  if (!ip || typeof ip !&#x3D;&#x3D; &#x27;string&#x27;) {
+    return false;
+  }
+
+  const ipv4Pattern &#x3D; /^(?:(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.){3}(?:25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/;
+  const ipv6Pattern &#x3D; /^(?:[0-9a-fA-F]{1,4}:){7}[0-9a-fA-F]{1,4}$|^(?:[0-9a-fA-F]{1,4}:){1,7}:$|^(?:[0-9a-fA-F]{1,4}:){1,6}:[0-9a-fA-F]{1,4}$|^(?:[0-9a-fA-F]{1,4}:){1,5}(?::[0-9a-fA-F]{1,4}){1,2}$|^(?:[0-9a-fA-F]{1,4}:){1,4}(?::[0-9a-fA-F]{1,4}){1,3}$|^(?:[0-9a-fA-F]{1,4}:){1,3}(?::[0-9a-fA-F]{1,4}){1,4}$|^(?:[0-9a-fA-F]{1,4}:){1,2}(?::[0-9a-fA-F]{1,4}){1,5}$|^[0-9a-fA-F]{1,4}:(?::[0-9a-fA-F]{1,4}){1,6}$|^:(?::[0-9a-fA-F]{1,4}){1,7}$|^::$/;
+
+  if (version &#x3D;&#x3D;&#x3D; 4) {
+    return ipv4Pattern.test(ip);
+  }
+
+  if (version &#x3D;&#x3D;&#x3D; 6) {
+    return ipv6Pattern.test(ip);
+  }
+
+  return ipv4Pattern.test(ip) || ipv6Pattern.test(ip);
+}
+
+/**
+ * Validate hex color code
+ *
+ * @param color - Hex color code to validate
+ * @returns True if hex color is valid
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * isValidHexColor(&#x27;#FF5733&#x27;); // true
+ * isValidHexColor(&#x27;#F57&#x27;); // true
+ * isValidHexColor(&#x27;FF5733&#x27;); // false (missing #)
+ * &#x60;&#x60;&#x60;
+ */
+export function isValidHexColor(color: string): boolean {
+  if (!color || typeof color !&#x3D;&#x3D; &#x27;string&#x27;) {
+    return false;
+  }
+
+  return /^#([A-Fa-f0-9]{6}|[A-Fa-f0-9]{3})$/.test(color);
+}
+
+/**
+ * Validate JSON string
+ *
+ * @param jsonString - JSON string to validate
+ * @returns True if JSON is valid
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * isValidJson(&#x27;{&quot;name&quot;:&quot;John&quot;}&#x27;); // true
+ * isValidJson(&#x27;{invalid}&#x27;); // false
+ * &#x60;&#x60;&#x60;
+ */
+export function isValidJson(jsonString: string): boolean {
+  if (!jsonString || typeof jsonString !&#x3D;&#x3D; &#x27;string&#x27;) {
+    return false;
+  }
+
+  try {
+    JSON.parse(jsonString);
+    return true;
+  } catch {
+    return false;
+  }
+}
+
+// &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+// Angular Validators
+// &#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;&#x3D;
+
+/**
+ * Angular email validator
+ *
+ * @param options - Email validation options
+ * @returns Validator function
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const form &#x3D; this.fb.group({
+ *   email: [&#x27;&#x27;, [emailValidator()]],
+ * });
+ * &#x60;&#x60;&#x60;
+ */
+export function emailValidator(options?: EmailValidationOptions): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+    if (!control.value) {
+      return null; // Don&#x27;t validate empty values (use Validators.required for that)
+    }
+
+    const isValid &#x3D; isValidEmail(control.value, options);
+
+    return isValid ? null : { email: { value: control.value } };
+  };
+}
+
+/**
+ * Angular URL validator
+ *
+ * @param options - URL validation options
+ * @returns Validator function
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const form &#x3D; this.fb.group({
+ *   website: [&#x27;&#x27;, [urlValidator()]],
+ * });
+ * &#x60;&#x60;&#x60;
+ */
+export function urlValidator(options?: UrlValidationOptions): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+    if (!control.value) {
+      return null;
+    }
+
+    const isValid &#x3D; isValidUrl(control.value, options);
+
+    return isValid ? null : { url: { value: control.value } };
+  };
+}
+
+/**
+ * Angular phone validator
+ *
+ * @param options - Phone validation options
+ * @returns Validator function
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const form &#x3D; this.fb.group({
+ *   phone: [&#x27;&#x27;, [phoneValidator({ country: &#x27;US&#x27; })]],
+ * });
+ * &#x60;&#x60;&#x60;
+ */
+export function phoneValidator(options?: PhoneValidationOptions): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+    if (!control.value) {
+      return null;
+    }
+
+    const isValid &#x3D; isValidPhone(control.value, options);
+
+    return isValid ? null : { phone: { value: control.value } };
+  };
+}
+
+/**
+ * Angular password strength validator
+ *
+ * @param options - Password strength options
+ * @returns Validator function
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const form &#x3D; this.fb.group({
+ *   password: [&#x27;&#x27;, [passwordStrengthValidator({ minLength: 10 })]],
+ * });
+ * &#x60;&#x60;&#x60;
+ */
+export function passwordStrengthValidator(options?: PasswordStrengthOptions): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+    if (!control.value) {
+      return null;
+    }
+
+    const result &#x3D; validatePasswordStrength(control.value, options);
+
+    return result.isValid
+      ? null
+      : { passwordStrength: { unmetRequirements: result.unmetRequirements } };
+  };
+}
+
+/**
+ * Angular match validator (for password confirmation)
+ *
+ * @param matchTo - Name of control to match against
+ * @returns Validator function
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const form &#x3D; this.fb.group({
+ *   password: [&#x27;&#x27;],
+ *   confirmPassword: [&#x27;&#x27;, [matchValidator(&#x27;password&#x27;)]],
+ * });
+ * &#x60;&#x60;&#x60;
+ */
+export function matchValidator(matchTo: string): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+    if (!control.value || !control.parent) {
+      return null;
+    }
+
+    const matchControl &#x3D; control.parent.get(matchTo);
+    if (!matchControl) {
+      return null;
+    }
+
+    const isMatch &#x3D; control.value &#x3D;&#x3D;&#x3D; matchControl.value;
+
+    return isMatch ? null : { match: { matchTo } };
+  };
+}
+
+/**
+ * Angular credit card validator
+ *
+ * @returns Validator function
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const form &#x3D; this.fb.group({
+ *   cardNumber: [&#x27;&#x27;, [creditCardValidator()]],
+ * });
+ * &#x60;&#x60;&#x60;
+ */
+export function creditCardValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+    if (!control.value) {
+      return null;
+    }
+
+    const isValid &#x3D; isValidCreditCard(control.value);
+
+    return isValid ? null : { creditCard: { value: control.value } };
+  };
+}
+
+/**
+ * Angular postal code validator
+ *
+ * @param country - Country code
+ * @returns Validator function
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const form &#x3D; this.fb.group({
+ *   zipCode: [&#x27;&#x27;, [postalCodeValidator(&#x27;US&#x27;)]],
+ * });
+ * &#x60;&#x60;&#x60;
+ */
+export function postalCodeValidator(country &#x3D; &#x27;US&#x27;): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+    if (!control.value) {
+      return null;
+    }
+
+    const isValid &#x3D; isValidPostalCode(control.value, country);
+
+    return isValid ? null : { postalCode: { value: control.value, country } };
+  };
+}
+
+/**
+ * Angular hex color validator
+ *
+ * @returns Validator function
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const form &#x3D; this.fb.group({
+ *   color: [&#x27;&#x27;, [hexColorValidator()]],
+ * });
+ * &#x60;&#x60;&#x60;
+ */
+export function hexColorValidator(): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+    if (!control.value) {
+      return null;
+    }
+
+    const isValid &#x3D; isValidHexColor(control.value);
+
+    return isValid ? null : { hexColor: { value: control.value } };
+  };
+}
+
+/**
+ * Angular min value validator (for numbers)
+ *
+ * @param min - Minimum value
+ * @returns Validator function
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const form &#x3D; this.fb.group({
+ *   age: [&#x27;&#x27;, [minValue(18)]],
+ * });
+ * &#x60;&#x60;&#x60;
+ */
+export function minValue(min: number): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+    if (control.value &#x3D;&#x3D;&#x3D; null || control.value &#x3D;&#x3D;&#x3D; undefined || control.value &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+      return null;
+    }
+
+    const value &#x3D; Number(control.value);
+
+    if (isNaN(value)) {
+      return { minValue: { min, actual: control.value } };
+    }
+
+    return value &gt;&#x3D; min ? null : { minValue: { min, actual: value } };
+  };
+}
+
+/**
+ * Angular max value validator (for numbers)
+ *
+ * @param max - Maximum value
+ * @returns Validator function
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const form &#x3D; this.fb.group({
+ *   age: [&#x27;&#x27;, [maxValue(120)]],
+ * });
+ * &#x60;&#x60;&#x60;
+ */
+export function maxValue(max: number): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+    if (control.value &#x3D;&#x3D;&#x3D; null || control.value &#x3D;&#x3D;&#x3D; undefined || control.value &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+      return null;
+    }
+
+    const value &#x3D; Number(control.value);
+
+    if (isNaN(value)) {
+      return { maxValue: { max, actual: control.value } };
+    }
+
+    return value &lt;&#x3D; max ? null : { maxValue: { max, actual: value } };
+  };
+}
+
+/**
+ * Angular range validator (for numbers)
+ *
+ * @param min - Minimum value
+ * @param max - Maximum value
+ * @returns Validator function
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const form &#x3D; this.fb.group({
+ *   age: [&#x27;&#x27;, [rangeValidator(18, 120)]],
+ * });
+ * &#x60;&#x60;&#x60;
+ */
+export function rangeValidator(min: number, max: number): ValidatorFn {
+  return (control: AbstractControl): ValidationErrors | null &#x3D;&gt; {
+    if (control.value &#x3D;&#x3D;&#x3D; null || control.value &#x3D;&#x3D;&#x3D; undefined || control.value &#x3D;&#x3D;&#x3D; &#x27;&#x27;) {
+      return null;
+    }
+
+    const value &#x3D; Number(control.value);
+
+    if (isNaN(value)) {
+      return { range: { min, max, actual: control.value } };
+    }
+
+    if (value &lt; min || value &gt; max) {
+      return { range: { min, max, actual: value } };
+    }
+
+    return null;
+  };
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'PhoneValidationOptions.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

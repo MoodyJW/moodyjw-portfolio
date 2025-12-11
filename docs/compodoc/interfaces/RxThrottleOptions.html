@@ -1,0 +1,917 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  RxThrottleOptions</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/utilities/debounce-throttle/debounce-throttle.utils.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Options for RxJS throttle operators</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#leading" 
+>
+                                            leading
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#trailing" 
+>
+                                            trailing
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="leading"></a>
+                                        <span class="name "><b>leading</b>
+                                            <a href="#leading">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>leading:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Execute on the leading edge (default: true)</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="trailing"></a>
+                                        <span class="name "><b>trailing</b>
+                                            <a href="#trailing">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>trailing:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Execute on the trailing edge (default: false)</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import type { MonoTypeOperatorFunction } from &#x27;rxjs&#x27;;
+import { Observable } from &#x27;rxjs&#x27;;
+import { debounceTime, throttleTime } from &#x27;rxjs/operators&#x27;;
+
+/**
+ * Options for debounce operations
+ */
+export interface DebounceOptions {
+  /** Execute on the leading edge instead of trailing (default: false) */
+  leading?: boolean;
+  /** Execute on the trailing edge (default: true) */
+  trailing?: boolean;
+  /** Maximum wait time before forced execution (in ms) */
+  maxWait?: number;
+}
+
+/**
+ * Options for throttle operations
+ */
+export interface ThrottleOptions {
+  /** Execute on the leading edge (default: true) */
+  leading?: boolean;
+  /** Execute on the trailing edge (default: false) */
+  trailing?: boolean;
+}
+
+/**
+ * Options for RxJS debounce operators
+ */
+export interface RxDebounceOptions {
+  /** Execute on the leading edge instead of trailing (default: false) */
+  leading?: boolean;
+}
+
+/**
+ * Options for RxJS throttle operators
+ */
+export interface RxThrottleOptions {
+  /** Execute on the leading edge (default: true) */
+  leading?: boolean;
+  /** Execute on the trailing edge (default: false) */
+  trailing?: boolean;
+}
+
+/**
+ * Creates a debounced function that delays invoking func until after
+ * wait milliseconds have elapsed since the last time the debounced
+ * function was invoked.
+ *
+ * @param func - The function to debounce
+ * @param wait - The number of milliseconds to delay
+ * @param options - Debounce options
+ * @returns The debounced function with a cancel method
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * // Basic debounce - waits 300ms after last call
+ * const debouncedSearch &#x3D; debounce((query: string) &#x3D;&gt; {
+ *   console.log(&#x27;Searching for:&#x27;, query);
+ * }, 300);
+ *
+ * // Leading edge execution
+ * const debouncedClick &#x3D; debounce(handleClick, 500, { leading: true, trailing: false });
+ *
+ * // With max wait
+ * const debouncedScroll &#x3D; debounce(handleScroll, 100, { maxWait: 500 });
+ *
+ * // Cancel pending execution
+ * debouncedSearch.cancel();
+ *
+ * // Flush pending execution immediately
+ * debouncedSearch.flush();
+ * &#x60;&#x60;&#x60;
+ */
+export function debounce&lt;T extends (...args: unknown[]) &#x3D;&gt; unknown&gt;(
+  func: T,
+  wait: number,
+  options: DebounceOptions &#x3D; {}
+): T &amp; { cancel: () &#x3D;&gt; void; flush: () &#x3D;&gt; void; pending: () &#x3D;&gt; boolean } {
+  const { leading &#x3D; false, trailing &#x3D; true, maxWait } &#x3D; options;
+
+  let timerId: ReturnType&lt;typeof setTimeout&gt; | undefined;
+  let maxTimerId: ReturnType&lt;typeof setTimeout&gt; | undefined;
+  let lastCallTime: number | undefined;
+  let lastInvokeTime &#x3D; 0;
+  let lastArgs: unknown[] | undefined;
+  let lastThis: unknown;
+  let result: unknown;
+
+  function invokeFunc(time: number) {
+    const args &#x3D; lastArgs;
+    const thisArg &#x3D; lastThis;
+
+    lastArgs &#x3D; undefined;
+    lastThis &#x3D; undefined;
+    lastInvokeTime &#x3D; time;
+    result &#x3D; func.apply(thisArg, args as Parameters&lt;T&gt;);
+    return result;
+  }
+
+  function startTimer(pendingFunc: () &#x3D;&gt; void, wait: number) {
+    return setTimeout(pendingFunc, wait);
+  }
+
+  function cancelTimer(id: ReturnType&lt;typeof setTimeout&gt; | undefined) {
+    if (id !&#x3D;&#x3D; undefined) {
+      clearTimeout(id);
+    }
+  }
+
+  function leadingEdge(time: number) {
+    // Reset any maxWait timer
+    lastInvokeTime &#x3D; time;
+
+    // Start the timer for the trailing edge
+    timerId &#x3D; startTimer(timerExpired, wait);
+
+    // Invoke the leading edge
+    return leading ? invokeFunc(time) : result;
+  }
+
+  function remainingWait(time: number) {
+    const timeSinceLastCall &#x3D; time - (lastCallTime || 0);
+    const timeSinceLastInvoke &#x3D; time - lastInvokeTime;
+    const timeWaiting &#x3D; wait - timeSinceLastCall;
+
+    return maxWait !&#x3D;&#x3D; undefined
+      ? Math.min(timeWaiting, maxWait - timeSinceLastInvoke)
+      : timeWaiting;
+  }
+
+  function shouldInvoke(time: number) {
+    const timeSinceLastCall &#x3D; time - (lastCallTime || 0);
+    const timeSinceLastInvoke &#x3D; time - lastInvokeTime;
+
+    // Either this is the first call, activity has stopped and we&#x27;re at the
+    // trailing edge, the system time has gone backwards and we&#x27;re treating
+    // it as the trailing edge, or we&#x27;ve hit the maxWait limit.
+    return (
+      lastCallTime &#x3D;&#x3D;&#x3D; undefined ||
+      timeSinceLastCall &gt;&#x3D; wait ||
+      timeSinceLastCall &lt; 0 ||
+      (maxWait !&#x3D;&#x3D; undefined &amp;&amp; timeSinceLastInvoke &gt;&#x3D; maxWait)
+    );
+  }
+
+  function timerExpired() {
+    const time &#x3D; Date.now();
+    if (shouldInvoke(time)) {
+      return trailingEdge(time);
+    }
+    // Restart the timer
+    timerId &#x3D; startTimer(timerExpired, remainingWait(time));
+    return undefined;
+  }
+
+  function trailingEdge(time: number) {
+    timerId &#x3D; undefined;
+
+    // Only invoke if we have lastArgs which means func has been called
+    if (trailing &amp;&amp; lastArgs) {
+      return invokeFunc(time);
+    }
+    lastArgs &#x3D; undefined;
+    lastThis &#x3D; undefined;
+    return result;
+  }
+
+  function cancel() {
+    if (timerId !&#x3D;&#x3D; undefined) {
+      cancelTimer(timerId);
+    }
+    if (maxTimerId !&#x3D;&#x3D; undefined) {
+      cancelTimer(maxTimerId);
+    }
+    lastInvokeTime &#x3D; 0;
+    lastArgs &#x3D; undefined;
+    lastCallTime &#x3D; undefined;
+    lastThis &#x3D; undefined;
+    timerId &#x3D; undefined;
+    maxTimerId &#x3D; undefined;
+  }
+
+  function flush() {
+    return timerId &#x3D;&#x3D;&#x3D; undefined ? result : trailingEdge(Date.now());
+  }
+
+  function pending() {
+    return timerId !&#x3D;&#x3D; undefined;
+  }
+
+  function debounced(this: unknown, ...args: unknown[]) {
+    const time &#x3D; Date.now();
+    const isInvoking &#x3D; shouldInvoke(time);
+
+    lastArgs &#x3D; args;
+    lastThis &#x3D; this;
+    lastCallTime &#x3D; time;
+
+    if (isInvoking) {
+      if (timerId &#x3D;&#x3D;&#x3D; undefined) {
+        return leadingEdge(lastCallTime);
+      }
+      if (maxWait !&#x3D;&#x3D; undefined) {
+        // Handle invocations in a tight loop
+        timerId &#x3D; startTimer(timerExpired, wait);
+        return invokeFunc(lastCallTime);
+      }
+    }
+    if (timerId &#x3D;&#x3D;&#x3D; undefined) {
+      timerId &#x3D; startTimer(timerExpired, wait);
+    }
+    return result;
+  }
+
+  debounced.cancel &#x3D; cancel;
+  debounced.flush &#x3D; flush;
+  debounced.pending &#x3D; pending;
+
+  return debounced as T &amp; {
+    cancel: () &#x3D;&gt; void;
+    flush: () &#x3D;&gt; void;
+    pending: () &#x3D;&gt; boolean;
+  };
+}
+
+/**
+ * Creates a throttled function that only invokes func at most once per
+ * every wait milliseconds.
+ *
+ * @param func - The function to throttle
+ * @param wait - The number of milliseconds to throttle invocations to
+ * @param options - Throttle options
+ * @returns The throttled function with a cancel method
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * // Basic throttle - executes at most once per 200ms
+ * const throttledResize &#x3D; throttle(() &#x3D;&gt; {
+ *   console.log(&#x27;Window resized&#x27;);
+ * }, 200);
+ *
+ * // Trailing edge execution
+ * const throttledScroll &#x3D; throttle(handleScroll, 100, { trailing: true });
+ *
+ * // Leading edge disabled
+ * const throttledInput &#x3D; throttle(handleInput, 300, { leading: false, trailing: true });
+ *
+ * // Cancel pending execution
+ * throttledResize.cancel();
+ *
+ * // Flush pending execution immediately
+ * throttledResize.flush();
+ * &#x60;&#x60;&#x60;
+ */
+export function throttle&lt;T extends (...args: unknown[]) &#x3D;&gt; unknown&gt;(
+  func: T,
+  wait: number,
+  options: ThrottleOptions &#x3D; {}
+): T &amp; { cancel: () &#x3D;&gt; void; flush: () &#x3D;&gt; void; pending: () &#x3D;&gt; boolean } {
+  const { leading &#x3D; true, trailing &#x3D; false } &#x3D; options;
+
+  return debounce(func, wait, {
+    leading,
+    trailing,
+    maxWait: wait,
+  });
+}
+
+/**
+ * RxJS operator that debounces emissions from the source Observable.
+ * Emits a value from the source Observable only after a particular time
+ * span has passed without another source emission.
+ *
+ * @param wait - The timeout duration in milliseconds
+ * @param options - Debounce options
+ * @returns An operator function that returns an Observable
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * // In a component
+ * searchControl.valueChanges
+ *   .pipe(rxDebounce(300))
+ *   .subscribe(query &#x3D;&gt; this.search(query));
+ *
+ * // Leading edge execution
+ * clicks$
+ *   .pipe(rxDebounce(500, { leading: true }))
+ *   .subscribe(() &#x3D;&gt; console.log(&#x27;Clicked&#x27;));
+ * &#x60;&#x60;&#x60;
+ */
+export function rxDebounce&lt;T&gt;(
+  wait: number,
+  options: RxDebounceOptions &#x3D; {}
+): MonoTypeOperatorFunction&lt;T&gt; {
+  const { leading &#x3D; false } &#x3D; options;
+
+  if (leading) {
+    // For leading edge, we need custom implementation
+    return (source: Observable&lt;T&gt;) &#x3D;&gt;
+      new Observable((subscriber) &#x3D;&gt; {
+        let timerId: ReturnType&lt;typeof setTimeout&gt; | undefined;
+        let hasValue &#x3D; false;
+
+        const subscription &#x3D; source.subscribe({
+          next(value: T) {
+            if (!hasValue) {
+              hasValue &#x3D; true;
+              subscriber.next(value);
+            }
+
+            if (timerId !&#x3D;&#x3D; undefined) {
+              clearTimeout(timerId);
+            }
+
+            timerId &#x3D; setTimeout(() &#x3D;&gt; {
+              hasValue &#x3D; false;
+              timerId &#x3D; undefined;
+            }, wait);
+          },
+          error(err) {
+            subscriber.error(err);
+          },
+          complete() {
+            subscriber.complete();
+          },
+        });
+
+        return () &#x3D;&gt; {
+          if (timerId !&#x3D;&#x3D; undefined) {
+            clearTimeout(timerId);
+          }
+          subscription.unsubscribe();
+        };
+      });
+  }
+
+  // Default trailing edge behavior
+  return debounceTime&lt;T&gt;(wait);
+}
+
+/**
+ * RxJS operator that throttles emissions from the source Observable.
+ * Emits a value from the source Observable, then ignores subsequent
+ * source values for wait milliseconds, then repeats this process.
+ *
+ * @param wait - The throttling duration in milliseconds
+ * @param options - Throttle options
+ * @returns An operator function that returns an Observable
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * // In a component
+ * scroll$
+ *   .pipe(rxThrottle(100))
+ *   .subscribe(() &#x3D;&gt; this.handleScroll());
+ *
+ * // Trailing edge execution
+ * resize$
+ *   .pipe(rxThrottle(200, { leading: false, trailing: true }))
+ *   .subscribe(() &#x3D;&gt; this.handleResize());
+ * &#x60;&#x60;&#x60;
+ */
+export function rxThrottle&lt;T&gt;(
+  wait: number,
+  options: RxThrottleOptions &#x3D; {}
+): MonoTypeOperatorFunction&lt;T&gt; {
+  const { leading &#x3D; true, trailing &#x3D; false } &#x3D; options;
+
+  const config &#x3D; {
+    leading,
+    trailing,
+  };
+
+  return throttleTime&lt;T&gt;(wait, undefined, config);
+}
+
+/**
+ * Creates a function that is restricted to execute func only once.
+ * Repeat calls to the function return the value of the first invocation.
+ *
+ * @param func - The function to restrict
+ * @returns The restricted function
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const initialize &#x3D; once(() &#x3D;&gt; {
+ *   console.log(&#x27;Initializing...&#x27;);
+ *   return { initialized: true };
+ * });
+ *
+ * initialize(); // Logs: &#x27;Initializing...&#x27;
+ * initialize(); // No log, returns cached result
+ * initialize(); // No log, returns cached result
+ * &#x60;&#x60;&#x60;
+ */
+export function once&lt;T extends (...args: unknown[]) &#x3D;&gt; unknown&gt;(
+  func: T
+): T &amp; { reset: () &#x3D;&gt; void } {
+  let called &#x3D; false;
+  let result: ReturnType&lt;T&gt;;
+
+  function onceWrapper(this: unknown, ...args: unknown[]) {
+    if (!called) {
+      called &#x3D; true;
+      result &#x3D; func.apply(this, args) as ReturnType&lt;T&gt;;
+    }
+    return result;
+  }
+
+  onceWrapper.reset &#x3D; () &#x3D;&gt; {
+    called &#x3D; false;
+    result &#x3D; undefined as ReturnType&lt;T&gt;;
+  };
+
+  return onceWrapper as T &amp; { reset: () &#x3D;&gt; void };
+}
+
+/**
+ * Creates a rate-limited function that executes at most once per interval.
+ * Unlike throttle, this tracks execution time rather than call time.
+ *
+ * @param func - The function to rate limit
+ * @param interval - The interval in milliseconds
+ * @returns The rate-limited function
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const rateLimitedApi &#x3D; rateLimit(apiCall, 1000);
+ *
+ * // These will queue and execute one per second
+ * rateLimitedApi();
+ * rateLimitedApi();
+ * rateLimitedApi();
+ * &#x60;&#x60;&#x60;
+ */
+export function rateLimit&lt;T extends (...args: unknown[]) &#x3D;&gt; unknown&gt;(
+  func: T,
+  interval: number
+): T &amp; { cancel: () &#x3D;&gt; void } {
+  let lastExecution &#x3D; 0;
+  let timeoutId: ReturnType&lt;typeof setTimeout&gt; | undefined;
+
+  function rateLimited(this: unknown, ...args: unknown[]) {
+    const now &#x3D; Date.now();
+    const timeSinceLastExecution &#x3D; now - lastExecution;
+
+    if (timeSinceLastExecution &gt;&#x3D; interval) {
+      lastExecution &#x3D; now;
+      return func.apply(this, args);
+    }
+
+    if (timeoutId !&#x3D;&#x3D; undefined) {
+      clearTimeout(timeoutId);
+    }
+
+    return new Promise((resolve) &#x3D;&gt; {
+      timeoutId &#x3D; setTimeout(() &#x3D;&gt; {
+        lastExecution &#x3D; Date.now();
+        resolve(func.apply(this, args));
+        timeoutId &#x3D; undefined;
+      }, interval - timeSinceLastExecution);
+    });
+  }
+
+  rateLimited.cancel &#x3D; () &#x3D;&gt; {
+    if (timeoutId !&#x3D;&#x3D; undefined) {
+      clearTimeout(timeoutId);
+      timeoutId &#x3D; undefined;
+    }
+  };
+
+  return rateLimited as T &amp; { cancel: () &#x3D;&gt; void };
+}
+
+/**
+ * Delays the execution of a function by the specified time.
+ *
+ * @param func - The function to delay
+ * @param wait - The delay in milliseconds
+ * @returns The delayed function
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const delayedLog &#x3D; delay((msg: string) &#x3D;&gt; console.log(msg), 1000);
+ * delayedLog(&#x27;Hello&#x27;); // Logs after 1 second
+ * &#x60;&#x60;&#x60;
+ */
+export function delay&lt;T extends (...args: unknown[]) &#x3D;&gt; unknown&gt;(
+  func: T,
+  wait: number
+): (...args: Parameters&lt;T&gt;) &#x3D;&gt; void {
+  return function (this: unknown, ...args: Parameters&lt;T&gt;) {
+    setTimeout(() &#x3D;&gt; {
+      func.apply(this, args);
+    }, wait);
+  };
+}
+
+/**
+ * Creates a function that memoizes the result of func. If resolver is provided,
+ * it determines the cache key for storing the result based on the arguments.
+ *
+ * @param func - The function to memoize
+ * @param resolver - The function to resolve the cache key
+ * @returns The memoized function with cache access
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const expensiveCalc &#x3D; memoize((n: number) &#x3D;&gt; {
+ *   console.log(&#x27;Calculating...&#x27;);
+ *   return n * n;
+ * });
+ *
+ * expensiveCalc(5); // Logs: &#x27;Calculating...&#x27;, returns 25
+ * expensiveCalc(5); // Returns 25 (from cache, no log)
+ *
+ * // With custom resolver
+ * const memoizedFetch &#x3D; memoize(
+ *   (url: string, options: RequestInit) &#x3D;&gt; fetch(url, options),
+ *   (url) &#x3D;&gt; url // Cache by URL only
+ * );
+ * &#x60;&#x60;&#x60;
+ */
+export function memoize&lt;T extends (...args: unknown[]) &#x3D;&gt; unknown&gt;(
+  func: T,
+  resolver?: (...args: Parameters&lt;T&gt;) &#x3D;&gt; string
+): T &amp; { cache: Map&lt;string, ReturnType&lt;T&gt;&gt;; clear: () &#x3D;&gt; void } {
+  const cache &#x3D; new Map&lt;string, ReturnType&lt;T&gt;&gt;();
+
+  function memoized(this: unknown, ...args: Parameters&lt;T&gt;) {
+    const key &#x3D; resolver ? resolver(...args) : JSON.stringify(args);
+
+    if (cache.has(key)) {
+      return cache.get(key);
+    }
+
+    const result &#x3D; func.apply(this, args) as ReturnType&lt;T&gt;;
+    cache.set(key, result);
+    return result;
+  }
+
+  memoized.cache &#x3D; cache;
+  memoized.clear &#x3D; () &#x3D;&gt; cache.clear();
+
+  return memoized as T &amp; {
+    cache: Map&lt;string, ReturnType&lt;T&gt;&gt;;
+    clear: () &#x3D;&gt; void;
+  };
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'RxThrottleOptions.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -330,7 +330,10 @@
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Component, ChangeDetectionStrategy, signal } from &#x27;@angular/core&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import type { OnInit} from &#x27;@angular/core&#x27;;
+import { ChangeDetectionStrategy, Component, inject, signal } from &#x27;@angular/core&#x27;;
+import { Meta, Title } from &#x27;@angular/platform-browser&#x27;;
+
 import { LABELS } from &#x27;@shared/constants&#x27;;
 
 interface CaseStudy {
@@ -348,7 +351,10 @@ interface CaseStudy {
   styleUrl: &#x27;./case-studies.component.scss&#x27;,
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class CaseStudiesComponent {
+export class CaseStudiesComponent implements OnInit {
+  private readonly meta &#x3D; inject(Meta);
+  private readonly metaTitle &#x3D; inject(Title);
+
   /** UI labels */
   protected readonly LABELS &#x3D; LABELS;
   protected readonly caseStudies &#x3D; signal&lt;CaseStudy[]&gt;([
@@ -374,6 +380,14 @@ export class CaseStudiesComponent {
       technologies: [&#x27;Angular&#x27;, &#x27;SCSS&#x27;, &#x27;Storybook&#x27;, &#x27;Design Tokens&#x27;],
     },
   ]);
+
+  ngOnInit(): void {
+    this.metaTitle.setTitle(&#x27;MoodyJW - Case Studies&#x27;);
+    this.meta.updateTag({
+      name: &#x27;case-studies&#x27;,
+      content: &#x27;Case Studies page of MoodyJW Portfolio&#x27;,
+    });
+  }
 }
 </code></pre>
     </div>

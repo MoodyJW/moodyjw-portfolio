@@ -115,115 +115,58 @@
 <li>✅ <strong>Dark mode support</strong> (auto-detects system preference)</li>
 <li>✅ <strong>Mockend data layer</strong> with simulated network latency for realistic development</li>
 <li>✅ <strong>Complete CI/CD pipeline</strong> with GitHub Actions (build, test, E2E, performance, security)</li>
+<li>🚧 <strong>Client-side AI Career Chatbot</strong> with WebLLM and RAG (Retrieval-Augmented Generation) - <em>Coming in Phase 5</em></li>
 </ul>
-<h2>📁 Project Structure</h2>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-none">## 📚 Documentation (Compodoc)
-
-We use `compodoc` to generate API documentation for the Angular application. Docs are generated into `docs/compodoc`.
-
-Generate docs locally:
-
-```bash
-# Install dependencies
+<h1>MoodyJW Portfolio</h1>
+<p>A concise developer-focused overview and local quick-start for the MoodyJW portfolio.</p>
+<p>Quick links:</p>
+<ul>
+<li>Architecture: <code>ARCHITECTURE.md</code></li>
+<li>Mock data &amp; services: <code>src/app/core/MOCKEND_GUIDE.md</code></li>
+<li>Store + integration: <code>src/app/core/STORE_SERVICE_INTEGRATION.md</code></li>
+<li>Generated API docs: <code>docs/compodoc/</code> (generated with Compodoc)</li>
+</ul>
+<p>Prerequisites</p>
+<ul>
+<li>Node.js (v20 or v22 recommended)</li>
+<li>npm (use <code>--legacy-peer-deps</code> when adding packages if necessary)</li>
+</ul>
+<p>Local quick start</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash"># install
 npm install
 
-# Generate Compodoc documentation
+# development server
+npm start
+
+# build production
+npm run build
+
+# generate docs locally
 npx compodoc -p tsconfig.json -d docs/compodoc
-
-# Serve docs locally
-npx compodoc -s -d docs/compodoc</code></pre></div><p>CI: A GitHub Actions workflow (<code>.github/workflows/compodoc.yml</code>) is included to generate docs on <code>main</code> and upload them as an artifact.</p>
-<p>Published docs: The deployment workflow also copies generated Compodoc output into the production <code>dist</code> and deploys it with the site. After a Pages deploy, API docs will be available at:</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-none">https://MoodyJW.github.io/moodyjw-portfolio/docs/compodoc/</code></pre></div><p>src/
-├── app/
-│ ├── core/ # Core application functionality
-│ │ ├── layout/ # Shell layouts (MainLayout)
-│ │ ├── services/ # Global services (ProjectService)
-│ │ ├── store/ # NgRx SignalStore (ProjectStore)
-│ │ ├── guards/ # Route guards
-│ │ ├── interceptors/ # HTTP interceptors (latency simulation)
-│ │ └── models/ # Data models and interfaces (Project)
-├── assets/
-│ └── data/ # Mock JSON data files (projects.json)
-├── shared/ # Shared across features
-│ ├── components/ # Reusable components
-│ ├── directives/ # Custom directives
-│ ├── pipes/ # Custom pipes
-│ └── utils/ # Utility functions
-└── features/ # Feature modules
-├── home/ # Home page feature
-└── case-studies/ # Case studies feature</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-none">
-## 🛠️ Tech Stack
-
-- **Framework**: Angular 21.0
-- **Language**: TypeScript 5.9 (strict mode)
-- **Styling**: SCSS with CSS Variables
-- **State Management**: NgRx SignalStore + Angular Signals
-- **Data Layer**: Mockend pattern with local JSON files
-- **HTTP Client**: Angular HttpClient with functional interceptors
-- **Routing**: Angular Router (lazy-loaded)
-- **Testing**: Vitest (Unit) + Playwright (E2E + Visual Regression)
-- **Build Tool**: Angular CLI with Vite
-- **CI/CD**: GitHub Actions (4 workflows) + GitHub CodeQL
-- **Code Quality**: ESLint with Angular ESLint + accessibility linting
-- **Performance**: Lighthouse CI with strict budgets (≥95/100/100/90)
-
-## 🎨 Design System
-
-The application uses a custom design system built with CSS Variables for consistency and theme support:
-
-- **Colors**: Primary, surface, text, and status colors
-- **Spacing**: 8-point grid system (xs to 4xl)
-- **Typography**: Font sizes, weights, and families
-- **Border Radius**: Consistent corner radii
-- **Shadows**: Elevation system
-- **Transitions**: Standardized durations and timings
-
-All design tokens are defined in `src/styles/_variables.scss`.
-
-## 💾 Data Architecture (Mockend Pattern)
-
-The application uses a **Mockend** approach for data management, providing a realistic development experience that easily transitions to real APIs:
-
-### Architecture Overview
-</code></pre></div><p>┌─────────────────┐
-│ Component │
-└────────┬────────┘
-│
-▼
-┌─────────────────┐
-│ ProjectService │ (uses inject(HttpClient))
-└────────┬────────┘
-│
-▼
-┌─────────────────┐
-│ HttpClient │ → latencyInterceptor (500-1000ms delay)
-└────────┬────────┘
-│
-▼
-┌─────────────────┐
-│ projects.json │ (src/assets/data/)
-└─────────────────┘</p>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-none">
-### Key Components
-
-- **`src/assets/data/projects.json`**: Mock data for case studies/projects
-- **`ProjectService`**: Service layer that fetches data using HttpClient
-- **`latencyInterceptor`**: Functional interceptor that simulates network latency (500-1000ms)
-- **`Project` model**: TypeScript interface defining the data structure
-
-### Why This Approach?
-
-1. **Realistic Development**: Simulated latency helps test loading states and UX
-2. **Easy Transition**: Same service layer works with real APIs—just change the URL
-3. **No Backend Required**: Develop frontend features independently
-4. **Type Safety**: Full TypeScript support with defined models
-5. **Testable**: Easy to mock and test data flows
-
-### Usage Example with NgRx SignalStore
-
-```typescript
-import { Component, inject, OnInit } from &#39;&#64;angular/core&#39;;
+# serve docs
+npx compodoc -s -d docs/compodoc</code></pre></div><p>Where things live</p>
+<ul>
+<li>App source: <code>src/app</code></li>
+<li>Mock data: <code>src/assets/data</code></li>
+<li>Generated docs: <code>docs/compodoc</code></li>
+<li>GitHub Actions workflows: <code>.github/workflows</code></li>
+</ul>
+<p>Docs and CI</p>
+<ul>
+<li>Compodoc is run locally via <code>npx compodoc</code> and is included in CI (<code>.github/workflows/compodoc.yml</code>).</li>
+<li>The Pages deploy workflow copies generated Compodoc output into the site so docs are available at <code>/docs/compodoc/</code> on the deployed site.</li>
+</ul>
+<p>Contributing</p>
+<ul>
+<li>Run <code>npm run lint</code> and <code>npm test</code> before opening PRs.</li>
+<li>See <code>IMPLEMENTATION_PLAN.md</code> for phase-level goals and progress.</li>
+</ul>
+<p>License and security</p>
+<ul>
+<li>Do not commit secrets; use GitHub Secrets for tokens.</li>
+<li>CodeQL and dependency review workflows are configured in CI.</li>
+</ul>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">import { Component, inject, OnInit } from &#39;&#64;angular/core&#39;;
 import { ProjectStore } from &#39;&#64;core/store&#39;;
 
 &#64;Component({
@@ -248,7 +191,43 @@ export class CaseStudiesComponent implements OnInit {
     // Load projects automatically triggers loading state
     this.store.loadProjects();
   }
-}</code></pre></div><h2>🎯 State Management with NgRx SignalStore</h2>
+}</code></pre></div><h2>🤖 Client-Side AI Career Chatbot (Planned - Phase 5)</h2>
+<p>This portfolio will feature an innovative <strong>client-side AI chatbot</strong> that answers questions about Jay&#39;s career, experience, and technical expertise—all running locally in your browser with no backend required.</p>
+<h3>Architecture Overview</h3>
+<p><strong>Technology Stack:</strong></p>
+<ul>
+<li><strong>WebLLM</strong>: Browser-based LLM inference using Llama-3.1-8B-Instruct (quantized)</li>
+<li><strong>RAG (Retrieval-Augmented Generation)</strong>: Vector search using pre-computed embeddings</li>
+<li><strong>Sentence Transformers</strong>: Build-time embedding generation with <code>all-MiniLM-L6-v2</code></li>
+<li><strong>Pure TypeScript</strong>: Client-side vector similarity search (cosine similarity)</li>
+<li><strong>IndexedDB</strong>: Model caching to avoid re-downloading</li>
+</ul>
+<h3>Key Features</h3>
+<ul>
+<li>🧠 <strong>Fully Client-Side</strong>: All AI processing happens in your browser</li>
+<li>⚡ <strong>Fast Response Time</strong>: Model loads in &lt; 30 seconds, cached for subsequent visits</li>
+<li>🔒 <strong>Privacy-First</strong>: No data sent to external servers</li>
+<li>📚 <strong>Knowledge Base</strong>: Answers questions about career history, projects, skills, and achievements</li>
+<li>♿ <strong>Accessible</strong>: WCAG 2.1 AAA compliant with keyboard navigation and screen reader support</li>
+<li>📱 <strong>Mobile-Friendly</strong>: Responsive chat interface works on all devices</li>
+</ul>
+<h3>How It Works</h3>
+<ol>
+<li><strong>Build Time</strong>: Python script generates embeddings from career content corpus</li>
+<li><strong>First Load</strong>: WebLLM model downloads and caches in IndexedDB (~1-2GB)</li>
+<li><strong>User Query</strong>: Question is embedded and similar content chunks are retrieved via RAG</li>
+<li><strong>Response</strong>: LLM generates contextual answer using only retrieved career information</li>
+<li><strong>Streaming</strong>: Tokens stream in real-time for smooth UX</li>
+</ol>
+<h3>Example Queries</h3>
+<ul>
+<li>&quot;What experience does Jay have with Angular?&quot;</li>
+<li>&quot;Tell me about Jay&#39;s leadership experience&quot;</li>
+<li>&quot;What are Jay&#39;s most significant technical achievements?&quot;</li>
+<li>&quot;Has Jay worked with microservices architecture?&quot;</li>
+</ul>
+<p><strong>Status</strong>: Implementation planned for Phase 5 (see <a href="IMPLEMENTATION_PLAN.md#L869-L906">IMPLEMENTATION_PLAN.md</a>)</p>
+<h2>🎯 State Management with NgRx SignalStore</h2>
 <h3>Store Features</h3>
 <p>The <code>ProjectStore</code> provides a complete state management solution:</p>
 <p><strong>State Properties:</strong></p>
@@ -307,8 +286,11 @@ npm start
 npm run build
 
 # Output will be in dist/moodyjw-portfolio</code></pre></div><h3>Testing</h3>
-<b>Example :</b><div><pre class="line-numbers"><code class="language-bash"># Run unit tests with coverage
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash"># Run unit tests (interactive, watch mode)
 npm test
+
+# Run unit tests with coverage (used in CI)
+npm run test:coverage
 
 # Run linting (ESLint + accessibility)
 npm run lint
@@ -320,16 +302,27 @@ npm run test:e2e
 npm run test:e2e:ui
 
 # Update visual regression baselines
-npm run test:e2e:update-snapshots</code></pre></div><h3>CI/CD Pipeline</h3>
-<p>The project includes 4 automated workflows:</p>
+npm run test:e2e:update-snapshots</code></pre></div><p><strong>Important:</strong> Always use <code>npm test</code> or <code>npm run test:coverage</code> for running tests. Do not use <code>npx vitest run</code> directly as it bypasses Angular&#39;s test infrastructure which handles component template and style resolution.</p>
+<h3>Storybook</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-bash"># Start Storybook development server
+npm run storybook
+
+# Build Storybook static site
+npm run build-storybook</code></pre></div><p><strong>Note:</strong> The <code>storybook-static/</code> build output is excluded from git (<code>.gitignore</code>) and CodeQL scanning. This directory contains bundled dependencies and should not be committed to the repository.</p>
+<h3>CI/CD Pipeline</h3>
+<p>The project includes 8 automated workflows:</p>
 <ol>
 <li><strong>CI</strong> (<code>ci.yml</code>) - Build, lint, test with coverage (80% threshold)</li>
 <li><strong>E2E Tests</strong> (<code>e2e.yml</code>) - Cross-browser testing (Chromium, Firefox, WebKit)</li>
 <li><strong>Lighthouse</strong> (<code>lighthouse.yml</code>) - Performance monitoring with PR comments</li>
 <li><strong>Dependency Review</strong> (<code>dependency-review.yml</code>) - Security vulnerability scanning</li>
+<li><strong>Deploy Pages</strong> (<code>deploy-pages.yml</code>) - Automated GitHub Pages deployment</li>
+<li><strong>Compodoc</strong> (<code>compodoc.yml</code>) - API documentation generation</li>
+<li><strong>Docs Check</strong> (<code>docs-check.yml</code>) - Documentation validation</li>
+<li><strong>Pages Sanity</strong> (<code>pages-sanity.yml</code>) - Deployment verification</li>
 </ol>
 <p>All workflows run on pull requests and must pass before merging.</p>
-<p><strong>Security:</strong> GitHub&#39;s built-in CodeQL scanning is enabled for static code analysis and vulnerability detection.</p>
+<p><strong>Security:</strong> GitHub&#39;s CodeQL &quot;Default setup&quot; is enabled for automatic security analysis on every push and PR.</p>
 <h2>📐 Architecture Principles</h2>
 <h3>Standalone Components</h3>
 <p>All components are standalone, eliminating the need for NgModules:</p>
@@ -389,10 +382,18 @@ export class FeatureComponent {}</code></pre></div><h3>Signals</h3>
 <h2>📚 Documentation</h2>
 <ul>
 <li><strong><a href="./IMPLEMENTATION_PLAN.md">Implementation Plan</a></strong> - Phased development roadmap</li>
+<li><strong><a href="./ARCHITECTURE.md">Architecture</a></strong> - System architecture and design decisions</li>
 <li><strong><a href="./.github/copilot-instructions.md">Copilot Instructions</a></strong> - AI coding assistant guidelines</li>
+<li><strong><a href="./.claude/README.md">Claude Code Commands</a></strong> - Claude Code slash commands and configuration</li>
 <li><strong><a href="./e2e/README.md">E2E Testing Guide</a></strong> - Playwright testing documentation</li>
 <li><strong><a href="./src/environments/README.md">Environment Configuration</a></strong> - Environment setup and configuration</li>
 <li><strong><a href="./src/app/shared/constants/README.md">Constants Documentation</a></strong> - Application constants usage guide</li>
+</ul>
+<h3>AI Coding Assistants</h3>
+<p>This project is optimized for AI-assisted development:</p>
+<ul>
+<li><strong>GitHub Copilot</strong>: See <a href="./.github/copilot-instructions.md">.github/copilot-instructions.md</a> for comprehensive coding guidelines</li>
+<li><strong>Claude Code</strong>: See <a href="./.claude/README.md">.claude/README.md</a> for available slash commands like <code>/new-component</code>, <code>/accessibility-check</code>, <code>/review-pr</code>, and more</li>
 </ul>
 <h2>🚀 Deployment</h2>
 <p>This project is deployed to <strong>GitHub Pages</strong> with automated CI/CD via GitHub Actions.</p>

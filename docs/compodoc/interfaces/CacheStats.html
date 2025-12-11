@@ -1,0 +1,849 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  CacheStats</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/services/cache/cache.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Cache statistics</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#hitRate" 
+>
+                                            hitRate
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#hits" 
+>
+                                            hits
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#misses" 
+>
+                                            misses
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#size" 
+>
+                                            size
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="hitRate"></a>
+                                        <span class="name "><b>hitRate</b>
+                                            <a href="#hitRate">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>hitRate:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Hit rate percentage</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="hits"></a>
+                                        <span class="name "><b>hits</b>
+                                            <a href="#hits">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>hits:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Number of cache hits</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="misses"></a>
+                                        <span class="name "><b>misses</b>
+                                            <a href="#misses">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>misses:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Number of cache misses</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="size"></a>
+                                        <span class="name "><b>size</b>
+                                            <a href="#size">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>size:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Number of items in cache</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, signal } from &#x27;@angular/core&#x27;;
+
+/**
+ * Cache entry with value and expiration time
+ */
+interface CacheEntry&lt;T&gt; {
+  /** Cached value */
+  value: T;
+  /** Expiration timestamp (ms since epoch) */
+  expiresAt: number;
+}
+
+/**
+ * Cache configuration options
+ */
+export interface CacheOptions {
+  /** Time-to-live in milliseconds (default: 5 minutes) */
+  ttl?: number;
+  /** Whether to use localStorage as fallback (default: false) */
+  useLocalStorage?: boolean;
+  /** Storage key prefix for localStorage (default: &#x27;cache_&#x27;) */
+  storagePrefix?: string;
+}
+
+/**
+ * Cache statistics
+ */
+export interface CacheStats {
+  /** Number of items in cache */
+  size: number;
+  /** Number of cache hits */
+  hits: number;
+  /** Number of cache misses */
+  misses: number;
+  /** Hit rate percentage */
+  hitRate: number;
+}
+
+/**
+ * In-memory caching service with TTL support and optional localStorage fallback
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * export class DataService {
+ *   private cacheService &#x3D; inject(CacheService);
+ *
+ *   async getUserData(userId: string) {
+ *     const cacheKey &#x3D; &#x60;user_${userId}&#x60;;
+ *     const cached &#x3D; this.cacheService.get&lt;User&gt;(cacheKey);
+ *
+ *     if (cached) {
+ *       return cached;
+ *     }
+ *
+ *     const data &#x3D; await this.fetchUserData(userId);
+ *     this.cacheService.set(cacheKey, data, { ttl: 300000 }); // 5 minutes
+ *     return data;
+ *   }
+ * }
+ * &#x60;&#x60;&#x60;
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class CacheService {
+  /** In-memory cache storage */
+  private cache &#x3D; new Map&lt;string, CacheEntry&lt;unknown&gt;&gt;();
+
+  /** Cache hit counter */
+  private readonly _hits &#x3D; signal(0);
+
+  /** Cache miss counter */
+  private readonly _misses &#x3D; signal(0);
+
+  /** Default TTL in milliseconds (5 minutes) */
+  private readonly DEFAULT_TTL &#x3D; 5 * 60 * 1000;
+
+  /** Default storage prefix */
+  private readonly DEFAULT_STORAGE_PREFIX &#x3D; &#x27;cache_&#x27;;
+
+  /** Cleanup interval ID */
+  private cleanupIntervalId?: number;
+
+  /** Whether localStorage is available */
+  private hasLocalStorage &#x3D; this.checkLocalStorageAvailability();
+
+  /** Public read-only signals for stats */
+  readonly hits &#x3D; this._hits.asReadonly();
+  readonly misses &#x3D; this._misses.asReadonly();
+
+  constructor() {
+    // Start periodic cleanup (every minute)
+    this.startPeriodicCleanup();
+  }
+
+  /**
+   * Get a value from the cache
+   * @param key - Cache key
+   * @returns Cached value or null if not found or expired
+   */
+  get&lt;T&gt;(key: string): T | null {
+    // Try in-memory cache first
+    const entry &#x3D; this.cache.get(key) as CacheEntry&lt;T&gt; | undefined;
+
+    if (entry) {
+      // Check if expired
+      if (Date.now() &gt; entry.expiresAt) {
+        this.cache.delete(key);
+        this._misses.update((count) &#x3D;&gt; count + 1);
+        return null;
+      }
+
+      this._hits.update((count) &#x3D;&gt; count + 1);
+      return entry.value;
+    }
+
+    // Try localStorage fallback
+    const storedValue &#x3D; this.getFromLocalStorage&lt;T&gt;(key);
+    if (storedValue) {
+      // Restore to in-memory cache
+      this.cache.set(key, storedValue as CacheEntry&lt;unknown&gt;);
+      this._hits.update((count) &#x3D;&gt; count + 1);
+      return storedValue.value;
+    }
+
+    this._misses.update((count) &#x3D;&gt; count + 1);
+    return null;
+  }
+
+  /**
+   * Set a value in the cache
+   * @param key - Cache key
+   * @param value - Value to cache
+   * @param options - Cache options (ttl, useLocalStorage)
+   */
+  set&lt;T&gt;(key: string, value: T, options?: CacheOptions): void {
+    const ttl &#x3D; options?.ttl ?? this.DEFAULT_TTL;
+    const useLocalStorage &#x3D; options?.useLocalStorage ?? false;
+
+    const entry: CacheEntry&lt;T&gt; &#x3D; {
+      value,
+      expiresAt: Date.now() + ttl,
+    };
+
+    // Store in memory
+    this.cache.set(key, entry as CacheEntry&lt;unknown&gt;);
+
+    // Store in localStorage if enabled
+    if (useLocalStorage &amp;&amp; this.hasLocalStorage) {
+      this.setInLocalStorage(key, entry, options);
+    }
+  }
+
+  /**
+   * Check if a key exists in the cache and is not expired
+   * @param key - Cache key
+   * @returns True if key exists and is valid
+   */
+  has(key: string): boolean {
+    const entry &#x3D; this.cache.get(key);
+
+    if (!entry) {
+      return false;
+    }
+
+    // Check if expired
+    if (Date.now() &gt; entry.expiresAt) {
+      this.cache.delete(key);
+      return false;
+    }
+
+    return true;
+  }
+
+  /**
+   * Delete a specific key from the cache
+   * @param key - Cache key
+   * @returns True if key was deleted
+   */
+  delete(key: string): boolean {
+    // Delete from memory
+    const deleted &#x3D; this.cache.delete(key);
+
+    // Delete from localStorage
+    if (this.hasLocalStorage) {
+      this.deleteFromLocalStorage(key);
+    }
+
+    return deleted;
+  }
+
+  /**
+   * Clear all cached entries
+   */
+  clear(): void {
+    this.cache.clear();
+
+    // Clear localStorage entries with our prefix
+    if (this.hasLocalStorage) {
+      this.clearLocalStorage();
+    }
+
+    // Reset stats
+    this._hits.set(0);
+    this._misses.set(0);
+  }
+
+  /**
+   * Clear all expired entries from the cache
+   * @returns Number of entries removed
+   */
+  clearExpired(): number {
+    const now &#x3D; Date.now();
+    let removedCount &#x3D; 0;
+
+    this.cache.forEach((entry, key) &#x3D;&gt; {
+      if (now &gt; entry.expiresAt) {
+        this.cache.delete(key);
+        removedCount++;
+      }
+    });
+
+    return removedCount;
+  }
+
+  /**
+   * Get cache statistics
+   * @returns Cache stats object
+   */
+  getStats(): CacheStats {
+    const hits &#x3D; this._hits();
+    const misses &#x3D; this._misses();
+    const total &#x3D; hits + misses;
+
+    return {
+      size: this.cache.size,
+      hits,
+      misses,
+      hitRate: total &gt; 0 ? (hits / total) * 100 : 0,
+    };
+  }
+
+  /**
+   * Get all cache keys
+   * @returns Array of cache keys
+   */
+  keys(): string[] {
+    return Array.from(this.cache.keys());
+  }
+
+  /**
+   * Get the number of items in the cache
+   * @returns Cache size
+   */
+  size(): number {
+    return this.cache.size;
+  }
+
+  /**
+   * Reset statistics counters
+   */
+  resetStats(): void {
+    this._hits.set(0);
+    this._misses.set(0);
+  }
+
+  /**
+   * Stop periodic cleanup (called on service destroy)
+   */
+  stopPeriodicCleanup(): void {
+    if (this.cleanupIntervalId !&#x3D;&#x3D; undefined) {
+      clearInterval(this.cleanupIntervalId);
+      this.cleanupIntervalId &#x3D; undefined;
+    }
+  }
+
+  /**
+   * Start periodic cleanup of expired entries
+   */
+  private startPeriodicCleanup(): void {
+    // Clean up expired entries every minute
+    this.cleanupIntervalId &#x3D; window.setInterval(() &#x3D;&gt; {
+      this.clearExpired();
+    }, 60000);
+  }
+
+  /**
+   * Check if localStorage is available
+   * @returns True if localStorage is available
+   */
+  private checkLocalStorageAvailability(): boolean {
+    try {
+      const testKey &#x3D; &#x27;__cache_test__&#x27;;
+      localStorage.setItem(testKey, &#x27;test&#x27;);
+      localStorage.removeItem(testKey);
+      return true;
+    } catch {
+      return false;
+    }
+  }
+
+  /**
+   * Get value from localStorage
+   * @param key - Cache key
+   * @returns Cache entry or null
+   */
+  private getFromLocalStorage&lt;T&gt;(key: string): CacheEntry&lt;T&gt; | null {
+    if (!this.hasLocalStorage) {
+      return null;
+    }
+
+    try {
+      const stored &#x3D; localStorage.getItem(this.getStorageKey(key));
+      if (!stored) {
+        return null;
+      }
+
+      const entry &#x3D; JSON.parse(stored) as CacheEntry&lt;T&gt;;
+
+      // Check if expired
+      if (Date.now() &gt; entry.expiresAt) {
+        localStorage.removeItem(this.getStorageKey(key));
+        return null;
+      }
+
+      return entry;
+    } catch {
+      return null;
+    }
+  }
+
+  /**
+   * Set value in localStorage
+   * @param key - Cache key
+   * @param entry - Cache entry
+   * @param options - Cache options
+   */
+  private setInLocalStorage&lt;T&gt;(
+    key: string,
+    entry: CacheEntry&lt;T&gt;,
+    options?: CacheOptions
+  ): void {
+    if (!this.hasLocalStorage) {
+      return;
+    }
+
+    try {
+      const storageKey &#x3D; this.getStorageKey(key, options?.storagePrefix);
+      localStorage.setItem(storageKey, JSON.stringify(entry));
+    } catch {
+      // Quota exceeded or other error - silently fail
+    }
+  }
+
+  /**
+   * Delete value from localStorage
+   * @param key - Cache key
+   */
+  private deleteFromLocalStorage(key: string): void {
+    if (!this.hasLocalStorage) {
+      return;
+    }
+
+    try {
+      localStorage.removeItem(this.getStorageKey(key));
+    } catch {
+      // Silently fail
+    }
+  }
+
+  /**
+   * Clear all cache entries from localStorage
+   */
+  private clearLocalStorage(): void {
+    if (!this.hasLocalStorage) {
+      return;
+    }
+
+    try {
+      const keysToRemove: string[] &#x3D; [];
+
+      for (let i &#x3D; 0; i &lt; localStorage.length; i++) {
+        const key &#x3D; localStorage.key(i);
+        if (key?.startsWith(this.DEFAULT_STORAGE_PREFIX)) {
+          keysToRemove.push(key);
+        }
+      }
+
+      keysToRemove.forEach((key) &#x3D;&gt; localStorage.removeItem(key));
+    } catch {
+      // Silently fail
+    }
+  }
+
+  /**
+   * Get storage key with prefix
+   * @param key - Cache key
+   * @param prefix - Optional custom prefix
+   * @returns Storage key with prefix
+   */
+  private getStorageKey(key: string, prefix?: string): string {
+    return &#x60;${prefix ?? this.DEFAULT_STORAGE_PREFIX}${key}&#x60;;
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'CacheStats.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

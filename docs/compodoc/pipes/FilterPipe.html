@@ -1,0 +1,734 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content pipe">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Pipes</li>
+  <li class="breadcrumb-item" >FilterPipe</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/pipes/filter/filter.pipe.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>FilterPipe</p>
+<p>Filters an array based on a predicate function or property matching.</p>
+<h2>Features</h2>
+<ul>
+<li><strong>IMPURE PIPE</strong>: Runs on every change detection cycle to detect array mutations</li>
+<li>Supports custom predicate functions for flexible filtering</li>
+<li>Supports simple property-value matching</li>
+<li>Type-safe with strict TypeScript</li>
+<li>Handles null/undefined gracefully</li>
+<li>Returns empty array for invalid inputs</li>
+</ul>
+<h2>⚠️ Performance Warning</h2>
+<p>This is an <strong>impure pipe</strong> (pure: false), meaning it runs on every change detection
+cycle. Use sparingly and consider these alternatives:</p>
+<ul>
+<li><strong>Preferred</strong>: Filter in component using computed signals or methods</li>
+<li><strong>Alternative</strong>: Use *ngFor with trackBy and filter in component</li>
+<li><strong>Acceptable</strong>: Use this pipe for small arrays or infrequent filtering</li>
+</ul>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// ✅ PREFERRED: Filter in component with computed signal
+filteredItems = computed(() =&gt; {
+  return this.items().filter(item =&gt; item.active);
+});
+
+// ❌ AVOID: Impure pipe runs on every change detection
+&lt;div *ngFor=&quot;let item of items | filter:predicate&quot;&gt;</code></pre></div><h2>Usage</h2>
+<h3>With Predicate Function</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;div *ngFor=&quot;let item of items | filter:isActive&quot;&gt;
+  {{ item.name }}
+&lt;/div&gt;</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">&#64;Component({
+  template: `...`,
+  imports: [FilterPipe, CommonModule]
+})
+export class MyComponent {
+  items = [
+    { name: &#39;Item 1&#39;, active: true },
+    { name: &#39;Item 2&#39;, active: false },
+  ];
+
+  isActive = (item: any) =&gt; item.active;
+}</code></pre></div><h3>With Property Matching</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;div *ngFor=&quot;let user of users | filter:&#39;status&#39;:&#39;active&#39;&quot;&gt;
+  {{ user.name }}
+&lt;/div&gt;</code></pre></div><h3>With Search Text</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;input [(ngModel)]=&quot;searchText&quot; placeholder=&quot;Search...&quot;&gt;
+&lt;div *ngFor=&quot;let item of items | filter:&#39;name&#39;:searchText&quot;&gt;
+  {{ item.name }}
+&lt;/div&gt;</code></pre></div><h2>Type Safety</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">interface User {
+  name: string;
+  active: boolean;
+}
+
+// Type-safe predicate
+filterActive = (user: User) =&gt; user.active;
+
+// In template
+&lt;div *ngFor=&quot;let user of users | filter:filterActive&quot;&gt;</code></pre></div><h2>Examples</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;!-- Filter by boolean property --&gt;
+&lt;div *ngFor=&quot;let item of items | filter:&#39;active&#39;:true&quot;&gt;
+
+&lt;!-- Filter by string match (case-insensitive) --&gt;
+&lt;div *ngFor=&quot;let item of items | filter:&#39;category&#39;:&#39;electronics&#39;&quot;&gt;
+
+&lt;!-- Filter with custom function --&gt;
+&lt;div *ngFor=&quot;let item of items | filter:customFilter&quot;&gt;
+
+&lt;!-- Filter with search text --&gt;
+&lt;input [(ngModel)]=&quot;query&quot;&gt;
+&lt;div *ngFor=&quot;let item of items | filter:&#39;title&#39;:query&quot;&gt;</code></pre></div><h2>Null/Undefined Handling</h2>
+<p>Returns empty array for null/undefined:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;div *ngFor=&quot;let item of nullArray | filter:predicate&quot;&gt;
+&lt;!-- No items rendered --&gt;
+&lt;/div&gt;</code></pre></div><h2>Best Practices</h2>
+<h3>✅ DO: Use for small, static arrays</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">const categories = [&#39;all&#39;, &#39;active&#39;, &#39;archived&#39;];
+filteredCategories = categories.filter(...);</code></pre></div><h3>✅ DO: Combine with trackBy for better performance</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;div *ngFor=&quot;let item of items | filter:predicate; trackBy: trackById&quot;&gt;</code></pre></div><h3>❌ AVOID: Large arrays or frequent updates</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;!-- Avoid: 1000+ items filtered on every change --&gt;
+&lt;div *ngFor=&quot;let item of largeArray | filter:predicate&quot;&gt;</code></pre></div><h3>❌ AVOID: Complex filtering logic in templates</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;!-- Avoid: Move complex logic to component --&gt;
+&lt;div *ngFor=&quot;let item of items | filter:complexPredicate&quot;&gt;</code></pre></div><h2>Alternative: Filter in Component</h2>
+<p>For better performance, filter in your component:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">&#64;Component({
+  template: `
+    &lt;div *ngFor=&quot;let item of filteredItems()&quot;&gt;
+      {{ item.name }}
+    &lt;/div&gt;
+  `
+})
+export class MyComponent {
+  items = signal([...]);
+  searchTerm = signal(&#39;&#39;);
+
+  filteredItems = computed(() =&gt; {
+    const term = this.searchTerm().toLowerCase();
+    return this.items().filter(item =&gt;
+      item.name.toLowerCase().includes(term)
+    );
+  });
+}</code></pre></div><p>See <a href="https://angular.dev/guide/pipes">https://angular.dev/guide/pipes</a></p>
+
+            </p>
+
+
+        <section data-compodoc="block-metadata">
+            <h3>Metadata</h3>
+            <table class="table table-sm table-hover metadata">
+                <tbody>
+                    <tr>
+                        <td class="col-md-3">Name</td>
+                        <td class="col-md-9">filter</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-3">Standalone</td>
+                        <td class="col-md-9"><code>true</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="transform"></a>
+                    <span class="name">
+                        <span ><b>transform</b></span>
+                        <a href="#transform"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>transform(array: T[] | null | undefined, predicateOrProperty?: unknown | string, value?: unknown)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="195"
+                                    class="link-to-prism">src/app/shared/pipes/filter/filter.pipe.ts:195</a></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>T</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Filters an array based on a predicate or property matching.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// With predicate function
+{{ items | filter:isActive }}
+
+
+// With property matching
+{{ items | filter:&#39;status&#39;:&#39;active&#39; }}
+
+
+// With search text
+{{ items | filter:&#39;name&#39;:searchQuery }}</code></pre></div></div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>array</td>
+                                            <td>
+                                                        <code>T[] | null | undefined</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>The array to filter</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>predicateOrProperty</td>
+                                            <td>
+                                                        <code>unknown | string</code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Predicate function or property name to filter by</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>value</td>
+                                            <td>
+                                                        <code>unknown</code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+
+                                            <td>
+                                                    <ul>
+<li>Value to match (when predicateOrProperty is a property name)</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>T[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Filtered array or empty array for null/undefined</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import type { PipeTransform } from &#x27;@angular/core&#x27;;
+import { Pipe } from &#x27;@angular/core&#x27;;
+
+/**
+ * FilterPipe
+ *
+ * Filters an array based on a predicate function or property matching.
+ *
+ * ## Features
+ * - **IMPURE PIPE**: Runs on every change detection cycle to detect array mutations
+ * - Supports custom predicate functions for flexible filtering
+ * - Supports simple property-value matching
+ * - Type-safe with strict TypeScript
+ * - Handles null/undefined gracefully
+ * - Returns empty array for invalid inputs
+ *
+ * ## ⚠️ Performance Warning
+ *
+ * This is an **impure pipe** (pure: false), meaning it runs on every change detection
+ * cycle. Use sparingly and consider these alternatives:
+ *
+ * - **Preferred**: Filter in component using computed signals or methods
+ * - **Alternative**: Use *ngFor with trackBy and filter in component
+ * - **Acceptable**: Use this pipe for small arrays or infrequent filtering
+ *
+ * &#x60;&#x60;&#x60;typescript
+ * // ✅ PREFERRED: Filter in component with computed signal
+ * filteredItems &#x3D; computed(() &#x3D;&gt; {
+ *   return this.items().filter(item &#x3D;&gt; item.active);
+ * });
+ *
+ * // ❌ AVOID: Impure pipe runs on every change detection
+ * &lt;div *ngFor&#x3D;&quot;let item of items | filter:predicate&quot;&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ## Usage
+ *
+ * ### With Predicate Function
+ * &#x60;&#x60;&#x60;html
+ * &lt;div *ngFor&#x3D;&quot;let item of items | filter:isActive&quot;&gt;
+ *   {{ item.name }}
+ * &lt;/div&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;typescript
+ * @Component({
+ *   template: &#x60;...&#x60;,
+ *   imports: [FilterPipe, CommonModule]
+ * })
+ * export class MyComponent {
+ *   items &#x3D; [
+ *     { name: &#x27;Item 1&#x27;, active: true },
+ *     { name: &#x27;Item 2&#x27;, active: false },
+ *   ];
+ *
+ *   isActive &#x3D; (item: any) &#x3D;&gt; item.active;
+ * }
+ * &#x60;&#x60;&#x60;
+ *
+ * ### With Property Matching
+ * &#x60;&#x60;&#x60;html
+ * &lt;div *ngFor&#x3D;&quot;let user of users | filter:&#x27;status&#x27;:&#x27;active&#x27;&quot;&gt;
+ *   {{ user.name }}
+ * &lt;/div&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ### With Search Text
+ * &#x60;&#x60;&#x60;html
+ * &lt;input [(ngModel)]&#x3D;&quot;searchText&quot; placeholder&#x3D;&quot;Search...&quot;&gt;
+ * &lt;div *ngFor&#x3D;&quot;let item of items | filter:&#x27;name&#x27;:searchText&quot;&gt;
+ *   {{ item.name }}
+ * &lt;/div&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ## Type Safety
+ *
+ * &#x60;&#x60;&#x60;typescript
+ * interface User {
+ *   name: string;
+ *   active: boolean;
+ * }
+ *
+ * // Type-safe predicate
+ * filterActive &#x3D; (user: User) &#x3D;&gt; user.active;
+ *
+ * // In template
+ * &lt;div *ngFor&#x3D;&quot;let user of users | filter:filterActive&quot;&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ## Examples
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;!-- Filter by boolean property --&gt;
+ * &lt;div *ngFor&#x3D;&quot;let item of items | filter:&#x27;active&#x27;:true&quot;&gt;
+ *
+ * &lt;!-- Filter by string match (case-insensitive) --&gt;
+ * &lt;div *ngFor&#x3D;&quot;let item of items | filter:&#x27;category&#x27;:&#x27;electronics&#x27;&quot;&gt;
+ *
+ * &lt;!-- Filter with custom function --&gt;
+ * &lt;div *ngFor&#x3D;&quot;let item of items | filter:customFilter&quot;&gt;
+ *
+ * &lt;!-- Filter with search text --&gt;
+ * &lt;input [(ngModel)]&#x3D;&quot;query&quot;&gt;
+ * &lt;div *ngFor&#x3D;&quot;let item of items | filter:&#x27;title&#x27;:query&quot;&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ## Null/Undefined Handling
+ *
+ * Returns empty array for null/undefined:
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;div *ngFor&#x3D;&quot;let item of nullArray | filter:predicate&quot;&gt;
+ * &lt;!-- No items rendered --&gt;
+ * &lt;/div&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ## Best Practices
+ *
+ * ### ✅ DO: Use for small, static arrays
+ * &#x60;&#x60;&#x60;typescript
+ * const categories &#x3D; [&#x27;all&#x27;, &#x27;active&#x27;, &#x27;archived&#x27;];
+ * filteredCategories &#x3D; categories.filter(...);
+ * &#x60;&#x60;&#x60;
+ *
+ * ### ✅ DO: Combine with trackBy for better performance
+ * &#x60;&#x60;&#x60;html
+ * &lt;div *ngFor&#x3D;&quot;let item of items | filter:predicate; trackBy: trackById&quot;&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ### ❌ AVOID: Large arrays or frequent updates
+ * &#x60;&#x60;&#x60;html
+ * &lt;!-- Avoid: 1000+ items filtered on every change --&gt;
+ * &lt;div *ngFor&#x3D;&quot;let item of largeArray | filter:predicate&quot;&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ### ❌ AVOID: Complex filtering logic in templates
+ * &#x60;&#x60;&#x60;html
+ * &lt;!-- Avoid: Move complex logic to component --&gt;
+ * &lt;div *ngFor&#x3D;&quot;let item of items | filter:complexPredicate&quot;&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ## Alternative: Filter in Component
+ *
+ * For better performance, filter in your component:
+ *
+ * &#x60;&#x60;&#x60;typescript
+ * @Component({
+ *   template: &#x60;
+ *     &lt;div *ngFor&#x3D;&quot;let item of filteredItems()&quot;&gt;
+ *       {{ item.name }}
+ *     &lt;/div&gt;
+ *   &#x60;
+ * })
+ * export class MyComponent {
+ *   items &#x3D; signal([...]);
+ *   searchTerm &#x3D; signal(&#x27;&#x27;);
+ *
+ *   filteredItems &#x3D; computed(() &#x3D;&gt; {
+ *     const term &#x3D; this.searchTerm().toLowerCase();
+ *     return this.items().filter(item &#x3D;&gt;
+ *       item.name.toLowerCase().includes(term)
+ *     );
+ *   });
+ * }
+ * &#x60;&#x60;&#x60;
+ *
+ * @see {@link https://angular.dev/guide/pipes}
+ */
+@Pipe({
+  name: &#x27;filter&#x27;,
+  standalone: true,
+  pure: false, // Impure pipe to detect array changes
+})
+export class FilterPipe implements PipeTransform {
+  /**
+   * Filters an array based on a predicate or property matching.
+   *
+   * @param array - The array to filter
+   * @param predicateOrProperty - Predicate function or property name to filter by
+   * @param value - Value to match (when predicateOrProperty is a property name)
+   * @returns Filtered array or empty array for null/undefined
+   *
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * // With predicate function
+   * {{ items | filter:isActive }}
+   *
+   * // With property matching
+   * {{ items | filter:&#x27;status&#x27;:&#x27;active&#x27; }}
+   *
+   * // With search text
+   * {{ items | filter:&#x27;name&#x27;:searchQuery }}
+   * &#x60;&#x60;&#x60;
+   */
+  transform&lt;T&gt;(
+    array: T[] | null | undefined,
+    predicateOrProperty?: ((item: T) &#x3D;&gt; boolean) | string,
+    value?: unknown,
+  ): T[] {
+    if (!array || !Array.isArray(array)) {
+      return [];
+    }
+
+    if (!predicateOrProperty) {
+      return array;
+    }
+
+    // If predicateOrProperty is a function, use it as predicate
+    if (typeof predicateOrProperty &#x3D;&#x3D;&#x3D; &#x27;function&#x27;) {
+      return array.filter(predicateOrProperty);
+    }
+
+    // If predicateOrProperty is a string, filter by property value
+    if (typeof predicateOrProperty &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+      const property &#x3D; predicateOrProperty as keyof T;
+
+      // If no value provided, filter by truthy property values
+      if (value &#x3D;&#x3D;&#x3D; undefined || value &#x3D;&#x3D;&#x3D; null) {
+        return array.filter((item) &#x3D;&gt; !!item[property]);
+      }
+
+      // If value is a string, do case-insensitive partial match
+      if (typeof value &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+        const searchValue &#x3D; value.toLowerCase();
+        return array.filter((item) &#x3D;&gt; {
+          const itemValue &#x3D; item[property];
+          if (typeof itemValue &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+            return itemValue.toLowerCase().includes(searchValue);
+          }
+          return String(itemValue).toLowerCase().includes(searchValue);
+        });
+      }
+
+      // Exact match for non-string values
+      return array.filter((item) &#x3D;&gt; item[property] &#x3D;&#x3D;&#x3D; value);
+    }
+
+    return array;
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'pipe';
+            var COMPODOC_CURRENT_PAGE_URL = 'FilterPipe.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

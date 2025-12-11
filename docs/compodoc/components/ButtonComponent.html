@@ -1,0 +1,1540 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ButtonComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#styleData" class="nav-link"
+                role="tab" id="styleData-tab" data-bs-toggle="tab" data-link="style">Styles</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/shared/components/button/button.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Accessible button component with multiple variants and sizes.
+Follows WCAG 2.1 AAA guidelines and integrates with the theme system.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;!-- Primary button --&gt;
+&lt;app-button variant=&quot;primary&quot; ariaLabel=&quot;Submit form&quot;&gt;Submit&lt;/app-button&gt;
+
+
+&lt;!-- Icon-only button --&gt;
+&lt;app-button variant=&quot;ghost&quot; iconOnly ariaLabel=&quot;Close dialog&quot;&gt;×&lt;/app-button&gt;
+
+
+&lt;!-- Loading state --&gt;
+&lt;app-button [loading]=&quot;isSubmitting()&quot; ariaLabel=&quot;Save changes&quot;&gt;Save&lt;/app-button&gt;</code></pre></div>
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-button</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                                <code><a href="../components/ButtonContentComponent.html" target="_self" >ButtonContentComponent</a></code>
+                </td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">styleUrls</td>
+                <td class="col-md-9"><code>./button.component.scss</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./button.component.html</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#ariaBusyValue" >ariaBusyValue</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#buttonClasses" >buttonClasses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isInteractive" >isInteractive</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_getButtonClasses" >_getButtonClasses</a>
+                            </li>
+                            <li>
+                                <a href="#handleClick" >handleClick</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#ariaDescribedBy" >ariaDescribedBy</a>
+                            </li>
+                            <li>
+                                <a href="#ariaLabel" >ariaLabel</a>
+                            </li>
+                            <li>
+                                <a href="#ariaPressed" >ariaPressed</a>
+                            </li>
+                            <li>
+                                <a href="#disabled" >disabled</a>
+                            </li>
+                            <li>
+                                <a href="#fullWidth" >fullWidth</a>
+                            </li>
+                            <li>
+                                <a href="#iconLeft" >iconLeft</a>
+                            </li>
+                            <li>
+                                <a href="#iconOnly" >iconOnly</a>
+                            </li>
+                            <li>
+                                <a href="#iconRight" >iconRight</a>
+                            </li>
+                            <li>
+                                <a href="#loading" >loading</a>
+                            </li>
+                            <li>
+                                <a href="#size" >size</a>
+                            </li>
+                            <li>
+                                <a href="#type" >type</a>
+                            </li>
+                            <li>
+                                <a href="#variant" >variant</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#clicked" >clicked</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ariaDescribedBy"></a>
+                        <b>ariaDescribedBy</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>undefined</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="102" class="link-to-prism">src/app/shared/components/button/button.component.ts:102</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>ID of element that describes the button
+Used for additional context beyond the label</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ariaLabel"></a>
+                        <b>ariaLabel</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="96" class="link-to-prism">src/app/shared/components/button/button.component.ts:96</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>ARIA label for the button (REQUIRED for accessibility)
+For icon-only buttons, this is the only text announced by screen readers
+For text buttons, this overrides the visible text for screen readers</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="ariaPressed"></a>
+                        <b>ariaPressed</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>boolean | undefined</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>undefined</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="107" class="link-to-prism">src/app/shared/components/button/button.component.ts:107</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the button is in a pressed/active state (for toggle buttons)</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="disabled"></a>
+                        <b>disabled</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="61" class="link-to-prism">src/app/shared/components/button/button.component.ts:61</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the button is disabled</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="fullWidth"></a>
+                        <b>fullWidth</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="89" class="link-to-prism">src/app/shared/components/button/button.component.ts:89</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the button should take full width of container</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="iconLeft"></a>
+                        <b>iconLeft</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>undefined</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="73" class="link-to-prism">src/app/shared/components/button/button.component.ts:73</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Icon identifier for left position
+Icon rendering will be implemented when icon system is added</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="iconOnly"></a>
+                        <b>iconOnly</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="84" class="link-to-prism">src/app/shared/components/button/button.component.ts:84</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether this is an icon-only button (no text content)</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="iconRight"></a>
+                        <b>iconRight</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>undefined</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="79" class="link-to-prism">src/app/shared/components/button/button.component.ts:79</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Icon identifier for right position
+Icon rendering will be implemented when icon system is added</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="loading"></a>
+                        <b>loading</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="67" class="link-to-prism">src/app/shared/components/button/button.component.ts:67</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the button is in loading state
+Shows spinner and disables interaction</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="size"></a>
+                        <b>size</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ButtonSize" target="_self" >ButtonSize</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;md&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="51" class="link-to-prism">src/app/shared/components/button/button.component.ts:51</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Size of the button</p>
+<ul>
+<li>sm: 32px height, 14px font</li>
+<li>md: 40px height, 16px font (default)</li>
+<li>lg: 48px height, 18px font</li>
+</ul>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="type"></a>
+                        <b>type</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ButtonType" target="_self" >ButtonType</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;button&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="56" class="link-to-prism">src/app/shared/components/button/button.component.ts:56</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>HTML button type attribute</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="variant"></a>
+                        <b>variant</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ButtonVariant" target="_self" >ButtonVariant</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;primary&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="43" class="link-to-prism">src/app/shared/components/button/button.component.ts:43</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Visual variant of the button</p>
+<ul>
+<li>primary: Main call-to-action (filled, high emphasis)</li>
+<li>secondary: Secondary actions (outlined, medium emphasis)</li>
+<li>tertiary: Less emphasis (text only with hover)</li>
+<li>ghost: Minimal emphasis (transparent with border)</li>
+<li>danger: Destructive actions (error color)</li>
+</ul>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="clicked"></a>
+                        <b>clicked</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>MouseEvent</code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="112" class="link-to-prism">src/app/shared/components/button/button.component.ts:112</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emitted when the button is clicked (if not disabled or loading)</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_getButtonClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_getButtonClasses</b></span>
+                        <a href="#_getButtonClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>_getButtonClasses()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="142"
+                                    class="link-to-prism">src/app/shared/components/button/button.component.ts:142</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Generate BEM CSS classes based on component state</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleClick"></a>
+                    <span class="name">
+                        <span ><b>handleClick</b></span>
+                        <a href="#handleClick"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleClick(event: MouseEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="133"
+                                    class="link-to-prism">src/app/shared/components/button/button.component.ts:133</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handle button click events
+Only emits if button is interactive (not disabled or loading)</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>MouseEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ariaBusyValue"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>ariaBusyValue</b></span>
+                        <a href="#ariaBusyValue"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; (this.loading() ? &#x27;true&#x27; : undefined))</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="127" class="link-to-prism">src/app/shared/components/button/button.component.ts:127</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed aria-busy attribute value</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="buttonClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>buttonClasses</b></span>
+                        <a href="#buttonClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this._getButtonClasses())</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="122" class="link-to-prism">src/app/shared/components/button/button.component.ts:122</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed CSS classes for the button</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isInteractive"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isInteractive</b></span>
+                        <a href="#isInteractive"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; !this.disabled() &amp;&amp; !this.loading())</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="117" class="link-to-prism">src/app/shared/components/button/button.component.ts:117</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Whether the button can be interacted with</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ChangeDetectionStrategy, Component, computed, input, output } from &#x27;@angular/core&#x27;;
+
+import { ButtonContentComponent } from &#x27;../button-content/button-content.component&#x27;;
+
+export type ButtonVariant &#x3D; &#x27;primary&#x27; | &#x27;secondary&#x27; | &#x27;tertiary&#x27; | &#x27;ghost&#x27; | &#x27;danger&#x27;;
+export type ButtonSize &#x3D; &#x27;sm&#x27; | &#x27;md&#x27; | &#x27;lg&#x27;;
+export type ButtonType &#x3D; &#x27;button&#x27; | &#x27;submit&#x27; | &#x27;reset&#x27;;
+
+/**
+ * Accessible button component with multiple variants and sizes.
+ * Follows WCAG 2.1 AAA guidelines and integrates with the theme system.
+ *
+ * @example
+ * &#x60;&#x60;&#x60;html
+ * &lt;!-- Primary button --&gt;
+ * &lt;app-button variant&#x3D;&quot;primary&quot; ariaLabel&#x3D;&quot;Submit form&quot;&gt;Submit&lt;/app-button&gt;
+ *
+ * &lt;!-- Icon-only button --&gt;
+ * &lt;app-button variant&#x3D;&quot;ghost&quot; iconOnly ariaLabel&#x3D;&quot;Close dialog&quot;&gt;×&lt;/app-button&gt;
+ *
+ * &lt;!-- Loading state --&gt;
+ * &lt;app-button [loading]&#x3D;&quot;isSubmitting()&quot; ariaLabel&#x3D;&quot;Save changes&quot;&gt;Save&lt;/app-button&gt;
+ * &#x60;&#x60;&#x60;
+ */
+@Component({
+  selector: &#x27;app-button&#x27;,
+  standalone: true,
+  imports: [CommonModule, ButtonContentComponent],
+  templateUrl: &#x27;./button.component.html&#x27;,
+  styleUrls: [&#x27;./button.component.scss&#x27;],
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ButtonComponent {
+  /**
+   * Visual variant of the button
+   * - primary: Main call-to-action (filled, high emphasis)
+   * - secondary: Secondary actions (outlined, medium emphasis)
+   * - tertiary: Less emphasis (text only with hover)
+   * - ghost: Minimal emphasis (transparent with border)
+   * - danger: Destructive actions (error color)
+   */
+  readonly variant &#x3D; input&lt;ButtonVariant&gt;(&#x27;primary&#x27;);
+
+  /**
+   * Size of the button
+   * - sm: 32px height, 14px font
+   * - md: 40px height, 16px font (default)
+   * - lg: 48px height, 18px font
+   */
+  readonly size &#x3D; input&lt;ButtonSize&gt;(&#x27;md&#x27;);
+
+  /**
+   * HTML button type attribute
+   */
+  readonly type &#x3D; input&lt;ButtonType&gt;(&#x27;button&#x27;);
+
+  /**
+   * Whether the button is disabled
+   */
+  readonly disabled &#x3D; input&lt;boolean&gt;(false);
+
+  /**
+   * Whether the button is in loading state
+   * Shows spinner and disables interaction
+   */
+  readonly loading &#x3D; input&lt;boolean&gt;(false);
+
+  /**
+   * Icon identifier for left position
+   * Icon rendering will be implemented when icon system is added
+   */
+  readonly iconLeft &#x3D; input&lt;string | undefined&gt;(undefined);
+
+  /**
+   * Icon identifier for right position
+   * Icon rendering will be implemented when icon system is added
+   */
+  readonly iconRight &#x3D; input&lt;string | undefined&gt;(undefined);
+
+  /**
+   * Whether this is an icon-only button (no text content)
+   */
+  readonly iconOnly &#x3D; input&lt;boolean&gt;(false);
+
+  /**
+   * Whether the button should take full width of container
+   */
+  readonly fullWidth &#x3D; input&lt;boolean&gt;(false);
+
+  /**
+   * ARIA label for the button (REQUIRED for accessibility)
+   * For icon-only buttons, this is the only text announced by screen readers
+   * For text buttons, this overrides the visible text for screen readers
+   */
+  readonly ariaLabel &#x3D; input.required&lt;string&gt;();
+
+  /**
+   * ID of element that describes the button
+   * Used for additional context beyond the label
+   */
+  readonly ariaDescribedBy &#x3D; input&lt;string | undefined&gt;(undefined);
+
+  /**
+   * Whether the button is in a pressed/active state (for toggle buttons)
+   */
+  readonly ariaPressed &#x3D; input&lt;boolean | undefined&gt;(undefined);
+
+  /**
+   * Emitted when the button is clicked (if not disabled or loading)
+   */
+  readonly clicked &#x3D; output&lt;MouseEvent&gt;();
+
+  /**
+   * Whether the button can be interacted with
+   */
+  readonly isInteractive &#x3D; computed(() &#x3D;&gt; !this.disabled() &amp;&amp; !this.loading());
+
+  /**
+   * Computed CSS classes for the button
+   */
+  readonly buttonClasses &#x3D; computed(() &#x3D;&gt; this._getButtonClasses());
+
+  /**
+   * Computed aria-busy attribute value
+   */
+  readonly ariaBusyValue &#x3D; computed(() &#x3D;&gt; (this.loading() ? &#x27;true&#x27; : undefined));
+
+  /**
+   * Handle button click events
+   * Only emits if button is interactive (not disabled or loading)
+   */
+  handleClick(event: MouseEvent): void {
+    if (this.isInteractive()) {
+      this.clicked.emit(event);
+    }
+  }
+
+  /**
+   * Generate BEM CSS classes based on component state
+   */
+  private _getButtonClasses(): string {
+    const classes &#x3D; [&#x27;btn&#x27;];
+
+    // Variant class
+    classes.push(&#x60;btn--${this.variant()}&#x60;);
+
+    // Size class
+    classes.push(&#x60;btn--${this.size()}&#x60;);
+
+    // State classes
+    if (this.disabled()) {
+      classes.push(&#x27;btn--disabled&#x27;);
+    }
+    if (this.loading()) {
+      classes.push(&#x27;btn--loading&#x27;);
+    }
+    if (this.iconOnly()) {
+      classes.push(&#x27;btn--icon-only&#x27;);
+    }
+    if (this.fullWidth()) {
+      classes.push(&#x27;btn--full-width&#x27;);
+    }
+
+    return classes.join(&#x27; &#x27;);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;button
+  [type]&#x3D;&quot;type()&quot;
+  [class]&#x3D;&quot;buttonClasses()&quot;
+  [disabled]&#x3D;&quot;disabled() || loading()&quot;
+  [attr.aria-label]&#x3D;&quot;ariaLabel()&quot;
+  [attr.aria-describedby]&#x3D;&quot;ariaDescribedBy()&quot;
+  [attr.aria-pressed]&#x3D;&quot;ariaPressed()&quot;
+  [attr.aria-busy]&#x3D;&quot;ariaBusyValue()&quot;
+  [attr.aria-disabled]&#x3D;&quot;disabled() ? &#x27;true&#x27; : undefined&quot;
+  (click)&#x3D;&quot;handleClick($event)&quot;
+&gt;
+  &lt;app-button-content
+    [loading]&#x3D;&quot;loading()&quot;
+    [iconLeft]&#x3D;&quot;iconLeft()&quot;
+    [iconRight]&#x3D;&quot;iconRight()&quot;
+    [iconOnly]&#x3D;&quot;iconOnly()&quot;
+  &gt;
+    &lt;ng-content /&gt;
+  &lt;/app-button-content&gt;
+&lt;/button&gt;
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="styleData">
+                <p class="comment">
+                    <code>./button.component.scss</code>
+                </p>
+                <pre class="line-numbers"><code class="language-scss">.btn {
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: var(--spacing-sm);
+  padding: 0 var(--spacing-lg);
+  min-height: 40px;
+  min-width: 80px;
+  border: none;
+  border-radius: var(--border-radius);
+  font: var(--font-weight-medium) var(--font-size-base)/1.5 var(--font-family-base);
+  white-space: nowrap;
+  cursor: pointer;
+  user-select: none;
+  transition: all var(--transition-duration) var(--transition-timing);
+
+  @media (pointer: coarse) {
+    min-height: 44px;
+  }
+
+  &amp;:focus {
+    outline: none;
+  }
+
+  &amp;:focus-visible {
+    outline: 2px solid var(--color-primary);
+    outline-offset: 2px;
+  }
+
+  &amp;:not(:disabled):not(.btn--disabled):not(.btn--loading) {
+    &amp;:hover {
+      transform: translateY(-1px);
+      box-shadow: var(--shadow-sm);
+    }
+
+    &amp;:active {
+      transform: translateY(0);
+    }
+  }
+
+  &amp;:disabled,
+  &amp;--disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    pointer-events: none;
+  }
+
+  &amp;--loading {
+    cursor: wait;
+    pointer-events: none;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    transition: none;
+    &amp;:hover {
+      transform: none;
+    }
+  }
+  &amp;--primary,
+  &amp;--tertiary,
+  &amp;--danger {
+    border: 2px solid transparent;
+  }
+
+  &amp;--tertiary,
+  &amp;--ghost {
+    background-color: transparent;
+  }
+
+  &amp;--primary,
+  &amp;--danger {
+    color: var(--color-background);
+  }
+
+  &amp;--primary {
+    background-color: var(--color-primary);
+
+    &amp;:not(:disabled):not(.btn--disabled):not(.btn--loading) {
+      &amp;:hover {
+        background-color: var(--color-primary-hover);
+      }
+
+      &amp;:active {
+        background-color: var(--color-primary-active);
+      }
+    }
+  }
+
+  &amp;--secondary {
+    background-color: var(--color-surface);
+    color: var(--color-text);
+    border: 2px solid var(--color-border);
+
+    &amp;:not(:disabled):not(.btn--disabled):not(.btn--loading) {
+      &amp;:hover {
+        background-color: var(--color-surface-hover);
+        border-color: var(--color-border-hover);
+      }
+
+      &amp;:active {
+        background-color: var(--color-surface-active);
+      }
+    }
+  }
+
+  &amp;--tertiary {
+    color: var(--color-text-secondary);
+
+    &amp;:not(:disabled):not(.btn--disabled):not(.btn--loading) {
+      &amp;:hover {
+        background-color: var(--color-surface-hover);
+        color: var(--color-text);
+        text-decoration: underline;
+      }
+
+      &amp;:active {
+        background-color: var(--color-surface-active);
+      }
+    }
+  }
+
+  &amp;--ghost {
+    color: var(--color-text);
+    border: 1px solid var(--color-border);
+
+    &amp;:not(:disabled):not(.btn--disabled):not(.btn--loading) {
+      &amp;:hover {
+        background-color: var(--color-surface);
+        border-color: var(--color-border-hover);
+      }
+
+      &amp;:active {
+        background-color: var(--color-surface-hover);
+      }
+    }
+  }
+
+  &amp;--danger {
+    background-color: var(--color-error);
+
+    &amp;:not(:disabled):not(.btn--disabled):not(.btn--loading) {
+      &amp;:hover {
+        filter: brightness(0.9);
+      }
+
+      &amp;:active {
+        filter: brightness(0.8);
+      }
+    }
+
+    &amp;:focus-visible {
+      outline-color: var(--color-error);
+    }
+  }
+
+  &amp;--sm {
+    min-height: 32px;
+    min-width: 64px;
+    padding: 0 var(--spacing-md);
+    font-size: var(--font-size-sm);
+
+    &amp;.btn--icon-only {
+      width: 32px;
+    }
+  }
+
+  &amp;--md.btn--icon-only {
+    width: 40px;
+  }
+
+  &amp;--lg {
+    min-height: 48px;
+    min-width: 96px;
+    padding: 0 var(--spacing-xl);
+    font-size: var(--font-size-lg);
+
+    &amp;.btn--icon-only {
+      width: 48px;
+    }
+  }
+
+  &amp;--sm.btn--icon-only,
+  &amp;--md.btn--icon-only {
+    @media (pointer: coarse) {
+      width: 44px;
+    }
+  }
+
+  &amp;--full-width {
+    width: 100%;
+  }
+
+  &amp;--icon-only {
+    aspect-ratio: 1;
+    padding: 0;
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><button  [type]="type()"  [class]="buttonClasses()"  [disabled]="disabled() || loading()"  [attr.aria-label]="ariaLabel()"  [attr.aria-describedby]="ariaDescribedBy()"  [attr.aria-pressed]="ariaPressed()"  [attr.aria-busy]="ariaBusyValue()"  [attr.aria-disabled]="disabled() ? \'true\' : undefined"  (click)="handleClick($event)">  <app-button-content    [loading]="loading()"    [iconLeft]="iconLeft()"    [iconRight]="iconRight()"    [iconOnly]="iconOnly()"  >    <ng-content />  </app-button-content></button></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'BadgeComponent', 'selector': 'app-badge'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'ButtonContentComponent', 'selector': 'app-button-content'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CaseStudiesComponent', 'selector': 'app-case-studies'},{'name': 'CheckboxCheckmarkComponent', 'selector': 'app-checkbox-checkmark'},{'name': 'CheckboxComponent', 'selector': 'app-checkbox'},{'name': 'ContainerComponent', 'selector': 'app-container'},{'name': 'DividerComponent', 'selector': 'app-divider'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormFieldComponent', 'selector': 'app-form-field'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IconComponent', 'selector': 'app-icon'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputFooterComponent', 'selector': 'app-input-footer'},{'name': 'InputLabelComponent', 'selector': 'app-input-label'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'MainLayoutComponent', 'selector': 'app-main-layout'},{'name': 'ModalComponent', 'selector': 'app-modal'},{'name': 'RadioComponent', 'selector': 'app-radio'},{'name': 'SelectButtonComponent', 'selector': 'app-select-button'},{'name': 'SelectComponent', 'selector': 'app-select'},{'name': 'SelectDropdownComponent', 'selector': 'app-select-dropdown'},{'name': 'SelectOptionComponent', 'selector': 'app-select-option'},{'name': 'SkeletonComponent', 'selector': 'app-skeleton'},{'name': 'StackComponent', 'selector': 'app-stack'},{'name': 'TabButtonComponent', 'selector': 'app-tab-button'},{'name': 'TabComponent', 'selector': 'app-tab'},{'name': 'TabsComponent', 'selector': 'app-tabs'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'TextareaComponent', 'selector': 'app-textarea'},{'name': 'ThemePickerComponent', 'selector': 'app-theme-picker'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'ToastDemoComponent', 'selector': 'app-toast-demo'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ButtonComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ButtonComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -3,8 +3,7 @@ import { signal } from '@angular/core';
 import type { ComponentFixture } from '@angular/core/testing';
 import { TestBed } from '@angular/core/testing';
 
-import { THEMES } from '../../../../shared/constants/themes.constants';
-import { ThemeService } from '../../../../shared/services/theme.service';
+import { THEMES, ThemeService } from '@core/theme';
 
 import { ThemePickerComponent } from './theme-picker.component';
 
@@ -76,14 +75,14 @@ describe('ThemePickerComponent', () => {
     });
 
     it('should display correct icon for light theme', () => {
-      themeServiceMock.activeTheme.set(mockThemes.find(t => !t.isDark)!);
+      themeServiceMock.activeTheme.set(mockThemes.find((t) => !t.isDark)!);
       fixture.detectChanges();
 
       expect(component.currentIcon()).toBe('heroSun');
     });
 
     it('should display correct icon for dark theme', () => {
-      themeServiceMock.activeTheme.set(mockThemes.find(t => t.isDark)!);
+      themeServiceMock.activeTheme.set(mockThemes.find((t) => t.isDark)!);
       fixture.detectChanges();
 
       expect(component.currentIcon()).toBe('heroMoon');
@@ -290,7 +289,7 @@ describe('ThemePickerComponent', () => {
       fixture.detectChanges();
 
       // Wait for listeners to be set up
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 10));
 
       const removeEventListenerSpy = vi.spyOn(document, 'removeEventListener');
 
@@ -308,7 +307,7 @@ describe('ThemePickerComponent', () => {
       expect(component.isOpen()).toBe(true);
 
       // Wait for setTimeout in setupOutsideClickListener
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 10));
 
       const outsideElement = document.createElement('div');
       document.body.appendChild(outsideElement);
@@ -328,7 +327,7 @@ describe('ThemePickerComponent', () => {
       expect(component.isOpen()).toBe(true);
 
       // Wait for setTimeout in setupOutsideClickListener
-      await new Promise(resolve => setTimeout(resolve, 10));
+      await new Promise((resolve) => setTimeout(resolve, 10));
 
       const dropdown = fixture.nativeElement.querySelector('[data-test="theme-picker-dropdown"]');
       const clickEvent = new MouseEvent('click', { bubbles: true });
@@ -358,7 +357,9 @@ describe('ThemePickerComponent', () => {
       component.toggle();
       fixture.detectChanges();
 
-      const activeOption = fixture.nativeElement.querySelector(`[data-test="theme-option-${mockThemes[1].slug}"]`);
+      const activeOption = fixture.nativeElement.querySelector(
+        `[data-test="theme-option-${mockThemes[1].slug}"]`
+      );
       expect(activeOption?.classList.contains('theme-picker__option--active')).toBe(true);
     });
 
