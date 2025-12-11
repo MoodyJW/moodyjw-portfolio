@@ -1,0 +1,97 @@
+<header class="header">
+  <nav class="header__nav" aria-label="Main navigation">
+    <!-- Brand/Logo -->
+    <div class="header__brand">
+      <a
+        [routerLink]="ROUTE_PATHS.ROOT"
+        class="header__brand-link"
+        [attr.aria-label]="'Navigate to ' + APP_NAME + ' homepage'"
+      >
+        {{ APP_NAME }}
+      </a>
+    </div>
+
+    <!-- Desktop Navigation -->
+    <ul class="header__menu header__menu--desktop" role="menubar">
+      @for (item of NAV_ITEMS; track item.path) {
+      <li class="header__menu-item" role="none">
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="header__menu-link--active"
+          [attr.aria-label]="item.ariaLabel"
+          class="header__menu-link"
+          role="menuitem"
+        >
+          {{ item.label }}
+        </a>
+      </li>
+      }
+    </ul>
+
+    <app-theme-picker class="header__theme-picker" />
+
+    <!-- Mobile Menu Toggle Button -->
+    <app-button
+      variant="ghost"
+      size="md"
+      [ariaLabel]="isMobileMenuOpen() ? ARIA_LABELS.CLOSE + ' menu' : ARIA_LABELS.OPEN + ' menu'"
+      [attr.aria-expanded]="isMobileMenuOpen()"
+      [attr.data-test]="'menu-toggle'"
+      aria-controls="mobile-menu"
+      (click)="toggleMobileMenu()"
+      (keydown)="onMenuToggleKeydown($event)"
+      class="header__mobile-toggle"
+    >
+      <app-icon
+        [name]="isMobileMenuOpen() ? 'heroXMark' : 'heroBars3'"
+        size="md"
+        [ariaLabel]="isMobileMenuOpen() ? 'Close icon' : 'Menu icon'"
+      />
+    </app-button>
+  </nav>
+
+  <!-- Mobile Menu Drawer -->
+  @if (isMobileMenuOpen()) {
+  <div
+    class="header__mobile-menu"
+    id="mobile-menu"
+    role="dialog"
+    aria-modal="true"
+    [attr.aria-label]="'Mobile navigation menu'"
+    (keydown)="onMenuCloseKeydown($event)"
+  >
+    <!-- Mobile Menu Backdrop -->
+    <div
+      class="header__mobile-backdrop"
+      (click)="closeMobileMenu()"
+      (keydown.enter)="closeMobileMenu()"
+      (keydown.space)="closeMobileMenu()"
+      tabindex="0"
+      role="button"
+      [attr.aria-label]="'Close mobile menu'"
+    ></div>
+
+    <!-- Mobile Menu Content -->
+    <div class="header__mobile-drawer">
+      <app-stack direction="vertical" spacing="sm" class="header__mobile-nav">
+        @for (item of NAV_ITEMS; track item.path) {
+        <a
+          [routerLink]="item.path"
+          routerLinkActive="header__menu-link--active"
+          [attr.aria-label]="item.ariaLabel"
+          (click)="closeMobileMenu()"
+          class="header__mobile-link"
+        >
+          {{ item.label }}
+        </a>
+        }
+
+        <!-- Theme Picker in Mobile Menu -->
+        <div class="header__mobile-theme-picker">
+          <app-theme-picker />
+        </div>
+      </app-stack>
+    </div>
+  </div>
+  }
+</header>

@@ -272,6 +272,7 @@ All shared components built, tested, documented, and production-ready.
   - [x] Zero dependencies, fully type-safe
 
 - [x] **Array/Object utilities** ✅ Complete
+
   - [x] Deep clone (objects, arrays, Date, RegExp, Map, Set with circular reference protection)
   - [x] Group by (property key or function)
   - [x] Unique by key (property key or function)
@@ -409,17 +410,17 @@ Phase 4 follows a strict dependency order:
 
 **Routing Configuration**:
 
-- [ ] **Configure feature routes in app.routes.ts**
-  - [ ] Home route: `/` → HomeComponent (already exists)
-  - [ ] Projects list route: `/projects` → ProjectsListComponent
-  - [ ] Project detail route: `/projects/:slug` → ProjectDetailComponent
-  - [ ] Case studies list route: `/case-studies` → CaseStudiesComponent (already exists)
-  - [ ] Case study detail route: `/case-studies/:slug` → CaseStudyDetailComponent
-  - [ ] About route: `/about` → AboutComponent
-  - [ ] Contact route: `/contact` → ContactComponent
-  - [ ] 404 route: `**` → NotFoundComponent (create if needed)
-  - [ ] Update navigation links in MainLayout
-  - [ ] Test all routes navigate correctly
+- [x] **Configure feature routes in app.routes.ts**
+  - [x] Home route: `/` → HomeComponent (already exists)
+  - [x] Projects list route: `/projects` → ProjectsListComponent
+  - [x] Project detail route: `/projects/:slug` → ProjectDetailComponent
+  - [x] Case studies list route: `/case-studies` → CaseStudiesComponent (already exists)
+  - [x] Case study detail route: `/case-studies/:slug` → CaseStudyDetailComponent
+  - [x] About route: `/about` → AboutComponent
+  - [x] Contact route: `/contact` → ContactComponent
+  - [x] 404 route: `**` → NotFoundComponent (create if needed)
+  - [x] Update navigation links in MainLayout
+  - [x] Test all routes navigate correctly
 
 **Data Models & Interfaces**:
 
@@ -434,6 +435,7 @@ Phase 4 follows a strict dependency order:
 **Feature Stores**:
 
 - [ ] **ProjectsService** (`src/app/core/services/projects/projects.service.ts`)
+
   - [ ] Injectable service with `providedIn: 'root'`
   - [ ] Create mock data array (5-7 sample projects)
   - [ ] `getAll(): Observable<Project[]>` - returns all projects
@@ -444,6 +446,7 @@ Phase 4 follows a strict dependency order:
   - [ ] Full TSDoc documentation
 
 - [ ] **ProjectsStore** (`src/app/core/stores/projects.store.ts`)
+
   - [ ] Create with `signalStore()` and `providedIn: 'root'`
   - [ ] **State**: `projects`, `selectedProject`, `isLoading`, `error`, `searchQuery`, `selectedTags`, `sortBy`
   - [ ] **Computed signals**:
@@ -461,6 +464,7 @@ Phase 4 follows a strict dependency order:
   - [ ] Full TSDoc documentation
 
 - [ ] **CaseStudiesService** (`src/app/core/services/case-studies/case-studies.service.ts`)
+
   - [ ] Injectable service with `providedIn: 'root'`
   - [ ] Create mock data array (3-5 sample case studies)
   - [ ] `getAll(): Observable<CaseStudy[]>` - returns all case studies
@@ -492,6 +496,7 @@ Phase 4 follows a strict dependency order:
 - [ ] **ProjectsListComponent** (create new: `src/app/features/projects/projects-list/projects-list.component.ts`)
 
   **Shared Components Used**:
+
   - ContainerComponent (page wrapper)
   - StackComponent (vertical spacing)
   - GridComponent (project cards grid)
@@ -506,6 +511,7 @@ Phase 4 follows a strict dependency order:
   - BreadcrumbComponent (page navigation)
 
   **Implementation Tasks**:
+
   - [ ] Generate component: `ng generate component features/projects/projects-list --standalone`
   - [ ] Inject ProjectsStore using `inject()`
   - [ ] Call `store.loadProjects()` in constructor or `ngOnInit`
@@ -569,6 +575,7 @@ Phase 4 follows a strict dependency order:
 - [ ] **CaseStudiesComponent enhancements** (`src/app/features/case-studies/case-studies.component.ts`)
 
   **Shared Components Used**:
+
   - ContainerComponent (page wrapper)
   - StackComponent (vertical spacing)
   - GridComponent (case study cards grid)
@@ -581,6 +588,7 @@ Phase 4 follows a strict dependency order:
   - BreadcrumbComponent (page navigation)
 
   **Implementation Tasks**:
+
   - [x] Component scaffolded
   - [ ] Inject CaseStudiesStore using `inject()`
   - [ ] Call `store.loadCaseStudies()` in constructor
@@ -636,6 +644,7 @@ Phase 4 follows a strict dependency order:
 - [ ] **ProjectDetailComponent** (create new: `src/app/features/projects/project-detail/project-detail.component.ts`)
 
   **Shared Components Used**:
+
   - ContainerComponent (page wrapper)
   - StackComponent (vertical spacing)
   - GridComponent (screenshots, tech cards, related projects)
@@ -649,6 +658,7 @@ Phase 4 follows a strict dependency order:
   - SkeletonComponent (loading state)
 
   **Implementation Tasks**:
+
   - [ ] Generate component: `ng generate component features/projects/project-detail --standalone`
   - [ ] Inject ActivatedRoute and ProjectsStore
   - [ ] Get slug from route params: `route.paramMap.pipe(map(p => p.get('slug')))`
@@ -731,6 +741,7 @@ Phase 4 follows a strict dependency order:
 - [ ] **CaseStudyDetailComponent** (create new: `src/app/features/case-studies/case-study-detail/case-study-detail.component.ts`)
 
   **Shared Components Used**:
+
   - ContainerComponent (page wrapper)
   - StackComponent (vertical spacing, sections)
   - GridComponent (technologies, metrics, images)
@@ -743,6 +754,7 @@ Phase 4 follows a strict dependency order:
   - SkeletonComponent (loading state)
 
   **Implementation Tasks**:
+
   - [ ] Generate component: `ng generate component features/case-studies/case-study-detail --standalone`
   - [ ] Inject ActivatedRoute and CaseStudiesStore
   - [ ] Get slug from route params
@@ -831,6 +843,7 @@ Phase 4 follows a strict dependency order:
 - [ ] **HomeComponent enhancements** (`src/app/features/home/home.component.ts`)
 
   **Shared Components Used**:
+
   - ContainerComponent (page wrapper, sections)
   - StackComponent (vertical spacing)
   - GridComponent (featured projects, skills)
@@ -840,6 +853,7 @@ Phase 4 follows a strict dependency order:
   - IconComponent (checkmarks, arrows)
 
   **Implementation Tasks**:
+
   - [x] Hero section scaffolded
   - [ ] **Hero section enhancements**:
     - [ ] Professional headline and introduction
@@ -904,6 +918,7 @@ Phase 4 follows a strict dependency order:
 - [ ] **AboutComponent** (create new: `src/app/features/about/about.component.ts`)
 
   **Shared Components Used**:
+
   - ContainerComponent (page wrapper)
   - StackComponent (timeline, sections)
   - GridComponent (skills matrix, certifications)
@@ -915,6 +930,7 @@ Phase 4 follows a strict dependency order:
   - TabsComponent (optional: Overview/Experience/Skills tabs)
 
   **Implementation Tasks**:
+
   - [ ] Generate component: `ng generate component features/about --standalone`
   - [ ] **Professional bio section**:
     - [ ] ContainerComponent with max-width for readability
@@ -967,7 +983,7 @@ Phase 4 follows a strict dependency order:
       - [ ] LinkedIn with IconComponent
       - [ ] Email with IconComponent
       - [ ] Optional: Twitter, Medium, Dev.to
-    - [ ] External links with target="_blank"
+    - [ ] External links with target="\_blank"
   - [ ] **Mobile responsive**:
     - [ ] Single column layout
     - [ ] Stack timeline vertically
@@ -993,6 +1009,7 @@ Phase 4 follows a strict dependency order:
 - [ ] **ContactComponent** (create new: `src/app/features/contact/contact.component.ts`)
 
   **Shared Components Used**:
+
   - ContainerComponent (page wrapper)
   - StackComponent (form layout, contact info)
   - GridComponent (form + contact info side-by-side)
@@ -1006,6 +1023,7 @@ Phase 4 follows a strict dependency order:
   - ToastService (success/error notifications)
 
   **Implementation Tasks**:
+
   - [ ] Generate component: `ng generate component features/contact --standalone`
   - [ ] **Page header**:
     - [ ] Page title and description
@@ -1115,6 +1133,7 @@ Phase 4 follows a strict dependency order:
 **Navigation & Layout Improvements**:
 
 - [ ] **"Back to top" button** (create new: `src/app/shared/components/back-to-top/back-to-top.component.ts`)
+
   - [ ] Generate standalone component
   - [ ] ButtonComponent with arrow up IconComponent
   - [ ] Fixed position bottom-right
@@ -1126,6 +1145,7 @@ Phase 4 follows a strict dependency order:
   - [ ] Storybook story
 
 - [ ] **Page transitions** (optional enhancement):
+
   - [ ] Create fade animation in animations.ts
   - [ ] Apply to router-outlet
   - [ ] Test across all routes
@@ -1140,6 +1160,7 @@ Phase 4 follows a strict dependency order:
 **Content Creation** (Placeholder/Mock Data):
 
 - [ ] **Mock project data** (in ProjectsService):
+
   - [ ] Create 5-7 sample projects with realistic data
   - [ ] Include: title, slug, description, technologies, images (placeholder), links, category, featured flag, dates
   - [ ] Variety of categories: Web App, Tool, Demo, Library
@@ -1147,12 +1168,14 @@ Phase 4 follows a strict dependency order:
   - [ ] Include GitHub star counts for some
 
 - [ ] **Mock case study data** (in CaseStudiesService):
+
   - [ ] Create 3-5 sample case studies
   - [ ] Include: title, slug, client, role, duration, challenge, solution, results, technologies, images (placeholder), dates
   - [ ] Realistic scenarios and metrics
   - [ ] Variety of industries/domains
 
 - [ ] **Skills and experience data**:
+
   - [ ] Create skills array with categories
   - [ ] Create experience timeline data
   - [ ] Create certifications array
@@ -1167,12 +1190,14 @@ Phase 4 follows a strict dependency order:
 **Documentation**:
 
 - [ ] **TSDoc comments**:
+
   - [ ] Add to all new feature components
   - [ ] Add to stores and services
   - [ ] Document public methods and properties
   - [ ] Add usage examples where helpful
 
 - [ ] **README updates**:
+
   - [ ] Document new features in main README
   - [ ] Update project structure section
   - [ ] Add feature overview
@@ -1186,29 +1211,34 @@ Phase 4 follows a strict dependency order:
 **Testing & Quality Assurance**:
 
 - [ ] **Run full test suite**:
+
   - [ ] Execute: `npm run test`
   - [ ] Verify all unit tests pass
   - [ ] Check coverage meets >85% target
   - [ ] Fix any failing tests
 
 - [ ] **Run E2E tests**:
+
   - [ ] Execute: `npm run e2e`
   - [ ] Verify all E2E tests pass
   - [ ] Test on all browsers (Chromium, Firefox, WebKit)
   - [ ] Fix any failing tests
 
 - [ ] **Linting**:
+
   - [ ] Execute: `npm run lint`
   - [ ] Fix all linting errors
   - [ ] Ensure consistent code style
 
 - [ ] **Build verification**:
+
   - [ ] Execute: `npm run build`
   - [ ] Verify production build succeeds
   - [ ] Check bundle sizes
   - [ ] Test production build locally
 
 - [ ] **Manual testing**:
+
   - [ ] Test all routes and navigation
   - [ ] Test all interactive features
   - [ ] Test responsive design on multiple viewports
@@ -1229,52 +1259,54 @@ Phase 4 follows a strict dependency order:
 This section maps which shared components are used across Phase 4 feature pages.
 
 **Core Layout Components** (used on every page):
+
 1. **ContainerComponent** - Page wrapper, max-width constraints, responsive padding
 2. **StackComponent** - Vertical spacing between sections, timeline layouts
 3. **GridComponent** - Card grids (projects, case studies), multi-column layouts, responsive breakpoints
 
-**UI Components** (heavily used):
-4. **CardComponent** - Project cards, case study cards, metric cards, experience cards, certification cards
-5. **ButtonComponent** - CTAs, navigation, form submit, social links, filters, actions
-6. **IconComponent** - Social platforms, metrics, checkmarks, arrows, external links, GitHub, search
-7. **BadgeComponent** - Technologies, skills, categories, status, role, client tags
+**UI Components** (heavily used): 4. **CardComponent** - Project cards, case study cards, metric cards, experience cards, certification cards 5. **ButtonComponent** - CTAs, navigation, form submit, social links, filters, actions 6. **IconComponent** - Social platforms, metrics, checkmarks, arrows, external links, GitHub, search 7. **BadgeComponent** - Technologies, skills, categories, status, role, client tags
 
 **Form Components** (Contact page + search/filter):
+
 - **FormFieldComponent** - Wraps inputs with labels and error messages
 - **InputComponent** - Name, email, subject, search fields
 - **TextareaComponent** - Message field with character count and auto-resize
 - **SelectComponent** - Sort dropdown on Projects List
 
 **Navigation Components**:
+
 - **BreadcrumbComponent** - All detail pages, helps users navigate hierarchy
 - **TabsComponent** - Project Detail (content sections), Projects List (category filter), optional on About
 
 **Feedback & Loading Components**:
+
 - **SkeletonComponent** - Loading states on all data-driven pages (Projects, Case Studies, Details)
 - **LoadingSpinnerComponent** - Form submission, async operations
 - **ToastService** - Success/error notifications (form submission, data loading errors)
 - **DividerComponent** - Section separators on detail pages, About page
 
 **Special Components**:
+
 - **ModalService** - Not used in Phase 4 (reserved for future features)
 
 **Component Usage by Page**:
 
-| Page | Components Used (count) | Most Important |
-|------|------------------------|----------------|
-| **Home** | 7 components | Container, Grid, Card, Badge, Button |
-| **Projects List** | 11 components | Grid, Card, Input, Select, Tabs, Badge, Skeleton |
-| **Project Detail** | 10 components | Container, Stack, Tabs, Card, Badge, Breadcrumb, Skeleton |
-| **Case Studies List** | 10 components | Grid, Card, Input, Badge, Skeleton, Breadcrumb |
-| **Case Study Detail** | 10 components | Container, Stack, Grid, Card, Badge, Divider, Skeleton |
-| **About** | 9 components | Container, Stack, Grid, Card, Badge, Divider |
-| **Contact** | 9 components | Container, Grid, FormField, Input, Textarea, Button, Card, Toast |
+| Page                  | Components Used (count) | Most Important                                                   |
+| --------------------- | ----------------------- | ---------------------------------------------------------------- |
+| **Home**              | 7 components            | Container, Grid, Card, Badge, Button                             |
+| **Projects List**     | 11 components           | Grid, Card, Input, Select, Tabs, Badge, Skeleton                 |
+| **Project Detail**    | 10 components           | Container, Stack, Tabs, Card, Badge, Breadcrumb, Skeleton        |
+| **Case Studies List** | 10 components           | Grid, Card, Input, Badge, Skeleton, Breadcrumb                   |
+| **Case Study Detail** | 10 components           | Container, Stack, Grid, Card, Badge, Divider, Skeleton           |
+| **About**             | 9 components            | Container, Stack, Grid, Card, Badge, Divider                     |
+| **Contact**           | 9 components            | Container, Grid, FormField, Input, Textarea, Button, Card, Toast |
 
 ---
 
 ### Technical Implementation Details
 
 **State Management**:
+
 - ProjectsStore: Manages projects collection, filtering, sorting, selection
 - CaseStudiesStore: Manages case studies collection, filtering, selection
 - Signal-based reactive state with computed signals for filtering/sorting
@@ -1282,6 +1314,7 @@ This section maps which shared components are used across Phase 4 feature pages.
 - Centralized error and loading states
 
 **Routing**:
+
 - Feature routing with route parameters for detail pages
 - Route slugs for SEO-friendly URLs
 - 404 handling for invalid slugs
@@ -1289,18 +1322,21 @@ This section maps which shared components are used across Phase 4 feature pages.
 - Breadcrumb integration with router state
 
 **Control Flow**:
+
 - Use `@if` for conditional rendering (loading, empty states, 404)
 - Use `@for` with track expressions for lists (projects, case studies, skills)
 - Computed signals for reactive derived state
 - Signal-based loading and error states
 
 **SEO Integration**:
+
 - SeoService on every page to set titles and meta descriptions
 - Open Graph tags for social sharing
 - Structured data (Person schema, Article schema for case studies)
 - Semantic HTML throughout
 
 **Form Handling**:
+
 - Reactive Forms with FormBuilder
 - Custom validators from Phase 3 utilities
 - Real-time validation feedback
@@ -1308,6 +1344,7 @@ This section maps which shared components are used across Phase 4 feature pages.
 - Loading states during submission
 
 **Responsive Design**:
+
 - Mobile-first approach
 - CSS Grid with responsive breakpoints
 - Stack layouts on mobile (GridComponent → single column)
@@ -1315,6 +1352,7 @@ This section maps which shared components are used across Phase 4 feature pages.
 - Touch-friendly button sizes
 
 **Performance Optimizations**:
+
 - Track expressions in `@for` loops for efficient change detection
 - Lazy loading of routes (Phase 8)
 - Image lazy loading (loading="lazy")
@@ -1322,6 +1360,7 @@ This section maps which shared components are used across Phase 4 feature pages.
 - Computed signals to minimize recalculations
 
 **Accessibility**:
+
 - WCAG 2.1 AAA compliance (carried over from Phase 2)
 - Keyboard navigation support
 - ARIA attributes on all interactive elements
@@ -1330,6 +1369,7 @@ This section maps which shared components are used across Phase 4 feature pages.
 - Form error announcements
 
 **Testing Strategy**:
+
 - Unit tests: 40+ per list page, 30+ per detail page, 20-30 per info page
 - E2E tests: 6-8 per list page, 4-5 per detail page, 3-4 per info page
 - Test store integration thoroughly
@@ -1342,6 +1382,7 @@ This section maps which shared components are used across Phase 4 feature pages.
 ### Success Metrics
 
 **Completion Criteria**:
+
 - ✅ All 7 feature pages implemented (Home, Projects List/Detail, Case Studies List/Detail, About, Contact)
 - ✅ Routing configured and tested for all pages
 - ✅ ProjectsStore and CaseStudiesStore fully integrated
@@ -1359,6 +1400,7 @@ This section maps which shared components are used across Phase 4 feature pages.
 - ✅ Test coverage >85%
 
 **Quality Gates**:
+
 - All unit tests passing (target: 200+ new tests for feature pages)
 - All E2E tests passing (target: 40+ new E2E tests)
 - Lighthouse score >90 on all pages
@@ -1373,19 +1415,23 @@ This section maps which shared components are used across Phase 4 feature pages.
 **Total: 2-3 weeks (15-18 working days)**
 
 **Week 1** (Days 1-5):
+
 - Days 1-3: Routing, Data Models, Feature Stores
 - Days 4-5: Projects List Page
 
 **Week 2** (Days 6-10):
+
 - Days 6-7: Case Studies List Page
 - Days 8-10: Project Detail + Case Study Detail
 
 **Week 3** (Days 11-15):
+
 - Days 11-12: Home Page Enhancements
 - Days 13-14: About Page + Contact Page
 - Day 15: Navigation improvements, Back-to-top button
 
 **Buffer** (Days 16-18 if needed):
+
 - Testing, bug fixes, polish
 - Content refinement
 - Documentation

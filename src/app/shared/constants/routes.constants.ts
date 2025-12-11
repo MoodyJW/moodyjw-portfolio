@@ -16,10 +16,18 @@ export const ROUTES = {
   ROOT: '',
   /** Home page route */
   HOME: 'home',
+  /** Projects list page route */
+  PROJECTS: 'projects',
+  /** Project detail page route (use with :slug parameter) */
+  PROJECT_DETAIL: 'projects/:slug',
   /** Case studies list page route */
   CASE_STUDIES: 'case-studies',
-  /** Case study detail page route (use with :id parameter) */
-  CASE_STUDY_DETAIL: 'case-studies/:id',
+  /** Case study detail page route (use with :slug parameter) */
+  CASE_STUDY_DETAIL: 'case-studies/:slug',
+  /** About page route */
+  ABOUT: 'about',
+  /** Contact page route */
+  CONTACT: 'contact',
 } as const;
 
 /**
@@ -34,22 +42,40 @@ export const ROUTES = {
 export const ROUTE_PATHS = {
   ROOT: '/',
   HOME: '/home',
+  PROJECTS: '/projects',
   CASE_STUDIES: '/case-studies',
+  ABOUT: '/about',
+  CONTACT: '/contact',
 } as const;
 
 /**
+ * Helper function to generate project detail route
+ * @param slug - The project slug
+ * @returns The full route path for the project detail
+ *
+ * @example
+ * ```typescript
+ * const route = getProjectRoute('e-commerce-platform');
+ * // Returns: '/projects/e-commerce-platform'
+ * ```
+ */
+export function getProjectRoute(slug: string): string {
+  return `/projects/${slug}`;
+}
+
+/**
  * Helper function to generate case study detail route
- * @param id - The case study ID
+ * @param slug - The case study slug
  * @returns The full route path for the case study detail
  *
  * @example
  * ```typescript
- * const route = getCaseStudyRoute('project-1');
- * // Returns: '/case-studies/project-1'
+ * const route = getCaseStudyRoute('mobile-app-redesign');
+ * // Returns: '/case-studies/mobile-app-redesign'
  * ```
  */
-export function getCaseStudyRoute(id: string): string {
-  return `/case-studies/${id}`;
+export function getCaseStudyRoute(slug: string): string {
+  return `/case-studies/${slug}`;
 }
 
 /**
@@ -63,8 +89,23 @@ export const NAV_ITEMS = [
     ariaLabel: 'Navigate to home page',
   },
   {
+    label: 'Projects',
+    path: ROUTE_PATHS.PROJECTS,
+    ariaLabel: 'Navigate to projects page',
+  },
+  {
     label: 'Case Studies',
     path: ROUTE_PATHS.CASE_STUDIES,
     ariaLabel: 'Navigate to case studies page',
+  },
+  {
+    label: 'About',
+    path: ROUTE_PATHS.ABOUT,
+    ariaLabel: 'Navigate to about page',
+  },
+  {
+    label: 'Contact',
+    path: ROUTE_PATHS.CONTACT,
+    ariaLabel: 'Navigate to contact page',
   },
 ] as const;
