@@ -380,311 +380,1016 @@ All services, utilities, pipes, and documentation are production-ready.
 
 ## Phase 4: Feature Pages & Content
 
+**Status**: ⏳ Next Up
 **Goal**: Implement core feature pages using shared components and services.
 
 ### Objectives
 
-- Build foundational feature pages with shared components
-- Implement dedicated stores for feature domains
-- Add real content and portfolio pieces
+- Implement feature stores with mock data (Mockend pattern)
+- Build foundational feature pages with shared component library
+- Configure routing and navigation
 - Create responsive, accessible user experiences
+- Add placeholder content for development/testing
+
+### Implementation Order
+
+Phase 4 follows a strict dependency order:
+
+1. **Foundation** (Week 1): Routing → Feature Stores → Data Models
+2. **List Pages** (Week 1-2): Projects List → Case Studies List
+3. **Detail Pages** (Week 2): Project Detail → Case Study Detail
+4. **Info Pages** (Week 2-3): Home Enhancements → About → Contact
+5. **Polish** (Week 3): Navigation improvements → Testing → Content refinement
 
 ### Deliverables
 
+---
+
+#### Part 1: Foundation (Days 1-3)
+
+**Routing Configuration**:
+
+- [ ] **Configure feature routes in app.routes.ts**
+  - [ ] Home route: `/` → HomeComponent (already exists)
+  - [ ] Projects list route: `/projects` → ProjectsListComponent
+  - [ ] Project detail route: `/projects/:slug` → ProjectDetailComponent
+  - [ ] Case studies list route: `/case-studies` → CaseStudiesComponent (already exists)
+  - [ ] Case study detail route: `/case-studies/:slug` → CaseStudyDetailComponent
+  - [ ] About route: `/about` → AboutComponent
+  - [ ] Contact route: `/contact` → ContactComponent
+  - [ ] 404 route: `**` → NotFoundComponent (create if needed)
+  - [ ] Update navigation links in MainLayout
+  - [ ] Test all routes navigate correctly
+
+**Data Models & Interfaces**:
+
+- [ ] **Create shared interfaces** (`src/app/core/models/`)
+  - [ ] Project interface (id, slug, title, description, technologies, images, links, category, featured, createdDate, etc.)
+  - [ ] CaseStudy interface (id, slug, title, description, client, role, duration, challenge, solution, results, technologies, images, etc.)
+  - [ ] Skill interface (name, proficiency, category, yearsOfExperience)
+  - [ ] Experience interface (company, role, duration, description, technologies, achievements)
+  - [ ] Certification interface (name, issuer, date, status, credentialUrl)
+  - [ ] ContactForm interface (name, email, subject, message)
+
 **Feature Stores**:
 
-- [ ] **ProjectsStore & ProjectsService**
+- [ ] **ProjectsService** (`src/app/core/services/projects/projects.service.ts`)
+  - [ ] Injectable service with `providedIn: 'root'`
+  - [ ] Create mock data array (5-7 sample projects)
+  - [ ] `getAll(): Observable<Project[]>` - returns all projects
+  - [ ] `getBySlug(slug: string): Observable<Project | undefined>` - returns single project
+  - [ ] `getFeatured(): Observable<Project[]>` - returns featured projects only
+  - [ ] Use `of()` with `delay(500)` to simulate async (Mockend pattern from ADR 003)
+  - [ ] Unit tests (57+ tests covering all methods)
+  - [ ] Full TSDoc documentation
 
-  - [ ] Manages personal projects (small apps, demos, code samples)
-  - [ ] Signal-based with rxMethod for async loads
-  - [ ] Expose isLoading/error/projects signals
-  - [ ] Filtering by tags, search query
-  - [ ] Sorting capabilities
-  - [ ] Unit tests with mocked HTTP
+- [ ] **ProjectsStore** (`src/app/core/stores/projects.store.ts`)
+  - [ ] Create with `signalStore()` and `providedIn: 'root'`
+  - [ ] **State**: `projects`, `selectedProject`, `isLoading`, `error`, `searchQuery`, `selectedTags`, `sortBy`
+  - [ ] **Computed signals**:
+    - [ ] `filteredProjects()` - applies search, tag filtering, and sorting
+    - [ ] `featuredProjects()` - returns featured projects only
+    - [ ] `projectsByCategory()` - groups projects by category
+  - [ ] **Methods** with `withMethods()`:
+    - [ ] `loadProjects()` - rxMethod to load all projects
+    - [ ] `selectProject(slug: string)` - rxMethod to load single project
+    - [ ] `setSearchQuery(query: string)` - updates search
+    - [ ] `toggleTag(tag: string)` - adds/removes tag filter
+    - [ ] `setSortBy(sort: 'recent' | 'popular' | 'name')` - updates sort
+    - [ ] `clearFilters()` - resets all filters
+  - [ ] Unit tests (60+ tests covering all methods and computed signals)
+  - [ ] Full TSDoc documentation
 
-- [ ] **CaseStudiesStore & CaseStudiesService**
-  - [ ] Manages detailed case studies (work engagements)
-  - [ ] Signal-based with rxMethod
-  - [ ] Expose isLoading/error/caseStudies signals
-  - [ ] Filtering and search
-  - [ ] selectedCaseStudy signal for detail view
-  - [ ] Unit tests
+- [ ] **CaseStudiesService** (`src/app/core/services/case-studies/case-studies.service.ts`)
+  - [ ] Injectable service with `providedIn: 'root'`
+  - [ ] Create mock data array (3-5 sample case studies)
+  - [ ] `getAll(): Observable<CaseStudy[]>` - returns all case studies
+  - [ ] `getBySlug(slug: string): Observable<CaseStudy | undefined>` - returns single case study
+  - [ ] Use `of()` with `delay(500)` to simulate async (Mockend pattern)
+  - [ ] Unit tests (45+ tests covering all methods)
+  - [ ] Full TSDoc documentation
 
-**Home Page**:
+- [ ] **CaseStudiesStore** (`src/app/core/stores/case-studies.store.ts`)
+  - [ ] Create with `signalStore()` and `providedIn: 'root'`
+  - [ ] **State**: `caseStudies`, `selectedCaseStudy`, `isLoading`, `error`, `searchQuery`, `selectedTags`
+  - [ ] **Computed signals**:
+    - [ ] `filteredCaseStudies()` - applies search and tag filtering
+  - [ ] **Methods** with `withMethods()`:
+    - [ ] `loadCaseStudies()` - rxMethod to load all case studies
+    - [ ] `selectCaseStudy(slug: string)` - rxMethod to load single case study
+    - [ ] `setSearchQuery(query: string)` - updates search
+    - [ ] `toggleTag(tag: string)` - adds/removes tag filter
+    - [ ] `clearFilters()` - resets all filters
+  - [ ] Unit tests (50+ tests covering all methods and computed signals)
+  - [ ] Full TSDoc documentation
 
-- [ ] **HomeComponent enhancements**
-  - **Uses**: ContainerComponent, StackComponent, GridComponent, ButtonComponent, CardComponent, IconComponent
-  - [x] Hero section (scaffolded)
-  - [ ] Professional introduction/bio section
-  - [ ] Featured projects showcase (3-4 highlights)
-    - CardComponent for project cards
-    - BadgeComponent for technologies
-    - ButtonComponent for "View More"
-  - [ ] Call-to-action section
-    - ButtonComponent (primary) for "View Projects"
-    - ButtonComponent (secondary) for "Contact Me"
-  - [ ] Skills overview section
-    - GridComponent for skills layout
-    - BadgeComponent for skill tags
-  - [ ] Smooth scroll navigation
-  - [ ] Mobile responsive
-  - [ ] Unit tests
-  - [ ] E2E test for critical flows
+---
 
-**Case Studies List Page**:
-
-- [ ] **CaseStudiesComponent enhancements**
-  - **Uses**: ContainerComponent, GridComponent, CardComponent, SkeletonComponent, InputComponent, SelectComponent, BadgeComponent, ButtonComponent, IconComponent, StackComponent
-  - [x] Component scaffolded
-  - [ ] Connect CaseStudiesStore
-    - Inject store using inject()
-    - Replace hardcoded data with store.caseStudies()
-    - Call store.loadCaseStudies() in ngOnInit
-  - [ ] GridComponent layout for case study cards
-  - [ ] CardComponent for each case study
-    - Clickable cards with hover states
-    - BadgeComponent for tags/technologies
-    - IconComponent for metadata (date, duration)
-  - [ ] Search functionality
-    - InputComponent with search icon
-    - Debounced search input
-    - Filter store results
-  - [ ] Tag-based filtering
-    - SelectComponent or badge chips
-    - Multiple tag selection
-    - Clear filters button
-  - [ ] SkeletonComponent loading states
-    - Show while store.isLoading()
-    - Match card layout
-  - [ ] Empty state when no results
-    - Use StackComponent for centered layout
-    - IconComponent for illustration
-    - ButtonComponent to clear filters
-  - [ ] BreadcrumbComponent for navigation
-  - [ ] Mobile responsive grid
-  - [ ] Unit tests
-  - [ ] E2E tests
-
-**Case Study Detail Page**:
-
-- [ ] **CaseStudyDetailComponent** (new)
-  - **Uses**: ContainerComponent, StackComponent, DividerComponent, BreadcrumbComponent, BadgeComponent, ButtonComponent, IconComponent, GridComponent, CardComponent, SkeletonComponent
-  - [ ] Route parameter handling (/case-studies/:slug)
-  - [ ] Connect to CaseStudiesStore
-    - Use store.selectCaseStudy(slug)
-    - Handle store.isLoading() and store.error()
-  - [ ] Hero section with title and description
-  - [ ] Metadata row (date, client, role, duration)
-    - BadgeComponent for tags
-  - [ ] Challenge section
-    - DividerComponent to separate sections
-  - [ ] Solution section
-  - [ ] Technologies used
-    - GridComponent for tech badges
-    - BadgeComponent for each technology
-  - [ ] Results/metrics section
-    - CardComponent for metric cards
-    - IconComponent for metric icons
-  - [ ] Image gallery or screenshots
-    - GridComponent for images
-  - [ ] Navigation section
-    - ButtonComponent for "Back to Case Studies"
-    - ButtonComponent for "Next Project" (if available)
-  - [ ] BreadcrumbComponent at top
-  - [ ] SkeletonComponent for loading
-  - [ ] 404 handling for invalid slugs
-  - [ ] Mobile responsive
-  - [ ] Unit tests
-  - [ ] E2E tests
+#### Part 2: List Pages (Days 4-7)
 
 **Projects List Page**:
 
-- [ ] **ProjectsListComponent** (new)
-  - **Uses**: ContainerComponent, GridComponent, CardComponent, SkeletonComponent, InputComponent, SelectComponent, BadgeComponent, ButtonComponent, IconComponent, TabsComponent, StackComponent
-  - [ ] Connect ProjectsStore
-  - [ ] TabsComponent for filtering (All, Web Apps, Tools, Demos)
-  - [ ] Search with InputComponent
-  - [ ] GridComponent layout
-  - [ ] CardComponent for each project
-    - GitHub stars BadgeComponent
-    - Technology BadgeComponent chips
-    - External link IconComponent
-  - [ ] Sort SelectComponent (Most Recent, Most Popular, A-Z)
-  - [ ] SkeletonComponent loading states
-  - [ ] Empty state
-  - [ ] BreadcrumbComponent
-  - [ ] Mobile responsive
-  - [ ] Unit tests
-  - [ ] E2E tests
+- [ ] **ProjectsListComponent** (create new: `src/app/features/projects/projects-list/projects-list.component.ts`)
+
+  **Shared Components Used**:
+  - ContainerComponent (page wrapper)
+  - StackComponent (vertical spacing)
+  - GridComponent (project cards grid)
+  - CardComponent (each project card)
+  - SkeletonComponent (loading states)
+  - InputComponent (search)
+  - SelectComponent (sort dropdown)
+  - TabsComponent (category filter)
+  - BadgeComponent (technology tags, GitHub stars)
+  - ButtonComponent (clear filters, view project)
+  - IconComponent (search icon, external link, GitHub)
+  - BreadcrumbComponent (page navigation)
+
+  **Implementation Tasks**:
+  - [ ] Generate component: `ng generate component features/projects/projects-list --standalone`
+  - [ ] Inject ProjectsStore using `inject()`
+  - [ ] Call `store.loadProjects()` in constructor or `ngOnInit`
+  - [ ] **Header section**:
+    - [ ] BreadcrumbComponent at top
+    - [ ] Page title with ContainerComponent
+    - [ ] StackComponent for header content spacing
+  - [ ] **Filter/Search section** (sticky on scroll):
+    - [ ] InputComponent for search with debounce (use debounce utility from Phase 3)
+    - [ ] Bind to `store.setSearchQuery()`
+    - [ ] SelectComponent for sort order (Most Recent, Most Popular, A-Z)
+    - [ ] Bind to `store.setSortBy()`
+    - [ ] TabsComponent for category filter (All, Web Apps, Tools, Demos)
+    - [ ] ButtonComponent to clear all filters
+    - [ ] Show active filter count BadgeComponent
+  - [ ] **Projects grid**:
+    - [ ] GridComponent with responsive columns (1/2/3)
+    - [ ] Loop through `store.filteredProjects()` with `@for`
+    - [ ] CardComponent for each project with hover effect
+    - [ ] Project thumbnail/image at top
+    - [ ] Project title and description
+    - [ ] BadgeComponent for each technology
+    - [ ] BadgeComponent for GitHub stars (if available)
+    - [ ] ButtonComponent "View Details" with router link
+    - [ ] IconComponent for external link/GitHub
+  - [ ] **Loading state**:
+    - [ ] Show SkeletonComponent grid when `store.isLoading()`
+    - [ ] Match card layout (6-8 skeleton cards)
+  - [ ] **Empty state**:
+    - [ ] Show when `store.filteredProjects().length === 0`
+    - [ ] StackComponent for centered content
+    - [ ] IconComponent for illustration
+    - [ ] Message: "No projects found"
+    - [ ] ButtonComponent to clear filters
+  - [ ] **Mobile responsive**:
+    - [ ] Single column on mobile
+    - [ ] Horizontal scroll for TabsComponent
+    - [ ] Stack filters vertically
+  - [ ] **Unit tests** (40+ tests):
+    - [ ] Component renders correctly
+    - [ ] Store integration works
+    - [ ] Search updates store
+    - [ ] Sort updates store
+    - [ ] Category filter works
+    - [ ] Clear filters resets state
+    - [ ] Loading state shows skeletons
+    - [ ] Empty state shows correctly
+    - [ ] Navigation to detail page works
+  - [ ] **E2E tests** (8+ tests):
+    - [ ] Load projects list
+    - [ ] Search for projects
+    - [ ] Filter by category
+    - [ ] Sort projects
+    - [ ] Navigate to project detail
+    - [ ] Clear filters
+    - [ ] Responsive layout
+    - [ ] Accessibility (keyboard nav, ARIA)
+
+**Case Studies List Page**:
+
+- [ ] **CaseStudiesComponent enhancements** (`src/app/features/case-studies/case-studies.component.ts`)
+
+  **Shared Components Used**:
+  - ContainerComponent (page wrapper)
+  - StackComponent (vertical spacing)
+  - GridComponent (case study cards grid)
+  - CardComponent (each case study card)
+  - SkeletonComponent (loading states)
+  - InputComponent (search)
+  - BadgeComponent (technology tags, role)
+  - ButtonComponent (clear filters, view case study)
+  - IconComponent (search icon, calendar, clock)
+  - BreadcrumbComponent (page navigation)
+
+  **Implementation Tasks**:
+  - [x] Component scaffolded
+  - [ ] Inject CaseStudiesStore using `inject()`
+  - [ ] Call `store.loadCaseStudies()` in constructor
+  - [ ] **Header section**:
+    - [ ] BreadcrumbComponent at top
+    - [ ] Page title and description
+  - [ ] **Filter/Search section**:
+    - [ ] InputComponent for search with debounce
+    - [ ] Bind to `store.setSearchQuery()`
+    - [ ] Tag filter (clickable BadgeComponent chips or SelectComponent)
+    - [ ] Bind to `store.toggleTag()`
+    - [ ] ButtonComponent to clear filters
+  - [ ] **Case studies grid**:
+    - [ ] GridComponent with responsive columns (1/2)
+    - [ ] Loop through `store.filteredCaseStudies()` with `@for`
+    - [ ] CardComponent for each case study with hover effect
+    - [ ] Case study image/thumbnail
+    - [ ] Title and client name
+    - [ ] Short description (truncate with TruncatePipe from Phase 3)
+    - [ ] BadgeComponent for role and technologies
+    - [ ] IconComponent with date and duration metadata
+    - [ ] ButtonComponent "Read More" with router link
+  - [ ] **Loading state**:
+    - [ ] Show SkeletonComponent grid when `store.isLoading()`
+    - [ ] Match card layout (4-6 skeleton cards)
+  - [ ] **Empty state**:
+    - [ ] Show when `store.filteredCaseStudies().length === 0`
+    - [ ] StackComponent for centered content
+    - [ ] Message and clear filters button
+  - [ ] **Mobile responsive**:
+    - [ ] Single column on mobile
+    - [ ] Adjust card layout
+  - [ ] **Unit tests** (35+ tests):
+    - [ ] Component renders correctly
+    - [ ] Store integration works
+    - [ ] Search functionality
+    - [ ] Tag filtering
+    - [ ] Loading and empty states
+    - [ ] Navigation works
+  - [ ] **E2E tests** (6+ tests):
+    - [ ] Load case studies
+    - [ ] Search case studies
+    - [ ] Filter by tag
+    - [ ] Navigate to detail
+    - [ ] Accessibility check
+
+---
+
+#### Part 3: Detail Pages (Days 8-10)
 
 **Project Detail Page**:
 
-- [ ] **ProjectDetailComponent** (new)
-  - **Uses**: ContainerComponent, StackComponent, DividerComponent, BreadcrumbComponent, BadgeComponent, ButtonComponent, IconComponent, GridComponent, CardComponent, TabsComponent
-  - [ ] Route parameter handling (/projects/:slug)
-  - [ ] Connect to ProjectsStore
-  - [ ] Project header with title, description
-  - [ ] Action buttons (View Live, GitHub, Download)
-    - ButtonComponent with IconComponent
-  - [ ] TabsComponent for sections (Overview, Features, Tech Stack, Demo)
-  - [ ] Screenshots/demo section
-    - GridComponent for images
-  - [ ] Features list
-    - StackComponent for feature items
-    - IconComponent for checkmarks
-  - [ ] Technologies section
-    - GridComponent for tech cards
-    - CardComponent for each technology
-  - [ ] Related projects
-    - GridComponent with CardComponent
-  - [ ] BreadcrumbComponent
-  - [ ] Mobile responsive
-  - [ ] Unit tests
-  - [ ] E2E tests
+- [ ] **ProjectDetailComponent** (create new: `src/app/features/projects/project-detail/project-detail.component.ts`)
+
+  **Shared Components Used**:
+  - ContainerComponent (page wrapper)
+  - StackComponent (vertical spacing)
+  - GridComponent (screenshots, tech cards, related projects)
+  - CardComponent (tech cards, metric cards, related projects)
+  - TabsComponent (Overview, Features, Tech Stack, Demo)
+  - BreadcrumbComponent (page navigation)
+  - BadgeComponent (technologies, status)
+  - ButtonComponent (View Live, GitHub, Download, Back)
+  - IconComponent (checkmarks, external link, GitHub)
+  - DividerComponent (section separators)
+  - SkeletonComponent (loading state)
+
+  **Implementation Tasks**:
+  - [ ] Generate component: `ng generate component features/projects/project-detail --standalone`
+  - [ ] Inject ActivatedRoute and ProjectsStore
+  - [ ] Get slug from route params: `route.paramMap.pipe(map(p => p.get('slug')))`
+  - [ ] Call `store.selectProject(slug)` when slug changes
+  - [ ] **Header section**:
+    - [ ] BreadcrumbComponent (Home > Projects > [Project Name])
+    - [ ] Project title and tagline
+    - [ ] Action buttons row:
+      - [ ] ButtonComponent "View Live" (primary) with external link
+      - [ ] ButtonComponent "View on GitHub" with IconComponent
+      - [ ] ButtonComponent "Download" (if applicable)
+  - [ ] **TabsComponent** for content sections:
+    - [ ] Tab 1: Overview
+    - [ ] Tab 2: Features
+    - [ ] Tab 3: Tech Stack
+    - [ ] Tab 4: Demo/Screenshots
+  - [ ] **Overview tab**:
+    - [ ] Project description (full)
+    - [ ] Project purpose and goals
+    - [ ] Key achievements
+    - [ ] BadgeComponent for project status (Active, Archived, etc.)
+  - [ ] **Features tab**:
+    - [ ] StackComponent for feature list
+    - [ ] Each feature with IconComponent checkmark
+    - [ ] Feature description
+  - [ ] **Tech Stack tab**:
+    - [ ] GridComponent for technology cards
+    - [ ] CardComponent for each technology with:
+      - [ ] Technology name and logo/icon
+      - [ ] Why it was chosen
+      - [ ] IconComponent for tech logo
+  - [ ] **Demo/Screenshots tab**:
+    - [ ] GridComponent for images (2-3 columns)
+    - [ ] Image gallery with captions
+    - [ ] Lazy load images
+  - [ ] **Metrics/Stats section** (if applicable):
+    - [ ] GridComponent for stat cards
+    - [ ] CardComponent for each metric (Stars, Forks, Downloads, etc.)
+    - [ ] IconComponent for metric icons
+  - [ ] **Related Projects section**:
+    - [ ] GridComponent (3 columns, responsive)
+    - [ ] CardComponent for each related project
+    - [ ] Router link to other project details
+  - [ ] **Navigation section**:
+    - [ ] DividerComponent above
+    - [ ] ButtonComponent "Back to Projects"
+    - [ ] ButtonComponent "Next Project" (if available in store)
+  - [ ] **Loading state**:
+    - [ ] Show SkeletonComponent while `store.isLoading()`
+    - [ ] Match page layout
+  - [ ] **404 handling**:
+    - [ ] Check if `store.selectedProject()` is undefined
+    - [ ] Show "Project not found" message
+    - [ ] ButtonComponent to return to projects list
+  - [ ] **Mobile responsive**:
+    - [ ] Stack action buttons vertically on mobile
+    - [ ] Single column grids
+    - [ ] Horizontal scroll for TabsComponent
+  - [ ] **SEO Integration**:
+    - [ ] Use SeoService to set page title
+    - [ ] Set meta description
+    - [ ] Set Open Graph tags with project image
+  - [ ] **Unit tests** (30+ tests):
+    - [ ] Component renders with project data
+    - [ ] Route params handled correctly
+    - [ ] Store integration works
+    - [ ] Tab switching works
+    - [ ] Action buttons navigate correctly
+    - [ ] 404 state shows correctly
+    - [ ] Related projects display
+  - [ ] **E2E tests** (5+ tests):
+    - [ ] Navigate to project detail
+    - [ ] Switch between tabs
+    - [ ] Click action buttons
+    - [ ] Navigate to related project
+    - [ ] Accessibility check
+
+**Case Study Detail Page**:
+
+- [ ] **CaseStudyDetailComponent** (create new: `src/app/features/case-studies/case-study-detail/case-study-detail.component.ts`)
+
+  **Shared Components Used**:
+  - ContainerComponent (page wrapper)
+  - StackComponent (vertical spacing, sections)
+  - GridComponent (technologies, metrics, images)
+  - CardComponent (metric cards, testimonials)
+  - BreadcrumbComponent (page navigation)
+  - BadgeComponent (technologies, role, client)
+  - ButtonComponent (Back, Next, Contact Client)
+  - IconComponent (metrics, date, duration)
+  - DividerComponent (section separators)
+  - SkeletonComponent (loading state)
+
+  **Implementation Tasks**:
+  - [ ] Generate component: `ng generate component features/case-studies/case-study-detail --standalone`
+  - [ ] Inject ActivatedRoute and CaseStudiesStore
+  - [ ] Get slug from route params
+  - [ ] Call `store.selectCaseStudy(slug)` when slug changes
+  - [ ] **Header section**:
+    - [ ] BreadcrumbComponent (Home > Case Studies > [Case Study Title])
+    - [ ] Case study title
+    - [ ] Client name and role BadgeComponent
+    - [ ] Project duration and date with IconComponent
+  - [ ] **Hero/Overview section**:
+    - [ ] Featured image or hero graphic
+    - [ ] Case study tagline/summary
+    - [ ] Quick facts (Client, Role, Duration, Team Size)
+    - [ ] BadgeComponent for each technology
+  - [ ] **Challenge section**:
+    - [ ] DividerComponent above
+    - [ ] Section heading "The Challenge"
+    - [ ] Problem description (multiple paragraphs)
+    - [ ] Key pain points as bullet list with IconComponent
+  - [ ] **Solution section**:
+    - [ ] DividerComponent above
+    - [ ] Section heading "The Solution"
+    - [ ] Approach and methodology
+    - [ ] Key decisions and rationale
+    - [ ] Implementation highlights
+  - [ ] **Technologies section**:
+    - [ ] DividerComponent above
+    - [ ] GridComponent for technology badges
+    - [ ] BadgeComponent for each tech with description
+    - [ ] Why each technology was chosen
+  - [ ] **Results/Impact section**:
+    - [ ] DividerComponent above
+    - [ ] GridComponent for metric cards (2-4 columns)
+    - [ ] CardComponent for each key metric:
+      - [ ] Metric value (large text)
+      - [ ] Metric label
+      - [ ] IconComponent for visual indicator
+      - [ ] Example: "50% faster load times", "10k+ users", "99.9% uptime"
+  - [ ] **Screenshots/Deliverables section**:
+    - [ ] GridComponent for images (2 columns)
+    - [ ] Image captions
+    - [ ] Lazy loading
+  - [ ] **Testimonial section** (if available):
+    - [ ] CardComponent with quote styling
+    - [ ] Client testimonial text
+    - [ ] Client name and title
+  - [ ] **Navigation section**:
+    - [ ] DividerComponent above
+    - [ ] ButtonComponent "Back to Case Studies"
+    - [ ] ButtonComponent "Next Case Study" (if available)
+  - [ ] **Loading state**:
+    - [ ] SkeletonComponent while loading
+    - [ ] Match page structure
+  - [ ] **404 handling**:
+    - [ ] Check if `store.selectedCaseStudy()` is undefined
+    - [ ] Show "Case study not found" message
+    - [ ] ButtonComponent to return to list
+  - [ ] **Mobile responsive**:
+    - [ ] Single column layout
+    - [ ] Stack metric cards vertically
+    - [ ] Adjust image grid
+  - [ ] **SEO Integration**:
+    - [ ] Use SeoService to set page title
+    - [ ] Set meta description from case study summary
+    - [ ] Set Open Graph tags
+    - [ ] Add Article schema with structured data
+  - [ ] **Unit tests** (25+ tests):
+    - [ ] Component renders with case study data
+    - [ ] Route params work
+    - [ ] Store integration
+    - [ ] Sections display correctly
+    - [ ] Navigation buttons work
+    - [ ] 404 handling
+  - [ ] **E2E tests** (4+ tests):
+    - [ ] Navigate to case study detail
+    - [ ] Read full content
+    - [ ] Navigate to next case study
+    - [ ] Accessibility check
+
+---
+
+#### Part 4: Info Pages (Days 11-14)
+
+**Home Page Enhancements**:
+
+- [ ] **HomeComponent enhancements** (`src/app/features/home/home.component.ts`)
+
+  **Shared Components Used**:
+  - ContainerComponent (page wrapper, sections)
+  - StackComponent (vertical spacing)
+  - GridComponent (featured projects, skills)
+  - CardComponent (featured projects)
+  - BadgeComponent (skills, technologies)
+  - ButtonComponent (CTAs, View More)
+  - IconComponent (checkmarks, arrows)
+
+  **Implementation Tasks**:
+  - [x] Hero section scaffolded
+  - [ ] **Hero section enhancements**:
+    - [ ] Professional headline and introduction
+    - [ ] Subtitle/tagline
+    - [ ] Primary CTA ButtonComponent "View Projects"
+    - [ ] Secondary CTA ButtonComponent "Contact Me"
+    - [ ] Optional: Animated typing effect for roles
+  - [ ] **Professional intro/bio section**:
+    - [ ] ContainerComponent with max-width for readability
+    - [ ] 2-3 paragraph professional summary
+    - [ ] What you do, specialties, approach
+    - [ ] Years of experience highlight
+  - [ ] **Featured projects showcase**:
+    - [ ] Section heading "Featured Work"
+    - [ ] GridComponent (1/2/3 columns responsive)
+    - [ ] Show 3-4 featured projects from ProjectsStore
+    - [ ] Inject ProjectsStore, call `store.loadProjects()`
+    - [ ] Use `store.featuredProjects()` computed signal
+    - [ ] CardComponent for each project:
+      - [ ] Project image
+      - [ ] Title and short description
+      - [ ] BadgeComponent for 2-3 key technologies
+      - [ ] ButtonComponent "Learn More" linking to detail page
+    - [ ] ButtonComponent "View All Projects" at bottom
+  - [ ] **Skills overview section**:
+    - [ ] Section heading "Skills & Technologies"
+    - [ ] GridComponent for skill categories (3-4 columns)
+    - [ ] Each category as a group:
+      - [ ] Category title (Frontend, Backend, DevOps, etc.)
+      - [ ] BadgeComponent for each skill in category
+    - [ ] Mobile: single column, stacked
+  - [ ] **Call-to-action section**:
+    - [ ] Background color contrast section
+    - [ ] Heading "Let's Work Together"
+    - [ ] Short pitch paragraph
+    - [ ] ButtonComponent "View Case Studies" (primary)
+    - [ ] ButtonComponent "Contact Me" (secondary)
+  - [ ] **Smooth scroll navigation**:
+    - [ ] Add id attributes to sections
+    - [ ] Implement smooth scroll behavior
+    - [ ] Optional: animate on scroll (AOS) for sections
+  - [ ] **Mobile responsive**:
+    - [ ] Single column layout on mobile
+    - [ ] Adjust hero text sizing
+    - [ ] Stack CTA buttons vertically
+  - [ ] **SEO Integration**:
+    - [ ] Use SeoService to set home page title
+    - [ ] Set comprehensive meta description
+    - [ ] Add Person schema for structured data
+  - [ ] **Unit tests** (20+ tests):
+    - [ ] Component renders all sections
+    - [ ] Featured projects load from store
+    - [ ] CTAs navigate correctly
+    - [ ] Responsive layout works
+  - [ ] **E2E tests** (3+ tests):
+    - [ ] Home page loads correctly
+    - [ ] Navigate to projects from featured
+    - [ ] CTA buttons work
 
 **About Page**:
 
-- [ ] **AboutComponent** (new)
-  - **Uses**: ContainerComponent, StackComponent, DividerComponent, GridComponent, CardComponent, BadgeComponent, ButtonComponent, IconComponent, TabsComponent
-  - [ ] Professional bio section
-    - ContainerComponent with readable max-width
-  - [ ] Professional headshot/avatar
-  - [ ] Skills matrix with proficiency levels
-    - GridComponent for skills
-    - BadgeComponent for skill names
-    - Custom progress indicators
-  - [ ] Professional timeline/experience
-    - StackComponent for timeline items
-    - DividerComponent between entries
-    - CardComponent for each experience
-  - [ ] Certifications and education
-    - GridComponent for cert cards
-    - CardComponent for each cert
-    - BadgeComponent for status
-  - [ ] Downloadable resume
-    - ButtonComponent with download icon
-  - [ ] Social links
-    - ButtonComponent (ghost) for each platform
-    - IconComponent for platform icons
-  - [ ] Mobile responsive
-  - [ ] Unit tests
-  - [ ] E2E tests
+- [ ] **AboutComponent** (create new: `src/app/features/about/about.component.ts`)
+
+  **Shared Components Used**:
+  - ContainerComponent (page wrapper)
+  - StackComponent (timeline, sections)
+  - GridComponent (skills matrix, certifications)
+  - CardComponent (experience cards, certification cards)
+  - BadgeComponent (skills, technologies, cert status)
+  - ButtonComponent (download resume, social links)
+  - IconComponent (social platforms, skill icons)
+  - DividerComponent (section separators)
+  - TabsComponent (optional: Overview/Experience/Skills tabs)
+
+  **Implementation Tasks**:
+  - [ ] Generate component: `ng generate component features/about --standalone`
+  - [ ] **Professional bio section**:
+    - [ ] ContainerComponent with max-width for readability
+    - [ ] Professional headshot/avatar image
+    - [ ] Full professional bio (3-4 paragraphs)
+    - [ ] Career journey and philosophy
+    - [ ] Current focus and interests
+  - [ ] **Quick facts/stats section**:
+    - [ ] GridComponent (2/4 columns)
+    - [ ] Years of experience
+    - [ ] Projects completed
+    - [ ] Technologies mastered
+    - [ ] Companies worked with
+  - [ ] **Skills matrix section**:
+    - [ ] Section heading "Technical Skills"
+    - [ ] GridComponent for skill categories
+    - [ ] Each skill with:
+      - [ ] BadgeComponent for skill name
+      - [ ] Proficiency level indicator (expert, advanced, intermediate)
+      - [ ] Years of experience
+    - [ ] Group by category (Languages, Frameworks, Tools, etc.)
+  - [ ] **Professional timeline/experience**:
+    - [ ] Section heading "Experience"
+    - [ ] StackComponent for timeline layout
+    - [ ] CardComponent for each role/company:
+      - [ ] Company name and logo
+      - [ ] Role title and duration
+      - [ ] Key responsibilities (bullet points)
+      - [ ] Technologies used (BadgeComponent)
+      - [ ] Notable achievements
+    - [ ] DividerComponent between entries
+    - [ ] Vertical timeline line visual
+  - [ ] **Certifications and education**:
+    - [ ] Section heading "Certifications & Education"
+    - [ ] GridComponent (2-3 columns)
+    - [ ] CardComponent for each certification/degree:
+      - [ ] Certification/degree name
+      - [ ] Issuing organization
+      - [ ] Date earned
+      - [ ] BadgeComponent for status (Active, Expired, In Progress)
+      - [ ] Optional credential URL link
+  - [ ] **Downloadable resume**:
+    - [ ] ButtonComponent with download icon
+    - [ ] Link to PDF resume in assets folder
+    - [ ] Track download event with AnalyticsService
+  - [ ] **Social links section**:
+    - [ ] Section heading "Connect With Me"
+    - [ ] ButtonComponent (ghost variant) for each platform:
+      - [ ] GitHub with IconComponent
+      - [ ] LinkedIn with IconComponent
+      - [ ] Email with IconComponent
+      - [ ] Optional: Twitter, Medium, Dev.to
+    - [ ] External links with target="_blank"
+  - [ ] **Mobile responsive**:
+    - [ ] Single column layout
+    - [ ] Stack timeline vertically
+    - [ ] Adjust grid columns
+  - [ ] **SEO Integration**:
+    - [ ] Use SeoService to set page title
+    - [ ] Set meta description
+    - [ ] Add Person schema with full details
+  - [ ] **Unit tests** (25+ tests):
+    - [ ] Component renders all sections
+    - [ ] Skills display correctly
+    - [ ] Timeline renders
+    - [ ] Social links work
+    - [ ] Resume download link works
+  - [ ] **E2E tests** (4+ tests):
+    - [ ] Navigate to about page
+    - [ ] Scroll through all sections
+    - [ ] Click social links
+    - [ ] Accessibility check
 
 **Contact Page**:
 
-- [ ] **ContactComponent** (new)
-  - **Uses**: ContainerComponent, StackComponent, FormFieldComponent, InputComponent, TextareaComponent, ButtonComponent, IconComponent, CardComponent, ToastService
-  - [ ] Reactive form with validation
-  - [ ] FormFieldComponent wrappers for all fields
-  - [ ] InputComponent (name, email, subject)
-  - [ ] TextareaComponent (message)
-    - Character count enabled
-    - Auto-resize
-  - [ ] Form validation
-    - Required validators
-    - Email validator
-    - Min/max length validators
-  - [ ] Submit ButtonComponent
-    - Loading state while sending
-    - LoadingSpinnerComponent integration
-  - [ ] Success/error ToastService notifications
-  - [ ] Email integration (EmailJS or serverless function)
-  - [ ] reCAPTCHA integration for spam protection
-  - [ ] Contact information cards
-    - CardComponent for email, LinkedIn, GitHub
-    - IconComponent for each platform
-  - [ ] Mobile responsive
+- [ ] **ContactComponent** (create new: `src/app/features/contact/contact.component.ts`)
+
+  **Shared Components Used**:
+  - ContainerComponent (page wrapper)
+  - StackComponent (form layout, contact info)
+  - GridComponent (form + contact info side-by-side)
+  - FormFieldComponent (wraps each input)
+  - InputComponent (name, email, subject)
+  - TextareaComponent (message)
+  - ButtonComponent (submit, social links)
+  - IconComponent (social platforms, email, phone)
+  - CardComponent (contact info cards)
+  - LoadingSpinnerComponent (submit state)
+  - ToastService (success/error notifications)
+
+  **Implementation Tasks**:
+  - [ ] Generate component: `ng generate component features/contact --standalone`
+  - [ ] **Page header**:
+    - [ ] Page title and description
+    - [ ] Encouraging message about getting in touch
+  - [ ] **Two-column layout** (form + contact info):
+    - [ ] GridComponent (2 columns on desktop, stack on mobile)
+    - [ ] Left column: Contact form
+    - [ ] Right column: Contact information cards
+  - [ ] **Contact form** (left column):
+    - [ ] Create reactive form with FormBuilder
+    - [ ] Import ReactiveFormsModule
+    - [ ] FormFieldComponent for name input:
+      - [ ] InputComponent with required validator
+      - [ ] Error messages for validation
+    - [ ] FormFieldComponent for email input:
+      - [ ] InputComponent with required and email validators
+      - [ ] Use emailValidator from Phase 3 validation utils
+      - [ ] Error messages
+    - [ ] FormFieldComponent for subject input:
+      - [ ] InputComponent with required validator
+      - [ ] Max length 100 characters
+    - [ ] FormFieldComponent for message textarea:
+      - [ ] TextareaComponent with required validator
+      - [ ] Min length 10, max length 1000 characters
+      - [ ] Character count enabled
+      - [ ] Auto-resize enabled
+      - [ ] Error messages
+    - [ ] Submit ButtonComponent:
+      - [ ] Disabled when form invalid or submitting
+      - [ ] Show LoadingSpinnerComponent when submitting
+      - [ ] Primary variant
+      - [ ] Text: "Send Message" / "Sending..." states
+  - [ ] **Contact information cards** (right column):
+    - [ ] StackComponent for vertical layout
+    - [ ] CardComponent for email:
+      - [ ] IconComponent for email icon
+      - [ ] Email address (clickable mailto: link)
+      - [ ] Description text
+    - [ ] CardComponent for LinkedIn:
+      - [ ] IconComponent for LinkedIn
+      - [ ] Profile link
+      - [ ] "Connect with me professionally"
+    - [ ] CardComponent for GitHub:
+      - [ ] IconComponent for GitHub
+      - [ ] Profile link
+      - [ ] "Check out my code"
+    - [ ] Optional: Phone card if applicable
+  - [ ] **Form submission logic**:
+    - [ ] **Phase 4**: Mock submission (console log, show success toast)
+    - [ ] **Phase 7**: Integrate real email service (EmailJS or serverless)
+    - [ ] Validate form before submission
+    - [ ] Set submitting state
+    - [ ] Call submission service
+    - [ ] On success:
+      - [ ] Show success ToastService notification
+      - [ ] Track event with AnalyticsService (`contact_submit`)
+      - [ ] Reset form
+    - [ ] On error:
+      - [ ] Show error ToastService notification
+      - [ ] Keep form data
+    - [ ] Clear submitting state
+  - [ ] **Form validation**:
+    - [ ] Real-time validation feedback
+    - [ ] Show errors on touch/dirty
+    - [ ] Disable submit when invalid
+    - [ ] Custom error messages per field
+  - [ ] **Spam protection** (Phase 7):
+    - [ ] reCAPTCHA v3 integration (deferred to Phase 7)
+    - [ ] Rate limiting on backend
+  - [ ] **Mobile responsive**:
+    - [ ] Stack columns vertically on mobile
+    - [ ] Full-width form fields
+    - [ ] Adjust card sizing
+  - [ ] **SEO Integration**:
+    - [ ] Use SeoService to set page title
+    - [ ] Set meta description
+    - [ ] Add ContactPage schema
+  - [ ] **Accessibility**:
+    - [ ] Proper form labels and ARIA attributes
+    - [ ] Error announcements for screen readers
+    - [ ] Focus management
+    - [ ] Keyboard navigation
+  - [ ] **Unit tests** (30+ tests):
+    - [ ] Component renders form correctly
+    - [ ] Form validation works
+    - [ ] Required fields validated
+    - [ ] Email format validated
+    - [ ] Character limits enforced
+    - [ ] Submit button disabled when invalid
+    - [ ] Form submission calls service
+    - [ ] Success toast shown
+    - [ ] Error toast shown on failure
+    - [ ] Form resets on success
+    - [ ] Analytics event tracked
+  - [ ] **E2E tests** (6+ tests):
+    - [ ] Navigate to contact page
+    - [ ] Fill out form with valid data
+    - [ ] Submit form successfully
+    - [ ] Validate required fields
+    - [ ] Validate email format
+    - [ ] Accessibility check
+
+---
+
+#### Part 5: Polish & Testing (Days 15-18)
+
+**Navigation & Layout Improvements**:
+
+- [ ] **"Back to top" button** (create new: `src/app/shared/components/back-to-top/back-to-top.component.ts`)
+  - [ ] Generate standalone component
+  - [ ] ButtonComponent with arrow up IconComponent
+  - [ ] Fixed position bottom-right
+  - [ ] Show/hide based on scroll position (use fromEvent with scroll)
+  - [ ] Smooth scroll to top on click
+  - [ ] Fade in/out animation
+  - [ ] Add to MainLayout for all pages
   - [ ] Unit tests
-  - [ ] E2E tests
+  - [ ] Storybook story
 
-**Navigation & Layout**:
+- [ ] **Page transitions** (optional enhancement):
+  - [ ] Create fade animation in animations.ts
+  - [ ] Apply to router-outlet
+  - [ ] Test across all routes
+  - [ ] Ensure accessibility (respect prefers-reduced-motion)
 
-- [ ] Smooth page transitions with Angular animations
-- [ ] "Back to top" ButtonComponent on long pages
-  - IconComponent for arrow up
-  - Fade in/out based on scroll position
-- [ ] Scroll spy navigation (if needed)
-- [ ] Mobile navigation improvements
-  - Hamburger menu
-  - Slide-out drawer with StackComponent
-  - Route links with active states
+- [ ] **MainLayout navigation updates**:
+  - [ ] Verify all route links are correct
+  - [ ] Add active route highlighting (already exists, verify)
+  - [ ] Test mobile menu with all new routes
+  - [ ] Ensure hamburger menu works on all pages
 
-**Content Creation**:
+**Content Creation** (Placeholder/Mock Data):
 
-- [ ] Write 3-5 detailed case studies
+- [ ] **Mock project data** (in ProjectsService):
+  - [ ] Create 5-7 sample projects with realistic data
+  - [ ] Include: title, slug, description, technologies, images (placeholder), links, category, featured flag, dates
+  - [ ] Variety of categories: Web App, Tool, Demo, Library
+  - [ ] Mark 3-4 as featured
+  - [ ] Include GitHub star counts for some
 
-  - Challenge, solution, results
-  - Technologies used
-  - Client testimonials (if available)
-  - Screenshots/deliverables
+- [ ] **Mock case study data** (in CaseStudiesService):
+  - [ ] Create 3-5 sample case studies
+  - [ ] Include: title, slug, client, role, duration, challenge, solution, results, technologies, images (placeholder), dates
+  - [ ] Realistic scenarios and metrics
+  - [ ] Variety of industries/domains
 
-- [ ] Write 3-5 personal project descriptions
+- [ ] **Skills and experience data**:
+  - [ ] Create skills array with categories
+  - [ ] Create experience timeline data
+  - [ ] Create certifications array
+  - [ ] Store in component or separate data file
 
-  - Project purpose and features
-  - Technical implementation details
-  - Live demo links
-  - GitHub repository links
-
-- [ ] Professional content
-
-  - Bio and elevator pitch
-  - Skills and technologies list
-  - Professional headshot/avatar
-  - Resume PDF
-
-- [ ] Social links
-  - GitHub profile
-  - LinkedIn profile
-  - Email address
-  - Optional: Twitter, Medium, Dev.to
+- [ ] **Placeholder images**:
+  - [ ] Use placeholder image service (placeholder.com or similar)
+  - [ ] Or create simple SVG placeholders
+  - [ ] Consistent sizing and aspect ratios
+  - [ ] Add to assets folder
 
 **Documentation**:
 
-- [ ] TSDoc comments on all feature components
-- [ ] Storybook stories for feature components (where applicable)
-- [ ] README updates for project structure
-- [ ] Inline code comments for complex logic
+- [ ] **TSDoc comments**:
+  - [ ] Add to all new feature components
+  - [ ] Add to stores and services
+  - [ ] Document public methods and properties
+  - [ ] Add usage examples where helpful
+
+- [ ] **README updates**:
+  - [ ] Document new features in main README
+  - [ ] Update project structure section
+  - [ ] Add feature overview
+  - [ ] Document mock data approach
+
+- [ ] **Storybook stories** (optional for feature pages):
+  - [ ] Consider adding stories for reusable sections
+  - [ ] Document component composition patterns
+  - [ ] Show different states
+
+**Testing & Quality Assurance**:
+
+- [ ] **Run full test suite**:
+  - [ ] Execute: `npm run test`
+  - [ ] Verify all unit tests pass
+  - [ ] Check coverage meets >85% target
+  - [ ] Fix any failing tests
+
+- [ ] **Run E2E tests**:
+  - [ ] Execute: `npm run e2e`
+  - [ ] Verify all E2E tests pass
+  - [ ] Test on all browsers (Chromium, Firefox, WebKit)
+  - [ ] Fix any failing tests
+
+- [ ] **Linting**:
+  - [ ] Execute: `npm run lint`
+  - [ ] Fix all linting errors
+  - [ ] Ensure consistent code style
+
+- [ ] **Build verification**:
+  - [ ] Execute: `npm run build`
+  - [ ] Verify production build succeeds
+  - [ ] Check bundle sizes
+  - [ ] Test production build locally
+
+- [ ] **Manual testing**:
+  - [ ] Test all routes and navigation
+  - [ ] Test all interactive features
+  - [ ] Test responsive design on multiple viewports
+  - [ ] Test keyboard navigation
+  - [ ] Test with screen reader (basic check)
+  - [ ] Test theme switching across pages
+  - [ ] Verify no console errors
+
+- [ ] **Performance check**:
+  - [ ] Run Lighthouse audit
+  - [ ] Verify scores meet targets
+  - [ ] Optimize any issues found
+
+---
 
 ### Component Usage Summary
 
-**Most Used Components**:
+This section maps which shared components are used across Phase 4 feature pages.
 
-1. **ContainerComponent** - Every page for max-width constraints
-2. **StackComponent** - Vertical spacing in all layouts
-3. **GridComponent** - Card grids, responsive layouts
-4. **CardComponent** - Projects, case studies, info cards
-5. **ButtonComponent** - CTAs, navigation, actions
-6. **IconComponent** - Visual indicators, social links, actions
-7. **BadgeComponent** - Tags, technologies, status indicators
+**Core Layout Components** (used on every page):
+1. **ContainerComponent** - Page wrapper, max-width constraints, responsive padding
+2. **StackComponent** - Vertical spacing between sections, timeline layouts
+3. **GridComponent** - Card grids (projects, case studies), multi-column layouts, responsive breakpoints
 
-**Form Components**: Contact page, search/filter functionality
-**Loading States**: SkeletonComponent on all data-driven pages
-**Navigation**: BreadcrumbComponent on detail pages
-**Feedback**: ToastService for success/error messages
+**UI Components** (heavily used):
+4. **CardComponent** - Project cards, case study cards, metric cards, experience cards, certification cards
+5. **ButtonComponent** - CTAs, navigation, form submit, social links, filters, actions
+6. **IconComponent** - Social platforms, metrics, checkmarks, arrows, external links, GitHub, search
+7. **BadgeComponent** - Technologies, skills, categories, status, role, client tags
 
-### Technical Details
+**Form Components** (Contact page + search/filter):
+- **FormFieldComponent** - Wraps inputs with labels and error messages
+- **InputComponent** - Name, email, subject, search fields
+- **TextareaComponent** - Message field with character count and auto-resize
+- **SelectComponent** - Sort dropdown on Projects List
 
-- ProjectStore/CaseStudiesStore fully integrated with all components
-- Use @if/@for control flow with store signals
-- Track expressions in loops for performance
-- Route guards for detail page validation
-- Lazy loading for optimal bundle size
-- Angular animations for page transitions
-- Responsive CSS Grid layouts
+**Navigation Components**:
+- **BreadcrumbComponent** - All detail pages, helps users navigate hierarchy
+- **TabsComponent** - Project Detail (content sections), Projects List (category filter), optional on About
+
+**Feedback & Loading Components**:
+- **SkeletonComponent** - Loading states on all data-driven pages (Projects, Case Studies, Details)
+- **LoadingSpinnerComponent** - Form submission, async operations
+- **ToastService** - Success/error notifications (form submission, data loading errors)
+- **DividerComponent** - Section separators on detail pages, About page
+
+**Special Components**:
+- **ModalService** - Not used in Phase 4 (reserved for future features)
+
+**Component Usage by Page**:
+
+| Page | Components Used (count) | Most Important |
+|------|------------------------|----------------|
+| **Home** | 7 components | Container, Grid, Card, Badge, Button |
+| **Projects List** | 11 components | Grid, Card, Input, Select, Tabs, Badge, Skeleton |
+| **Project Detail** | 10 components | Container, Stack, Tabs, Card, Badge, Breadcrumb, Skeleton |
+| **Case Studies List** | 10 components | Grid, Card, Input, Badge, Skeleton, Breadcrumb |
+| **Case Study Detail** | 10 components | Container, Stack, Grid, Card, Badge, Divider, Skeleton |
+| **About** | 9 components | Container, Stack, Grid, Card, Badge, Divider |
+| **Contact** | 9 components | Container, Grid, FormField, Input, Textarea, Button, Card, Toast |
+
+---
+
+### Technical Implementation Details
+
+**State Management**:
+- ProjectsStore: Manages projects collection, filtering, sorting, selection
+- CaseStudiesStore: Manages case studies collection, filtering, selection
+- Signal-based reactive state with computed signals for filtering/sorting
+- rxMethod for async data loading operations
+- Centralized error and loading states
+
+**Routing**:
+- Feature routing with route parameters for detail pages
+- Route slugs for SEO-friendly URLs
+- 404 handling for invalid slugs
+- Active route highlighting in navigation
+- Breadcrumb integration with router state
+
+**Control Flow**:
+- Use `@if` for conditional rendering (loading, empty states, 404)
+- Use `@for` with track expressions for lists (projects, case studies, skills)
+- Computed signals for reactive derived state
+- Signal-based loading and error states
+
+**SEO Integration**:
+- SeoService on every page to set titles and meta descriptions
+- Open Graph tags for social sharing
+- Structured data (Person schema, Article schema for case studies)
+- Semantic HTML throughout
+
+**Form Handling**:
+- Reactive Forms with FormBuilder
+- Custom validators from Phase 3 utilities
+- Real-time validation feedback
+- Accessibility-focused error messaging
+- Loading states during submission
+
+**Responsive Design**:
+- Mobile-first approach
+- CSS Grid with responsive breakpoints
+- Stack layouts on mobile (GridComponent → single column)
+- Horizontal scroll for TabsComponent on mobile
+- Touch-friendly button sizes
+
+**Performance Optimizations**:
+- Track expressions in `@for` loops for efficient change detection
+- Lazy loading of routes (Phase 8)
+- Image lazy loading (loading="lazy")
+- Debounced search inputs (using Phase 3 debounce utility)
+- Computed signals to minimize recalculations
+
+**Accessibility**:
+- WCAG 2.1 AAA compliance (carried over from Phase 2)
+- Keyboard navigation support
+- ARIA attributes on all interactive elements
+- Focus management in modals and forms
+- Screen reader announcements for dynamic content
+- Form error announcements
+
+**Testing Strategy**:
+- Unit tests: 40+ per list page, 30+ per detail page, 20-30 per info page
+- E2E tests: 6-8 per list page, 4-5 per detail page, 3-4 per info page
+- Test store integration thoroughly
+- Test responsive layouts
+- Test accessibility with axe-core in Playwright
+- Coverage target: >85% overall, >90% for feature components
+
+---
 
 ### Success Metrics
 
-- All pages use shared components consistently
-- Stores fully integrated with UI
-- Navigation and routing working smoothly
-- Initial content published (3-5 case studies, 3-5 projects)
-- Mobile responsive layouts verified
-- Theme system functional across all pages
-- All pages have unit tests and E2E coverage
+**Completion Criteria**:
+- ✅ All 7 feature pages implemented (Home, Projects List/Detail, Case Studies List/Detail, About, Contact)
+- ✅ Routing configured and tested for all pages
+- ✅ ProjectsStore and CaseStudiesStore fully integrated
+- ✅ All pages use shared component library consistently
+- ✅ Mock/placeholder content in place for development
+- ✅ Mobile responsive layouts verified across all pages
+- ✅ Theme system functional across all pages
+- ✅ All pages have comprehensive unit tests
+- ✅ All pages have E2E coverage
+- ✅ SEO metadata on all pages
+- ✅ Accessibility verified (keyboard nav, screen reader basics)
+- ✅ No console errors in development or production builds
+- ✅ Linting passes with zero errors
+- ✅ Build succeeds without warnings
+- ✅ Test coverage >85%
 
-### Estimated Duration
+**Quality Gates**:
+- All unit tests passing (target: 200+ new tests for feature pages)
+- All E2E tests passing (target: 40+ new E2E tests)
+- Lighthouse score >90 on all pages
+- Zero TypeScript errors
+- Zero ESLint errors
+- Bundle size <500KB (before Phase 4 content)
 
-2-3 weeks
+---
+
+### Phase 4 Estimated Duration
+
+**Total: 2-3 weeks (15-18 working days)**
+
+**Week 1** (Days 1-5):
+- Days 1-3: Routing, Data Models, Feature Stores
+- Days 4-5: Projects List Page
+
+**Week 2** (Days 6-10):
+- Days 6-7: Case Studies List Page
+- Days 8-10: Project Detail + Case Study Detail
+
+**Week 3** (Days 11-15):
+- Days 11-12: Home Page Enhancements
+- Days 13-14: About Page + Contact Page
+- Day 15: Navigation improvements, Back-to-top button
+
+**Buffer** (Days 16-18 if needed):
+- Testing, bug fixes, polish
+- Content refinement
+- Documentation
+- Performance optimization
 
 ---
 
