@@ -1,96 +1,29 @@
-import { ChangeDetectionStrategy, Component, signal } from '@angular/core';
-import { RouterLink, RouterLinkActive, RouterOutlet } from '@angular/router';
-import { provideIcons } from '@ng-icons/core';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
+import { RouterOutlet } from '@angular/router';
 
-import {
-  ButtonComponent,
-  IconComponent,
-  StackComponent,
-} from '@shared/components';
-import {
-  APP_NAME,
-  ARIA_LABELS,
-  ICON_REGISTRY,
-  KEYBOARD_KEYS,
-  NAV_ITEMS,
-  ROUTE_PATHS,
-} from '@shared/constants';
-
-import { ThemePickerComponent } from '../../shared/components/theme-picker/theme-picker.component';
 import { FooterComponent } from '../footer/footer.component';
+import { HeaderComponent } from '../header/header.component';
 
+/**
+ * Main layout component that provides the application shell
+ *
+ * Orchestrates the overall page structure with:
+ * - Skip-to-content link for accessibility
+ * - Header with navigation
+ * - Main content area with router outlet
+ * - Footer
+ *
+ * @example
+ * ```html
+ * <app-main-layout />
+ * ```
+ */
 @Component({
   selector: 'app-main-layout',
   standalone: true,
-  imports: [
-    RouterOutlet,
-    RouterLink,
-    RouterLinkActive,
-    ButtonComponent,
-    IconComponent,
-    StackComponent,
-    FooterComponent,
-    ThemePickerComponent,
-  ],
-  viewProviders: [provideIcons(ICON_REGISTRY)],
+  imports: [RouterOutlet, HeaderComponent, FooterComponent],
   templateUrl: './main-layout.component.html',
   styleUrl: './main-layout.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MainLayoutComponent {
-  /** Route paths for navigation */
-  protected readonly ROUTE_PATHS = ROUTE_PATHS;
-
-  /** Navigation menu items */
-  protected readonly NAV_ITEMS = NAV_ITEMS;
-
-  /** Application name */
-  protected readonly APP_NAME = APP_NAME;
-
-  /** ARIA labels for accessibility */
-  protected readonly ARIA_LABELS = ARIA_LABELS;
-
-  /** Keyboard keys for accessibility */
-  protected readonly KEYBOARD_KEYS = KEYBOARD_KEYS;
-
-  /** Mobile menu open/closed state */
-  protected readonly isMobileMenuOpen = signal(false);
-
-  /**
-   * Toggle mobile menu open/closed state
-   */
-  protected toggleMobileMenu(): void {
-    this.isMobileMenuOpen.update((value) => !value);
-  }
-
-  /**
-   * Close mobile menu
-   */
-  protected closeMobileMenu(): void {
-    this.isMobileMenuOpen.set(false);
-  }
-
-  /**
-   * Handle keyboard navigation for mobile menu toggle
-   * @param event - Keyboard event
-   */
-  protected onMenuToggleKeydown(event: KeyboardEvent): void {
-    if (
-      event.key === this.KEYBOARD_KEYS.ENTER ||
-      event.key === this.KEYBOARD_KEYS.SPACE
-    ) {
-      event.preventDefault();
-      this.toggleMobileMenu();
-    }
-  }
-
-  /**
-   * Handle keyboard navigation for closing mobile menu
-   * @param event - Keyboard event
-   */
-  protected onMenuCloseKeydown(event: KeyboardEvent): void {
-    if (event.key === this.KEYBOARD_KEYS.ESCAPE) {
-      this.closeMobileMenu();
-    }
-  }
-}
+export class MainLayoutComponent {}

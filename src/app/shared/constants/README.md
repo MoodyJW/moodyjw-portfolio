@@ -12,26 +12,32 @@ Route path constants for type-safe navigation.
 
 - `ROUTES` - Route path segments (without leading slash)
 - `ROUTE_PATHS` - Full route paths (with leading slash) for use in templates
-- `NAV_ITEMS` - Navigation menu configuration
-- `getCaseStudyRoute(id)` - Helper function to generate case study detail routes
+- `NAV_ITEMS` - Navigation menu configuration with 5 items (Home, Projects, Case Studies, About, Contact)
+- `getProjectRoute(slug)` - Helper function to generate project detail routes
+- `getCaseStudyRoute(slug)` - Helper function to generate case study detail routes
 
 **Example Usage:**
 
 ```typescript
 // In TypeScript
-import { ROUTES, ROUTE_PATHS, getCaseStudyRoute } from '@shared/constants';
+import { ROUTES, ROUTE_PATHS, getProjectRoute, getCaseStudyRoute } from '@shared/constants';
 
 // Navigate programmatically
+this.router.navigate([ROUTES.PROJECTS]);
 this.router.navigate([ROUTES.CASE_STUDIES]);
 
-// Generate dynamic route
-const route = getCaseStudyRoute('project-1'); // '/case-studies/project-1'
+// Generate dynamic routes with slugs
+const projectRoute = getProjectRoute('e-commerce-platform'); // '/projects/e-commerce-platform'
+const caseStudyRoute = getCaseStudyRoute('mobile-app-redesign'); // '/case-studies/mobile-app-redesign'
 ```
 
 ```html
 <!-- In templates -->
 <a [routerLink]="ROUTE_PATHS.HOME">Home</a>
+<a [routerLink]="ROUTE_PATHS.PROJECTS">Projects</a>
 <a [routerLink]="ROUTE_PATHS.CASE_STUDIES">Case Studies</a>
+<a [routerLink]="ROUTE_PATHS.ABOUT">About</a>
+<a [routerLink]="ROUTE_PATHS.CONTACT">Contact</a>
 ```
 
 ### `api.constants.ts`

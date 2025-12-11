@@ -7,6 +7,8 @@ The `core` directory contains application-wide functionality that should only be
 ```
 core/
 ├── layout/           # Shell layouts and main layout components
+├── header/           # Application header with navigation
+├── footer/           # Application footer
 ├── services/         # Global singleton services
 ├── store/            # NgRx SignalStore state management
 ├── guards/           # Route guards for navigation control
@@ -16,10 +18,22 @@ core/
 
 ## Layout
 
-The `layout` folder contains shell components that wrap feature content:
+The `layout` folder contains shell components that compose the application structure:
 
-- **MainLayoutComponent**: Primary layout with header, navigation, content area, and footer
-- Future layouts: AdminLayout, AuthLayout, etc.
+- **MainLayoutComponent**: Application shell that orchestrates the overall page structure (header, main content with router outlet, footer)
+- **HeaderComponent**: Responsive navigation bar with desktop menu, mobile drawer, brand logo, and theme picker
+- **FooterComponent**: Application footer with copyright information and external links
+- Future layouts: AdminLayout, AuthLayout, PrintLayout, etc.
+
+### Header Component
+
+The HeaderComponent provides:
+- Responsive navigation with 5 main routes (Home, Projects, Case Studies, About, Contact)
+- Mobile hamburger menu with slide-out drawer animation
+- Active route highlighting using `routerLinkActive`
+- Theme picker integration for light/dark mode switching
+- Full keyboard accessibility (Enter/Space to toggle, Escape to close)
+- WCAG 2.1 AAA compliant with proper ARIA labels and semantic HTML
 
 ## Store
 
