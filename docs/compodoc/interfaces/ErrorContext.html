@@ -1,0 +1,984 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  ErrorContext</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/services/error-handler/error-handler.service.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Error context information</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#action" 
+>
+                                            action
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#data" 
+>
+                                            data
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#severity" 
+>
+                                            severity
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#showToast" 
+>
+                                            showToast
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#source" 
+>
+                                            source
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#userMessage" 
+>
+                                            userMessage
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="action"></a>
+                                        <span class="name "><b>action</b>
+                                            <a href="#action">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>action:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>User action that triggered the error</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="data"></a>
+                                        <span class="name "><b>data</b>
+                                            <a href="#data">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>data:     <code>Record&lt;string | unknown&gt;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>Record&lt;string | unknown&gt;</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Additional context data</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="severity"></a>
+                                        <span class="name "><b>severity</b>
+                                            <a href="#severity">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>severity:         <code><a href="../miscellaneous/typealiases.html#ErrorSeverity" target="_self" >ErrorSeverity</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ErrorSeverity" target="_self" >ErrorSeverity</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Error severity level</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="showToast"></a>
+                                        <span class="name "><b>showToast</b>
+                                            <a href="#showToast">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>showToast:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Whether to show toast notification</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="source"></a>
+                                        <span class="name "><b>source</b>
+                                            <a href="#source">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>source:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Component or service where error occurred</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="userMessage"></a>
+                                        <span class="name "><b>userMessage</b>
+                                            <a href="#userMessage">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>userMessage:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Custom user-friendly message</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpErrorResponse } from &#x27;@angular/common/http&#x27;;
+import type { ErrorHandler} from &#x27;@angular/core&#x27;;
+import { inject, Injectable, signal } from &#x27;@angular/core&#x27;;
+
+import { ToastService } from &#x27;../toast/toast.service&#x27;;
+
+/**
+ * Error severity levels
+ */
+export type ErrorSeverity &#x3D; &#x27;low&#x27; | &#x27;medium&#x27; | &#x27;high&#x27; | &#x27;critical&#x27;;
+
+/**
+ * Error context information
+ */
+export interface ErrorContext {
+  /** Component or service where error occurred */
+  source?: string;
+  /** User action that triggered the error */
+  action?: string;
+  /** Additional context data */
+  data?: Record&lt;string, unknown&gt;;
+  /** Whether to show toast notification */
+  showToast?: boolean;
+  /** Custom user-friendly message */
+  userMessage?: string;
+  /** Error severity level */
+  severity?: ErrorSeverity;
+}
+
+/**
+ * Logged error information
+ */
+export interface LoggedError {
+  /** Unique error ID */
+  id: string;
+  /** Error message */
+  message: string;
+  /** Error stack trace */
+  stack?: string;
+  /** Timestamp when error occurred */
+  timestamp: Date;
+  /** Error type (e.g., &#x27;TypeError&#x27;, &#x27;HttpError&#x27;) */
+  type: string;
+  /** Error context */
+  context?: ErrorContext;
+  /** Error severity */
+  severity: ErrorSeverity;
+  /** HTTP status code (for HTTP errors) */
+  statusCode?: number;
+}
+
+/**
+ * Global error handler service that catches and processes errors
+ * Provides user-friendly error messages, logging, and optional external reporting
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * // In app.config.ts
+ * export const appConfig: ApplicationConfig &#x3D; {
+ *   providers: [
+ *     { provide: ErrorHandler, useClass: ErrorHandlerService },
+ *     // ... other providers
+ *   ]
+ * };
+ *
+ * // Manual error handling
+ * export class MyComponent {
+ *   private errorHandler &#x3D; inject(ErrorHandlerService);
+ *
+ *   someMethod() {
+ *     try {
+ *       // risky operation
+ *     } catch (error) {
+ *       this.errorHandler.handleError(error, {
+ *         source: &#x27;MyComponent&#x27;,
+ *         action: &#x27;someMethod&#x27;,
+ *         showToast: true,
+ *         userMessage: &#x27;Failed to perform operation&#x27;
+ *       });
+ *     }
+ *   }
+ * }
+ * &#x60;&#x60;&#x60;
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class ErrorHandlerService implements ErrorHandler {
+  private toastService &#x3D; inject(ToastService);
+
+  /** Signal containing all logged errors */
+  private readonly _errors &#x3D; signal&lt;LoggedError[]&gt;([]);
+
+  /** Counter for generating unique error IDs */
+  private _idCounter &#x3D; 0;
+
+  /** Maximum number of errors to keep in memory */
+  private readonly MAX_ERRORS &#x3D; 50;
+
+  /** Whether to log errors to console */
+  private logToConsole &#x3D; true;
+
+  /** External error reporting callback (e.g., Sentry) */
+  private externalReporter?: (error: LoggedError) &#x3D;&gt; void;
+
+  /**
+   * Public read-only access to logged errors
+   */
+  readonly errors &#x3D; this._errors.asReadonly();
+
+  /**
+   * Get the total count of logged errors
+   */
+  getErrorCount &#x3D; (): number &#x3D;&gt; this._errors().length;
+
+  /**
+   * Handle an error (implements Angular&#x27;s ErrorHandler interface)
+   * @param error - The error to handle
+   */
+  handleError(error: unknown, context?: ErrorContext): void {
+    const loggedError &#x3D; this.processError(error, context);
+
+    // Log to console
+    if (this.logToConsole) {
+      this.logErrorToConsole(loggedError);
+    }
+
+    // Store error
+    this.storeError(loggedError);
+
+    // Show toast notification if requested
+    if (context?.showToast !&#x3D;&#x3D; false) {
+      this.showErrorToast(loggedError, context);
+    }
+
+    // Report to external service
+    if (this.externalReporter) {
+      try {
+        this.externalReporter(loggedError);
+      } catch (reportError) {
+        console.error(&#x27;[ErrorHandler] Failed to report error:&#x27;, reportError);
+      }
+    }
+  }
+
+  /**
+   * Handle HTTP errors specifically
+   * @param error - HTTP error response
+   * @param context - Error context
+   */
+  handleHttpError(error: HttpErrorResponse, context?: ErrorContext): void {
+    const enhancedContext: ErrorContext &#x3D; {
+      ...context,
+      data: {
+        ...context?.data,
+        url: error.url,
+        status: error.status,
+        statusText: error.statusText,
+      },
+    };
+
+    this.handleError(error, enhancedContext);
+  }
+
+  /**
+   * Set up external error reporting (e.g., Sentry)
+   * @param reporter - Function to call for external reporting
+   */
+  setupExternalReporting(reporter: (error: LoggedError) &#x3D;&gt; void): void {
+    this.externalReporter &#x3D; reporter;
+  }
+
+  /**
+   * Enable or disable console logging
+   * @param enabled - Whether to log to console
+   */
+  setConsoleLogging(enabled: boolean): void {
+    this.logToConsole &#x3D; enabled;
+  }
+
+  /**
+   * Clear all logged errors
+   */
+  clearErrors(): void {
+    this._errors.set([]);
+  }
+
+  /**
+   * Get errors by severity level
+   * @param severity - Severity level to filter by
+   */
+  getErrorsBySeverity(severity: ErrorSeverity): LoggedError[] {
+    return this._errors().filter((error) &#x3D;&gt; error.severity &#x3D;&#x3D;&#x3D; severity);
+  }
+
+  /**
+   * Process an error into a standardized format
+   * @param error - The error to process
+   * @param context - Error context
+   * @returns Processed error information
+   */
+  private processError(error: unknown, context?: ErrorContext): LoggedError {
+    const id &#x3D; this.generateErrorId();
+    const timestamp &#x3D; new Date();
+
+    // HTTP Error
+    if (error instanceof HttpErrorResponse) {
+      return {
+        id,
+        message: this.getHttpErrorMessage(error),
+        stack: undefined,
+        timestamp,
+        type: &#x27;HttpError&#x27;,
+        context,
+        severity: this.determineHttpErrorSeverity(error),
+        statusCode: error.status,
+      };
+    }
+
+    // Standard Error
+    if (error instanceof Error) {
+      return {
+        id,
+        message: error.message,
+        stack: error.stack,
+        timestamp,
+        type: error.name || &#x27;Error&#x27;,
+        context,
+        severity: context?.severity || this.determineErrorSeverity(error),
+      };
+    }
+
+    // Unknown error type
+    return {
+      id,
+      message: String(error),
+      timestamp,
+      type: &#x27;UnknownError&#x27;,
+      context,
+      severity: context?.severity || &#x27;medium&#x27;,
+    };
+  }
+
+  /**
+   * Get user-friendly message for HTTP errors
+   * @param error - HTTP error response
+   */
+  private getHttpErrorMessage(error: HttpErrorResponse): string {
+    if (error.status &#x3D;&#x3D;&#x3D; 0) {
+      return &#x27;Network error - please check your internet connection&#x27;;
+    }
+
+    if (error.status &gt;&#x3D; 400 &amp;&amp; error.status &lt; 500) {
+      // Client errors
+      switch (error.status) {
+        case 400:
+          return &#x27;Bad request - please check your input&#x27;;
+        case 401:
+          return &#x27;Authentication required - please log in&#x27;;
+        case 403:
+          return &#x27;Access denied - you don\&#x27;t have permission&#x27;;
+        case 404:
+          return &#x27;Resource not found&#x27;;
+        case 429:
+          return &#x27;Too many requests - please try again later&#x27;;
+        default:
+          return &#x60;Client error (${error.status})&#x60;;
+      }
+    }
+
+    if (error.status &gt;&#x3D; 500) {
+      // Server errors
+      return &#x27;Server error - please try again later&#x27;;
+    }
+
+    return error.message || &#x60;HTTP Error ${error.status}&#x60;;
+  }
+
+  /**
+   * Determine severity for HTTP errors
+   * @param error - HTTP error response
+   */
+  private determineHttpErrorSeverity(error: HttpErrorResponse): ErrorSeverity {
+    if (error.status &#x3D;&#x3D;&#x3D; 0) return &#x27;high&#x27;; // Network error
+    if (error.status &#x3D;&#x3D;&#x3D; 401) return &#x27;medium&#x27;; // Auth error
+    if (error.status &#x3D;&#x3D;&#x3D; 403) return &#x27;medium&#x27;; // Permission error
+    if (error.status &#x3D;&#x3D;&#x3D; 404) return &#x27;low&#x27;; // Not found
+    if (error.status &gt;&#x3D; 500) return &#x27;high&#x27;; // Server error
+    return &#x27;medium&#x27;;
+  }
+
+  /**
+   * Determine severity for general errors
+   * @param error - Error object
+   */
+  private determineErrorSeverity(error: Error): ErrorSeverity {
+    const message &#x3D; error.message.toLowerCase();
+
+    // Critical errors
+    if (
+      message.includes(&#x27;out of memory&#x27;) ||
+      message.includes(&#x27;quota exceeded&#x27;) ||
+      message.includes(&#x27;cannot read&#x27;)
+    ) {
+      return &#x27;critical&#x27;;
+    }
+
+    // High severity
+    if (
+      message.includes(&#x27;failed&#x27;) ||
+      message.includes(&#x27;error&#x27;) ||
+      message.includes(&#x27;exception&#x27;)
+    ) {
+      return &#x27;high&#x27;;
+    }
+
+    return &#x27;medium&#x27;;
+  }
+
+  /**
+   * Log error to console with formatting
+   * @param error - Logged error information
+   */
+  private logErrorToConsole(error: LoggedError): void {
+    const prefix &#x3D; &#x60;[ErrorHandler ${error.severity.toUpperCase()}]&#x60;;
+    const context &#x3D; error.context
+      ? &#x60;\nContext: ${JSON.stringify(error.context, null, 2)}&#x60;
+      : &#x27;&#x27;;
+
+    console.error(
+      &#x60;${prefix} ${error.type}: ${error.message}${context}&#x60;,
+      error.stack ? &#x60;\n${error.stack}&#x60; : &#x27;&#x27;
+    );
+  }
+
+  /**
+   * Store error in memory (with limit)
+   * @param error - Logged error information
+   */
+  private storeError(error: LoggedError): void {
+    this._errors.update((errors) &#x3D;&gt; {
+      const updated &#x3D; [error, ...errors];
+      // Keep only the most recent MAX_ERRORS
+      return updated.slice(0, this.MAX_ERRORS);
+    });
+  }
+
+  /**
+   * Show error toast notification
+   * @param error - Logged error information
+   * @param context - Error context
+   */
+  private showErrorToast(error: LoggedError, context?: ErrorContext): void {
+    const userMessage &#x3D;
+      context?.userMessage || this.getUserFriendlyMessage(error);
+
+    const duration &#x3D; error.severity &#x3D;&#x3D;&#x3D; &#x27;critical&#x27; ? 0 : 7000; // Critical errors don&#x27;t auto-dismiss
+
+    this.toastService.error(userMessage, {
+      title: this.getToastTitle(error),
+      duration,
+      position: &#x27;top-right&#x27;,
+    });
+  }
+
+  /**
+   * Get user-friendly error message
+   * @param error - Logged error information
+   */
+  private getUserFriendlyMessage(error: LoggedError): string {
+    // HTTP errors already have user-friendly messages
+    if (error.type &#x3D;&#x3D;&#x3D; &#x27;HttpError&#x27;) {
+      return error.message;
+    }
+
+    // For other errors, provide a generic message
+    if (error.severity &#x3D;&#x3D;&#x3D; &#x27;critical&#x27;) {
+      return &#x27;A critical error occurred. Please refresh the page.&#x27;;
+    }
+
+    if (error.severity &#x3D;&#x3D;&#x3D; &#x27;high&#x27;) {
+      return &#x27;An error occurred. Please try again.&#x27;;
+    }
+
+    return &#x27;Something went wrong. Please try again.&#x27;;
+  }
+
+  /**
+   * Get toast title based on error severity
+   * @param error - Logged error information
+   */
+  private getToastTitle(error: LoggedError): string {
+    switch (error.severity) {
+      case &#x27;critical&#x27;:
+        return &#x27;Critical Error&#x27;;
+      case &#x27;high&#x27;:
+        return &#x27;Error&#x27;;
+      case &#x27;medium&#x27;:
+        return &#x27;Warning&#x27;;
+      case &#x27;low&#x27;:
+        return &#x27;Notice&#x27;;
+      default:
+        return &#x27;Error&#x27;;
+    }
+  }
+
+  /**
+   * Generate unique error ID
+   */
+  private generateErrorId(): string {
+    return &#x60;err_${Date.now()}_${++this._idCounter}&#x60;;
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'ErrorContext.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

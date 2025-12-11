@@ -1,0 +1,1773 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ThemePickerComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/shared/components/theme-picker/theme-picker.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Theme picker component for switching between available themes.</p>
+<p>This component provides a dropdown interface for theme selection with the following features:</p>
+<ul>
+<li>Displays current theme with appropriate icon</li>
+<li>Shows all available themes in a dropdown menu with color swatches</li>
+<li>Color swatches display primary, background, and accent colors for each theme</li>
+<li>Menu stays open after theme selection to allow previewing multiple themes</li>
+<li>Supports system default theme option</li>
+<li>Indicates when system default is active</li>
+<li>Shows checkmark for selected theme, color swatches for unselected themes</li>
+<li>Keyboard navigation support (Enter, Space, Escape)</li>
+<li>Click-outside-to-close functionality</li>
+<li>WCAG 2.1 AAA compliant</li>
+</ul>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">Basic usage:
+```html
+&lt;app-theme-picker /&gt;</code></pre></div>
+    </p>
+
+
+    <p class="comment">
+        <h3>Implements</h3>
+    </p>
+    <p class="comment">
+                <code>OnDestroy</code>
+    </p>
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-theme-picker</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                                <code><a href="../components/IconComponent.html" target="_self" >IconComponent</a></code>
+                                <code><a href="../components/BadgeComponent.html" target="_self" >BadgeComponent</a></code>
+                                <code><a href="../components/StackComponent.html" target="_self" >StackComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./theme-picker.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./theme-picker.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#clickOutsideListener" >clickOutsideListener</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#currentIcon" >currentIcon</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#currentTheme" >currentTheme</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#elementRef" >elementRef</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Optional</span>
+                                <a href="#escapeKeyListener" >escapeKeyListener</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isOpen" >isOpen</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#isSystemDefault" >isSystemDefault</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#themes" >themes</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#themeService" >themeService</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#close" >close</a>
+                            </li>
+                            <li>
+                                <a href="#isActiveTheme" >isActiveTheme</a>
+                            </li>
+                            <li>
+                                <a href="#ngOnDestroy" >ngOnDestroy</a>
+                            </li>
+                            <li>
+                                <a href="#onButtonKeydown" >onButtonKeydown</a>
+                            </li>
+                            <li>
+                                <a href="#onOptionKeydown" >onOptionKeydown</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#removeEscapeKeyListener" >removeEscapeKeyListener</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#removeOutsideClickListener" >removeOutsideClickListener</a>
+                            </li>
+                            <li>
+                                <a href="#selectSystemDefault" >selectSystemDefault</a>
+                            </li>
+                            <li>
+                                <a href="#selectTheme" >selectTheme</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#setupEscapeKeyListener" >setupEscapeKeyListener</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#setupOutsideClickListener" >setupOutsideClickListener</a>
+                            </li>
+                            <li>
+                                <a href="#toggle" >toggle</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-constructor">
+    <h3 id="constructor">Constructor</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+<code>constructor()</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:81</a></div>
+                            </td>
+                        </tr>
+
+            </tbody>
+        </table>
+</section>
+
+
+
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="close"></a>
+                    <span class="name">
+                        <span ><b>close</b></span>
+                        <a href="#close"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>close()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="106"
+                                    class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:106</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Close dropdown</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isActiveTheme"></a>
+                    <span class="name">
+                        <span ><b>isActiveTheme</b></span>
+                        <a href="#isActiveTheme"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>isActiveTheme(slug: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="129"
+                                    class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:129</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Check if a theme is currently active</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>slug</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ngOnDestroy"></a>
+                    <span class="name">
+                        <span ><b>ngOnDestroy</b></span>
+                        <a href="#ngOnDestroy"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>ngOnDestroy()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="208"
+                                    class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:208</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Cleanup on destroy</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onButtonKeydown"></a>
+                    <span class="name">
+                        <span ><b>onButtonKeydown</b></span>
+                        <a href="#onButtonKeydown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onButtonKeydown(event: KeyboardEvent)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="136"
+                                    class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:136</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handle button keydown events</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>KeyboardEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="onOptionKeydown"></a>
+                    <span class="name">
+                        <span ><b>onOptionKeydown</b></span>
+                        <a href="#onOptionKeydown"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>onOptionKeydown(event: KeyboardEvent, action: () => void)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="146"
+                                    class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:146</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handle option keydown events</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>event</td>
+                                            <td>
+                                                        <code>KeyboardEvent</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                        <tr>
+                                                <td>action</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeEscapeKeyListener"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>removeEscapeKeyListener</b></span>
+                        <a href="#removeEscapeKeyListener"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>removeEscapeKeyListener()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="198"
+                                    class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:198</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Remove escape key listener</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="removeOutsideClickListener"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>removeOutsideClickListener</b></span>
+                        <a href="#removeOutsideClickListener"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>removeOutsideClickListener()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="175"
+                                    class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:175</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Remove click outside listener</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectSystemDefault"></a>
+                    <span class="name">
+                        <span ><b>selectSystemDefault</b></span>
+                        <a href="#selectSystemDefault"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>selectSystemDefault()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="122"
+                                    class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:122</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Reset to system default theme
+Note: Menu stays open after selection to allow users to preview multiple themes</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="selectTheme"></a>
+                    <span class="name">
+                        <span ><b>selectTheme</b></span>
+                        <a href="#selectTheme"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>selectTheme(slug: <a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank">string</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="114"
+                                    class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:114</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Select a theme by slug
+Note: Menu stays open after selection to allow users to preview multiple themes</p>
+</div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>slug</td>
+                                            <td>
+                                                            <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                            <div class="io-description">
+                                
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setupEscapeKeyListener"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>setupEscapeKeyListener</b></span>
+                        <a href="#setupEscapeKeyListener"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setupEscapeKeyListener()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="185"
+                                    class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:185</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Setup escape key listener</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="setupOutsideClickListener"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>setupOutsideClickListener</b></span>
+                        <a href="#setupOutsideClickListener"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>setupOutsideClickListener()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="156"
+                                    class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:156</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Setup click outside listener</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toggle"></a>
+                    <span class="name">
+                        <span ><b>toggle</b></span>
+                        <a href="#toggle"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>toggle()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="99"
+                                    class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:99</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Toggle dropdown open/closed</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="clickOutsideListener"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>clickOutsideListener</b></span>
+                        <a href="#clickOutsideListener"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:80</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentIcon"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>currentIcon</b></span>
+                        <a href="#currentIcon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const theme &#x3D; this.currentTheme();
+    return theme.isDark ? &#x27;heroMoon&#x27; : &#x27;heroSun&#x27;;
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:75</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed: Current theme icon</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="currentTheme"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>currentTheme</b></span>
+                        <a href="#currentTheme"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.themeService.activeTheme</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="60" class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:60</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed: Current theme</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="elementRef"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>elementRef</b></span>
+                        <a href="#elementRef"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ElementRef)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="50" class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:50</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="escapeKeyListener"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Optional</span>
+                        <span ><b>escapeKeyListener</b></span>
+                        <a href="#escapeKeyListener"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="81" class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:81</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isOpen"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isOpen</b></span>
+                        <a href="#isOpen"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>signal(false)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="55" class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:55</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Signal: Is dropdown open</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="isSystemDefault"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>isSystemDefault</b></span>
+                        <a href="#isSystemDefault"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.themeService.isSystemDefault</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="70" class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:70</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed: Is system default active</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="themes"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>themes</b></span>
+                        <a href="#themes"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>this.themeService.themes</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="65" class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:65</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed: All available themes</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="themeService"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                            <span class="modifier">Readonly</span>
+                        <span ><b>themeService</b></span>
+                        <a href="#themeService"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>inject(ThemeService)</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="49" class="link-to-prism">src/app/shared/components/theme-picker/theme-picker.component.ts:49</a></div>
+                        </td>
+                    </tr>
+
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import type { OnDestroy } from &#x27;@angular/core&#x27;;
+import {
+  ChangeDetectionStrategy,
+  Component,
+  computed,
+  effect,
+  ElementRef,
+  inject,
+  signal,
+} from &#x27;@angular/core&#x27;;
+
+import { ThemeService } from &#x27;../../../core/theme/theme.service&#x27;;
+import { BadgeComponent } from &#x27;../badge/badge.component&#x27;;
+import { IconComponent } from &#x27;../icon/icon.component&#x27;;
+import { StackComponent } from &#x27;../stack/stack.component&#x27;;
+
+/**
+ * Theme picker component for switching between available themes.
+ *
+ * @remarks
+ * This component provides a dropdown interface for theme selection with the following features:
+ * - Displays current theme with appropriate icon
+ * - Shows all available themes in a dropdown menu with color swatches
+ * - Color swatches display primary, background, and accent colors for each theme
+ * - Menu stays open after theme selection to allow previewing multiple themes
+ * - Supports system default theme option
+ * - Indicates when system default is active
+ * - Shows checkmark for selected theme, color swatches for unselected themes
+ * - Keyboard navigation support (Enter, Space, Escape)
+ * - Click-outside-to-close functionality
+ * - WCAG 2.1 AAA compliant
+ *
+ * @example
+ * Basic usage:
+ * &#x60;&#x60;&#x60;html
+ * &lt;app-theme-picker /&gt;
+ * &#x60;&#x60;&#x60;
+ */
+@Component({
+  selector: &#x27;app-theme-picker&#x27;,
+  standalone: true,
+  imports: [CommonModule, IconComponent, BadgeComponent, StackComponent],
+  templateUrl: &#x27;./theme-picker.component.html&#x27;,
+  styleUrl: &#x27;./theme-picker.component.scss&#x27;,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ThemePickerComponent implements OnDestroy {
+  private readonly themeService &#x3D; inject(ThemeService);
+  private readonly elementRef &#x3D; inject(ElementRef);
+
+  /**
+   * Signal: Is dropdown open
+   */
+  readonly isOpen &#x3D; signal(false);
+
+  /**
+   * Computed: Current theme
+   */
+  readonly currentTheme &#x3D; this.themeService.activeTheme;
+
+  /**
+   * Computed: All available themes
+   */
+  readonly themes &#x3D; this.themeService.themes;
+
+  /**
+   * Computed: Is system default active
+   */
+  readonly isSystemDefault &#x3D; this.themeService.isSystemDefault;
+
+  /**
+   * Computed: Current theme icon
+   */
+  readonly currentIcon &#x3D; computed(() &#x3D;&gt; {
+    const theme &#x3D; this.currentTheme();
+    return theme.isDark ? &#x27;heroMoon&#x27; : &#x27;heroSun&#x27;;
+  });
+
+  private clickOutsideListener?: (event: MouseEvent) &#x3D;&gt; void;
+  private escapeKeyListener?: (event: KeyboardEvent) &#x3D;&gt; void;
+
+  constructor() {
+    // Set up click outside and escape key listeners
+    effect(() &#x3D;&gt; {
+      if (this.isOpen()) {
+        this.setupOutsideClickListener();
+        this.setupEscapeKeyListener();
+      } else {
+        this.removeOutsideClickListener();
+        this.removeEscapeKeyListener();
+      }
+    });
+  }
+
+  /**
+   * Toggle dropdown open/closed
+   */
+  toggle(): void {
+    this.isOpen.update((open) &#x3D;&gt; !open);
+  }
+
+  /**
+   * Close dropdown
+   */
+  close(): void {
+    this.isOpen.set(false);
+  }
+
+  /**
+   * Select a theme by slug
+   * Note: Menu stays open after selection to allow users to preview multiple themes
+   */
+  selectTheme(slug: string): void {
+    this.themeService.setTheme(slug);
+  }
+
+  /**
+   * Reset to system default theme
+   * Note: Menu stays open after selection to allow users to preview multiple themes
+   */
+  selectSystemDefault(): void {
+    this.themeService.resetToSystem();
+  }
+
+  /**
+   * Check if a theme is currently active
+   */
+  isActiveTheme(slug: string): boolean {
+    return this.currentTheme().slug &#x3D;&#x3D;&#x3D; slug &amp;&amp; !this.isSystemDefault();
+  }
+
+  /**
+   * Handle button keydown events
+   */
+  onButtonKeydown(event: KeyboardEvent): void {
+    if (event.key &#x3D;&#x3D;&#x3D; &#x27;Enter&#x27; || event.key &#x3D;&#x3D;&#x3D; &#x27; &#x27;) {
+      event.preventDefault();
+      this.toggle();
+    }
+  }
+
+  /**
+   * Handle option keydown events
+   */
+  onOptionKeydown(event: KeyboardEvent, action: () &#x3D;&gt; void): void {
+    if (event.key &#x3D;&#x3D;&#x3D; &#x27;Enter&#x27; || event.key &#x3D;&#x3D;&#x3D; &#x27; &#x27;) {
+      event.preventDefault();
+      action();
+    }
+  }
+
+  /**
+   * Setup click outside listener
+   */
+  private setupOutsideClickListener(): void {
+    // Use setTimeout to avoid immediate triggering
+    setTimeout(() &#x3D;&gt; {
+      this.clickOutsideListener &#x3D; (event: MouseEvent) &#x3D;&gt; {
+        const target &#x3D; event.target as HTMLElement;
+        const clickedInside &#x3D; this.elementRef.nativeElement.contains(target);
+
+        if (!clickedInside) {
+          this.close();
+        }
+      };
+
+      document.addEventListener(&#x27;click&#x27;, this.clickOutsideListener);
+    }, 0);
+  }
+
+  /**
+   * Remove click outside listener
+   */
+  private removeOutsideClickListener(): void {
+    if (this.clickOutsideListener) {
+      document.removeEventListener(&#x27;click&#x27;, this.clickOutsideListener);
+      this.clickOutsideListener &#x3D; undefined;
+    }
+  }
+
+  /**
+   * Setup escape key listener
+   */
+  private setupEscapeKeyListener(): void {
+    this.escapeKeyListener &#x3D; (event: KeyboardEvent) &#x3D;&gt; {
+      if (event.key &#x3D;&#x3D;&#x3D; &#x27;Escape&#x27;) {
+        this.close();
+      }
+    };
+
+    document.addEventListener(&#x27;keydown&#x27;, this.escapeKeyListener);
+  }
+
+  /**
+   * Remove escape key listener
+   */
+  private removeEscapeKeyListener(): void {
+    if (this.escapeKeyListener) {
+      document.removeEventListener(&#x27;keydown&#x27;, this.escapeKeyListener);
+      this.escapeKeyListener &#x3D; undefined;
+    }
+  }
+
+  /**
+   * Cleanup on destroy
+   */
+  ngOnDestroy(): void {
+    this.removeOutsideClickListener();
+    this.removeEscapeKeyListener();
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div class&#x3D;&quot;theme-picker&quot;&gt;
+  &lt;!-- Theme Picker Button --&gt;
+  &lt;button
+    type&#x3D;&quot;button&quot;
+    class&#x3D;&quot;theme-picker__button&quot;
+    [attr.aria-haspopup]&#x3D;&quot;true&quot;
+    [attr.aria-expanded]&#x3D;&quot;isOpen()&quot;
+    [attr.aria-label]&#x3D;&quot;&#x27;Select theme, current theme is &#x27; + currentTheme().label&quot;
+    (click)&#x3D;&quot;toggle()&quot;
+    (keydown)&#x3D;&quot;onButtonKeydown($event)&quot;
+    data-test&#x3D;&quot;theme-picker-button&quot;
+  &gt;
+    &lt;app-icon [name]&#x3D;&quot;currentIcon()&quot; size&#x3D;&quot;md&quot; [ariaLabel]&#x3D;&quot;currentTheme().label + &#x27; theme icon&#x27;&quot; /&gt;
+    &lt;span class&#x3D;&quot;theme-picker__label&quot;&gt;{{ currentTheme().label }}&lt;/span&gt;
+    @if (isSystemDefault()) {
+    &lt;app-badge
+      variant&#x3D;&quot;secondary&quot;
+      size&#x3D;&quot;sm&quot;
+      ariaLabel&#x3D;&quot;System theme indicator&quot;
+      [content]&#x3D;&quot;&#x27;System&#x27;&quot;
+      class&#x3D;&quot;theme-picker__badge&quot;
+    /&gt;
+    }
+    &lt;app-icon
+      [name]&#x3D;&quot;isOpen() ? &#x27;heroChevronUp&#x27; : &#x27;heroChevronDown&#x27;&quot;
+      size&#x3D;&quot;sm&quot;
+      ariaLabel&#x3D;&quot;Dropdown indicator&quot;
+    /&gt;
+  &lt;/button&gt;
+
+  &lt;!-- Dropdown Menu --&gt;
+  @if (isOpen()) {
+  &lt;div
+    class&#x3D;&quot;theme-picker__dropdown&quot;
+    role&#x3D;&quot;menu&quot;
+    [attr.aria-label]&#x3D;&quot;&#x27;Theme selection menu&#x27;&quot;
+    data-test&#x3D;&quot;theme-picker-dropdown&quot;
+  &gt;
+    &lt;app-stack direction&#x3D;&quot;vertical&quot; spacing&#x3D;&quot;xs&quot; role&#x3D;&quot;&quot;&gt;
+      &lt;!-- System Default Option --&gt;
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        role&#x3D;&quot;menuitem&quot;
+        class&#x3D;&quot;theme-picker__option&quot;
+        [class.theme-picker__option--active]&#x3D;&quot;isSystemDefault()&quot;
+        (click)&#x3D;&quot;selectSystemDefault()&quot;
+        (keydown.enter)&#x3D;&quot;selectSystemDefault()&quot;
+        (keydown.space)&#x3D;&quot;$event.preventDefault(); selectSystemDefault()&quot;
+        [attr.aria-label]&#x3D;&quot;&#x27;Use system default theme&#x27;&quot;
+        data-test&#x3D;&quot;theme-option-system&quot;
+      &gt;
+        &lt;app-icon name&#x3D;&quot;heroComputerDesktop&quot; size&#x3D;&quot;md&quot; ariaLabel&#x3D;&quot;System default icon&quot; /&gt;
+        &lt;span class&#x3D;&quot;theme-picker__option-label&quot;&gt;System Default&lt;/span&gt;
+        @if (isSystemDefault()) {
+        &lt;app-icon
+          name&#x3D;&quot;heroCheck&quot;
+          size&#x3D;&quot;sm&quot;
+          color&#x3D;&quot;primary&quot;
+          ariaLabel&#x3D;&quot;Selected&quot;
+          class&#x3D;&quot;theme-picker__option-check&quot;
+        /&gt;
+        }
+      &lt;/button&gt;
+
+      &lt;!-- Theme Options --&gt;
+      @for (theme of themes(); track theme.slug) {
+      &lt;button
+        type&#x3D;&quot;button&quot;
+        role&#x3D;&quot;menuitem&quot;
+        class&#x3D;&quot;theme-picker__option&quot;
+        [class.theme-picker__option--active]&#x3D;&quot;isActiveTheme(theme.slug)&quot;
+        (click)&#x3D;&quot;selectTheme(theme.slug)&quot;
+        (keydown.enter)&#x3D;&quot;selectTheme(theme.slug)&quot;
+        (keydown.space)&#x3D;&quot;$event.preventDefault(); selectTheme(theme.slug)&quot;
+        [attr.aria-label]&#x3D;&quot;&#x27;Switch to &#x27; + theme.label + &#x27; theme&#x27;&quot;
+        [attr.data-test]&#x3D;&quot;&#x27;theme-option-&#x27; + theme.slug&quot;
+      &gt;
+        &lt;div class&#x3D;&quot;theme-picker__option-content&quot;&gt;
+          &lt;app-icon
+            [name]&#x3D;&quot;theme.isDark ? &#x27;heroMoon&#x27; : &#x27;heroSun&#x27;&quot;
+            size&#x3D;&quot;md&quot;
+            [ariaLabel]&#x3D;&quot;theme.label + &#x27; theme icon&#x27;&quot;
+          /&gt;
+          &lt;span class&#x3D;&quot;theme-picker__option-label&quot;&gt;{{ theme.label }}&lt;/span&gt;
+        &lt;/div&gt;
+
+        &lt;!-- Color Swatch Legend --&gt;
+        @if (isActiveTheme(theme.slug)) {
+        &lt;app-icon
+          name&#x3D;&quot;heroCheck&quot;
+          size&#x3D;&quot;sm&quot;
+          color&#x3D;&quot;primary&quot;
+          ariaLabel&#x3D;&quot;Selected&quot;
+          class&#x3D;&quot;theme-picker__option-check&quot;
+        /&gt;
+        } @else {
+        &lt;div
+          class&#x3D;&quot;theme-picker__swatch&quot;
+          [attr.aria-label]&#x3D;&quot;&#x27;Color preview for &#x27; + theme.label + &#x27; theme&#x27;&quot;
+        &gt;
+          &lt;span
+            class&#x3D;&quot;theme-picker__swatch-color&quot;
+            [style.background-color]&#x3D;&quot;theme.tokens.primary&quot;
+            [attr.aria-label]&#x3D;&quot;&#x27;Primary color&#x27;&quot;
+          &gt;&lt;/span&gt;
+          &lt;span
+            class&#x3D;&quot;theme-picker__swatch-color&quot;
+            [style.background-color]&#x3D;&quot;theme.tokens.background&quot;
+            [attr.aria-label]&#x3D;&quot;&#x27;Background color&#x27;&quot;
+          &gt;&lt;/span&gt;
+        &lt;/div&gt;
+        }
+      &lt;/button&gt;
+      }
+    &lt;/app-stack&gt;
+  &lt;/div&gt;
+  }
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div class="theme-picker">  <!-- Theme Picker Button -->  <button    type="button"    class="theme-picker__button"    [attr.aria-haspopup]="true"    [attr.aria-expanded]="isOpen()"    [attr.aria-label]="\'Select theme, current theme is \' + currentTheme().label"    (click)="toggle()"    (keydown)="onButtonKeydown($event)"    data-test="theme-picker-button"  >    <app-icon [name]="currentIcon()" size="md" [ariaLabel]="currentTheme().label + \' theme icon\'" />    <span class="theme-picker__label">{{ currentTheme().label }}</span>    @if (isSystemDefault()) {    <app-badge      variant="secondary"      size="sm"      ariaLabel="System theme indicator"      [content]="\'System\'"      class="theme-picker__badge"    />    }    <app-icon      [name]="isOpen() ? \'heroChevronUp\' : \'heroChevronDown\'"      size="sm"      ariaLabel="Dropdown indicator"    />  </button>  <!-- Dropdown Menu -->  @if (isOpen()) {  <div    class="theme-picker__dropdown"    role="menu"    [attr.aria-label]="\'Theme selection menu\'"    data-test="theme-picker-dropdown"  >    <app-stack direction="vertical" spacing="xs" role="">      <!-- System Default Option -->      <button        type="button"        role="menuitem"        class="theme-picker__option"        [class.theme-picker__option--active]="isSystemDefault()"        (click)="selectSystemDefault()"        (keydown.enter)="selectSystemDefault()"        (keydown.space)="$event.preventDefault(); selectSystemDefault()"        [attr.aria-label]="\'Use system default theme\'"        data-test="theme-option-system"      >        <app-icon name="heroComputerDesktop" size="md" ariaLabel="System default icon" />        <span class="theme-picker__option-label">System Default</span>        @if (isSystemDefault()) {        <app-icon          name="heroCheck"          size="sm"          color="primary"          ariaLabel="Selected"          class="theme-picker__option-check"        />        }      </button>      <!-- Theme Options -->      @for (theme of themes(); track theme.slug) {      <button        type="button"        role="menuitem"        class="theme-picker__option"        [class.theme-picker__option--active]="isActiveTheme(theme.slug)"        (click)="selectTheme(theme.slug)"        (keydown.enter)="selectTheme(theme.slug)"        (keydown.space)="$event.preventDefault(); selectTheme(theme.slug)"        [attr.aria-label]="\'Switch to \' + theme.label + \' theme\'"        [attr.data-test]="\'theme-option-\' + theme.slug"      >        <div class="theme-picker__option-content">          <app-icon            [name]="theme.isDark ? \'heroMoon\' : \'heroSun\'"            size="md"            [ariaLabel]="theme.label + \' theme icon\'"          />          <span class="theme-picker__option-label">{{ theme.label }}</span>        </div>        <!-- Color Swatch Legend -->        @if (isActiveTheme(theme.slug)) {        <app-icon          name="heroCheck"          size="sm"          color="primary"          ariaLabel="Selected"          class="theme-picker__option-check"        />        } @else {        <div          class="theme-picker__swatch"          [attr.aria-label]="\'Color preview for \' + theme.label + \' theme\'"        >          <span            class="theme-picker__swatch-color"            [style.background-color]="theme.tokens.primary"            [attr.aria-label]="\'Primary color\'"          ></span>          <span            class="theme-picker__swatch-color"            [style.background-color]="theme.tokens.background"            [attr.aria-label]="\'Background color\'"          ></span>        </div>        }      </button>      }    </app-stack>  </div>  }</div></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'BadgeComponent', 'selector': 'app-badge'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'ButtonContentComponent', 'selector': 'app-button-content'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CaseStudiesComponent', 'selector': 'app-case-studies'},{'name': 'CheckboxCheckmarkComponent', 'selector': 'app-checkbox-checkmark'},{'name': 'CheckboxComponent', 'selector': 'app-checkbox'},{'name': 'ContainerComponent', 'selector': 'app-container'},{'name': 'DividerComponent', 'selector': 'app-divider'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormFieldComponent', 'selector': 'app-form-field'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IconComponent', 'selector': 'app-icon'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputFooterComponent', 'selector': 'app-input-footer'},{'name': 'InputLabelComponent', 'selector': 'app-input-label'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'MainLayoutComponent', 'selector': 'app-main-layout'},{'name': 'ModalComponent', 'selector': 'app-modal'},{'name': 'RadioComponent', 'selector': 'app-radio'},{'name': 'SelectButtonComponent', 'selector': 'app-select-button'},{'name': 'SelectComponent', 'selector': 'app-select'},{'name': 'SelectDropdownComponent', 'selector': 'app-select-dropdown'},{'name': 'SelectOptionComponent', 'selector': 'app-select-option'},{'name': 'SkeletonComponent', 'selector': 'app-skeleton'},{'name': 'StackComponent', 'selector': 'app-stack'},{'name': 'TabButtonComponent', 'selector': 'app-tab-button'},{'name': 'TabComponent', 'selector': 'app-tab'},{'name': 'TabsComponent', 'selector': 'app-tabs'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'TextareaComponent', 'selector': 'app-textarea'},{'name': 'ThemePickerComponent', 'selector': 'app-theme-picker'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'ToastDemoComponent', 'selector': 'app-toast-demo'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ThemePickerComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ThemePickerComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

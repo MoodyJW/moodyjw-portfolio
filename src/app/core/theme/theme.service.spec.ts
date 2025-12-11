@@ -3,9 +3,7 @@
 
 import { TestBed } from '@angular/core/testing';
 
-import { THEMES } from '../constants/themes.constants';
-
-import { getSystemThemeSlug, onSystemThemeChange, ThemeService } from './theme.service';
+import { getSystemThemeSlug, onSystemThemeChange, THEMES, ThemeService } from '@core/theme';
 
 declare const window: Window & typeof globalThis;
 declare const document: Document;

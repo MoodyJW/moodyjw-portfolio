@@ -226,8 +226,8 @@ Fetches data from local JSON files (Mockend pattern)</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="31"
-                                    class="link-to-prism">src/app/core/services/project.service.ts:31</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="35"
+                                    class="link-to-prism">src/app/core/services/project.service.ts:35</a></div>
                         </td>
                     </tr>
 
@@ -303,8 +303,8 @@ Fetches data from local JSON files (Mockend pattern)</p>
 
                     <tr>
                         <td class="col-md-4">
-                            <div class="io-line">Defined in <a href="" data-line="22"
-                                    class="link-to-prism">src/app/core/services/project.service.ts:22</a></div>
+                            <div class="io-line">Defined in <a href="" data-line="26"
+                                    class="link-to-prism">src/app/core/services/project.service.ts:26</a></div>
                         </td>
                     </tr>
 
@@ -358,7 +358,7 @@ Fetches data from local JSON files (Mockend pattern)</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="15" class="link-to-prism">src/app/core/services/project.service.ts:15</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="19" class="link-to-prism">src/app/core/services/project.service.ts:19</a></div>
                         </td>
                     </tr>
 
@@ -391,7 +391,7 @@ Fetches data from local JSON files (Mockend pattern)</p>
                 </tr>
                     <tr>
                         <td class="col-md-4">
-                                <div class="io-line">Defined in <a href="" data-line="16" class="link-to-prism">src/app/core/services/project.service.ts:16</a></div>
+                                <div class="io-line">Defined in <a href="" data-line="20" class="link-to-prism">src/app/core/services/project.service.ts:20</a></div>
                         </td>
                     </tr>
 
@@ -404,11 +404,15 @@ Fetches data from local JSON files (Mockend pattern)</p>
 
 
     <div class="tab-pane fade  tab-source-code" id="source">
-        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, inject } from &#x27;@angular/core&#x27;;
-import { HttpClient } from &#x27;@angular/common/http&#x27;;
-import { Observable } from &#x27;rxjs&#x27;;
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { HttpClient } from &#x27;@angular/common/http&#x27;;
+import { inject, Injectable } from &#x27;@angular/core&#x27;;
+
+import type { Observable } from &#x27;rxjs&#x27;;
+import { catchError, map, of, timeout } from &#x27;rxjs&#x27;;
+
+import { HTTP_TIMEOUTS, MOCK_ENDPOINTS } from &#x27;@shared/constants&#x27;;
+
 import type { Project } from &#x27;../models/project.model&#x27;;
-import { MOCK_ENDPOINTS } from &#x27;@shared/constants&#x27;;
 
 /**
  * Service for managing project/case study data
@@ -435,16 +439,14 @@ export class ProjectService {
    * @returns Observable of Project or undefined if not found
    */
   getProjectById(id: string): Observable&lt;Project | undefined&gt; {
-    return new Observable((observer) &#x3D;&gt; {
-      this.getProjects().subscribe({
-        next: (projects) &#x3D;&gt; {
-          const project &#x3D; projects.find((p) &#x3D;&gt; p.id &#x3D;&#x3D;&#x3D; id);
-          observer.next(project);
-          observer.complete();
-        },
-        error: (err) &#x3D;&gt; observer.error(err),
-      });
-    });
+    return this.getProjects().pipe(
+      timeout(HTTP_TIMEOUTS.DEFAULT),
+      map((projects) &#x3D;&gt; projects.find((p) &#x3D;&gt; p.id &#x3D;&#x3D;&#x3D; id)),
+      catchError((error) &#x3D;&gt; {
+        console.error(&#x27;Failed to load project&#x27;, { id, error });
+        return of(undefined);
+      })
+    );
   }
 }
 </code></pre>

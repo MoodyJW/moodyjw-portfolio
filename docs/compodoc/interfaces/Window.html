@@ -1,0 +1,766 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  Window</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/services/analytics/analytics.service.ts</code>
+        </p>
+
+
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                        <a href="#dataLayer" 
+>
+                                            dataLayer
+                                        </a>
+                                </li>
+                                <li>
+                                        <a href="#gtag" 
+>
+                                            gtag
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+            <section data-compodoc="block-indexables">
+    <h3 id="inputs">Indexable</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <code>[key: string]:    <code>unknown</code>
+</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="409" class="link-to-prism">src/app/shared/services/analytics/analytics.service.ts:409</a></div>
+                            </td>
+                        </tr>
+            </tbody>
+        </table>
+</section>
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="dataLayer"></a>
+                                        <span class="name "><b>dataLayer</b>
+                                            <a href="#dataLayer">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>dataLayer:     <code>any[]</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>any[]</code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="gtag"></a>
+                                        <span class="name "><b>gtag</b>
+                                            <a href="#gtag">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>gtag:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/function" target="_blank" >function</a></code>
+
+                                        </td>
+                                    </tr>
+
+
+
+
+
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { Injectable, signal } from &#x27;@angular/core&#x27;;
+
+/**
+ * Analytics event data structure
+ */
+export interface AnalyticsEvent {
+  /** Event name (e.g., &#x27;page_view&#x27;, &#x27;project_view&#x27;) */
+  name: string;
+  /** Event parameters */
+  params?: Record&lt;string, string | number | boolean&gt;;
+}
+
+/**
+ * Custom dimensions for analytics
+ */
+export interface CustomDimensions {
+  /** Current theme (e.g., &#x27;lumen&#x27;, &#x27;aurora&#x27;) */
+  theme?: string;
+  /** User type (e.g., &#x27;recruiter&#x27;, &#x27;developer&#x27;) */
+  userType?: string;
+  /** Device type (e.g., &#x27;mobile&#x27;, &#x27;desktop&#x27;) */
+  deviceType?: string;
+  /** Any additional custom dimensions */
+  [key: string]: string | undefined;
+}
+
+/**
+ * Page view tracking data
+ */
+export interface PageView {
+  /** Page title */
+  pageTitle: string;
+  /** Page path (e.g., &#x27;/about&#x27;) */
+  pagePath: string;
+  /** Page location (full URL) */
+  pageLocation?: string;
+}
+
+/**
+ * Analytics consent status
+ */
+export interface ConsentStatus {
+  /** Analytics cookies consent */
+  analytics: boolean;
+  /** Marketing cookies consent */
+  marketing: boolean;
+}
+
+/**
+ * Service for Google Analytics 4 (GA4) tracking
+ * Provides privacy-friendly analytics with consent-aware initialization
+ * Uses signal-based state management for reactive tracking status
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * export class MyComponent {
+ *   private analyticsService &#x3D; inject(AnalyticsService);
+ *
+ *   ngOnInit() {
+ *     // Initialize with consent
+ *     this.analyticsService.initialize(&#x27;G-XXXXXXXXXX&#x27;, true);
+ *
+ *     // Track page view
+ *     this.analyticsService.trackPageView({
+ *       pageTitle: &#x27;About&#x27;,
+ *       pagePath: &#x27;/about&#x27;
+ *     });
+ *
+ *     // Track custom event
+ *     this.analyticsService.trackEvent({
+ *       name: &#x27;project_view&#x27;,
+ *       params: { project_id: &#x27;my-project&#x27; }
+ *     });
+ *   }
+ * }
+ * &#x60;&#x60;&#x60;
+ */
+@Injectable({
+  providedIn: &#x27;root&#x27;,
+})
+export class AnalyticsService {
+  /** Whether analytics is initialized and ready */
+  private readonly isInitialized &#x3D; signal&lt;boolean&gt;(false);
+
+  /** Whether user has consented to analytics */
+  private readonly hasConsent &#x3D; signal&lt;boolean&gt;(false);
+
+  /** Whether analytics is enabled (initialized AND consented) */
+  private readonly isEnabled &#x3D; signal&lt;boolean&gt;(false);
+
+  /** GA4 measurement ID */
+  private measurementId: string | null &#x3D; null;
+
+  /** Custom dimensions applied to all events */
+  private customDimensions: CustomDimensions &#x3D; {};
+
+  /** Queue for events sent before initialization */
+  private eventQueue: AnalyticsEvent[] &#x3D; [];
+
+  /**
+   * Get the analytics initialization status
+   */
+  getIsInitialized &#x3D; this.isInitialized.asReadonly();
+
+  /**
+   * Get the user consent status
+   */
+  getHasConsent &#x3D; this.hasConsent.asReadonly();
+
+  /**
+   * Get the analytics enabled status
+   */
+  getIsEnabled &#x3D; this.isEnabled.asReadonly();
+
+  /**
+   * Initialize Google Analytics with the provided measurement ID
+   * @param measurementId - GA4 measurement ID (e.g., &#x27;G-XXXXXXXXXX&#x27;)
+   * @param consent - Whether user has consented to analytics (default: false)
+   */
+  initialize(measurementId: string, consent &#x3D; false): void {
+    if (this.isInitialized()) {
+      console.warn(&#x27;[AnalyticsService] Already initialized&#x27;);
+      return;
+    }
+
+    this.measurementId &#x3D; measurementId;
+    this.hasConsent.set(consent);
+
+    // Load GA4 script if consent is given
+    if (consent) {
+      this.loadGoogleAnalytics();
+    }
+
+    this.isInitialized.set(true);
+    this.updateEnabledStatus();
+
+    // Process queued events if enabled
+    if (this.isEnabled()) {
+      this.processEventQueue();
+    }
+  }
+
+  /**
+   * Update user consent status
+   * @param consent - Consent status for analytics and marketing
+   */
+  updateConsent(consent: ConsentStatus): void {
+    const analyticsConsent &#x3D; consent.analytics;
+    this.hasConsent.set(analyticsConsent);
+
+    if (analyticsConsent &amp;&amp; this.isInitialized() &amp;&amp; !this.isEnabled()) {
+      // User just gave consent, load GA4
+      this.loadGoogleAnalytics();
+      // Update enabled status BEFORE processing queue
+      this.updateEnabledStatus();
+      this.processEventQueue();
+    } else if (!analyticsConsent &amp;&amp; this.isEnabled()) {
+      // User revoked consent, disable tracking
+      this.disableTracking();
+      this.updateEnabledStatus();
+    } else {
+      this.updateEnabledStatus();
+    }
+  }
+
+  /**
+   * Set custom dimensions to be included with all events
+   * @param dimensions - Custom dimensions object
+   */
+  setCustomDimensions(dimensions: CustomDimensions): void {
+    this.customDimensions &#x3D; { ...this.customDimensions, ...dimensions };
+
+    if (this.isEnabled() &amp;&amp; typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; window.gtag) {
+      window.gtag(&#x27;set&#x27;, &#x27;user_properties&#x27;, dimensions);
+    }
+  }
+
+  /**
+   * Track a page view
+   * @param pageView - Page view data
+   */
+  trackPageView(pageView: PageView): void {
+    if (!this.canTrack()) {
+      this.queueEvent({
+        name: &#x27;page_view&#x27;,
+        params: {
+          page_title: pageView.pageTitle,
+          page_path: pageView.pagePath,
+          page_location: pageView.pageLocation || window.location.href,
+        },
+      });
+      return;
+    }
+
+    const params &#x3D; {
+      page_title: pageView.pageTitle,
+      page_path: pageView.pagePath,
+      page_location: pageView.pageLocation || window.location.href,
+      ...this.customDimensions,
+    };
+
+    window.gtag(&#x27;event&#x27;, &#x27;page_view&#x27;, params);
+  }
+
+  /**
+   * Track a custom event
+   * @param event - Event data with name and optional parameters
+   */
+  trackEvent(event: AnalyticsEvent): void {
+    if (!this.canTrack()) {
+      this.queueEvent(event);
+      return;
+    }
+
+    const params &#x3D; {
+      ...event.params,
+      ...this.customDimensions,
+    };
+
+    window.gtag(&#x27;event&#x27;, event.name, params);
+  }
+
+  /**
+   * Track a project view event
+   * @param projectId - Project identifier
+   * @param projectTitle - Project title
+   */
+  trackProjectView(projectId: string, projectTitle: string): void {
+    this.trackEvent({
+      name: &#x27;project_view&#x27;,
+      params: {
+        project_id: projectId,
+        project_title: projectTitle,
+      },
+    });
+  }
+
+  /**
+   * Track a theme change event
+   * @param themeName - Theme name (e.g., &#x27;lumen&#x27;, &#x27;aurora&#x27;)
+   */
+  trackThemeChange(themeName: string): void {
+    this.trackEvent({
+      name: &#x27;theme_change&#x27;,
+      params: {
+        theme_name: themeName,
+      },
+    });
+
+    // Update custom dimension
+    this.setCustomDimensions({ theme: themeName });
+  }
+
+  /**
+   * Track a contact form submission event
+   * @param method - Contact method (e.g., &#x27;email&#x27;, &#x27;linkedin&#x27;)
+   */
+  trackContactSubmit(method: string): void {
+    this.trackEvent({
+      name: &#x27;contact_submit&#x27;,
+      params: {
+        contact_method: method,
+      },
+    });
+  }
+
+  /**
+   * Track an outbound link click
+   * @param url - Destination URL
+   * @param linkText - Link text or label
+   */
+  trackOutboundLink(url: string, linkText?: string): void {
+    this.trackEvent({
+      name: &#x27;click&#x27;,
+      params: {
+        link_url: url,
+        link_text: linkText || url,
+        outbound: true,
+      },
+    });
+  }
+
+  /**
+   * Disable all analytics tracking
+   * Sets the GA4 opt-out flag and clears consent
+   */
+  private disableTracking(): void {
+    if (this.measurementId &amp;&amp; typeof window !&#x3D;&#x3D; &#x27;undefined&#x27;) {
+      window[&#x60;ga-disable-${this.measurementId}&#x60;] &#x3D; true;
+    }
+  }
+
+  /**
+   * Load the Google Analytics script
+   */
+  private loadGoogleAnalytics(): void {
+    if (!this.measurementId || typeof window &#x3D;&#x3D;&#x3D; &#x27;undefined&#x27; || typeof document &#x3D;&#x3D;&#x3D; &#x27;undefined&#x27;) {
+      return;
+    }
+
+    // Check if gtag is already loaded
+    if (typeof window.gtag !&#x3D;&#x3D; &#x27;undefined&#x27;) {
+      this.configureGoogleAnalytics();
+      return;
+    }
+
+    // Create script element
+    const script &#x3D; document.createElement(&#x27;script&#x27;);
+    script.async &#x3D; true;
+    script.src &#x3D; &#x60;https://www.googletagmanager.com/gtag/js?id&#x3D;${this.measurementId}&#x60;;
+
+    // Initialize gtag function
+    window.dataLayer &#x3D; window.dataLayer || [];
+    window.gtag &#x3D; function gtag() {
+       
+      window.dataLayer.push(arguments);
+    };
+
+    window.gtag(&#x27;js&#x27;, new Date());
+
+    // Configure GA4
+    this.configureGoogleAnalytics();
+
+    // Append script to head
+    document.head.appendChild(script);
+  }
+
+  /**
+   * Configure Google Analytics with the measurement ID and settings
+   */
+  private configureGoogleAnalytics(): void {
+    if (!this.measurementId || typeof window &#x3D;&#x3D;&#x3D; &#x27;undefined&#x27; || !window.gtag) {
+      return;
+    }
+
+    window.gtag(&#x27;config&#x27;, this.measurementId, {
+      anonymize_ip: true,
+      cookie_flags: &#x27;SameSite&#x3D;Strict;Secure&#x27;,
+      send_page_view: false, // Manual page view tracking
+    });
+
+    // Apply custom dimensions if any
+    if (Object.keys(this.customDimensions).length &gt; 0) {
+      window.gtag(&#x27;set&#x27;, &#x27;user_properties&#x27;, this.customDimensions);
+    }
+  }
+
+  /**
+   * Update the enabled status based on initialization and consent
+   */
+  private updateEnabledStatus(): void {
+    const enabled &#x3D; this.isInitialized() &amp;&amp; this.hasConsent();
+    this.isEnabled.set(enabled);
+  }
+
+  /**
+   * Check if tracking is allowed
+   */
+  private canTrack(): boolean {
+    return this.isEnabled() &amp;&amp; typeof window !&#x3D;&#x3D; &#x27;undefined&#x27; &amp;&amp; !!window.gtag;
+  }
+
+  /**
+   * Queue an event to be sent after initialization
+   * @param event - Event to queue
+   */
+  private queueEvent(event: AnalyticsEvent): void {
+    // Queue events if not initialized OR if initialized but not yet enabled
+    if (!this.isInitialized() || (this.isInitialized() &amp;&amp; !this.isEnabled())) {
+      this.eventQueue.push(event);
+    }
+  }
+
+  /**
+   * Process all queued events
+   */
+  private processEventQueue(): void {
+    if (!this.canTrack() || this.eventQueue.length &#x3D;&#x3D;&#x3D; 0) {
+      return;
+    }
+
+    // Process each queued event
+    this.eventQueue.forEach((event) &#x3D;&gt; {
+      if (event.name &#x3D;&#x3D;&#x3D; &#x27;page_view&#x27; &amp;&amp; event.params) {
+        this.trackPageView({
+          pageTitle: String(event.params[&#x27;page_title&#x27;] || &#x27;&#x27;),
+          pagePath: String(event.params[&#x27;page_path&#x27;] || &#x27;&#x27;),
+          pageLocation: event.params[&#x27;page_location&#x27;]
+            ? String(event.params[&#x27;page_location&#x27;])
+            : undefined,
+        });
+      } else {
+        this.trackEvent(event);
+      }
+    });
+
+    // Clear the queue
+    this.eventQueue &#x3D; [];
+  }
+}
+
+/**
+ * Extend Window interface for gtag
+ */
+declare global {
+  interface Window {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    dataLayer: any[];
+    gtag: (...args: unknown[]) &#x3D;&gt; void;
+    [key: string]: unknown;
+  }
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'Window.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

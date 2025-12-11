@@ -4,7 +4,7 @@ declare var document: Document;
 declare var localStorage: Storage;
 import { computed, effect, Injectable, signal } from '@angular/core';
 
-import { THEMES } from '../constants/themes.constants';
+import { THEMES } from './themes.constants';
 
 const THEME_STORAGE_KEY = 'theme-preference-v1';
 
@@ -22,13 +22,6 @@ interface ThemePreference {
   version: number;
 }
 
-/**
- * Utility: Get system theme slug ('lumen' for light, 'nocturne' for dark by default)
- */
-
-/**
- * Exported for testing: Get system theme slug
- */
 export function getSystemThemeSlug(): string {
   if (
     typeof window !== 'undefined' &&
@@ -40,13 +33,6 @@ export function getSystemThemeSlug(): string {
   return 'lumen';
 }
 
-/**
- * Utility: Listen for OS theme changes
- */
-
-/**
- * Exported for testing: Listen for OS theme changes
- */
 export function onSystemThemeChange(callback: (slug: string) => void): () => void {
   if (typeof window === 'undefined' || !window.matchMedia) return () => {};
   const mq = window.matchMedia('(prefers-color-scheme: dark)');

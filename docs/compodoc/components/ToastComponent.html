@@ -1,0 +1,1327 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content component">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Components</li>
+  <li class="breadcrumb-item"
+  >
+  ToastComponent</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" class="nav-link"
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+        <li class="nav-item">
+            <a href="#templateData" class="nav-link"
+                role="tab" id="templateData-tab" data-bs-toggle="tab" data-link="template">Template</a>
+        </li>
+        <li class="nav-item">
+            <a href="#tree" class="nav-link"
+                role="tab" id="tree-tab" data-bs-toggle="tab" data-link="dom-tree">DOM Tree</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info"><p class="comment">
+    <h3>File</h3>
+</p>
+<p class="comment">
+    <code>src/app/shared/components/toast/toast.component.ts</code>
+</p>
+
+
+    <p class="comment">
+        <h3>Description</h3>
+    </p>
+    <p class="comment">
+        <p>Toast notification component for displaying temporary messages.
+Follows WCAG 2.1 AAA guidelines and integrates with the theme system.
+Supports auto-dismiss and manual dismiss functionality.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;!-- Success toast with auto-dismiss --&gt;
+&lt;app-toast
+  variant=&quot;success&quot;
+  message=&quot;Changes saved successfully!&quot;
+  [duration]=&quot;3000&quot;
+  [dismissible]=&quot;true&quot;
+  (dismissed)=&quot;handleDismiss()&quot;&gt;
+&lt;/app-toast&gt;
+
+
+&lt;!-- Error toast without auto-dismiss --&gt;
+&lt;app-toast
+  variant=&quot;error&quot;
+  message=&quot;An error occurred&quot;
+  [duration]=&quot;0&quot;
+  [dismissible]=&quot;true&quot;&gt;
+&lt;/app-toast&gt;</code></pre></div>
+    </p>
+
+
+
+
+<section data-compodoc="block-metadata">
+    <h3>Metadata</h3>
+    <table class="table table-sm table-hover metadata">
+        <tbody>
+
+            <tr>
+                <td class="col-md-3">changeDetection</td>
+                <td class="col-md-9"><code>ChangeDetectionStrategy.OnPush</code></td>
+            </tr>
+
+
+
+
+
+
+
+
+
+
+
+            <tr>
+                <td class="col-md-3">selector</td>
+                <td class="col-md-9"><code>app-toast</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">standalone</td>
+                <td class="col-md-9"><code>true</code></td>
+            </tr>
+
+            <tr>
+                <td class="col-md-3">imports</td>
+                <td class="col-md-9">
+                            <code>CommonModule</code>
+                                <code><a href="../components/ButtonComponent.html" target="_self" >ButtonComponent</a></code>
+                                <code><a href="../components/IconComponent.html" target="_self" >IconComponent</a></code>
+                </td>
+            </tr>
+
+
+
+
+            <tr>
+                <td class="col-md-3">templateUrl</td>
+                <td class="col-md-9"><code>./toast.component.html</code></td>
+            </tr>
+
+
+
+            <tr>
+                <td class="col-md-3">styleUrl</td>
+                <td class="col-md-9"><code>./toast.component.scss</code></td>
+            </tr>
+
+
+
+
+
+        </tbody>
+    </table>
+</section>
+
+    <section data-compodoc="block-index">
+    <h3 id="index">Index</h3>
+    <table class="table table-sm table-bordered index-table">
+        <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Properties</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#ariaLive" >ariaLive</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#ariaRole" >ariaRole</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#toastClasses" >toastClasses</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#variantIcon" >variantIcon</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#variantIconLabel" >variantIconLabel</a>
+                            </li>
+                            <li>
+                                    <span class="modifier">Readonly</span>
+                                <a href="#variantIconName" >variantIconName</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Methods</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                    <span class="modifier">Private</span>
+                                <a href="#_getToastClasses" >_getToastClasses</a>
+                            </li>
+                            <li>
+                                <a href="#handleDismiss" >handleDismiss</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Inputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#dismissible" >dismissible</a>
+                            </li>
+                            <li>
+                                <a href="#duration" >duration</a>
+                            </li>
+                            <li>
+                                <a href="#isExiting" >isExiting</a>
+                            </li>
+                            <li>
+                                <a href="#message" >message</a>
+                            </li>
+                            <li>
+                                <a href="#position" >position</a>
+                            </li>
+                            <li>
+                                <a href="#title" >title</a>
+                            </li>
+                            <li>
+                                <a href="#variant" >variant</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+                <tr>
+                    <td class="col-md-4">
+                        <h6><b>Outputs</b></h6>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <ul class="index-list">
+                            <li>
+                                <a href="#dismissed" >dismissed</a>
+                            </li>
+                        </ul>
+                    </td>
+                </tr>
+
+
+
+        </tbody>
+    </table>
+</section>
+
+
+    <section data-compodoc="block-inputs">
+    <h3 id="inputs">Inputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dismissible"></a>
+                        <b>dismissible</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>true</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="80" class="link-to-prism">src/app/shared/components/toast/toast.component.ts:80</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the toast can be manually dismissed</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="duration"></a>
+                        <b>duration</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/number" target="_blank" >number</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>5000</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="75" class="link-to-prism">src/app/shared/components/toast/toast.component.ts:75</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Auto-dismiss duration in milliseconds
+Set to 0 to disable auto-dismiss</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="isExiting"></a>
+                        <b>isExiting</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>false</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="91" class="link-to-prism">src/app/shared/components/toast/toast.component.ts:91</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Whether the toast is currently animating out</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="message"></a>
+                        <b>message</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Required : </i>&nbsp;<b>true</b>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="64" class="link-to-prism">src/app/shared/components/toast/toast.component.ts:64</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>The message to display in the toast</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="position"></a>
+                        <b>position</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ToastPosition" target="_self" >ToastPosition</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;top-right&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="86" class="link-to-prism">src/app/shared/components/toast/toast.component.ts:86</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Position of the toast on screen
+Used by the toast container to position toasts</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="title"></a>
+                        <b>title</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>string | undefined</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>undefined</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="69" class="link-to-prism">src/app/shared/components/toast/toast.component.ts:69</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Optional title for the toast</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="variant"></a>
+                        <b>variant</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="../miscellaneous/typealiases.html#ToastVariant" target="_self" >ToastVariant</a></code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>&#x27;info&#x27;</code>
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="59" class="link-to-prism">src/app/shared/components/toast/toast.component.ts:59</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Visual variant of the toast</p>
+<ul>
+<li>success: Positive feedback (green)</li>
+<li>error: Error messages (red)</li>
+<li>warning: Warning messages (yellow/orange)</li>
+<li>info: Informational messages (blue)</li>
+</ul>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+    <section data-compodoc="block-outputs">
+    <h3 id="outputs">Outputs</h3>
+        <table class="table table-sm table-bordered">
+            <tbody>
+                <tr>
+                    <td class="col-md-4">
+                        <a name="dismissed"></a>
+                        <b>dismissed</b>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                    </td>
+                </tr>
+                        <tr>
+                            <td class="col-md-2" colspan="2">
+                                    <div class="io-line">Defined in <a href="" data-line="160" class="link-to-prism">src/app/shared/components/toast/toast.component.ts:160</a></div>
+                            </td>
+                        </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <div class="io-description"><p>Emitted when the toast is dismissed (manually or automatically)</p>
+</div>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+</section>
+
+
+    <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="_getToastClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Private</span>
+                        <span ><b>_getToastClasses</b></span>
+                        <a href="#_getToastClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+                        <span class="modifier-icon icon ion-ios-reset"></span>
+                    <code>_getToastClasses()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="172"
+                                    class="link-to-prism">src/app/shared/components/toast/toast.component.ts:172</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Generate BEM CSS classes based on component state</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/string" target="_blank" >string</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="handleDismiss"></a>
+                    <span class="name">
+                        <span ><b>handleDismiss</b></span>
+                        <a href="#handleDismiss"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>handleDismiss()</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="165"
+                                    class="link-to-prism">src/app/shared/components/toast/toast.component.ts:165</a></div>
+                        </td>
+                    </tr>
+
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Handle dismiss button click</p>
+</div>
+
+                        <div class="io-description">
+                            <b>Returns : </b>        <code><a href="https://www.typescriptlang.org/docs/handbook/basic-types.html" target="_blank" >void</a></code>
+
+                        </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+    <section data-compodoc="block-properties">
+    
+    <h3 id="inputs">
+        Properties
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ariaLive"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>ariaLive</b></span>
+                        <a href="#ariaLive"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt;
+    this.variant() &#x3D;&#x3D;&#x3D; &#x27;error&#x27; || this.variant() &#x3D;&#x3D;&#x3D; &#x27;warning&#x27; ? &#x27;assertive&#x27; : &#x27;polite&#x27;
+  )</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="105" class="link-to-prism">src/app/shared/components/toast/toast.component.ts:105</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>ARIA live region politeness</p>
+<ul>
+<li>assertive: For errors and warnings (interrupts)</li>
+<li>polite: For success and info (doesn&#39;t interrupt)</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="ariaRole"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>ariaRole</b></span>
+                        <a href="#ariaRole"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; (this.variant() &#x3D;&#x3D;&#x3D; &#x27;error&#x27; ? &#x27;alert&#x27; : &#x27;status&#x27;))</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="98" class="link-to-prism">src/app/shared/components/toast/toast.component.ts:98</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>ARIA role for the toast</p>
+<ul>
+<li>alert: For error messages (assertive)</li>
+<li>status: For success/info messages (polite)</li>
+</ul>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="toastClasses"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>toastClasses</b></span>
+                        <a href="#toastClasses"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; this._getToastClasses())</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="155" class="link-to-prism">src/app/shared/components/toast/toast.component.ts:155</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Computed CSS classes for the toast</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="variantIcon"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>variantIcon</b></span>
+                        <a href="#variantIcon"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const icons: Record&lt;ToastVariant, string&gt; &#x3D; {
+      success: &#x27;✓&#x27;,
+      error: &#x27;✕&#x27;,
+      warning: &#x27;⚠&#x27;,
+      info: &#x27;ℹ&#x27;,
+    };
+    return icons[this.variant()];
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="113" class="link-to-prism">src/app/shared/components/toast/toast.component.ts:113</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Icon for each toast variant
+Uses text symbols for now; can be replaced with icon component</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="variantIconLabel"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>variantIconLabel</b></span>
+                        <a href="#variantIconLabel"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    const labels: Record&lt;ToastVariant, string&gt; &#x3D; {
+      success: &#x27;Success&#x27;,
+      error: &#x27;Error&#x27;,
+      warning: &#x27;Warning&#x27;,
+      info: &#x27;Information&#x27;,
+    };
+    return labels[this.variant()];
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="142" class="link-to-prism">src/app/shared/components/toast/toast.component.ts:142</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Accessible label for the variant icon</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="variantIconName"></a>
+                    <span class="name">
+                            <span class="modifier">Readonly</span>
+                        <span ><b>variantIconName</b></span>
+                        <a href="#variantIconName"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Type : </i>    <code>unknown</code>
+
+                    </td>
+                </tr>
+                <tr>
+                    <td class="col-md-4">
+                        <i>Default value : </i><code>computed(() &#x3D;&gt; {
+    switch (this.variant()) {
+      case &#x27;success&#x27;:
+        return ICON_NAMES.SUCCESS;
+      case &#x27;error&#x27;:
+        return ICON_NAMES.ERROR;
+      case &#x27;warning&#x27;:
+        return ICON_NAMES.WARNING;
+      default:
+        return ICON_NAMES.INFO;
+    }
+  })</code>
+                    </td>
+                </tr>
+                    <tr>
+                        <td class="col-md-4">
+                                <div class="io-line">Defined in <a href="" data-line="126" class="link-to-prism">src/app/shared/components/toast/toast.component.ts:126</a></div>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                    <div class="io-description"><p>Map toast variant to a named icon from the registry</p>
+</div>
+                </td>
+            </tr>
+
+        </tbody>
+    </table>
+</section>
+
+</div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import { CommonModule } from &#x27;@angular/common&#x27;;
+import { ChangeDetectionStrategy, Component, computed, input, output } from &#x27;@angular/core&#x27;;
+
+import { ICON_NAMES } from &#x27;@shared/constants/icons.constants&#x27;;
+
+import { ButtonComponent } from &#x27;../button/button.component&#x27;;
+import { IconComponent } from &#x27;../icon/icon.component&#x27;;
+
+export type ToastVariant &#x3D; &#x27;success&#x27; | &#x27;error&#x27; | &#x27;warning&#x27; | &#x27;info&#x27;;
+export type ToastPosition &#x3D;
+  | &#x27;top-right&#x27;
+  | &#x27;top-left&#x27;
+  | &#x27;top-center&#x27;
+  | &#x27;bottom-right&#x27;
+  | &#x27;bottom-left&#x27;
+  | &#x27;bottom-center&#x27;;
+
+/**
+ * Toast notification component for displaying temporary messages.
+ * Follows WCAG 2.1 AAA guidelines and integrates with the theme system.
+ * Supports auto-dismiss and manual dismiss functionality.
+ *
+ * @example
+ * &#x60;&#x60;&#x60;html
+ * &lt;!-- Success toast with auto-dismiss --&gt;
+ * &lt;app-toast
+ *   variant&#x3D;&quot;success&quot;
+ *   message&#x3D;&quot;Changes saved successfully!&quot;
+ *   [duration]&#x3D;&quot;3000&quot;
+ *   [dismissible]&#x3D;&quot;true&quot;
+ *   (dismissed)&#x3D;&quot;handleDismiss()&quot;&gt;
+ * &lt;/app-toast&gt;
+ *
+ * &lt;!-- Error toast without auto-dismiss --&gt;
+ * &lt;app-toast
+ *   variant&#x3D;&quot;error&quot;
+ *   message&#x3D;&quot;An error occurred&quot;
+ *   [duration]&#x3D;&quot;0&quot;
+ *   [dismissible]&#x3D;&quot;true&quot;&gt;
+ * &lt;/app-toast&gt;
+ * &#x60;&#x60;&#x60;
+ */
+@Component({
+  selector: &#x27;app-toast&#x27;,
+  standalone: true,
+  imports: [CommonModule, ButtonComponent, IconComponent],
+  templateUrl: &#x27;./toast.component.html&#x27;,
+  styleUrl: &#x27;./toast.component.scss&#x27;,
+  changeDetection: ChangeDetectionStrategy.OnPush,
+})
+export class ToastComponent {
+  /**
+   * Visual variant of the toast
+   * - success: Positive feedback (green)
+   * - error: Error messages (red)
+   * - warning: Warning messages (yellow/orange)
+   * - info: Informational messages (blue)
+   */
+  readonly variant &#x3D; input&lt;ToastVariant&gt;(&#x27;info&#x27;);
+
+  /**
+   * The message to display in the toast
+   */
+  readonly message &#x3D; input.required&lt;string&gt;();
+
+  /**
+   * Optional title for the toast
+   */
+  readonly title &#x3D; input&lt;string | undefined&gt;(undefined);
+
+  /**
+   * Auto-dismiss duration in milliseconds
+   * Set to 0 to disable auto-dismiss
+   */
+  readonly duration &#x3D; input&lt;number&gt;(5000);
+
+  /**
+   * Whether the toast can be manually dismissed
+   */
+  readonly dismissible &#x3D; input&lt;boolean&gt;(true);
+
+  /**
+   * Position of the toast on screen
+   * Used by the toast container to position toasts
+   */
+  readonly position &#x3D; input&lt;ToastPosition&gt;(&#x27;top-right&#x27;);
+
+  /**
+   * Whether the toast is currently animating out
+   */
+  readonly isExiting &#x3D; input&lt;boolean&gt;(false);
+
+  /**
+   * ARIA role for the toast
+   * - alert: For error messages (assertive)
+   * - status: For success/info messages (polite)
+   */
+  readonly ariaRole &#x3D; computed(() &#x3D;&gt; (this.variant() &#x3D;&#x3D;&#x3D; &#x27;error&#x27; ? &#x27;alert&#x27; : &#x27;status&#x27;));
+
+  /**
+   * ARIA live region politeness
+   * - assertive: For errors and warnings (interrupts)
+   * - polite: For success and info (doesn&#x27;t interrupt)
+   */
+  readonly ariaLive &#x3D; computed(() &#x3D;&gt;
+    this.variant() &#x3D;&#x3D;&#x3D; &#x27;error&#x27; || this.variant() &#x3D;&#x3D;&#x3D; &#x27;warning&#x27; ? &#x27;assertive&#x27; : &#x27;polite&#x27;
+  );
+
+  /**
+   * Icon for each toast variant
+   * Uses text symbols for now; can be replaced with icon component
+   */
+  readonly variantIcon &#x3D; computed(() &#x3D;&gt; {
+    const icons: Record&lt;ToastVariant, string&gt; &#x3D; {
+      success: &#x27;✓&#x27;,
+      error: &#x27;✕&#x27;,
+      warning: &#x27;⚠&#x27;,
+      info: &#x27;ℹ&#x27;,
+    };
+    return icons[this.variant()];
+  });
+
+  /**
+   * Map toast variant to a named icon from the registry
+   */
+  readonly variantIconName &#x3D; computed(() &#x3D;&gt; {
+    switch (this.variant()) {
+      case &#x27;success&#x27;:
+        return ICON_NAMES.SUCCESS;
+      case &#x27;error&#x27;:
+        return ICON_NAMES.ERROR;
+      case &#x27;warning&#x27;:
+        return ICON_NAMES.WARNING;
+      default:
+        return ICON_NAMES.INFO;
+    }
+  });
+
+  /**
+   * Accessible label for the variant icon
+   */
+  readonly variantIconLabel &#x3D; computed(() &#x3D;&gt; {
+    const labels: Record&lt;ToastVariant, string&gt; &#x3D; {
+      success: &#x27;Success&#x27;,
+      error: &#x27;Error&#x27;,
+      warning: &#x27;Warning&#x27;,
+      info: &#x27;Information&#x27;,
+    };
+    return labels[this.variant()];
+  });
+
+  /**
+   * Computed CSS classes for the toast
+   */
+  readonly toastClasses &#x3D; computed(() &#x3D;&gt; this._getToastClasses());
+
+  /**
+   * Emitted when the toast is dismissed (manually or automatically)
+   */
+  readonly dismissed &#x3D; output&lt;void&gt;();
+
+  /**
+   * Handle dismiss button click
+   */
+  handleDismiss(): void {
+    this.dismissed.emit();
+  }
+
+  /**
+   * Generate BEM CSS classes based on component state
+   */
+  private _getToastClasses(): string {
+    const classes &#x3D; [&#x27;toast&#x27;];
+
+    // Variant class
+    classes.push(&#x60;toast--${this.variant()}&#x60;);
+
+    // Position class
+    classes.push(&#x60;toast--${this.position()}&#x60;);
+
+    // State classes
+    if (this.isExiting()) {
+      classes.push(&#x27;toast--exiting&#x27;);
+    }
+
+    return classes.join(&#x27; &#x27;);
+  }
+}
+</code></pre>
+    </div>
+
+    <div class="tab-pane fade " id="templateData">
+        <pre class="line-numbers"><code class="language-html">&lt;div
+  [class]&#x3D;&quot;toastClasses()&quot;
+  [attr.role]&#x3D;&quot;ariaRole()&quot;
+  [attr.aria-live]&#x3D;&quot;ariaLive()&quot;
+  [attr.aria-atomic]&#x3D;&quot;true&quot;
+&gt;
+  &lt;!-- Icon --&gt;
+  &lt;div class&#x3D;&quot;toast__icon&quot; [attr.aria-label]&#x3D;&quot;variantIconLabel()&quot;&gt;
+    &lt;app-icon
+      [name]&#x3D;&quot;variantIconName()&quot;
+      size&#x3D;&quot;md&quot;
+      color&#x3D;&quot;current&quot;
+      [decorative]&#x3D;&quot;false&quot;
+      [ariaLabel]&#x3D;&quot;variantIconLabel()&quot;
+    /&gt;
+  &lt;/div&gt;
+
+  &lt;!-- Content --&gt;
+  &lt;div class&#x3D;&quot;toast__content&quot;&gt;
+    @if (title()) {
+    &lt;div class&#x3D;&quot;toast__title&quot;&gt;{{ title() }}&lt;/div&gt;
+    }
+    &lt;div class&#x3D;&quot;toast__message&quot;&gt;{{ message() }}&lt;/div&gt;
+  &lt;/div&gt;
+
+  @if (dismissible()) {
+  &lt;app-button
+    variant&#x3D;&quot;ghost&quot;
+    size&#x3D;&quot;sm&quot;
+    [iconOnly]&#x3D;&quot;true&quot;
+    ariaLabel&#x3D;&quot;Dismiss notification&quot;
+    (clicked)&#x3D;&quot;handleDismiss()&quot;
+  &gt;
+    ×
+  &lt;/app-button&gt;
+  }
+&lt;/div&gt;
+</code></pre>
+    </div>
+
+
+    <div class="tab-pane fade " id="tree">
+        <div id="tree-container"></div>
+        <div class="tree-legend">
+            <div class="title">
+                <b>Legend</b>
+            </div>
+            <div>
+                <div class="color htmlelement"></div><span>Html element</span>
+            </div>
+            <div>
+                <div class="color component"></div><span>Component</span>
+            </div>
+            <div>
+                <div class="color directive"></div><span>Html element with directive</span>
+            </div>
+        </div>
+    </div>
+
+    
+</div>
+
+<script src="../js/libs/vis-network.min.js"></script>
+<script src="../js/libs/htmlparser.js"></script>
+<script src="../js/libs/deep-iterator.js"></script>
+<script>
+        var COMPONENT_TEMPLATE = '<div><div  [class]="toastClasses()"  [attr.role]="ariaRole()"  [attr.aria-live]="ariaLive()"  [attr.aria-atomic]="true">  <!-- Icon -->  <div class="toast__icon" [attr.aria-label]="variantIconLabel()">    <app-icon      [name]="variantIconName()"      size="md"      color="current"      [decorative]="false"      [ariaLabel]="variantIconLabel()"    />  </div>  <!-- Content -->  <div class="toast__content">    @if (title()) {    <div class="toast__title">{{ title() }}</div>    }    <div class="toast__message">{{ message() }}</div>  </div>  @if (dismissible()) {  <app-button    variant="ghost"    size="sm"    [iconOnly]="true"    ariaLabel="Dismiss notification"    (clicked)="handleDismiss()"  >    ×  </app-button>  }</div></div>'
+    var COMPONENTS = [{'name': 'App', 'selector': 'app-root'},{'name': 'BadgeComponent', 'selector': 'app-badge'},{'name': 'BreadcrumbComponent', 'selector': 'app-breadcrumb'},{'name': 'ButtonComponent', 'selector': 'app-button'},{'name': 'ButtonContentComponent', 'selector': 'app-button-content'},{'name': 'CardComponent', 'selector': 'app-card'},{'name': 'CaseStudiesComponent', 'selector': 'app-case-studies'},{'name': 'CheckboxCheckmarkComponent', 'selector': 'app-checkbox-checkmark'},{'name': 'CheckboxComponent', 'selector': 'app-checkbox'},{'name': 'ContainerComponent', 'selector': 'app-container'},{'name': 'DividerComponent', 'selector': 'app-divider'},{'name': 'FooterComponent', 'selector': 'app-footer'},{'name': 'FormFieldComponent', 'selector': 'app-form-field'},{'name': 'GridComponent', 'selector': 'app-grid'},{'name': 'HomeComponent', 'selector': 'app-home'},{'name': 'IconComponent', 'selector': 'app-icon'},{'name': 'InputComponent', 'selector': 'app-input'},{'name': 'InputFooterComponent', 'selector': 'app-input-footer'},{'name': 'InputLabelComponent', 'selector': 'app-input-label'},{'name': 'LoadingSpinnerComponent', 'selector': 'app-loading-spinner'},{'name': 'MainLayoutComponent', 'selector': 'app-main-layout'},{'name': 'ModalComponent', 'selector': 'app-modal'},{'name': 'RadioComponent', 'selector': 'app-radio'},{'name': 'SelectButtonComponent', 'selector': 'app-select-button'},{'name': 'SelectComponent', 'selector': 'app-select'},{'name': 'SelectDropdownComponent', 'selector': 'app-select-dropdown'},{'name': 'SelectOptionComponent', 'selector': 'app-select-option'},{'name': 'SkeletonComponent', 'selector': 'app-skeleton'},{'name': 'StackComponent', 'selector': 'app-stack'},{'name': 'TabButtonComponent', 'selector': 'app-tab-button'},{'name': 'TabComponent', 'selector': 'app-tab'},{'name': 'TabsComponent', 'selector': 'app-tabs'},{'name': 'TemplatePlaygroundComponent', 'selector': 'template-playground-root'},{'name': 'TextareaComponent', 'selector': 'app-textarea'},{'name': 'ThemePickerComponent', 'selector': 'app-theme-picker'},{'name': 'ToastComponent', 'selector': 'app-toast'},{'name': 'ToastContainerComponent', 'selector': 'app-toast-container'},{'name': 'ToastDemoComponent', 'selector': 'app-toast-demo'}];
+    var DIRECTIVES = [];
+    var ACTUAL_COMPONENT = {'name': 'ToastComponent'};
+</script>
+<script src="../js/tree.js"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'component';
+            var COMPODOC_CURRENT_PAGE_URL = 'ToastComponent.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

@@ -1,0 +1,765 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content pipe">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Pipes</li>
+  <li class="breadcrumb-item" >SortPipe</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/pipes/sort/sort.pipe.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>SortPipe</p>
+<p>Sorts an array by a property or using a custom comparator function.</p>
+<h2>Features</h2>
+<ul>
+<li><strong>IMPURE PIPE</strong>: Runs on every change detection cycle to detect array mutations</li>
+<li>Supports ascending and descending sort</li>
+<li>Supports sorting by property name</li>
+<li>Supports custom comparator functions</li>
+<li>Type-safe with strict TypeScript</li>
+<li>Handles null/undefined gracefully</li>
+<li>Returns empty array for invalid inputs</li>
+</ul>
+<h2>⚠️ Performance Warning</h2>
+<p>This is an <strong>impure pipe</strong> (pure: false), meaning it runs on every change detection
+cycle. Use sparingly and consider these alternatives:</p>
+<ul>
+<li><strong>Preferred</strong>: Sort in component using computed signals or methods</li>
+<li><strong>Alternative</strong>: Use *ngFor with trackBy and sort in component</li>
+<li><strong>Acceptable</strong>: Use this pipe for small arrays or infrequent sorting</li>
+</ul>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// ✅ PREFERRED: Sort in component with computed signal
+sortedItems = computed(() =&gt; {
+  return [...this.items()].sort((a, b) =&gt; a.name.localeCompare(b.name));
+});
+
+// ❌ AVOID: Impure pipe runs on every change detection
+&lt;div *ngFor=&quot;let item of items | sort:&#39;name&#39;&quot;&gt;</code></pre></div><h2>Usage</h2>
+<h3>Sort by Property (Ascending)</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;div *ngFor=&quot;let user of users | sort:&#39;name&#39;&quot;&gt;
+  {{ user.name }}
+&lt;/div&gt;</code></pre></div><h3>Sort by Property (Descending)</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;div *ngFor=&quot;let user of users | sort:&#39;name&#39;:&#39;desc&#39;&quot;&gt;
+  {{ user.name }}
+&lt;/div&gt;</code></pre></div><h3>Sort with Custom Comparator</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;div *ngFor=&quot;let item of items | sort:customComparator&quot;&gt;
+  {{ item.title }}
+&lt;/div&gt;</code></pre></div><b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">&#64;Component({
+  template: `...`,
+  imports: [SortPipe, CommonModule]
+})
+export class MyComponent {
+  items = [
+    { title: &#39;B&#39;, priority: 1 },
+    { title: &#39;A&#39;, priority: 2 },
+  ];
+
+  customComparator = (a: any, b: any) =&gt; a.priority - b.priority;
+}</code></pre></div><h2>Type Safety</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">interface User {
+  name: string;
+  age: number;
+}
+
+// Type-safe comparator
+sortByAge = (a: User, b: User) =&gt; a.age - b.age;
+
+// In template
+&lt;div *ngFor=&quot;let user of users | sort:sortByAge&quot;&gt;</code></pre></div><h2>Examples</h2>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;!-- Sort strings alphabetically --&gt;
+&lt;div *ngFor=&quot;let item of items | sort:&#39;title&#39;&quot;&gt;
+
+&lt;!-- Sort numbers descending --&gt;
+&lt;div *ngFor=&quot;let item of items | sort:&#39;price&#39;:&#39;desc&#39;&quot;&gt;
+
+&lt;!-- Sort dates (newest first) --&gt;
+&lt;div *ngFor=&quot;let item of items | sort:&#39;createdAt&#39;:&#39;desc&#39;&quot;&gt;
+
+&lt;!-- Sort with custom logic --&gt;
+&lt;div *ngFor=&quot;let item of items | sort:customSort&quot;&gt;</code></pre></div><h2>Null/Undefined Handling</h2>
+<p>Returns empty array for null/undefined:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;div *ngFor=&quot;let item of nullArray | sort:&#39;name&#39;&quot;&gt;
+&lt;!-- No items rendered --&gt;
+&lt;/div&gt;</code></pre></div><p>Null/undefined property values are sorted to the end:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// Items with null &#39;name&#39; will appear at the end
+{{ items | sort:&#39;name&#39; }}</code></pre></div><h2>Best Practices</h2>
+<h3>✅ DO: Use for small, static arrays</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">const categories = [&#39;zebra&#39;, &#39;apple&#39;, &#39;banana&#39;];
+sortedCategories = categories.sort();</code></pre></div><h3>✅ DO: Combine with trackBy for better performance</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;div *ngFor=&quot;let item of items | sort:&#39;name&#39;; trackBy: trackById&quot;&gt;</code></pre></div><h3>❌ AVOID: Large arrays or frequent updates</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;!-- Avoid: 1000+ items sorted on every change --&gt;
+&lt;div *ngFor=&quot;let item of largeArray | sort:&#39;name&#39;&quot;&gt;</code></pre></div><h3>❌ AVOID: Complex sorting logic in templates</h3>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-html">&lt;!-- Avoid: Move complex logic to component --&gt;
+&lt;div *ngFor=&quot;let item of items | sort:complexComparator&quot;&gt;</code></pre></div><h2>Alternative: Sort in Component</h2>
+<p>For better performance, sort in your component:</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">&#64;Component({
+  template: `
+    &lt;div *ngFor=&quot;let item of sortedItems()&quot;&gt;
+      {{ item.name }}
+    &lt;/div&gt;
+  `
+})
+export class MyComponent {
+  items = signal([...]);
+  sortBy = signal&lt;&#39;name&#39; | &#39;date&#39;&gt;(&#39;name&#39;);
+
+  sortedItems = computed(() =&gt; {
+    const items = [...this.items()];
+    const key = this.sortBy();
+    return items.sort((a, b) =&gt; {
+      if (a[key] &lt; b[key]) return -1;
+      if (a[key] &gt; b[key]) return 1;
+      return 0;
+    });
+  });
+}</code></pre></div><p>See <a href="https://angular.dev/guide/pipes">https://angular.dev/guide/pipes</a></p>
+
+            </p>
+
+
+        <section data-compodoc="block-metadata">
+            <h3>Metadata</h3>
+            <table class="table table-sm table-hover metadata">
+                <tbody>
+                    <tr>
+                        <td class="col-md-3">Name</td>
+                        <td class="col-md-9">sort</td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-3">Standalone</td>
+                        <td class="col-md-9"><code>true</code></td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+            <section data-compodoc="block-methods">
+    
+    <h3 id="methods">
+        Methods
+    </h3>
+    <table class="table table-sm table-bordered">
+        <tbody>
+            <tr>
+                <td class="col-md-4">
+                    <a name="transform"></a>
+                    <span class="name">
+                        <span ><b>transform</b></span>
+                        <a href="#transform"><span class="icon ion-ios-link"></span></a>
+                    </span>
+                </td>
+            </tr>
+            <tr>
+                <td class="col-md-4">
+<code>transform(array: T[] | null | undefined, propertyOrComparator?: unknown | string, order: <a href="../undefineds/SortOrder.html" target="_self">SortOrder</a>)</code>
+                </td>
+            </tr>
+
+
+                    <tr>
+                        <td class="col-md-4">
+                            <div class="io-line">Defined in <a href="" data-line="204"
+                                    class="link-to-prism">src/app/shared/pipes/sort/sort.pipe.ts:204</a></div>
+                        </td>
+                    </tr>
+
+                    <tr>
+                        <td class="col-md-4">
+                            <b>Type parameters :</b>
+                            <ul class="type-parameters">
+                                    <li>T</li>
+                            </ul>
+                        </td>
+                    </tr>
+
+            <tr>
+                <td class="col-md-4">
+                        <div class="io-description"><p>Sorts an array by a property or using a custom comparator.</p>
+<b>Example :</b><div><pre class="line-numbers"><code class="language-typescript">// Sort by property
+{{ items | sort:&#39;name&#39; }}
+{{ items | sort:&#39;price&#39;:&#39;desc&#39; }}
+
+
+// Sort with comparator
+{{ items | sort:customComparator }}</code></pre></div></div>
+
+                            <div class="io-description">
+                                <b>Parameters :</b>
+                                
+                                <table class="params">
+                                    <thead>
+                                        <tr>
+                                            <td>Name</td>
+                                                <td>Type</td>
+                                            <td>Optional</td>
+                                                <td>Default value</td>
+                                                <td>Description</td>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        <tr>
+                                                <td>array</td>
+                                            <td>
+                                                        <code>T[] | null | undefined</code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>The array to sort</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>propertyOrComparator</td>
+                                            <td>
+                                                        <code>unknown | string</code>
+                                            </td>
+
+                                            <td>
+                                                    Yes
+                                            </td>
+
+                                            <td>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Property name or comparator function to sort by</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                                <td>order</td>
+                                            <td>
+                                                            <code><a href="../miscellaneous/typealiases.html#SortOrder" target="_self" >SortOrder</a></code>
+                                            </td>
+
+                                            <td>
+                                                    No
+                                            </td>
+
+                                            <td>
+                                                    <code>&#x27;asc&#x27;</code>
+                                            </td>
+
+                                            <td>
+                                                    <ul>
+<li>Sort order: &#39;asc&#39; (default) or &#39;desc&#39;</li>
+</ul>
+
+                                            </td>
+                                        </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        <div class="io-description">
+                            <b>Returns : </b>    <code>T[]</code>
+
+                        </div>
+                            <div class="io-description">
+                                <p>Sorted array or empty array for null/undefined</p>
+
+                            </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</section>
+
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">import type { PipeTransform } from &#x27;@angular/core&#x27;;
+import { Pipe } from &#x27;@angular/core&#x27;;
+
+type SortOrder &#x3D; &#x27;asc&#x27; | &#x27;desc&#x27;;
+
+/**
+ * SortPipe
+ *
+ * Sorts an array by a property or using a custom comparator function.
+ *
+ * ## Features
+ * - **IMPURE PIPE**: Runs on every change detection cycle to detect array mutations
+ * - Supports ascending and descending sort
+ * - Supports sorting by property name
+ * - Supports custom comparator functions
+ * - Type-safe with strict TypeScript
+ * - Handles null/undefined gracefully
+ * - Returns empty array for invalid inputs
+ *
+ * ## ⚠️ Performance Warning
+ *
+ * This is an **impure pipe** (pure: false), meaning it runs on every change detection
+ * cycle. Use sparingly and consider these alternatives:
+ *
+ * - **Preferred**: Sort in component using computed signals or methods
+ * - **Alternative**: Use *ngFor with trackBy and sort in component
+ * - **Acceptable**: Use this pipe for small arrays or infrequent sorting
+ *
+ * &#x60;&#x60;&#x60;typescript
+ * // ✅ PREFERRED: Sort in component with computed signal
+ * sortedItems &#x3D; computed(() &#x3D;&gt; {
+ *   return [...this.items()].sort((a, b) &#x3D;&gt; a.name.localeCompare(b.name));
+ * });
+ *
+ * // ❌ AVOID: Impure pipe runs on every change detection
+ * &lt;div *ngFor&#x3D;&quot;let item of items | sort:&#x27;name&#x27;&quot;&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ## Usage
+ *
+ * ### Sort by Property (Ascending)
+ * &#x60;&#x60;&#x60;html
+ * &lt;div *ngFor&#x3D;&quot;let user of users | sort:&#x27;name&#x27;&quot;&gt;
+ *   {{ user.name }}
+ * &lt;/div&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ### Sort by Property (Descending)
+ * &#x60;&#x60;&#x60;html
+ * &lt;div *ngFor&#x3D;&quot;let user of users | sort:&#x27;name&#x27;:&#x27;desc&#x27;&quot;&gt;
+ *   {{ user.name }}
+ * &lt;/div&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ### Sort with Custom Comparator
+ * &#x60;&#x60;&#x60;html
+ * &lt;div *ngFor&#x3D;&quot;let item of items | sort:customComparator&quot;&gt;
+ *   {{ item.title }}
+ * &lt;/div&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * &#x60;&#x60;&#x60;typescript
+ * @Component({
+ *   template: &#x60;...&#x60;,
+ *   imports: [SortPipe, CommonModule]
+ * })
+ * export class MyComponent {
+ *   items &#x3D; [
+ *     { title: &#x27;B&#x27;, priority: 1 },
+ *     { title: &#x27;A&#x27;, priority: 2 },
+ *   ];
+ *
+ *   customComparator &#x3D; (a: any, b: any) &#x3D;&gt; a.priority - b.priority;
+ * }
+ * &#x60;&#x60;&#x60;
+ *
+ * ## Type Safety
+ *
+ * &#x60;&#x60;&#x60;typescript
+ * interface User {
+ *   name: string;
+ *   age: number;
+ * }
+ *
+ * // Type-safe comparator
+ * sortByAge &#x3D; (a: User, b: User) &#x3D;&gt; a.age - b.age;
+ *
+ * // In template
+ * &lt;div *ngFor&#x3D;&quot;let user of users | sort:sortByAge&quot;&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ## Examples
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;!-- Sort strings alphabetically --&gt;
+ * &lt;div *ngFor&#x3D;&quot;let item of items | sort:&#x27;title&#x27;&quot;&gt;
+ *
+ * &lt;!-- Sort numbers descending --&gt;
+ * &lt;div *ngFor&#x3D;&quot;let item of items | sort:&#x27;price&#x27;:&#x27;desc&#x27;&quot;&gt;
+ *
+ * &lt;!-- Sort dates (newest first) --&gt;
+ * &lt;div *ngFor&#x3D;&quot;let item of items | sort:&#x27;createdAt&#x27;:&#x27;desc&#x27;&quot;&gt;
+ *
+ * &lt;!-- Sort with custom logic --&gt;
+ * &lt;div *ngFor&#x3D;&quot;let item of items | sort:customSort&quot;&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ## Null/Undefined Handling
+ *
+ * Returns empty array for null/undefined:
+ *
+ * &#x60;&#x60;&#x60;html
+ * &lt;div *ngFor&#x3D;&quot;let item of nullArray | sort:&#x27;name&#x27;&quot;&gt;
+ * &lt;!-- No items rendered --&gt;
+ * &lt;/div&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * Null/undefined property values are sorted to the end:
+ *
+ * &#x60;&#x60;&#x60;typescript
+ * // Items with null &#x27;name&#x27; will appear at the end
+ * {{ items | sort:&#x27;name&#x27; }}
+ * &#x60;&#x60;&#x60;
+ *
+ * ## Best Practices
+ *
+ * ### ✅ DO: Use for small, static arrays
+ * &#x60;&#x60;&#x60;typescript
+ * const categories &#x3D; [&#x27;zebra&#x27;, &#x27;apple&#x27;, &#x27;banana&#x27;];
+ * sortedCategories &#x3D; categories.sort();
+ * &#x60;&#x60;&#x60;
+ *
+ * ### ✅ DO: Combine with trackBy for better performance
+ * &#x60;&#x60;&#x60;html
+ * &lt;div *ngFor&#x3D;&quot;let item of items | sort:&#x27;name&#x27;; trackBy: trackById&quot;&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ### ❌ AVOID: Large arrays or frequent updates
+ * &#x60;&#x60;&#x60;html
+ * &lt;!-- Avoid: 1000+ items sorted on every change --&gt;
+ * &lt;div *ngFor&#x3D;&quot;let item of largeArray | sort:&#x27;name&#x27;&quot;&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ### ❌ AVOID: Complex sorting logic in templates
+ * &#x60;&#x60;&#x60;html
+ * &lt;!-- Avoid: Move complex logic to component --&gt;
+ * &lt;div *ngFor&#x3D;&quot;let item of items | sort:complexComparator&quot;&gt;
+ * &#x60;&#x60;&#x60;
+ *
+ * ## Alternative: Sort in Component
+ *
+ * For better performance, sort in your component:
+ *
+ * &#x60;&#x60;&#x60;typescript
+ * @Component({
+ *   template: &#x60;
+ *     &lt;div *ngFor&#x3D;&quot;let item of sortedItems()&quot;&gt;
+ *       {{ item.name }}
+ *     &lt;/div&gt;
+ *   &#x60;
+ * })
+ * export class MyComponent {
+ *   items &#x3D; signal([...]);
+ *   sortBy &#x3D; signal&lt;&#x27;name&#x27; | &#x27;date&#x27;&gt;(&#x27;name&#x27;);
+ *
+ *   sortedItems &#x3D; computed(() &#x3D;&gt; {
+ *     const items &#x3D; [...this.items()];
+ *     const key &#x3D; this.sortBy();
+ *     return items.sort((a, b) &#x3D;&gt; {
+ *       if (a[key] &lt; b[key]) return -1;
+ *       if (a[key] &gt; b[key]) return 1;
+ *       return 0;
+ *     });
+ *   });
+ * }
+ * &#x60;&#x60;&#x60;
+ *
+ * @see {@link https://angular.dev/guide/pipes}
+ */
+@Pipe({
+  name: &#x27;sort&#x27;,
+  standalone: true,
+  pure: false, // Impure pipe to detect array changes
+})
+export class SortPipe implements PipeTransform {
+  /**
+   * Sorts an array by a property or using a custom comparator.
+   *
+   * @param array - The array to sort
+   * @param propertyOrComparator - Property name or comparator function to sort by
+   * @param order - Sort order: &#x27;asc&#x27; (default) or &#x27;desc&#x27;
+   * @returns Sorted array or empty array for null/undefined
+   *
+   * @example
+   * &#x60;&#x60;&#x60;typescript
+   * // Sort by property
+   * {{ items | sort:&#x27;name&#x27; }}
+   * {{ items | sort:&#x27;price&#x27;:&#x27;desc&#x27; }}
+   *
+   * // Sort with comparator
+   * {{ items | sort:customComparator }}
+   * &#x60;&#x60;&#x60;
+   */
+  transform&lt;T&gt;(
+    array: T[] | null | undefined,
+    propertyOrComparator?: ((a: T, b: T) &#x3D;&gt; number) | string,
+    order: SortOrder &#x3D; &#x27;asc&#x27;,
+  ): T[] {
+    if (!array || !Array.isArray(array)) {
+      return [];
+    }
+
+    if (!propertyOrComparator) {
+      return array;
+    }
+
+    // Create a shallow copy to avoid mutating the original array
+    const sortedArray &#x3D; [...array];
+
+    // If propertyOrComparator is a function, use it as comparator
+    if (typeof propertyOrComparator &#x3D;&#x3D;&#x3D; &#x27;function&#x27;) {
+      return sortedArray.sort(propertyOrComparator);
+    }
+
+    // If propertyOrComparator is a string, sort by property
+    if (typeof propertyOrComparator &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+      const property &#x3D; propertyOrComparator as keyof T;
+
+      sortedArray.sort((a, b) &#x3D;&gt; {
+        const aValue &#x3D; a[property];
+        const bValue &#x3D; b[property];
+
+        // Handle null/undefined values (sort them to the end)
+        if (aValue &#x3D;&#x3D; null &amp;&amp; bValue &#x3D;&#x3D; null) return 0;
+        if (aValue &#x3D;&#x3D; null) return 1;
+        if (bValue &#x3D;&#x3D; null) return -1;
+
+        // Compare values
+        let comparison &#x3D; 0;
+
+        if (typeof aValue &#x3D;&#x3D;&#x3D; &#x27;string&#x27; &amp;&amp; typeof bValue &#x3D;&#x3D;&#x3D; &#x27;string&#x27;) {
+          // Use localeCompare for string comparison
+          comparison &#x3D; aValue.localeCompare(bValue);
+        } else if (typeof aValue &#x3D;&#x3D;&#x3D; &#x27;number&#x27; &amp;&amp; typeof bValue &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) {
+          // Numeric comparison
+          comparison &#x3D; aValue - bValue;
+        } else if (aValue instanceof Date &amp;&amp; bValue instanceof Date) {
+          // Date comparison
+          comparison &#x3D; aValue.getTime() - bValue.getTime();
+        } else {
+          // Fallback: convert to string and compare
+          comparison &#x3D; String(aValue).localeCompare(String(bValue));
+        }
+
+        // Apply sort order
+        return order &#x3D;&#x3D;&#x3D; &#x27;desc&#x27; ? -comparison : comparison;
+      });
+    }
+
+    return sortedArray;
+  }
+}
+</code></pre>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'pipe';
+            var COMPODOC_CURRENT_PAGE_URL = 'SortPipe.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>

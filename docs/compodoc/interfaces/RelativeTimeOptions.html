@@ -1,0 +1,1208 @@
+<!doctype html>
+<html class="no-js" lang="">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="x-ua-compatible" content="ie=edge">
+        <title>moodyjw-portfolio documentation</title>
+        <meta name="description" content="">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+
+        <link rel="icon" type="image/x-icon" href="../images/favicon.ico">
+	   <link rel="stylesheet" href="../styles/style.css">
+        <link rel="stylesheet" href="../styles/dark.css">
+    </head>
+    <body>
+          <script>
+               // Blocking script to avoid flickering dark mode
+               // Dark mode toggle button
+               var useDark = window.matchMedia('(prefers-color-scheme: dark)');
+               var darkModeState = useDark.matches;
+               var $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               var $darkModeToggles = document.querySelectorAll('.dark-mode-switch');
+               var darkModeStateLocal = localStorage.getItem('compodoc_darkmode-state');
+
+               function checkToggle(check) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].checked = check;
+                    }
+               }
+
+               function toggleDarkMode(state) {
+                    if (window.localStorage) {
+                         localStorage.setItem('compodoc_darkmode-state', state);
+                    }
+
+                    checkToggle(state);
+
+                    const hasClass = document.body.classList.contains('dark');
+
+                    if (state) {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.add('dark');
+                         }
+                         if (!hasClass) {
+                              document.body.classList.add('dark');
+                         }
+                    } else {
+                         for (var i = 0; i < $darkModeToggles.length; i++) {
+                              $darkModeToggles[i].classList.remove('dark');
+                         }
+                         if (hasClass) {
+                              document.body.classList.remove('dark');
+                         }
+                    }
+               }
+
+               useDark.addEventListener('change', function (evt) {
+                    toggleDarkMode(evt.matches);
+               });
+               if (darkModeStateLocal) {
+                    darkModeState = darkModeStateLocal === 'true';
+               }
+               toggleDarkMode(darkModeState);
+          </script>
+          <script>
+              // --- Iframe navigation tracking for Template Playground ---
+              function sendCurrentUrlToParent() {
+                  if (window.parent && window.parent !== window) {
+                      window.parent.postMessage({
+                          type: 'compodoc-iframe-navigate',
+                          url: window.location.pathname + window.location.hash
+                      }, '*');
+                  }
+              }
+              window.addEventListener('hashchange', sendCurrentUrlToParent, false);
+              window.addEventListener('popstate', sendCurrentUrlToParent, false);
+              window.addEventListener('DOMContentLoaded', sendCurrentUrlToParent, false);
+          </script>
+
+        <div class="navbar navbar-default navbar-fixed-top d-md-none p-0">
+               <div class="d-flex">
+                    <a href="../" class="navbar-brand">moodyjw-portfolio documentation</a>
+                    <button type="button" class="btn btn-default btn-menu ion-ios-menu" id="btn-menu"></button>
+               </div>
+        </div>
+
+        <div class="xs-menu menu" id="mobile-menu">
+                <div id="book-search-input" role="search"><input type="text" placeholder="Type to search"></div>            <compodoc-menu></compodoc-menu>
+        </div>
+
+        <div class="container-fluid main">
+           <div class="row main">
+               <div class="d-none d-md-block menu">
+                   <compodoc-menu mode="normal"></compodoc-menu>
+               </div>
+               <!-- START CONTENT -->
+               <div class="content interface">
+                   <div class="content-data">
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<ol class="breadcrumb">
+  <li class="breadcrumb-item">Interfaces</li>
+  <li class="breadcrumb-item"
+  >
+  RelativeTimeOptions</li>
+</ol>
+
+<ul class="nav nav-tabs" role="tablist">
+        <li class="nav-item">
+            <a href="#info" 
+                class="nav-link"
+                class="nav-link active"
+                role="tab" id="info-tab" data-bs-toggle="tab" data-link="info">Info</a>
+        </li>
+        <li class="nav-item">
+            <a href="#source" 
+                class="nav-link"
+                
+                role="tab" id="source-tab" data-bs-toggle="tab" data-link="source">Source</a>
+        </li>
+</ul>
+
+<div class="tab-content">
+    <div class="tab-pane fade active in" id="info">
+        <p class="comment">
+            <h3>File</h3>
+        </p>
+        <p class="comment">
+            <code>src/app/shared/utilities/date/date.utils.ts</code>
+        </p>
+
+
+            <p class="comment">
+                <h3>Description</h3>
+            </p>
+            <p class="comment">
+                <p>Relative time options</p>
+
+            </p>
+
+
+        <section data-compodoc="block-index">
+            <h3 id="index">Index</h3>
+            <table class="table table-sm table-bordered index-table">
+                <tbody>
+                    <tr>
+                        <td class="col-md-4">
+                            <h6><b>Properties</b></h6>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td class="col-md-4">
+                            <ul class="index-list">
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#includeSuffix" 
+>
+                                            includeSuffix
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#maxUnit" 
+>
+                                            maxUnit
+                                        </a>
+                                </li>
+                                <li>
+                                            <span class="modifier">Optional</span>
+                                        <a href="#short" 
+>
+                                            short
+                                        </a>
+                                </li>
+                            </ul>
+                        </td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+
+
+
+            <section data-compodoc="block-properties">
+                <h3 id="inputs">Properties</h3>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="includeSuffix"></a>
+                                        <span class="name "><b>includeSuffix</b>
+                                            <a href="#includeSuffix">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>includeSuffix:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Whether to include &quot;ago&quot; suffix (default: true)</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="maxUnit"></a>
+                                        <span class="name "><b>maxUnit</b>
+                                            <a href="#maxUnit">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>maxUnit:     <code>&quot;second&quot; | &quot;minute&quot; | &quot;hour&quot; | &quot;day&quot; | &quot;week&quot; | &quot;month&quot; | &quot;year&quot;</code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>    <code>&quot;second&quot; | &quot;minute&quot; | &quot;hour&quot; | &quot;day&quot; | &quot;week&quot; | &quot;month&quot; | &quot;year&quot;</code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Maximum unit to use (default: &#39;year&#39;)</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+                    <table class="table table-sm table-bordered">
+                        <tbody>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <a name="short"></a>
+                                        <span class="name "><b>short</b>
+                                            <a href="#short">
+                                                <span class="icon ion-ios-link"></span>
+                                            </a>
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="col-md-4">
+                                        <code>short:         <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+</code>
+                                    </td>
+                                </tr>
+
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Type : </i>        <code><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/boolean" target="_blank" >boolean</a></code>
+
+                                        </td>
+                                    </tr>
+
+                                    <tr>
+                                        <td class="col-md-4">
+                                            <i>Optional</i>
+                                        </td>
+                                    </tr>
+
+
+
+
+                            <tr>
+                                <td class="col-md-4">
+                                    <div class="io-description"><p>Whether to use short format (default: false)</p>
+</div>
+                                </td>
+                            </tr>
+                        </tbody>
+                    </table>
+            </section>
+    </div>
+
+
+    <div class="tab-pane fade  tab-source-code" id="source">
+        <pre class="line-numbers compodoc-sourcecode"><code class="language-typescript">export interface DateFormatOptions {
+  /** Whether to include time (default: false) */
+  includeTime?: boolean;
+  /** Whether to use 12-hour format (default: false for 24-hour) */
+  use12Hour?: boolean;
+  /** Whether to include seconds (default: false) */
+  includeSeconds?: boolean;
+  /** Locale for formatting (default: &#x27;en-US&#x27;) */
+  locale?: string;
+}
+
+/**
+ * Relative time options
+ */
+export interface RelativeTimeOptions {
+  /** Whether to include &quot;ago&quot; suffix (default: true) */
+  includeSuffix?: boolean;
+  /** Maximum unit to use (default: &#x27;year&#x27;) */
+  maxUnit?: &#x27;second&#x27; | &#x27;minute&#x27; | &#x27;hour&#x27; | &#x27;day&#x27; | &#x27;week&#x27; | &#x27;month&#x27; | &#x27;year&#x27;;
+  /** Whether to use short format (default: false) */
+  short?: boolean;
+}
+
+/**
+ * Date range interface
+ */
+export interface DateRange {
+  start: Date;
+  end: Date;
+}
+
+/**
+ * Format a date to ISO string (YYYY-MM-DD)
+ *
+ * @param date - Date to format
+ * @returns Formatted date string
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * formatDateISO(new Date(&#x27;2024-03-15&#x27;));
+ * // Returns: &#x27;2024-03-15&#x27;
+ * &#x60;&#x60;&#x60;
+ */
+export function formatDateISO(date: Date | string | number): string {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    throw new Error(&#x27;Invalid date provided to formatDateISO&#x27;);
+  }
+
+  const year &#x3D; d.getFullYear();
+  const month &#x3D; String(d.getMonth() + 1).padStart(2, &#x27;0&#x27;);
+  const day &#x3D; String(d.getDate()).padStart(2, &#x27;0&#x27;);
+
+  return &#x60;${year}-${month}-${day}&#x60;;
+}
+
+/**
+ * Format a date to a localized string
+ *
+ * @param date - Date to format
+ * @param options - Formatting options
+ * @returns Formatted date string
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * formatDate(new Date(&#x27;2024-03-15T14:30:00&#x27;));
+ * // Returns: &#x27;3/15/2024&#x27;
+ *
+ * formatDate(new Date(&#x27;2024-03-15T14:30:00&#x27;), { includeTime: true });
+ * // Returns: &#x27;3/15/2024, 2:30 PM&#x27;
+ *
+ * formatDate(new Date(&#x27;2024-03-15T14:30:00&#x27;), { includeTime: true, use12Hour: false });
+ * // Returns: &#x27;3/15/2024, 14:30&#x27;
+ * &#x60;&#x60;&#x60;
+ */
+export function formatDate(
+  date: Date | string | number,
+  options: DateFormatOptions &#x3D; {}
+): string {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    throw new Error(&#x27;Invalid date provided to formatDate&#x27;);
+  }
+
+  const {
+    includeTime &#x3D; false,
+    use12Hour &#x3D; true,
+    includeSeconds &#x3D; false,
+    locale &#x3D; &#x27;en-US&#x27;,
+  } &#x3D; options;
+
+  const dateOptions: Intl.DateTimeFormatOptions &#x3D; {
+    year: &#x27;numeric&#x27;,
+    month: &#x27;numeric&#x27;,
+    day: &#x27;numeric&#x27;,
+  };
+
+  if (includeTime) {
+    dateOptions.hour &#x3D; &#x27;numeric&#x27;;
+    dateOptions.minute &#x3D; &#x27;numeric&#x27;;
+    dateOptions.hour12 &#x3D; use12Hour;
+
+    if (includeSeconds) {
+      dateOptions.second &#x3D; &#x27;numeric&#x27;;
+    }
+  }
+
+  return d.toLocaleString(locale, dateOptions);
+}
+
+/**
+ * Format a date for display (e.g., &quot;March 15, 2024&quot;)
+ *
+ * @param date - Date to format
+ * @param locale - Locale for formatting (default: &#x27;en-US&#x27;)
+ * @returns Formatted date string
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * formatDateLong(new Date(&#x27;2024-03-15&#x27;));
+ * // Returns: &#x27;March 15, 2024&#x27;
+ * &#x60;&#x60;&#x60;
+ */
+export function formatDateLong(
+  date: Date | string | number,
+  locale &#x3D; &#x27;en-US&#x27;
+): string {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    throw new Error(&#x27;Invalid date provided to formatDateLong&#x27;);
+  }
+
+  return d.toLocaleDateString(locale, {
+    year: &#x27;numeric&#x27;,
+    month: &#x27;long&#x27;,
+    day: &#x27;numeric&#x27;,
+  });
+}
+
+/**
+ * Format a date for display (e.g., &quot;Mar 15, 2024&quot;)
+ *
+ * @param date - Date to format
+ * @param locale - Locale for formatting (default: &#x27;en-US&#x27;)
+ * @returns Formatted date string
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * formatDateMedium(new Date(&#x27;2024-03-15&#x27;));
+ * // Returns: &#x27;Mar 15, 2024&#x27;
+ * &#x60;&#x60;&#x60;
+ */
+export function formatDateMedium(
+  date: Date | string | number,
+  locale &#x3D; &#x27;en-US&#x27;
+): string {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    throw new Error(&#x27;Invalid date provided to formatDateMedium&#x27;);
+  }
+
+  return d.toLocaleDateString(locale, {
+    year: &#x27;numeric&#x27;,
+    month: &#x27;short&#x27;,
+    day: &#x27;numeric&#x27;,
+  });
+}
+
+/**
+ * Format a date for display (e.g., &quot;3/15/24&quot;)
+ *
+ * @param date - Date to format
+ * @param locale - Locale for formatting (default: &#x27;en-US&#x27;)
+ * @returns Formatted date string
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * formatDateShort(new Date(&#x27;2024-03-15&#x27;));
+ * // Returns: &#x27;3/15/24&#x27;
+ * &#x60;&#x60;&#x60;
+ */
+export function formatDateShort(
+  date: Date | string | number,
+  locale &#x3D; &#x27;en-US&#x27;
+): string {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    throw new Error(&#x27;Invalid date provided to formatDateShort&#x27;);
+  }
+
+  return d.toLocaleDateString(locale, {
+    year: &#x27;2-digit&#x27;,
+    month: &#x27;numeric&#x27;,
+    day: &#x27;numeric&#x27;,
+  });
+}
+
+/**
+ * Format time only (e.g., &quot;2:30 PM&quot; or &quot;14:30&quot;)
+ *
+ * @param date - Date to format
+ * @param use12Hour - Whether to use 12-hour format (default: true)
+ * @param includeSeconds - Whether to include seconds (default: false)
+ * @param locale - Locale for formatting (default: &#x27;en-US&#x27;)
+ * @returns Formatted time string
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * formatTime(new Date(&#x27;2024-03-15T14:30:00&#x27;));
+ * // Returns: &#x27;2:30 PM&#x27;
+ *
+ * formatTime(new Date(&#x27;2024-03-15T14:30:00&#x27;), false);
+ * // Returns: &#x27;14:30&#x27;
+ * &#x60;&#x60;&#x60;
+ */
+export function formatTime(
+  date: Date | string | number,
+  use12Hour &#x3D; true,
+  includeSeconds &#x3D; false,
+  locale &#x3D; &#x27;en-US&#x27;
+): string {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    throw new Error(&#x27;Invalid date provided to formatTime&#x27;);
+  }
+
+  const options: Intl.DateTimeFormatOptions &#x3D; {
+    hour: &#x27;numeric&#x27;,
+    minute: &#x27;numeric&#x27;,
+    hour12: use12Hour,
+  };
+
+  if (includeSeconds) {
+    options.second &#x3D; &#x27;numeric&#x27;;
+  }
+
+  return d.toLocaleTimeString(locale, options);
+}
+
+/**
+ * Get relative time string (e.g., &quot;2 hours ago&quot;, &quot;in 3 days&quot;)
+ *
+ * @param date - Date to compare
+ * @param options - Relative time options
+ * @returns Relative time string
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const twoHoursAgo &#x3D; new Date(Date.now() - 2 * 60 * 60 * 1000);
+ * timeAgo(twoHoursAgo);
+ * // Returns: &#x27;2 hours ago&#x27;
+ *
+ * const inThreeDays &#x3D; new Date(Date.now() + 3 * 24 * 60 * 60 * 1000);
+ * timeAgo(inThreeDays);
+ * // Returns: &#x27;in 3 days&#x27;
+ *
+ * timeAgo(twoHoursAgo, { short: true });
+ * // Returns: &#x27;2h ago&#x27;
+ * &#x60;&#x60;&#x60;
+ */
+export function timeAgo(
+  date: Date | string | number,
+  options: RelativeTimeOptions &#x3D; {}
+): string {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    throw new Error(&#x27;Invalid date provided to timeAgo&#x27;);
+  }
+
+  const { includeSuffix &#x3D; true, maxUnit &#x3D; &#x27;year&#x27;, short &#x3D; false } &#x3D; options;
+
+  const now &#x3D; Date.now();
+  const past &#x3D; d.getTime();
+  const diffMs &#x3D; now - past;
+  const isFuture &#x3D; diffMs &lt; 0;
+  const absDiff &#x3D; Math.abs(diffMs);
+
+  const seconds &#x3D; Math.floor(absDiff / 1000);
+  const minutes &#x3D; Math.floor(seconds / 60);
+  const hours &#x3D; Math.floor(minutes / 60);
+  const days &#x3D; Math.floor(hours / 24);
+  const weeks &#x3D; Math.floor(days / 7);
+  const months &#x3D; Math.floor(days / 30);
+  const years &#x3D; Math.floor(days / 365);
+
+  let value: number;
+  let unit: string;
+
+  // Determine appropriate unit
+  if (years &gt; 0 &amp;&amp; maxUnit &#x3D;&#x3D;&#x3D; &#x27;year&#x27;) {
+    value &#x3D; years;
+    unit &#x3D; short ? &#x27;y&#x27; : years &#x3D;&#x3D;&#x3D; 1 ? &#x27;year&#x27; : &#x27;years&#x27;;
+  } else if (months &gt; 0 &amp;&amp; [&#x27;year&#x27;, &#x27;month&#x27;].includes(maxUnit)) {
+    value &#x3D; months;
+    unit &#x3D; short ? &#x27;mo&#x27; : months &#x3D;&#x3D;&#x3D; 1 ? &#x27;month&#x27; : &#x27;months&#x27;;
+  } else if (weeks &gt; 0 &amp;&amp; [&#x27;year&#x27;, &#x27;month&#x27;, &#x27;week&#x27;].includes(maxUnit)) {
+    value &#x3D; weeks;
+    unit &#x3D; short ? &#x27;w&#x27; : weeks &#x3D;&#x3D;&#x3D; 1 ? &#x27;week&#x27; : &#x27;weeks&#x27;;
+  } else if (days &gt; 0 &amp;&amp; [&#x27;year&#x27;, &#x27;month&#x27;, &#x27;week&#x27;, &#x27;day&#x27;].includes(maxUnit)) {
+    value &#x3D; days;
+    unit &#x3D; short ? &#x27;d&#x27; : days &#x3D;&#x3D;&#x3D; 1 ? &#x27;day&#x27; : &#x27;days&#x27;;
+  } else if (
+    hours &gt; 0 &amp;&amp;
+    [&#x27;year&#x27;, &#x27;month&#x27;, &#x27;week&#x27;, &#x27;day&#x27;, &#x27;hour&#x27;].includes(maxUnit)
+  ) {
+    value &#x3D; hours;
+    unit &#x3D; short ? &#x27;h&#x27; : hours &#x3D;&#x3D;&#x3D; 1 ? &#x27;hour&#x27; : &#x27;hours&#x27;;
+  } else if (
+    minutes &gt; 0 &amp;&amp;
+    [&#x27;year&#x27;, &#x27;month&#x27;, &#x27;week&#x27;, &#x27;day&#x27;, &#x27;hour&#x27;, &#x27;minute&#x27;].includes(maxUnit)
+  ) {
+    value &#x3D; minutes;
+    unit &#x3D; short ? &#x27;m&#x27; : minutes &#x3D;&#x3D;&#x3D; 1 ? &#x27;minute&#x27; : &#x27;minutes&#x27;;
+  } else {
+    value &#x3D; seconds;
+    unit &#x3D; short ? &#x27;s&#x27; : seconds &#x3D;&#x3D;&#x3D; 1 ? &#x27;second&#x27; : &#x27;seconds&#x27;;
+  }
+
+  // Build result string
+  const timeStr &#x3D; short ? &#x60;${value}${unit}&#x60; : &#x60;${value} ${unit}&#x60;;
+
+  if (!includeSuffix) {
+    return timeStr;
+  }
+
+  if (isFuture) {
+    return short ? &#x60;in ${timeStr}&#x60; : &#x60;in ${timeStr}&#x60;;
+  }
+
+  return short ? &#x60;${timeStr} ago&#x60; : &#x60;${timeStr} ago&#x60;;
+}
+
+/**
+ * Check if a date is valid
+ *
+ * @param date - Date to validate
+ * @returns True if date is valid
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * isValidDate(new Date());
+ * // Returns: true
+ *
+ * isValidDate(&#x27;invalid&#x27;);
+ * // Returns: false
+ *
+ * isValidDate(new Date(&#x27;2024-03-15&#x27;));
+ * // Returns: true
+ * &#x60;&#x60;&#x60;
+ */
+export function isValidDate(date: unknown): date is Date {
+  if (date instanceof Date) {
+    return !isNaN(date.getTime());
+  }
+
+  if (typeof date &#x3D;&#x3D;&#x3D; &#x27;string&#x27; || typeof date &#x3D;&#x3D;&#x3D; &#x27;number&#x27;) {
+    const d &#x3D; new Date(date);
+    return !isNaN(d.getTime());
+  }
+
+  return false;
+}
+
+/**
+ * Check if a date is today
+ *
+ * @param date - Date to check
+ * @returns True if date is today
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * isToday(new Date());
+ * // Returns: true
+ *
+ * isToday(new Date(&#x27;2024-03-15&#x27;));
+ * // Returns: false (unless today is March 15, 2024)
+ * &#x60;&#x60;&#x60;
+ */
+export function isToday(date: Date | string | number): boolean {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    return false;
+  }
+
+  const today &#x3D; new Date();
+  return (
+    d.getDate() &#x3D;&#x3D;&#x3D; today.getDate() &amp;&amp;
+    d.getMonth() &#x3D;&#x3D;&#x3D; today.getMonth() &amp;&amp;
+    d.getFullYear() &#x3D;&#x3D;&#x3D; today.getFullYear()
+  );
+}
+
+/**
+ * Check if a date is yesterday
+ *
+ * @param date - Date to check
+ * @returns True if date is yesterday
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const yesterday &#x3D; new Date(Date.now() - 24 * 60 * 60 * 1000);
+ * isYesterday(yesterday);
+ * // Returns: true
+ * &#x60;&#x60;&#x60;
+ */
+export function isYesterday(date: Date | string | number): boolean {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    return false;
+  }
+
+  const yesterday &#x3D; new Date();
+  yesterday.setDate(yesterday.getDate() - 1);
+
+  return (
+    d.getDate() &#x3D;&#x3D;&#x3D; yesterday.getDate() &amp;&amp;
+    d.getMonth() &#x3D;&#x3D;&#x3D; yesterday.getMonth() &amp;&amp;
+    d.getFullYear() &#x3D;&#x3D;&#x3D; yesterday.getFullYear()
+  );
+}
+
+/**
+ * Check if a date is tomorrow
+ *
+ * @param date - Date to check
+ * @returns True if date is tomorrow
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const tomorrow &#x3D; new Date(Date.now() + 24 * 60 * 60 * 1000);
+ * isTomorrow(tomorrow);
+ * // Returns: true
+ * &#x60;&#x60;&#x60;
+ */
+export function isTomorrow(date: Date | string | number): boolean {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    return false;
+  }
+
+  const tomorrow &#x3D; new Date();
+  tomorrow.setDate(tomorrow.getDate() + 1);
+
+  return (
+    d.getDate() &#x3D;&#x3D;&#x3D; tomorrow.getDate() &amp;&amp;
+    d.getMonth() &#x3D;&#x3D;&#x3D; tomorrow.getMonth() &amp;&amp;
+    d.getFullYear() &#x3D;&#x3D;&#x3D; tomorrow.getFullYear()
+  );
+}
+
+/**
+ * Check if a date is in the past
+ *
+ * @param date - Date to check
+ * @returns True if date is in the past
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * isPast(new Date(&#x27;2020-01-01&#x27;));
+ * // Returns: true
+ * &#x60;&#x60;&#x60;
+ */
+export function isPast(date: Date | string | number): boolean {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    return false;
+  }
+
+  return d.getTime() &lt; Date.now();
+}
+
+/**
+ * Check if a date is in the future
+ *
+ * @param date - Date to check
+ * @returns True if date is in the future
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * isFuture(new Date(&#x27;2030-01-01&#x27;));
+ * // Returns: true
+ * &#x60;&#x60;&#x60;
+ */
+export function isFuture(date: Date | string | number): boolean {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    return false;
+  }
+
+  return d.getTime() &gt; Date.now();
+}
+
+/**
+ * Check if two dates are the same day
+ *
+ * @param date1 - First date
+ * @param date2 - Second date
+ * @returns True if dates are the same day
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const d1 &#x3D; new Date(&#x27;2024-03-15T10:00:00&#x27;);
+ * const d2 &#x3D; new Date(&#x27;2024-03-15T18:00:00&#x27;);
+ * isSameDay(d1, d2);
+ * // Returns: true
+ * &#x60;&#x60;&#x60;
+ */
+export function isSameDay(
+  date1: Date | string | number,
+  date2: Date | string | number
+): boolean {
+  const d1 &#x3D; new Date(date1);
+  const d2 &#x3D; new Date(date2);
+
+  if (isNaN(d1.getTime()) || isNaN(d2.getTime())) {
+    return false;
+  }
+
+  return (
+    d1.getDate() &#x3D;&#x3D;&#x3D; d2.getDate() &amp;&amp;
+    d1.getMonth() &#x3D;&#x3D;&#x3D; d2.getMonth() &amp;&amp;
+    d1.getFullYear() &#x3D;&#x3D;&#x3D; d2.getFullYear()
+  );
+}
+
+/**
+ * Check if a date is within a range
+ *
+ * @param date - Date to check
+ * @param range - Date range
+ * @returns True if date is within range (inclusive)
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const date &#x3D; new Date(&#x27;2024-03-15&#x27;);
+ * const range &#x3D; {
+ *   start: new Date(&#x27;2024-03-01&#x27;),
+ *   end: new Date(&#x27;2024-03-31&#x27;),
+ * };
+ * isWithinRange(date, range);
+ * // Returns: true
+ * &#x60;&#x60;&#x60;
+ */
+export function isWithinRange(
+  date: Date | string | number,
+  range: DateRange
+): boolean {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    return false;
+  }
+
+  const start &#x3D; new Date(range.start);
+  const end &#x3D; new Date(range.end);
+
+  if (isNaN(start.getTime()) || isNaN(end.getTime())) {
+    return false;
+  }
+
+  return d.getTime() &gt;&#x3D; start.getTime() &amp;&amp; d.getTime() &lt;&#x3D; end.getTime();
+}
+
+/**
+ * Add days to a date
+ *
+ * @param date - Starting date
+ * @param days - Number of days to add (can be negative)
+ * @returns New date with days added
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * addDays(new Date(&#x27;2024-03-15&#x27;), 5);
+ * // Returns: Date representing 2024-03-20
+ *
+ * addDays(new Date(&#x27;2024-03-15&#x27;), -5);
+ * // Returns: Date representing 2024-03-10
+ * &#x60;&#x60;&#x60;
+ */
+export function addDays(date: Date | string | number, days: number): Date {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    throw new Error(&#x27;Invalid date provided to addDays&#x27;);
+  }
+
+  const result &#x3D; new Date(d);
+  result.setDate(result.getDate() + days);
+  return result;
+}
+
+/**
+ * Add months to a date
+ *
+ * @param date - Starting date
+ * @param months - Number of months to add (can be negative)
+ * @returns New date with months added
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * addMonths(new Date(&#x27;2024-03-15&#x27;), 2);
+ * // Returns: Date representing 2024-05-15
+ * &#x60;&#x60;&#x60;
+ */
+export function addMonths(date: Date | string | number, months: number): Date {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    throw new Error(&#x27;Invalid date provided to addMonths&#x27;);
+  }
+
+  const result &#x3D; new Date(d);
+  result.setMonth(result.getMonth() + months);
+  return result;
+}
+
+/**
+ * Add years to a date
+ *
+ * @param date - Starting date
+ * @param years - Number of years to add (can be negative)
+ * @returns New date with years added
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * addYears(new Date(&#x27;2024-03-15&#x27;), 1);
+ * // Returns: Date representing 2025-03-15
+ * &#x60;&#x60;&#x60;
+ */
+export function addYears(date: Date | string | number, years: number): Date {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    throw new Error(&#x27;Invalid date provided to addYears&#x27;);
+  }
+
+  const result &#x3D; new Date(d);
+  result.setFullYear(result.getFullYear() + years);
+  return result;
+}
+
+/**
+ * Get the difference between two dates in days
+ *
+ * @param date1 - First date
+ * @param date2 - Second date
+ * @returns Number of days between dates (can be negative)
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const d1 &#x3D; new Date(&#x27;2024-03-15&#x27;);
+ * const d2 &#x3D; new Date(&#x27;2024-03-20&#x27;);
+ * diffInDays(d1, d2);
+ * // Returns: 5
+ * &#x60;&#x60;&#x60;
+ */
+export function diffInDays(
+  date1: Date | string | number,
+  date2: Date | string | number
+): number {
+  const d1 &#x3D; new Date(date1);
+  const d2 &#x3D; new Date(date2);
+
+  if (isNaN(d1.getTime()) || isNaN(d2.getTime())) {
+    throw new Error(&#x27;Invalid date(s) provided to diffInDays&#x27;);
+  }
+
+  const diffMs &#x3D; d2.getTime() - d1.getTime();
+  return Math.floor(diffMs / (1000 * 60 * 60 * 24));
+}
+
+/**
+ * Get the difference between two dates in hours
+ *
+ * @param date1 - First date
+ * @param date2 - Second date
+ * @returns Number of hours between dates (can be negative)
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * const d1 &#x3D; new Date(&#x27;2024-03-15T10:00:00&#x27;);
+ * const d2 &#x3D; new Date(&#x27;2024-03-15T15:30:00&#x27;);
+ * diffInHours(d1, d2);
+ * // Returns: 5.5
+ * &#x60;&#x60;&#x60;
+ */
+export function diffInHours(
+  date1: Date | string | number,
+  date2: Date | string | number
+): number {
+  const d1 &#x3D; new Date(date1);
+  const d2 &#x3D; new Date(date2);
+
+  if (isNaN(d1.getTime()) || isNaN(d2.getTime())) {
+    throw new Error(&#x27;Invalid date(s) provided to diffInHours&#x27;);
+  }
+
+  const diffMs &#x3D; d2.getTime() - d1.getTime();
+  return diffMs / (1000 * 60 * 60);
+}
+
+/**
+ * Get the start of day (midnight) for a date
+ *
+ * @param date - Date to process
+ * @returns New date set to start of day
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * startOfDay(new Date(&#x27;2024-03-15T14:30:00&#x27;));
+ * // Returns: Date representing 2024-03-15T00:00:00
+ * &#x60;&#x60;&#x60;
+ */
+export function startOfDay(date: Date | string | number): Date {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    throw new Error(&#x27;Invalid date provided to startOfDay&#x27;);
+  }
+
+  const result &#x3D; new Date(d);
+  result.setHours(0, 0, 0, 0);
+  return result;
+}
+
+/**
+ * Get the end of day (23:59:59.999) for a date
+ *
+ * @param date - Date to process
+ * @returns New date set to end of day
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * endOfDay(new Date(&#x27;2024-03-15T14:30:00&#x27;));
+ * // Returns: Date representing 2024-03-15T23:59:59.999
+ * &#x60;&#x60;&#x60;
+ */
+export function endOfDay(date: Date | string | number): Date {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    throw new Error(&#x27;Invalid date provided to endOfDay&#x27;);
+  }
+
+  const result &#x3D; new Date(d);
+  result.setHours(23, 59, 59, 999);
+  return result;
+}
+
+/**
+ * Get the start of month for a date
+ *
+ * @param date - Date to process
+ * @returns New date set to start of month
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * startOfMonth(new Date(&#x27;2024-03-15&#x27;));
+ * // Returns: Date representing 2024-03-01T00:00:00
+ * &#x60;&#x60;&#x60;
+ */
+export function startOfMonth(date: Date | string | number): Date {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    throw new Error(&#x27;Invalid date provided to startOfMonth&#x27;);
+  }
+
+  const result &#x3D; new Date(d);
+  result.setDate(1);
+  result.setHours(0, 0, 0, 0);
+  return result;
+}
+
+/**
+ * Get the end of month for a date
+ *
+ * @param date - Date to process
+ * @returns New date set to end of month
+ *
+ * @example
+ * &#x60;&#x60;&#x60;typescript
+ * endOfMonth(new Date(&#x27;2024-03-15&#x27;));
+ * // Returns: Date representing 2024-03-31T23:59:59.999
+ * &#x60;&#x60;&#x60;
+ */
+export function endOfMonth(date: Date | string | number): Date {
+  const d &#x3D; new Date(date);
+  if (isNaN(d.getTime())) {
+    throw new Error(&#x27;Invalid date provided to endOfMonth&#x27;);
+  }
+
+  const result &#x3D; new Date(d);
+  result.setMonth(result.getMonth() + 1, 0);
+  result.setHours(23, 59, 59, 999);
+  return result;
+}
+</code></pre>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+                   </div><div class="search-results">
+    <div class="has-results">
+        <h1 class="search-results-title"><span class='search-results-count'></span> results matching "<span class='search-query'></span>"</h1>
+        <ul class="search-results-list"></ul>
+    </div>
+    <div class="no-results">
+        <h1 class="search-results-title">No results matching "<span class='search-query'></span>"</h1>
+    </div>
+</div>
+</div>
+               <!-- END CONTENT -->
+           </div>
+       </div>
+
+          <label class="dark-mode-switch">
+               <input type="checkbox">
+               <span class="slider">
+                    <svg class="slider-icon" viewBox="0 0 24 24" fill="none" height="20" stroke="#000" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" width="20" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"></path>
+                    </svg>
+               </span>
+          </label>
+
+       <script>
+            var COMPODOC_CURRENT_PAGE_DEPTH = 1;
+            var COMPODOC_CURRENT_PAGE_CONTEXT = 'interface';
+            var COMPODOC_CURRENT_PAGE_URL = 'RelativeTimeOptions.html';
+            var MAX_SEARCH_RESULTS = 15;
+       </script>
+
+       <script>
+               $darkModeToggleSwitchers = document.querySelectorAll('.dark-mode-switch input');
+               checkToggle(darkModeState);
+               if ($darkModeToggleSwitchers.length > 0) {
+                    for (var i = 0; i < $darkModeToggleSwitchers.length; i++) {
+                         $darkModeToggleSwitchers[i].addEventListener('change', function (event) {
+                              darkModeState = !darkModeState;
+                              toggleDarkMode(darkModeState);
+                         });
+                    }
+               }
+          </script>
+
+       <script src="../js/libs/custom-elements.min.js"></script>
+       <script src="../js/libs/lit-html.js"></script>
+
+       <script src="../js/menu-wc.js" defer></script>
+       <script nomodule src="../js/menu-wc_es5.js" defer></script>
+
+       <script src="../js/libs/bootstrap-native.js"></script>
+
+       <script src="../js/libs/es6-shim.min.js"></script>
+       <script src="../js/libs/EventDispatcher.js"></script>
+       <script src="../js/libs/promise.min.js"></script>
+
+       <script src="../js/compodoc.js"></script>
+
+       <script src="../js/tabs.js"></script>
+       <script src="../js/menu.js"></script>
+       <script src="../js/libs/clipboard.min.js"></script>
+       <script src="../js/libs/prism.js"></script>
+       <script src="../js/sourceCode.js"></script>
+          <script src="../js/search/search.js"></script>
+          <script src="../js/search/lunr.min.js"></script>
+          <script src="../js/search/search-lunr.js"></script>
+          <script src="../js/search/search_index.js"></script>
+       <script src="../js/lazy-load-graphs.js"></script>
+
+
+    </body>
+</html>
