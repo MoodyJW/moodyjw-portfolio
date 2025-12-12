@@ -1,4 +1,6 @@
-import { ChangeDetectionStrategy, Component } from '@angular/core';
+import type { OnInit } from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 
 import { ContainerComponent } from '@shared/components';
 
@@ -21,4 +23,10 @@ import { ContainerComponent } from '@shared/components';
   styleUrl: './about.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class AboutComponent {}
+export class AboutComponent implements OnInit {
+  private readonly titleService = inject(Title);
+
+  ngOnInit(): void {
+    this.titleService.setTitle('MoodyJW - About');
+  }
+}
