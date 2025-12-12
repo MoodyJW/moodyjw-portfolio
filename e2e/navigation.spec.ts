@@ -21,13 +21,13 @@ test.describe('Navigation', () => {
 
     if (isMobile) {
       // On mobile, open the hamburger menu first
-      await page.click('.main-layout__mobile-toggle');
-      await page.waitForSelector('.main-layout__mobile-menu', { state: 'visible' });
+      await page.click('.header__mobile-toggle');
+      await page.waitForSelector('.header__mobile-menu', { state: 'visible' });
       // Click the visible mobile link
-      await page.click('.main-layout__mobile-link:has-text("Case Studies")');
+      await page.click('.header__mobile-link:has-text("Case Studies")');
     } else {
       // On desktop, click the visible desktop link
-      await page.click('.main-layout__menu--desktop .main-layout__menu-link:has-text("Case Studies")');
+      await page.click('.header__menu--desktop .header__menu-link:has-text("Case Studies")');
     }
 
     await expect(page).toHaveURL('/case-studies');
@@ -43,17 +43,71 @@ test.describe('Navigation', () => {
 
     if (isMobile) {
       // On mobile, open the hamburger menu first
-      await page.click('.main-layout__mobile-toggle');
-      await page.waitForSelector('.main-layout__mobile-menu', { state: 'visible' });
+      await page.click('.header__mobile-toggle');
+      await page.waitForSelector('.header__mobile-menu', { state: 'visible' });
       // Click the visible mobile link
-      await page.click('.main-layout__mobile-link:has-text("Home")');
+      await page.click('.header__mobile-link:has-text("Home")');
     } else {
       // On desktop, click the visible desktop link
-      await page.click('.main-layout__menu--desktop .main-layout__menu-link:has-text("Home")');
+      await page.click('.header__menu--desktop .header__menu-link:has-text("Home")');
     }
 
     await expect(page).toHaveURL('/home');
     await expect(page).toHaveTitle('MoodyJW - Home');
+  });
+
+  test('should navigate to projects page', async ({ page }) => {
+    await page.goto('/');
+
+    const viewport = page.viewportSize();
+    const isMobile = viewport && viewport.width < 768;
+
+    if (isMobile) {
+      await page.click('.header__mobile-toggle');
+      await page.waitForSelector('.header__mobile-menu', { state: 'visible' });
+      await page.click('.header__mobile-link:has-text("Projects")');
+    } else {
+      await page.click('.header__menu--desktop .header__menu-link:has-text("Projects")');
+    }
+
+    await expect(page).toHaveURL('/projects');
+    await expect(page).toHaveTitle(/Projects/);
+  });
+
+  test('should navigate to about page', async ({ page }) => {
+    await page.goto('/');
+
+    const viewport = page.viewportSize();
+    const isMobile = viewport && viewport.width < 768;
+
+    if (isMobile) {
+      await page.click('.header__mobile-toggle');
+      await page.waitForSelector('.header__mobile-menu', { state: 'visible' });
+      await page.click('.header__mobile-link:has-text("About")');
+    } else {
+      await page.click('.header__menu--desktop .header__menu-link:has-text("About")');
+    }
+
+    await expect(page).toHaveURL('/about');
+    await expect(page).toHaveTitle(/About/);
+  });
+
+  test('should navigate to contact page', async ({ page }) => {
+    await page.goto('/');
+
+    const viewport = page.viewportSize();
+    const isMobile = viewport && viewport.width < 768;
+
+    if (isMobile) {
+      await page.click('.header__mobile-toggle');
+      await page.waitForSelector('.header__mobile-menu', { state: 'visible' });
+      await page.click('.header__mobile-link:has-text("Contact")');
+    } else {
+      await page.click('.header__menu--desktop .header__menu-link:has-text("Contact")');
+    }
+
+    await expect(page).toHaveURL('/contact');
+    await expect(page).toHaveTitle(/Contact/);
   });
 });
 
