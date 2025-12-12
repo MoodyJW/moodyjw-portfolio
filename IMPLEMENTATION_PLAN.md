@@ -429,7 +429,6 @@ Phase 4 follows a strict dependency order:
   - [ ] CaseStudy interface (id, slug, title, description, client, role, duration, challenge, solution, results, technologies, images, etc.)
   - [ ] Skill interface (name, proficiency, category, yearsOfExperience)
   - [ ] Experience interface (company, role, duration, description, technologies, achievements)
-  - [ ] Certification interface (name, issuer, date, status, credentialUrl)
   - [ ] ContactForm interface (name, email, subject, message)
 
 **Feature Stores**:

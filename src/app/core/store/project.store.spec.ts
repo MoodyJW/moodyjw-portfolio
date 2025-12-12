@@ -16,21 +16,54 @@ describe('ProjectStore', () => {
   const mockProjects: Project[] = [
     {
       id: 'project-1',
+      slug: 'project-1',
       title: 'Project 1',
       description: 'Description 1',
-      tags: ['Angular', 'TypeScript'],
+      shortDescription: 'Short description 1',
+      technologies: ['Angular', 'TypeScript'],
+      category: 'Web App',
+      featured: true,
+      images: {
+        thumbnail: '/assets/images/project-1-thumb.jpg',
+        hero: '/assets/images/project-1-hero.jpg',
+        gallery: [],
+      },
+      links: {},
+      createdDate: '2024-01-01',
     },
     {
       id: 'project-2',
+      slug: 'project-2',
       title: 'Project 2',
       description: 'Description 2',
-      tags: ['React', 'JavaScript'],
+      shortDescription: 'Short description 2',
+      technologies: ['React', 'JavaScript'],
+      category: 'Mobile App',
+      featured: false,
+      images: {
+        thumbnail: '/assets/images/project-2-thumb.jpg',
+        hero: '/assets/images/project-2-hero.jpg',
+        gallery: [],
+      },
+      links: {},
+      createdDate: '2024-02-01',
     },
     {
       id: 'project-3',
+      slug: 'project-3',
       title: 'Project 3',
       description: 'Description 3',
-      tags: ['Angular', 'RxJS'],
+      shortDescription: 'Short description 3',
+      technologies: ['Angular', 'RxJS'],
+      category: 'Library',
+      featured: true,
+      images: {
+        thumbnail: '/assets/images/project-3-thumb.jpg',
+        hero: '/assets/images/project-3-hero.jpg',
+        gallery: [],
+      },
+      links: {},
+      createdDate: '2024-03-01',
     },
   ];
 
@@ -62,8 +95,8 @@ describe('ProjectStore', () => {
       expect(store.projectCount()).toBe(3);
     });
 
-    it('should filter projects by tag', () => {
-      const angularProjects = store.projectsByTag()('Angular');
+    it('should filter projects by technology', () => {
+      const angularProjects = store.projectsByTechnology()('Angular');
       expect(angularProjects.length).toBe(2);
       expect(angularProjects[0].id).toBe('project-1');
       expect(angularProjects[1].id).toBe('project-3');
@@ -75,9 +108,9 @@ describe('ProjectStore', () => {
       expect(store.hasSelection()).toBe(true);
     });
 
-    it('should compute all unique tags', () => {
-      const tags = store.allTags();
-      expect(tags).toEqual(['Angular', 'JavaScript', 'React', 'RxJS', 'TypeScript']);
+    it('should compute all unique technologies', () => {
+      const technologies = store.allTechnologies();
+      expect(technologies).toEqual(['Angular', 'JavaScript', 'React', 'RxJS', 'TypeScript']);
     });
   });
 

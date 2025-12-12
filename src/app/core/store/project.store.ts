@@ -60,10 +60,10 @@ export const ProjectStore = signalStore(
     projectCount: computed(() => projects().length),
 
     /**
-     * Projects filtered by specific tags
+     * Projects filtered by specific technologies
      */
-    projectsByTag: computed(() => {
-      return (tag: string) => projects().filter((p) => p.tags.includes(tag));
+    projectsByTechnology: computed(() => {
+      return (technology: string) => projects().filter((p) => p.technologies.includes(technology));
     }),
 
     /**
@@ -72,14 +72,14 @@ export const ProjectStore = signalStore(
     hasSelection: computed(() => selectedProject() !== null),
 
     /**
-     * Gets unique tags from all projects
+     * Gets unique technologies from all projects
      */
-    allTags: computed(() => {
-      const allTags = flatten(
-        projects().map((p) => p.tags),
+    allTechnologies: computed(() => {
+      const allTechnologies = flatten(
+        projects().map((p) => p.technologies),
         1
       );
-      return uniqueBy(allTags).sort();
+      return uniqueBy(allTechnologies).sort();
     }),
   })),
   withMethods((store, projectService = inject(ProjectService)) => ({

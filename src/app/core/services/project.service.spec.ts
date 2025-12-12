@@ -13,15 +13,37 @@ describe('ProjectService', () => {
   const mockProjects: Project[] = [
     {
       id: 'test-1',
+      slug: 'test-project-1',
       title: 'Test Project 1',
       description: 'Test description 1',
-      tags: ['Angular', 'TypeScript'],
+      shortDescription: 'Short description 1',
+      technologies: ['Angular', 'TypeScript'],
+      category: 'Web App',
+      featured: true,
+      images: {
+        thumbnail: '/assets/images/test-1-thumb.jpg',
+        hero: '/assets/images/test-1-hero.jpg',
+        gallery: [],
+      },
+      links: {},
+      createdDate: '2024-01-01',
     },
     {
       id: 'test-2',
+      slug: 'test-project-2',
       title: 'Test Project 2',
       description: 'Test description 2',
-      tags: ['React', 'JavaScript'],
+      shortDescription: 'Short description 2',
+      technologies: ['React', 'JavaScript'],
+      category: 'Mobile App',
+      featured: false,
+      images: {
+        thumbnail: '/assets/images/test-2-thumb.jpg',
+        hero: '/assets/images/test-2-hero.jpg',
+        gallery: [],
+      },
+      links: {},
+      createdDate: '2024-02-01',
     },
   ];
 
