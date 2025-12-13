@@ -34,7 +34,7 @@ test.describe('Theme Picker', () => {
     const ariaLabel = await themePicker.getAttribute('aria-label');
 
     // aria-label should contain one of the theme names
-    expect(ariaLabel).toMatch(/(Lumen|Aurora|Nocturne|Cosmos)/);
+    expect(ariaLabel).toMatch(/(Lumen|Aurora|Nocturne|Cosmos|Terminal)/);
   });
 
   test('should toggle dropdown when clicked', async ({ page }) => {
@@ -65,16 +65,18 @@ test.describe('Theme Picker', () => {
     const systemOption = page.locator('[data-test="theme-option-system"]');
     await expect(systemOption).toBeVisible();
 
-    // Should show all 4 theme options (Lumen, Aurora, Nocturne, Cosmos)
+    // Should show all 5 theme options (Lumen, Aurora, Nocturne, Cosmos, Terminal)
     const lumenOption = page.locator('[data-test="theme-option-lumen"]');
     const auroraOption = page.locator('[data-test="theme-option-aurora"]');
     const nocturneOption = page.locator('[data-test="theme-option-nocturne"]');
     const cosmosOption = page.locator('[data-test="theme-option-cosmos"]');
+    const terminalOption = page.locator('[data-test="theme-option-terminal"]');
 
     await expect(lumenOption).toBeVisible();
     await expect(auroraOption).toBeVisible();
     await expect(nocturneOption).toBeVisible();
     await expect(cosmosOption).toBeVisible();
+    await expect(terminalOption).toBeVisible();
   });
 
   test('should switch themes when option is selected', async ({ page }) => {
@@ -271,5 +273,33 @@ test.describe('Theme Picker', () => {
 
     const themeAttr = await page.locator('html').getAttribute('data-theme');
     expect(themeAttr).toBe('aurora');
+  });
+
+  test('should apply Terminal theme with green text on black background', async ({ page }) => {
+    await page.goto('/');
+
+    // Select Terminal theme
+    await page.locator('[data-test="theme-picker-button"]').click();
+    await page.locator('[data-test="theme-option-terminal"]').click();
+
+    // Verify theme is applied
+    const themeAttr = await page.locator('html').getAttribute('data-theme');
+    expect(themeAttr).toBe('terminal');
+
+    // Check that Terminal theme uses correct colors
+    const primaryColor = await page.locator('html').evaluate(el =>
+      getComputedStyle(el).getPropertyValue('--color-primary').trim()
+    );
+    const bgColor = await page.locator('html').evaluate(el =>
+      getComputedStyle(el).getPropertyValue('--color-background').trim()
+    );
+
+    // Terminal should have green primary (#35ff42) and black background (#17110e)
+    expect(primaryColor).toBe('#35ff42');
+    expect(bgColor).toBe('#17110e');
+
+    // Button should show Terminal
+    const button = page.locator('[data-test="theme-picker-button"]');
+    await expect(button).toContainText('Terminal');
   });
 });

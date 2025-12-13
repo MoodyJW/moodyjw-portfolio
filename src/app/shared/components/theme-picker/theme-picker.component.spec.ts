@@ -146,8 +146,8 @@ describe('ThemePickerComponent', () => {
       fixture.detectChanges();
 
       const options = fixture.nativeElement.querySelectorAll('.theme-picker__option');
-      // 4 themes + 1 system option = 5 total
-      expect(options.length).toBe(5);
+      // 5 themes + 1 system option = 6 total
+      expect(options.length).toBe(6);
     });
 
     it('should display system default option', () => {

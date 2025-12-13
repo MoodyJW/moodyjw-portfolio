@@ -160,6 +160,35 @@ export const THEMES = [
     },
     description: 'Vivid, futuristic, and ultra-accessible. Alternate dark theme.',
   },
+  {
+    slug: 'terminal',
+    label: 'Terminal',
+    isDark: true,
+    tokens: {
+      primary: '#35ff42',
+      primaryOnSurface: '#35ff42',
+      primaryHover: '#4aff55',
+      background: '#17110e',
+      surface: '#17110e',
+      surfaceActive: '#17110e',
+      surfaceHover: '#17110e',
+      text: '#35ff42',
+      textSecondary: '#35ff42',
+      border: '#35ff42',
+      borderHover: '#4aff55',
+      accent: '#35ff42',
+      error: '#35ff42',
+      success: '#35ff42',
+      warning: '#35ff42',
+      info: '#35ff42',
+    },
+    contrast: {
+      textOnBackground: 12.8,
+      textOnSurface: 12.8,
+      accentOnBackground: 12.8,
+    },
+    description: 'Classic terminal aesthetic with green text on black background.',
+  },
 ] as const;
 
 // Validate themes at runtime (fail fast if invalid)
