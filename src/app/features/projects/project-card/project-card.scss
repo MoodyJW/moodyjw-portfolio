@@ -1,0 +1,115 @@
+// Project Card Component Styles
+// BEM Naming Convention
+
+.project-card {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &__image-wrapper {
+    width: 100%;
+    aspect-ratio: 16 / 9;
+    overflow: hidden;
+    border-radius: var(--border-radius);
+    background: var(--color-surface);
+  }
+
+  &__image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    transition: transform var(--transition-duration) var(--transition-timing);
+
+    .project-card:hover & {
+      transform: scale(1.05);
+    }
+  }
+
+  &__title-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start;
+    gap: var(--spacing-sm);
+  }
+
+  &__title {
+    font-size: var(--font-size-xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    margin: 0;
+    flex: 1;
+  }
+
+  &__description {
+    font-size: var(--font-size-sm);
+    color: var(--color-text-secondary);
+    margin: 0;
+    line-height: 1.6;
+  }
+
+  // Technologies
+  &__technologies {
+    display: flex;
+    gap: var(--spacing-xs);
+    flex-wrap: wrap;
+  }
+
+  &__tech-badge {
+    padding: var(--spacing-xs) var(--spacing-sm);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text-secondary);
+    border-radius: var(--border-radius-sm);
+    font-size: var(--font-size-xs);
+    font-weight: var(--font-weight-medium);
+    cursor: pointer;
+    transition: all var(--transition-duration) var(--transition-timing);
+
+    &:hover {
+      border-color: var(--color-primary);
+      color: var(--color-primary);
+    }
+
+    &--selected {
+      background: var(--color-primary);
+      color: var(--color-background);
+      border-color: var(--color-primary);
+    }
+
+    &--count {
+      cursor: default;
+      pointer-events: none;
+    }
+  }
+
+  // Metadata
+  &__metadata {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+  }
+
+  &__meta-item {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-xs);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  // Actions
+  &__actions {
+    display: flex;
+    gap: var(--spacing-sm);
+    margin-top: auto;
+  }
+
+  &__view-link {
+    flex: 1;
+    text-decoration: none;
+  }
+
+  &__icon-link {
+    text-decoration: none;
+  }
+}

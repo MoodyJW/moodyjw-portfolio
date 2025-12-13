@@ -1,0 +1,124 @@
+<!-- eslint-disable @angular-eslint/template/cyclomatic-complexity -->
+<app-card
+  variant="elevated"
+  [hoverable]="true"
+  class="project-card"
+  [attr.data-test]="'project-card-' + project().slug"
+>
+  <app-stack gap="md">
+    <!-- Project Image -->
+    @if (project().images.thumbnail) {
+      <div class="project-card__image-wrapper">
+        <img
+          [src]="project().images.thumbnail"
+          [alt]="project().title"
+          class="project-card__image"
+          loading="lazy"
+        />
+      </div>
+    }
+
+    <!-- Project Content -->
+    <app-stack gap="sm">
+      <!-- Title and Featured Badge -->
+      <div class="project-card__title-row">
+        <h3 class="project-card__title">{{ project().title }}</h3>
+        @if (project().featured) {
+          <app-badge variant="primary" ariaLabel="Featured project">Featured</app-badge>
+        }
+      </div>
+
+      <!-- Description -->
+      <p class="project-card__description">
+        {{ project().shortDescription }}
+      </p>
+
+      <!-- Technologies -->
+      <div class="project-card__technologies">
+        @for (tech of displayTechs(); track tech) {
+          <button
+            type="button"
+            class="project-card__tech-badge"
+            [class.project-card__tech-badge--selected]="isTagSelected(tech)"
+            (click)="onTagClick(tech)"
+            [attr.data-test]="'tech-badge-' + tech.toLowerCase()"
+            [attr.aria-label]="'Filter by ' + tech"
+          >
+            {{ tech }}
+          </button>
+        }
+        @if (remainingTechCount()) {
+          <span class="project-card__tech-badge project-card__tech-badge--count">
+            +{{ remainingTechCount() }}
+          </span>
+        }
+      </div>
+
+      <!-- Metadata Row -->
+      <div class="project-card__metadata">
+        <!-- Category -->
+        <div class="project-card__meta-item">
+          <app-icon name="heroFolder" size="sm" />
+          <span>{{ project().category }}</span>
+        </div>
+
+        <!-- GitHub Stars (if available) -->
+        @if (hasGitHubStars()) {
+          <div class="project-card__meta-item">
+            <app-icon name="heroStar" size="sm" />
+            <span>{{ project().githubStars }}</span>
+          </div>
+        }
+
+        <!-- Status (if available) -->
+        @if (hasStatus()) {
+          <div class="project-card__meta-item">
+            <app-icon [name]="statusIcon()" size="sm" />
+            <span>{{ project().metadata!.status }}</span>
+          </div>
+        }
+      </div>
+    </app-stack>
+
+    <!-- Action Buttons -->
+    <div class="project-card__actions">
+      <a [href]="getProjectRoute()" class="project-card__view-link">
+        <app-button
+          variant="primary"
+          size="sm"
+          [attr.data-test]="'view-project-' + project().slug"
+          ariaLabel="View project details"
+        >
+          View Details
+          <app-icon name="heroArrowRight" size="sm" />
+        </app-button>
+      </a>
+
+      @if (hasLiveLink()) {
+        <a [href]="project().links.live" target="_blank" rel="noopener noreferrer" class="project-card__icon-link">
+          <app-button
+            variant="ghost"
+            size="sm"
+            ariaLabel="View live project"
+            data-test="live-link"
+          >
+            <app-icon name="heroArrowTopRightOnSquare" size="sm" />
+          </app-button>
+        </a>
+      }
+
+      @if (hasGitHubLink()) {
+        <a [href]="project().links.github" target="_blank" rel="noopener noreferrer" class="project-card__icon-link">
+          <app-button
+            variant="ghost"
+            size="sm"
+            ariaLabel="View GitHub repository"
+            data-test="github-link"
+          >
+            <app-icon name="ionLogoGithub" size="sm" />
+          </app-button>
+        </a>
+      }
+    </div>
+  </app-stack>
+</app-card>

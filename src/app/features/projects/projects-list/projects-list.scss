@@ -1,0 +1,129 @@
+// Projects List Component Styles
+// BEM Naming Convention
+
+.projects-list {
+  // Header
+  &__header {
+    text-align: center;
+    margin-bottom: var(--spacing-xl);
+  }
+
+  &__title {
+    font-size: var(--font-size-3xl);
+    font-weight: var(--font-weight-bold);
+    color: var(--color-text);
+    margin-bottom: var(--spacing-md);
+  }
+
+  &__description {
+    font-size: var(--font-size-lg);
+    color: var(--color-text-secondary);
+    max-width: 800px;
+    margin: 0 auto;
+  }
+
+  // Filters Section
+  &__filters {
+    position: sticky;
+    top: 0;
+    background: var(--color-background);
+    z-index: 10;
+    padding: var(--spacing-md) 0;
+    margin-bottom: var(--spacing-lg);
+  }
+
+  &__filter-row {
+    display: flex;
+    gap: var(--spacing-md);
+    flex-wrap: wrap;
+
+    @media (max-width: 768px) {
+      flex-direction: column;
+    }
+  }
+
+  &__search {
+    flex: 1;
+    min-width: 250px;
+  }
+
+  &__sort {
+    min-width: 200px;
+
+    @media (max-width: 768px) {
+      width: 100%;
+    }
+  }
+
+  // Category Tabs
+  &__categories {
+    display: flex;
+    gap: var(--spacing-sm);
+    flex-wrap: wrap;
+  }
+
+  &__category-btn {
+    padding: var(--spacing-sm) var(--spacing-md);
+    border: 1px solid var(--color-border);
+    background: var(--color-surface);
+    color: var(--color-text);
+    border-radius: var(--border-radius);
+    cursor: pointer;
+    transition: all var(--transition-duration) var(--transition-timing);
+    font-size: var(--font-size-sm);
+    font-weight: var(--font-weight-medium);
+
+    &:hover {
+      border-color: var(--color-border-hover);
+      background: var(--color-surface-hover);
+    }
+
+    &--active {
+      background: var(--color-primary);
+      color: var(--color-background);
+      border-color: var(--color-primary);
+    }
+  }
+
+  // Active Filters
+  &__active-filters {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: var(--spacing-sm) var(--spacing-md);
+    background: var(--color-surface);
+    border-radius: var(--border-radius);
+  }
+
+  &__filter-info {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-sm);
+    color: var(--color-text-secondary);
+    font-size: var(--font-size-sm);
+  }
+
+  // Empty State
+  &__empty {
+    padding: var(--spacing-3xl) var(--spacing-md);
+    text-align: center;
+  }
+
+  &__empty-icon {
+    color: var(--color-text-secondary);
+    opacity: 0.5;
+  }
+
+  &__empty-title {
+    font-size: var(--font-size-2xl);
+    font-weight: var(--font-weight-semibold);
+    color: var(--color-text);
+    margin: 0;
+  }
+
+  &__empty-description {
+    font-size: var(--font-size-md);
+    color: var(--color-text-secondary);
+    margin: 0;
+  }
+}

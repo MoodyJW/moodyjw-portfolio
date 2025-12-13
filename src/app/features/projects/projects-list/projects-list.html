@@ -1,0 +1,155 @@
+<!-- eslint-disable @angular-eslint/template/cyclomatic-complexity -->
+<app-container maxWidth="xl">
+  <app-stack gap="lg">
+    <!-- Breadcrumb Navigation -->
+    <app-breadcrumb [items]="breadcrumbs" />
+
+    <!-- Header Section -->
+    <header class="projects-list__header">
+      <h1 class="projects-list__title">Projects</h1>
+      <p class="projects-list__description">
+        Explore my portfolio of web applications, tools, and open-source contributions.
+        Filter by technology, search by keyword, or browse by category.
+      </p>
+    </header>
+
+    <!-- Filter and Search Section -->
+    <section class="projects-list__filters">
+      <app-stack gap="md">
+        <!-- Search and Sort Row -->
+        <div class="projects-list__filter-row">
+          <app-input
+            type="text"
+            placeholder="Search projects..."
+            ariaLabel="Search projects"
+            [value]="localSearchQuery()"
+            (valueChange)="onSearchChange($event)"
+            class="projects-list__search"
+            data-test="projects-search"
+          />
+
+          <app-select
+            [value]="getCurrentSort()"
+            [options]="sortOptions"
+            (valueChange)="onSortChange($event)"
+            placeholder="Sort by..."
+            ariaLabel="Sort projects"
+            class="projects-list__sort"
+            data-test="projects-sort"
+          />
+        </div>
+
+        <!-- Category Filter (simplified for now) -->
+        <div class="projects-list__categories" data-test="category-tabs">
+          @for (category of categories(); track category) {
+            <button
+              type="button"
+              class="projects-list__category-btn"
+              [class.projects-list__category-btn--active]="selectedCategory() === category"
+              (click)="selectedCategory.set(category)"
+            >
+              {{ category }}
+            </button>
+          }
+        </div>
+
+        <!-- Active Filters Display -->
+        @if (activeFilterCount() > 0) {
+          <div class="projects-list__active-filters">
+            <div class="projects-list__filter-info">
+              <app-icon name="heroTag" size="sm" />
+              <span>{{ activeFilterCount() }} active filter{{ activeFilterCount() > 1 ? 's' : '' }}</span>
+            </div>
+
+            <app-button
+              variant="ghost"
+              size="sm"
+              ariaLabel="Clear all filters"
+              (click)="onClearFilters()"
+              data-test="clear-filters"
+            >
+              <app-icon name="heroXMark" size="sm" />
+              Clear All
+            </app-button>
+          </div>
+        }
+      </app-stack>
+    </section>
+
+    <!-- Loading State -->
+    @if (store.isLoading()) {
+      <app-grid [cols]="1" [colsMd]="2" [colsLg]="3" gap="lg">
+        @for (skeleton of [1, 2, 3, 4, 5, 6]; track skeleton) {
+          <app-card variant="elevated">
+            <app-stack gap="md">
+              <app-skeleton width="100%" height="200px" ariaLabel="Loading project image" />
+              <app-skeleton width="80%" height="24px" ariaLabel="Loading project title" />
+              <app-skeleton width="100%" height="60px" ariaLabel="Loading project description" />
+              <app-stack gap="sm" direction="horizontal">
+                <app-skeleton width="60px" height="24px" [rounded]="true" ariaLabel="Loading tag" />
+                <app-skeleton width="70px" height="24px" [rounded]="true" ariaLabel="Loading tag" />
+                <app-skeleton width="65px" height="24px" [rounded]="true" ariaLabel="Loading tag" />
+              </app-stack>
+            </app-stack>
+          </app-card>
+        }
+      </app-grid>
+    }
+
+    <!-- Projects Grid -->
+    @else if (filteredProjects().length > 0) {
+      <app-grid [cols]="1" [colsMd]="2" [colsLg]="3" gap="lg" data-test="projects-grid">
+        @for (project of filteredProjects(); track project.id) {
+          <app-project-card
+            [project]="project"
+            [selectedTags]="store.selectedTags()"
+            (tagClick)="onToggleTag($event)"
+          />
+        }
+      </app-grid>
+    }
+
+    <!-- Empty State -->
+    @else {
+      <app-stack gap="lg" align="center" class="projects-list__empty">
+        <div class="projects-list__empty-icon">
+          <app-icon name="heroFolder" size="2xl" />
+        </div>
+
+        <app-stack gap="sm" align="center">
+          <h2 class="projects-list__empty-title">No projects found</h2>
+          <p class="projects-list__empty-description">
+            Try adjusting your search or filters to find what you're looking for.
+          </p>
+        </app-stack>
+
+        @if (activeFilterCount() > 0) {
+          <app-button
+            variant="primary"
+            (click)="onClearFilters()"
+            ariaLabel="Clear all filters"
+            data-test="empty-clear-filters"
+          >
+            Clear All Filters
+          </app-button>
+        }
+      </app-stack>
+    }
+
+    <!-- Error State -->
+    @if (store.error()) {
+      <app-card variant="outlined">
+        <app-stack gap="md" align="center">
+          <app-icon name="heroExclamationTriangle" size="lg" />
+          <div>
+            <h3>Error Loading Projects</h3>
+            <p>{{ store.error() }}</p>
+          </div>
+          <app-button variant="primary" (click)="store.loadProjects()" ariaLabel="Try loading projects again">
+            Try Again
+          </app-button>
+        </app-stack>
+      </app-card>
+    }
+  </app-stack>
+</app-container>

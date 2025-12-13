@@ -6,6 +6,7 @@
     "baseUrl": "./",
     "paths": {
       "@core/*": ["src/app/core/*"],
+      "@core/theme": ["src/app/core/theme"],
       "@shared/*": ["src/app/shared/*"],
       "@features/*": ["src/app/features/*"],
       "@environments/*": ["src/environments/*"]

@@ -10,7 +10,8 @@ import {
   signal,
 } from '@angular/core';
 
-import { ThemeService } from '../../../core/theme/theme.service';
+import { ThemeService } from '@core/theme';
+
 import { BadgeComponent } from '../badge/badge.component';
 import { IconComponent } from '../icon/icon.component';
 import { StackComponent } from '../stack/stack.component';
