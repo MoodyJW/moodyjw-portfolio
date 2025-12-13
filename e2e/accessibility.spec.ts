@@ -1,4 +1,6 @@
 import { test, expect } from './fixtures/accessibility';
+import { THEMES } from '../src/app/core/theme/themes.constants';
+import { addThemeInitScript } from './helpers/theme-init';
 
 /**
  * Accessibility tests for the application
@@ -6,65 +8,67 @@ import { test, expect } from './fixtures/accessibility';
  */
 
 test.describe('Accessibility Compliance', () => {
-  test('Home page should have no accessibility violations', async ({ page, makeAxeBuilder }) => {
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
-    await page.waitForSelector('h1', { state: 'visible' });
+  for (const theme of THEMES) {
+    test.describe(`${theme.slug} theme`, () => {
+      test.beforeEach(async ({ context }) => {
+        // inject theme before any page is created in this context
+        await context.addInitScript(addThemeInitScript(theme.slug));
+      });
 
-    const accessibilityScanResults = await makeAxeBuilder().analyze();
+      test('Home page should have no accessibility violations', async ({ page, makeAxeBuilder }) => {
+        await page.goto('/');
+        await page.waitForLoadState('networkidle');
+        await page.waitForSelector('h1', { state: 'visible' });
 
-    expect(accessibilityScanResults.violations).toEqual([]);
-  });
+        const accessibilityScanResults = await makeAxeBuilder().analyze();
 
-  test('Case Studies page should have no accessibility violations', async ({
-    page,
-    makeAxeBuilder,
-  }) => {
-    await page.goto('/case-studies');
-    await page.waitForLoadState('networkidle');
-    await page.waitForSelector('h1', { state: 'visible' });
+        expect(accessibilityScanResults.violations).toEqual([]);
+      });
 
-    const accessibilityScanResults = await makeAxeBuilder().analyze();
+      test('Case Studies page should have no accessibility violations', async ({
+        page,
+        makeAxeBuilder,
+      }) => {
+        await page.goto('/case-studies');
+        await page.waitForLoadState('networkidle');
+        await page.waitForSelector('h1', { state: 'visible' });
 
-    expect(accessibilityScanResults.violations).toEqual([]);
-  });
+        const accessibilityScanResults = await makeAxeBuilder().analyze();
 
-  test('should have proper heading hierarchy', async ({ page }) => {
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
+        expect(accessibilityScanResults.violations).toEqual([]);
+      });
 
-    // Wait for the h1 to be visible (Angular has rendered)
-    await page.waitForSelector('h1', { state: 'visible' });
+      test('should have proper heading hierarchy', async ({ page }) => {
+        await page.goto('/');
+        await page.waitForLoadState('networkidle');
 
-    // Check for h1 (should be exactly 1)
-    const h1Count = await page.locator('h1').count();
-    expect(h1Count).toBe(1);
+        await page.waitForSelector('h1', { state: 'visible' });
 
-    // Headings should not skip levels
-    const headings = await page.locator('h1, h2, h3, h4, h5, h6').allTextContents();
-    expect(headings.length).toBeGreaterThan(0);
-  });
+        const h1Count = await page.locator('h1').count();
+        expect(h1Count).toBe(1);
 
-  test('should have skip navigation link', async ({ page }) => {
-    await page.goto('/');
-    await page.waitForLoadState('networkidle');
+        const headings = await page.locator('h1, h2, h3, h4, h5, h6').allTextContents();
+        expect(headings.length).toBeGreaterThan(0);
+      });
 
-    const skipLink = page.locator('a[href="#main-content"]').first();
+      test('should have skip navigation link', async ({ page }) => {
+        await page.goto('/');
+        await page.waitForLoadState('networkidle');
 
-    // Verify skip link exists
-    await expect(skipLink).toBeAttached();
+        const skipLink = page.locator('a[href="#main-content"]').first();
 
-    // Programmatically focus the skip link (more reliable than Tab key)
-    await page.evaluate(() => {
-      const link = document.querySelector<HTMLAnchorElement>('a[href="#main-content"]');
-      link?.focus();
+        await expect(skipLink).toBeAttached();
+
+        await page.evaluate(() => {
+          const link = document.querySelector<HTMLAnchorElement>('a[href="#main-content"]');
+          link?.focus();
+        });
+
+        await page.waitForTimeout(100);
+
+        await expect(skipLink).toBeFocused();
+        await expect(skipLink).toBeVisible();
+      });
     });
-
-    // Wait a bit for focus to settle
-    await page.waitForTimeout(100);
-
-    // Verify it becomes focused and visible
-    await expect(skipLink).toBeFocused();
-    await expect(skipLink).toBeVisible();
-  });
+  }
 });

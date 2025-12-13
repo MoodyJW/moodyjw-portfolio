@@ -43,10 +43,22 @@ Claude Code is aware of the project structure and coding standards through:
    - Documentation standards (TSDoc, Storybook)
 
 2. **IMPLEMENTATION_PLAN.md** - 9-phase development roadmap
+   - **Testing Workflow** section: Mandatory testing requirements before feature completion
+   - All features must pass: `npm run lint:fix`, `npm test`, and `npx playwright test`
 
 3. **ARCHITECTURE.md** - Architectural decisions and patterns
 
 4. **docs/** directory - Strategy documents for analytics, auth, error tracking, theming, and versioning
+
+## Testing Requirements
+
+**CRITICAL**: Before completing any feature work, you must run and pass ALL of these tests:
+
+1. **Linting**: `npm run lint:fix` → 0 errors
+2. **Unit Tests**: `npm test` → All passing (2,691+ tests)
+3. **E2E Tests**: `npx playwright test` → All passing (330 tests across 5 themes, 4 viewports, 3 browsers)
+
+See the **Testing Workflow** section in `IMPLEMENTATION_PLAN.md` for complete details.
 
 ## Usage Examples
 
