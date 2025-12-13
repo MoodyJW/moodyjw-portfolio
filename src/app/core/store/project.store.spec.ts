@@ -87,7 +87,7 @@ describe('ProjectStore', () => {
 
   describe('Computed Selectors', () => {
     beforeEach(() => {
-      vi.spyOn(projectService, 'getProjects').mockReturnValue(of(mockProjects));
+      vi.spyOn(projectService, 'getAll').mockReturnValue(of(mockProjects));
       store.loadProjects();
     });
 
@@ -104,7 +104,8 @@ describe('ProjectStore', () => {
 
     it('should compute hasSelection', () => {
       expect(store.hasSelection()).toBe(false);
-      store.selectProject(mockProjects[0]);
+      vi.spyOn(projectService, 'getBySlug').mockReturnValue(of(mockProjects[0]));
+      store.selectProject(mockProjects[0].slug);
       expect(store.hasSelection()).toBe(true);
     });
 
@@ -116,7 +117,7 @@ describe('ProjectStore', () => {
 
   describe('loadProjects', () => {
     it('should load projects successfully', () => {
-      vi.spyOn(projectService, 'getProjects').mockReturnValue(of(mockProjects));
+      vi.spyOn(projectService, 'getAll').mockReturnValue(of(mockProjects));
 
       store.loadProjects();
 
@@ -126,7 +127,7 @@ describe('ProjectStore', () => {
     });
 
     it('should handle loading state', () => {
-      vi.spyOn(projectService, 'getProjects').mockReturnValue(of(mockProjects));
+      vi.spyOn(projectService, 'getAll').mockReturnValue(of(mockProjects));
 
       store.loadProjects();
 
@@ -135,7 +136,7 @@ describe('ProjectStore', () => {
 
     it('should handle errors', () => {
       const errorMessage = 'Network error';
-      vi.spyOn(projectService, 'getProjects').mockReturnValue(
+      vi.spyOn(projectService, 'getAll').mockReturnValue(
         throwError(() => new Error(errorMessage))
       );
 
@@ -147,7 +148,7 @@ describe('ProjectStore', () => {
     });
 
     it('should handle errors without message property', () => {
-      vi.spyOn(projectService, 'getProjects').mockReturnValue(
+      vi.spyOn(projectService, 'getAll').mockReturnValue(
         throwError(() => ({ status: 500 }))
       );
 
@@ -205,7 +206,8 @@ describe('ProjectStore', () => {
 
   describe('State Management Methods', () => {
     it('should clear selection', () => {
-      store.selectProject(mockProjects[0]);
+      vi.spyOn(projectService, 'getBySlug').mockReturnValue(of(mockProjects[0]));
+      store.selectProject(mockProjects[0].slug);
       expect(store.selectedProject()).toEqual(mockProjects[0]);
 
       store.clearSelection();
@@ -213,12 +215,13 @@ describe('ProjectStore', () => {
     });
 
     it('should manually select project', () => {
-      store.selectProject(mockProjects[1]);
+      vi.spyOn(projectService, 'getBySlug').mockReturnValue(of(mockProjects[1]));
+      store.selectProject(mockProjects[1].slug);
       expect(store.selectedProject()).toEqual(mockProjects[1]);
     });
 
     it('should clear error', () => {
-      vi.spyOn(projectService, 'getProjects').mockReturnValue(
+      vi.spyOn(projectService, 'getAll').mockReturnValue(
         throwError(() => new Error('Test error'))
       );
       store.loadProjects();
@@ -229,9 +232,10 @@ describe('ProjectStore', () => {
     });
 
     it('should reset store to initial state', () => {
-      vi.spyOn(projectService, 'getProjects').mockReturnValue(of(mockProjects));
+      vi.spyOn(projectService, 'getAll').mockReturnValue(of(mockProjects));
+      vi.spyOn(projectService, 'getBySlug').mockReturnValue(of(mockProjects[0]));
       store.loadProjects();
-      store.selectProject(mockProjects[0]);
+      store.selectProject(mockProjects[0].slug);
 
       expect(store.projects().length).toBeGreaterThan(0);
       expect(store.selectedProject()).not.toBeNull();
