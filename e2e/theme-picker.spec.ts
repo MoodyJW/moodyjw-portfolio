@@ -1,4 +1,5 @@
 import { test, expect } from '@playwright/test';
+import { normalizeColor } from './helpers/color';
 
 /**
  * Theme Picker E2E Tests
@@ -225,9 +226,9 @@ test.describe('Theme Picker', () => {
     await page.locator('[data-test="theme-option-nocturne"]').click();
 
     // Check that CSS variables are applied
-    const bgColor = await page.locator('html').evaluate(el =>
-      getComputedStyle(el).getPropertyValue('--color-background')
-    );
+    const bgColor = await page
+      .locator('html')
+      .evaluate((el) => getComputedStyle(el).getPropertyValue('--color-background'));
 
     // Dark theme should have a dark background color
     expect(bgColor).toBeTruthy();
@@ -282,21 +283,29 @@ test.describe('Theme Picker', () => {
     await page.locator('[data-test="theme-picker-button"]').click();
     await page.locator('[data-test="theme-option-terminal"]').click();
 
+    // Wait for theme to be applied
+    await page.waitForFunction(
+      () => document.documentElement.getAttribute('data-theme') === 'terminal',
+      { timeout: 5000 }
+    );
+
     // Verify theme is applied
     const themeAttr = await page.locator('html').getAttribute('data-theme');
     expect(themeAttr).toBe('terminal');
 
     // Check that Terminal theme uses correct colors
-    const primaryColor = await page.locator('html').evaluate(el =>
-      getComputedStyle(el).getPropertyValue('--color-primary').trim()
-    );
-    const bgColor = await page.locator('html').evaluate(el =>
-      getComputedStyle(el).getPropertyValue('--color-background').trim()
-    );
+    const primaryColor = await page
+      .locator('html')
+      .evaluate((el) => getComputedStyle(el).getPropertyValue('--color-primary').trim());
+    const bgColor = await page
+      .locator('html')
+      .evaluate((el) => getComputedStyle(el).getPropertyValue('--color-background').trim());
 
     // Terminal should have green primary (#35ff42) and black background (#17110e)
-    expect(primaryColor).toBe('#35ff42');
-    expect(bgColor).toBe('#17110e');
+    const normPrimary = normalizeColor(primaryColor);
+    const normBg = normalizeColor(bgColor);
+    expect(normPrimary).toBe('#35ff42');
+    expect(normBg).toBe('#17110e');
 
     // Button should show Terminal
     const button = page.locator('[data-test="theme-picker-button"]');
