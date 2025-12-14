@@ -673,14 +673,14 @@ Phase 4 follows a strict dependency order:
 
 **Case Studies List Page**:
 
-- [ ] **CaseStudiesComponent enhancements** (`src/app/features/case-studies/case-studies.component.ts`)
+- [x] **CaseStudiesComponent enhancements** (`src/app/features/case-studies/case-studies.component.ts`)
 
   **Shared Components Used**:
 
   - ContainerComponent (page wrapper)
   - StackComponent (vertical spacing)
   - GridComponent (case study cards grid)
-  - CardComponent (each case study card)
+  - CardComponent (each case study card via CaseStudyCard component)
   - SkeletonComponent (loading states)
   - InputComponent (search)
   - BadgeComponent (technology tags, role)
@@ -691,44 +691,64 @@ Phase 4 follows a strict dependency order:
   **Implementation Tasks**:
 
   - [x] Component scaffolded
-  - [ ] Inject CaseStudiesStore using `inject()`
-  - [ ] Call `store.loadCaseStudies()` in constructor
-  - [ ] **Header section**:
-    - [ ] BreadcrumbComponent at top
-    - [ ] Page title and description
-  - [ ] **Filter/Search section**:
-    - [ ] InputComponent for search with debounce
-    - [ ] Bind to `store.setSearchQuery()`
-    - [ ] Tag filter (clickable BadgeComponent chips or SelectComponent)
-    - [ ] Bind to `store.toggleTag()`
-    - [ ] ButtonComponent to clear filters
-  - [ ] **Case studies grid**:
-    - [ ] GridComponent with responsive columns (1/2)
-    - [ ] Loop through `store.filteredCaseStudies()` with `@for`
-    - [ ] CardComponent for each case study with hover effect
-    - [ ] Case study image/thumbnail
-    - [ ] Title and client name
-    - [ ] Short description (truncate with TruncatePipe from Phase 3)
-    - [ ] BadgeComponent for role and technologies
-    - [ ] IconComponent with date and duration metadata
-    - [ ] ButtonComponent "Read More" with router link
-  - [ ] **Loading state**:
-    - [ ] Show SkeletonComponent grid when `store.isLoading()`
-    - [ ] Match card layout (4-6 skeleton cards)
-  - [ ] **Empty state**:
-    - [ ] Show when `store.filteredCaseStudies().length === 0`
-    - [ ] StackComponent for centered content
-    - [ ] Message and clear filters button
-  - [ ] **Mobile responsive**:
-    - [ ] Single column on mobile
-    - [ ] Adjust card layout
-  - [ ] **Unit tests** (35+ tests):
-    - [ ] Component renders correctly
-    - [ ] Store integration works
-    - [ ] Search functionality
-    - [ ] Tag filtering
-    - [ ] Loading and empty states
-    - [ ] Navigation works
+  - [x] Inject CaseStudiesStore using `inject()`
+  - [x] Call `store.loadCaseStudies()` in constructor
+  - [x] **Header section**:
+    - [x] BreadcrumbComponent at top
+    - [x] Page title and description
+  - [x] **Filter/Search section**:
+    - [x] InputComponent for search with debounce (300ms)
+    - [x] Bind to `store.setSearchQuery()`
+    - [x] Tag filter (clickable technology badges in cards)
+    - [x] Bind to `store.toggleTag()`
+    - [x] ButtonComponent to clear filters
+    - [x] Active filter count display
+  - [x] **Case studies grid**:
+    - [x] GridComponent with responsive columns (1/2)
+    - [x] Loop through `store.filteredCaseStudies()` with `@for`
+    - [x] CaseStudyCard component for each case study with hover effect
+    - [x] Case study image/thumbnail
+    - [x] Title and client name
+    - [x] Description display
+    - [x] Technology badges (first 3 shown, +N indicator for remaining)
+    - [x] IconComponent with duration metadata
+    - [x] ButtonComponent "View Case Study" with router link
+  - [x] **Loading state**:
+    - [x] Show SkeletonComponent grid when `store.isLoading()`
+    - [x] Match card layout (6 skeleton cards)
+  - [x] **Empty state**:
+    - [x] Show when `store.filteredCaseStudies().length === 0`
+    - [x] StackComponent for centered content
+    - [x] Message and clear filters button
+  - [x] **Mobile responsive**:
+    - [x] Single column on mobile
+    - [x] Adjust card layout
+  - [x] **CaseStudyCard component** (`src/app/features/case-studies/case-study-card/case-study-card.ts`):
+    - [x] Standalone component with inputs for caseStudy and selectedTags
+    - [x] Output for tagClick events
+    - [x] Computed signals for displayTechs (first 3) and remainingTechCount
+    - [x] RouterLink integration for navigation
+    - [x] Full TSDoc documentation
+    - [x] Unit tests (23 tests): ✅ Complete
+      - [x] Component creation
+      - [x] Computed properties (displayTechs, remainingTechCount)
+      - [x] Tag selection state
+      - [x] Route generation
+      - [x] Tag click events
+      - [x] Input changes handling
+      - [x] Edge cases (no/few technologies)
+    - [x] Storybook stories (case-study-card.stories.ts)
+  - [x] **Unit tests** (28 tests): ✅ Complete
+    - [x] Component renders correctly
+    - [x] Store integration works (loadCaseStudies called)
+    - [x] Search functionality with debouncing
+    - [x] Tag filtering
+    - [x] Clear filters functionality
+    - [x] Active filter count computation
+    - [x] Loading and empty states
+    - [x] Store state integration (filteredCaseStudies, selectedTags, searchQuery, isLoading, error)
+    - [x] Edge cases (empty queries, whitespace, empty arrays)
+    - [x] Local state management for debounced search
   - [ ] **E2E tests** (6+ tests):
     - [ ] Load case studies
     - [ ] Search case studies

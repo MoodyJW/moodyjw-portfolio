@@ -1,0 +1,83 @@
+<app-card
+  variant="elevated"
+  [hoverable]="true"
+  class="case-study-card"
+  [attr.data-test]="'case-study-card-' + caseStudy().slug"
+>
+  <app-stack gap="md" role="presentation">
+    <!-- Case Study Image -->
+    @if (caseStudy().images.thumbnail) {
+      <div class="case-study-card__image-wrapper">
+        <img
+          [src]="caseStudy().images.thumbnail"
+          [alt]="caseStudy().title"
+          class="case-study-card__image"
+          loading="lazy"
+        />
+      </div>
+    }
+
+    <!-- Case Study Content -->
+    <app-stack gap="sm" role="presentation">
+      <!-- Title -->
+      <h3 class="case-study-card__title">{{ caseStudy().title }}</h3>
+
+      <!-- Client and Role -->
+      <div class="case-study-card__meta-header">
+        <span class="case-study-card__client">
+          <app-icon name="heroBriefcase" size="xs" />
+          {{ caseStudy().client }}
+        </span>
+        <span class="case-study-card__role">{{ caseStudy().role }}</span>
+      </div>
+
+      <!-- Description -->
+      <p class="case-study-card__description">
+        {{ caseStudy().description }}
+      </p>
+
+      <!-- Technologies -->
+      <div class="case-study-card__technologies">
+        @for (tech of displayTechs(); track tech) {
+          <button
+            type="button"
+            class="case-study-card__tech-badge"
+            [class.case-study-card__tech-badge--selected]="isTagSelected(tech)"
+            (click)="onTagClick(tech)"
+            [attr.data-test]="'tech-badge-' + tech.toLowerCase()"
+            [attr.aria-label]="'Filter by ' + tech"
+          >
+            {{ tech }}
+          </button>
+        }
+        @if (remainingTechCount()) {
+          <span class="case-study-card__tech-badge case-study-card__tech-badge--count">
+            +{{ remainingTechCount() }}
+          </span>
+        }
+      </div>
+
+      <!-- Duration -->
+      <div class="case-study-card__duration">
+        <app-icon name="heroClock" size="sm" />
+        <span>{{ caseStudy().duration }}</span>
+      </div>
+    </app-stack>
+
+    <!-- Actions -->
+    <div class="case-study-card__actions">
+      <a [routerLink]="getCaseStudyRoute()" class="case-study-card__link">
+        <app-button
+          variant="primary"
+          size="sm"
+          [fullWidth]="true"
+          ariaLabel="View case study details"
+          data-test="view-details-button"
+        >
+          <span>View Case Study</span>
+          <app-icon name="heroArrowRight" size="sm" />
+        </app-button>
+      </a>
+    </div>
+  </app-stack>
+</app-card>

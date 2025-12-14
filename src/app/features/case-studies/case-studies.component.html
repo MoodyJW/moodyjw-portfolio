@@ -1,32 +1,102 @@
-<div class="case-studies">
-  <header class="case-studies__header">
-    <h1 class="case-studies__title">Case Studies</h1>
-    <p class="case-studies__description">
-      A collection of projects showcasing modern Angular development with scalable architecture and
-      best practices.
-    </p>
-  </header>
+<!-- eslint-disable @angular-eslint/template/cyclomatic-complexity -->
+<app-container maxWidth="xl">
+  <app-stack gap="lg" role="presentation">
+    <!-- Breadcrumb Navigation -->
+    <app-breadcrumb [items]="breadcrumbs" />
 
-  <div class="case-studies__grid">
-    @for (study of caseStudies(); track study.id) {
-    <article class="case-studies__card">
-      <div class="case-studies__card-image">
-        <div class="case-studies__card-image-placeholder">
-          {{ study.title.charAt(0) }}
+    <!-- Header Section -->
+    <header class="case-studies__header">
+      <h1 class="case-studies__title">Case Studies</h1>
+      <p class="case-studies__description">
+        In-depth analysis of real projects including challenges, solutions, results, and lessons learned.
+        Filter by technology or search by keyword.
+      </p>
+    </header>
+
+    <!-- Filter and Search Section -->
+    <section class="case-studies__filters">
+      <app-stack gap="md" role="presentation">
+        <!-- Search Row -->
+        <div class="case-studies__filter-row">
+          <app-input
+            type="text"
+            placeholder="Search case studies..."
+            ariaLabel="Search case studies"
+            [value]="localSearchQuery()"
+            (valueChange)="onSearchChange($event)"
+            class="case-studies__search"
+            data-test="case-studies-search"
+          />
         </div>
-      </div>
-      <div class="case-studies__card-content">
-        <h2 class="case-studies__card-title">{{ study.title }}</h2>
-        <p class="case-studies__card-description">{{ study.description }}</p>
-        <div class="case-studies__card-technologies">
-          @for (tech of study.technologies; track tech) {
-          <span class="case-studies__card-tech-tag">{{ tech }}</span>
-          }
-        </div>
-      </div>
-    </article>
-    } @empty {
-    <p class="case-studies__empty">{{ LABELS.EMPTY_STATES.NO_PROJECTS }}</p>
+
+        <!-- Active Filters Display -->
+        @if (activeFilterCount() > 0) {
+          <div class="case-studies__active-filters">
+            <div class="case-studies__filter-info">
+              <app-icon name="heroTag" size="sm" />
+              <span>{{ activeFilterCount() }} active filter{{ activeFilterCount() > 1 ? 's' : '' }}</span>
+            </div>
+
+            <app-button
+              variant="ghost"
+              size="sm"
+              ariaLabel="Clear all filters"
+              (click)="onClearFilters()"
+              data-test="clear-filters"
+            >
+              <app-icon name="heroXMark" size="sm" />
+              Clear All
+            </app-button>
+          </div>
+        }
+      </app-stack>
+    </section>
+
+    <!-- Loading State -->
+    @if (store.isLoading()) {
+      <app-grid columns="2" gap="lg" role="presentation">
+        @for (_ of [1, 2, 3, 4]; track $index) {
+          <app-card variant="elevated">
+            <app-stack gap="md" role="presentation">
+              <app-skeleton height="200px" ariaLabel="Loading case study image" />
+              <app-skeleton height="24px" width="80%" ariaLabel="Loading case study title" />
+              <app-skeleton height="16px" width="60%" ariaLabel="Loading case study metadata" />
+              <app-skeleton height="60px" ariaLabel="Loading case study description" />
+            </app-stack>
+          </app-card>
+        }
+      </app-grid>
     }
-  </div>
-</div>
+
+    <!-- Case Studies Grid -->
+    @if (showCaseStudies()) {
+      <app-grid columns="2" gap="lg" role="presentation">
+        @for (caseStudy of store.filteredCaseStudies(); track caseStudy.id) {
+          <app-case-study-card
+            [caseStudy]="caseStudy"
+            [selectedTags]="store.selectedTags()"
+            (tagClick)="onToggleTag($event)"
+          />
+        }
+      </app-grid>
+    }
+
+    <!-- Empty State -->
+    @if (showEmptyState()) {
+      <app-stack gap="md" role="presentation" class="case-studies__empty">
+        <app-icon name="heroMagnifyingGlass" size="xl" />
+        <h2>No case studies found</h2>
+        <p>Try adjusting your filters or search query.</p>
+        @if (showClearFiltersButton()) {
+          <app-button
+            variant="primary"
+            ariaLabel="Clear filters"
+            (click)="onClearFilters()"
+          >
+            Clear Filters
+          </app-button>
+        }
+      </app-stack>
+    }
+  </app-stack>
+</app-container>
